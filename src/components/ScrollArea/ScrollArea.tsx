@@ -1,8 +1,8 @@
-import "overlayscrollbars/css/OverlayScrollbars.css";
+import 'overlayscrollbars/css/OverlayScrollbars.css';
 
-import { forwardRef } from "react";
+import React, { forwardRef } from 'react';
 
-import { OverlayScrollbarsComponent } from "overlayscrollbars-react";
+import { OverlayScrollbarsComponent } from 'overlayscrollbars-react';
 
 export const ScrollArea = forwardRef(
   ({
@@ -16,5 +16,5 @@ export const ScrollArea = forwardRef(
     // );
 
     return <OverlayScrollbarsComponent {...others}>{children}</OverlayScrollbarsComponent>;
-  }
+  },
 );
