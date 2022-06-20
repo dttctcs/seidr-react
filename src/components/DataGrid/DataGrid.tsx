@@ -1,12 +1,13 @@
-import React, { ReactElement, useEffect, useReducer, useState } from 'react';
-import { fetchData, fetchInfo, fetchEntry, createEntry, updateEntry, deleteEntry } from './utils';
+import React, { ReactElement, useEffect, useReducer, useState, forwardRef } from 'react';
+import { useSeidrBaseURL, useSeidrApi } from '../SeidrProvider';
 import { getDefaultValues, getValidationSchema } from './utils';
 
 import { Box, CircularProgress } from '@mui/material';
 import DataGridToolbar from './DataGridToolbar';
-
 import DataGridPagination from './DataGridPagination';
-import DataGridBody from './DataGridBody';
+
+import { Body } from './Body';
+import { applyStyles } from './DataGrid.styles';
 
 interface Filter {
   foreign_key: string;
@@ -62,6 +63,7 @@ export interface DataGridProps {
   onError?: () => void;
   /** Callback to be fired on entry selection */
   onSelectEntry?: () => void;
+  styles;
 }
 
 const initialState = {
@@ -129,24 +131,34 @@ function reducer(state, action) {
   }
 }
 
-export function DataGrid({
-  path,
-  fitToParent = false,
-  hideToolbar = false,
-  hideFilter = false,
-  hideSettings = false,
-  hideActions = false,
-  settings = null,
-  queryParams = null,
-  rowsPerPageProps = null,
-  relation = null,
-  AddEntryComponent = null,
-  EditEntryComponent = null,
-  ViewEntryComponent = null,
-  sx = null,
-  onError = null,
-  onSelectEntry = null,
-}: DataGridProps) {
+export const DataGrid = forwardRef((props: DataGridProps, ref) => {
+  const baseURL = useSeidrBaseURL();
+  const { fetchInfo, fetchList, fetchEntry, createEntry, updateEntry, deleteEntry } = useSeidrApi();
+
+  const {
+    path,
+    fitToParent = false,
+    hideToolbar = false,
+    hideFilter = false,
+    hideSettings = false,
+    hideActions = false,
+    settings = null,
+    queryParams = null,
+    rowsPerPageProps = null,
+    relation = null,
+    AddEntryComponent = null,
+    EditEntryComponent = null,
+    ViewEntryComponent = null,
+    sx = null,
+    onError = null,
+    onSelectEntry = null,
+    styles,
+    children,
+    ...others
+  } = props;
+
+  const { classes, clsx, theme } = applyStyles({}, { styles, name: 'DataGrid' });
+
   const [state, dispatch] = useReducer(reducer, {
     ...initialState,
     queryParams: {
@@ -215,7 +227,7 @@ export function DataGrid({
             filters: [...params.filters, { col: relation.foreign_key, opr: relation.type, value: relation.id }],
           }
         : params;
-      const data = await fetchData(path, relatedQueryParams);
+      const data = await fetchList(path, relatedQueryParams);
       dispatch({ type: 'setData', payload: data });
     } catch (error) {
       console.log(error);
@@ -294,7 +306,7 @@ export function DataGrid({
   };
 
   return state.data && state.info ? (
-    <Box sx={{ height: 1, display: 'flex', flexDirection: 'column', ...sx }}>
+    <Box className={classes.root} sx={{ height: 1, display: 'flex', flexDirection: 'column', ...sx }}>
       {!hideToolbar ? (
         <Box>
           <DataGridToolbar
@@ -330,7 +342,7 @@ export function DataGrid({
             minHeight: 0,
           }}
         >
-          <DataGridBody
+          <Body
             path={path}
             state={state}
             dispatch={dispatch}
@@ -354,7 +366,7 @@ export function DataGrid({
         </Box>
       ) : (
         <>
-          <DataGridBody
+          <Body
             path={path}
             state={state}
             dispatch={dispatch}
@@ -392,4 +404,4 @@ export function DataGrid({
       <CircularProgress size={28} />
     </Box>
   ) : null;
-}
+});

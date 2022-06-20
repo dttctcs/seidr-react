@@ -1,0 +1,12 @@
+{
+  "env": {
+    "browser": true
+  },
+  "plugins": ["react"],
+  "extends": ["eslint:recommended", "prettier", "react:app"],
+  "parserOptions": {
+    "sourceType": "module",
+    "ecmaVersion": 2021
+  },
+  "rules": {}
+}

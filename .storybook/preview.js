@@ -1,13 +1,14 @@
-import { setupWorker } from "msw";
-import { handlers } from "../src/mocks/handlers";
+import { setupWorker } from 'msw';
+import { handlers } from '../src/mocks/handlers';
+import { SeidrProvider } from '../src/components/SeidrProvider';
 
-if (typeof global.process === "undefined") {
+if (typeof global.process === 'undefined') {
   const worker = setupWorker(...handlers);
   worker.start();
 }
 
 export const parameters = {
-  actions: { argTypesRegex: "^on[A-Z].*" },
+  actions: { argTypesRegex: '^on[A-Z].*' },
   controls: {
     matchers: {
       color: /(background|color)$/i,
@@ -15,3 +16,13 @@ export const parameters = {
     },
   },
 };
+
+export const decorators = [
+  (Story) => {
+    return (
+      <SeidrProvider>
+        <Story />
+      </SeidrProvider>
+    );
+  },
+];

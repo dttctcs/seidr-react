@@ -169,7 +169,7 @@ const getInfo = () => {
         label: 'brand',
         name: 'Brand',
         required: false,
-        type: 'Float',
+        type: 'String',
         unique: false,
       },
       {
@@ -177,7 +177,7 @@ const getInfo = () => {
         label: 'model',
         name: 'Model',
         required: false,
-        type: 'Float',
+        type: 'String',
         unique: false,
       },
       {
@@ -372,7 +372,7 @@ const getInfo = () => {
         },
       },
     },
-    permissions: ['can_get', 'can_info'],
+    permissions: ['can_get', 'can_info', 'can_put', 'can_delete', 'can_post'],
     relations: [
       {
         foreign_key: 'id',
@@ -397,7 +397,16 @@ const get = () => {
 };
 
 const getItem = (id) => {
-  return cars.find((car) => car.id === id);
+  let item = cars.find((car) => car.id == id);
+
+  return {
+    show_title: 'Show Flight Summary',
+    description_columns: {},
+    show_columns: ['brand', 'model', 'date', 'year'],
+    label_columns: { brand: 'Brand', model: 'Model', date: 'Date', weight: 'Weight' },
+    id: item.id,
+    result: item,
+  };
 };
 
 export const handlers = [
@@ -408,6 +417,15 @@ export const handlers = [
     return res(ctx.json(get()));
   }),
   rest.get('/cars/:id', (req, res, ctx) => {
+    return res(ctx.json(getItem(req.params.id)));
+  }),
+  rest.post('/cars/:id', (req, res, ctx) => {
+    return res(ctx.json(getItem(req.params.id)));
+  }),
+  rest.delete('/cars/:id', (req, res, ctx) => {
+    return res(ctx.json(getItem(req.params.id)));
+  }),
+  rest.delete('/cars/:id', (req, res, ctx) => {
     return res(ctx.json(getItem(req.params.id)));
   }),
 ];

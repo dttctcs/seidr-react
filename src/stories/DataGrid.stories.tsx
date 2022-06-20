@@ -1,6 +1,8 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
+import { generateBorderStyles } from '../components/SeidrProvider/utils';
 
 import { DataGrid } from '../components/DataGrid';
+import { DataGridStyles } from '../components/DataGrid';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
@@ -81,5 +83,23 @@ FitToParent.args = {
   path: window.location.origin + '/cars/',
 };
 FitToParent.argTypes = {
+  ...defaultArgTypes,
+};
+
+export const StylesAPI = Template.bind({});
+StylesAPI.decorators = [
+  (Story, ctx) => {
+    return (
+      <div style={{ height: '300px', padding: '40px', margin: '3em' }}>
+        <Story />
+      </div>
+    );
+  },
+];
+StylesAPI.args = {
+  path: window.location.origin + '/cars/',
+  styles: generateBorderStyles(DataGridStyles),
+};
+StylesAPI.argTypes = {
   ...defaultArgTypes,
 };

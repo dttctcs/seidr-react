@@ -2,9 +2,9 @@ import React from 'react';
 
 import { TableHead, TableRow } from '@mui/material';
 import DataGridCell from '../DataGridCell';
-import HeadCellContent from './HeadCellContent';
+import { HeaderCell } from './HeaderCell';
 
-function DataGridHead({ state, onSortBy, hideActions }) {
+export const Header = React.memo(({ state, onSortBy, hideActions }) => {
   return (
     <TableHead>
       <TableRow>
@@ -15,12 +15,10 @@ function DataGridHead({ state, onSortBy, hideActions }) {
         ) : null}
         {state.data.list_columns.map((column, index) => (
           <DataGridCell key={column} sx={{ whiteSpace: 'nowrap' }}>
-            <HeadCellContent column={column} onSortBy={onSortBy} state={state} />
+            <HeaderCell column={column} onSortBy={onSortBy} state={state} />
           </DataGridCell>
         ))}
       </TableRow>
     </TableHead>
   );
-}
-
-export default React.memo(DataGridHead);
+});

@@ -1,19 +1,19 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import { useSeidrAuth } from '../components/SeidrProvider';
+import { useSeidrApi } from '../components/SeidrProvider';
 
 function HookWrapper() {
-  const auth = useSeidrAuth();
+  const api = useSeidrApi();
   return (
     <div>
-      <div>Test useSeidrAuth hook</div>
-      <div>{JSON.stringify(auth)}</div>
+      <div>Test useSeidrApi hook</div>
+      <div>{JSON.stringify(api)}</div>
     </div>
   );
 }
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
-  title: 'hooks/useSeidrAuth',
+  title: 'hooks/useSeidrApi',
   component: HookWrapper,
   // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
 } as ComponentMeta<typeof HookWrapper>;

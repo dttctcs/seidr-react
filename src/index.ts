@@ -1,2 +1,2 @@
 export * from './components/DataGrid';
-export * from './components/AuthProvider';
+export * from './components/SeidrProvider';

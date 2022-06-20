@@ -1,20 +1,7 @@
-import React, { createContext, useContext, useEffect, useState } from 'react';
-import { createFetchParams } from '../../utils';
+import React, { useEffect, useState } from 'react';
+import { createFetchParams } from './utils';
 
-const AuthContext = createContext();
-
-// Hook for child components to get the auth object (and rerender when it changes)
-export function useAuth() {
-  return useContext(AuthContext);
-}
-
-export function AuthProvider({ children }) {
-  const auth = useProvideAuth();
-
-  return <AuthContext.Provider value={auth}>{children}</AuthContext.Provider>;
-}
-
-function useProvideAuth() {
+export function useProvideAuth() {
   const [user, setUser] = useState(null);
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(true);

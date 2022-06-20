@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { fetchEntry } from '../utils';
+import { useSeidrApi } from '../../SeidrProvider';
 
 import { IconButton, Tooltip } from '@mui/material';
 import EditEntry from './EditEntry';
@@ -8,6 +8,7 @@ import { Edit } from '@mui/icons-material';
 function EditEntryButton({ id, path, onEditEntry, EditEntryComponent, selected, ...props }) {
   const [editItemDialog, setEditItemDialog] = useState(false);
   const [entry, setEntry] = useState(null);
+  const { fetchEntry } = useSeidrApi();
 
   return (
     <>
@@ -16,6 +17,7 @@ function EditEntryButton({ id, path, onEditEntry, EditEntryComponent, selected, 
           onClick={() => {
             setEditItemDialog(true);
             const entryPromise = fetchEntry(path, id);
+
             entryPromise.then((data) => setEntry({ id: data.id, ...data.result }));
           }}
           size="small"

@@ -3,7 +3,7 @@ import React from 'react';
 import { Box, Chip, Stack, Tooltip } from '@mui/material';
 import { ArrowDropDown, ArrowDropUp } from '@mui/icons-material';
 
-function HeadCellContent({ column, onSortBy, state }) {
+export function HeaderCell({ column, onSortBy, state }) {
   const selectedColumn = state.queryParams.order_column === column;
   const selectable = state.data.order_columns.includes(column);
 
@@ -51,5 +51,3 @@ function HeadCellContent({ column, onSortBy, state }) {
     </Stack>
   );
 }
-
-export default HeadCellContent;
