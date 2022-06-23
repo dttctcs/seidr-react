@@ -3,7 +3,7 @@ import { useSeidrBaseURL, useSeidrApi } from '../SeidrProvider';
 import { getDefaultValues, getValidationSchema } from './utils';
 
 import { Box, CircularProgress } from '@mui/material';
-import DataGridToolbar from './DataGridToolbar';
+import { Toolbar } from './Toolbar';
 import DataGridPagination from './DataGridPagination';
 
 import { Body } from './Body';
@@ -19,7 +19,7 @@ interface Settings {
   rtl?: boolean;
   dense?: boolean;
   striped?: boolean;
-  cellRightBorder?: boolean;
+  rightBorder?: boolean;
 }
 
 interface QueryParams {
@@ -54,15 +54,15 @@ export interface DataGridProps {
   /** A base filter to apply (Currently used in the context of RelatedAPIs) */
   relation?: Relation;
   /** ReatNode to be rendered on item add. Will provide add info to the component as properties ( columns, schema, defaultValues)*/
-  AddEntryComponent?: ReactElement;
+  AddComponent?: ReactElement;
   /** ReatNode to be rendered on item edit. Will provide edit info to the component as properties ( columns, schema, defaultValues)*/
-  EditEntryComponent?: ReactElement;
+  EditComponent?: ReactElement;
   /** ReatNode to be rendered on item view Will provide the selected item to the component */
-  ViewEntryComponent?: ReactElement;
-  /** Callback to be fired on DataGrid error */
-  onError?: () => void;
-  /** Callback to be fired on entry selection */
-  onSelectEntry?: () => void;
+  ViewComponent?: ReactElement;
+  // /** Callback to be fired on DataGrid error */
+  // onError?: () => void;
+  // /** Callback to be fired on entry selection */
+  // onSelectEntry?: () => void;
   styles;
 }
 
@@ -82,7 +82,7 @@ const initialState = {
     rtl: false,
     dense: false,
     striped: false,
-    cellRightBorder: false,
+    rightBorder: false,
   },
 };
 
@@ -146,9 +146,9 @@ export const DataGrid = forwardRef((props: DataGridProps, ref) => {
     queryParams = null,
     rowsPerPageProps = null,
     relation = null,
-    AddEntryComponent = null,
-    EditEntryComponent = null,
-    ViewEntryComponent = null,
+    AddComponent = null,
+    EditComponent = null,
+    ViewComponent = null,
     sx = null,
     onError = null,
     onSelectEntry = null,
@@ -157,7 +157,7 @@ export const DataGrid = forwardRef((props: DataGridProps, ref) => {
     ...others
   } = props;
 
-  const { classes, clsx, theme } = applyStyles({}, { styles, name: 'DataGrid' });
+  const { classes, cx, theme } = applyStyles({}, { styles, name: 'DataGrid' });
 
   const [state, dispatch] = useReducer(reducer, {
     ...initialState,
@@ -172,7 +172,7 @@ export const DataGrid = forwardRef((props: DataGridProps, ref) => {
       rtl: settings?.rtl ?? false,
       dense: settings?.dense ?? false,
       striped: settings?.striped ?? false,
-      cellRightBorder: settings?.cellRightBorder ?? false,
+      rightBorder: settings?.rightBorder ?? false,
     },
   });
 
@@ -308,29 +308,27 @@ export const DataGrid = forwardRef((props: DataGridProps, ref) => {
   return state.data && state.info ? (
     <Box className={classes.root} sx={{ height: 1, display: 'flex', flexDirection: 'column', ...sx }}>
       {!hideToolbar ? (
-        <Box>
-          <DataGridToolbar
-            path={path}
-            filterState={{
-              filters: state.info.filters,
-              activeFilters: state.queryParams.filters,
-              onFiltersChange: (data) => dispatch({ type: 'setFilters', payload: data }),
-            }}
-            addState={{
-              canPost: state.info.permissions.includes('can_post'),
-              onAddEntry: handleAddEntry,
-              AddEntryComponent: AddEntryComponent,
-              ...state.info.add,
-            }}
-            settingsState={{
-              onSettingsChange: (data) => dispatch({ type: 'setSettings', payload: data }),
-              settings: state.settings,
-            }}
-            hideFilter={hideFilter}
-            hideSettings={hideSettings}
-            dense={state.settings.dense}
-          />
-        </Box>
+        <Toolbar
+          path={path}
+          filterState={{
+            filters: state.info.filters,
+            activeFilters: state.queryParams.filters,
+            onFiltersChange: (data) => dispatch({ type: 'setFilters', payload: data }),
+          }}
+          addState={{
+            canPost: state.info.permissions.includes('can_post'),
+            onAddEntry: handleAddEntry,
+            AddComponent: AddComponent,
+            ...state.info.add,
+          }}
+          settingsState={{
+            onSettingsChange: (data) => dispatch({ type: 'setSettings', payload: data }),
+            settings: state.settings,
+          }}
+          hideFilter={hideFilter}
+          hideSettings={hideSettings}
+          dense={state.settings.dense}
+        />
       ) : null}
       {fitToParent ? (
         <Box
@@ -351,8 +349,8 @@ export const DataGrid = forwardRef((props: DataGridProps, ref) => {
             onViewEntry={handleViewEntry}
             onEditEntry={handleEditEntry}
             onDeleteEntry={handleDeleteEntry}
-            ViewEntryComponent={ViewEntryComponent}
-            EditEntryComponent={EditEntryComponent}
+            ViewComponent={ViewComponent}
+            EditComponent={EditComponent}
             hideActions={hideActions}
           />
           <DataGridPagination
@@ -375,8 +373,8 @@ export const DataGrid = forwardRef((props: DataGridProps, ref) => {
             onViewEntry={handleViewEntry}
             onEditEntry={handleEditEntry}
             onDeleteEntry={handleDeleteEntry}
-            ViewEntryComponent={ViewEntryComponent}
-            EditEntryComponent={EditEntryComponent}
+            ViewComponent={ViewComponent}
+            EditComponent={EditComponent}
             hideActions={hideActions}
           />
           <DataGridPagination

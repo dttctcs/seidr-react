@@ -5,4 +5,5 @@ export {
   useSeidrApi,
   useSeidrAuth,
   useSeidrBaseURL,
+  useSeidrDefaultProps,
 } from './SeidrProvider';

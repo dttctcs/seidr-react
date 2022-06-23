@@ -1,4 +1,4 @@
-import { createStyles } from '../../styles';
+import { createStyles } from '@mantine/core';
 
 export const DataGridStyles = {
   root: 'Root element',

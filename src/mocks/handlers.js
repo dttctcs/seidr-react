@@ -6,34 +6,50 @@ const getInfo = () => {
     add_columns: [
       {
         description: '',
-        label: 'brand',
-        name: 'Brand',
+        name: 'brand',
+        label: 'Brand',
         required: false,
-        type: 'Float',
+        type: 'String',
         unique: false,
       },
       {
         description: '',
-        label: 'model',
-        name: 'Model',
+        name: 'model',
+        label: 'Model',
         required: false,
-        type: 'Float',
+        type: 'String',
         unique: false,
       },
       {
         description: '',
-        label: 'date',
-        name: 'Date',
+        name: 'date',
+        label: 'Date',
         required: false,
         type: 'Date',
         unique: false,
       },
       {
         description: '',
-        label: 'weight',
-        name: 'Weight',
+        name: 'weight',
+        label: 'Weight',
         required: false,
         type: 'Float',
+        unique: false,
+      },
+      {
+        description: '',
+        name: 'electric',
+        label: 'Electric',
+        required: false,
+        type: 'Boolean',
+        unique: false,
+      },
+      {
+        description: '',
+        name: 'datetime',
+        label: 'DateTime',
+        required: false,
+        type: 'DateTime',
         unique: false,
       },
     ],
@@ -166,34 +182,50 @@ const getInfo = () => {
     edit_columns: [
       {
         description: '',
-        label: 'brand',
-        name: 'Brand',
+        name: 'brand',
+        label: 'Brand',
         required: false,
         type: 'String',
         unique: false,
       },
       {
         description: '',
-        label: 'model',
-        name: 'Model',
+        name: 'model',
+        label: 'Model',
         required: false,
         type: 'String',
         unique: false,
       },
       {
         description: '',
-        label: 'date',
-        name: 'Date',
+        name: 'date',
+        label: 'Date',
         required: false,
         type: 'Date',
         unique: false,
       },
       {
         description: '',
-        label: 'weight',
-        name: 'Weight',
+        name: 'weight',
+        label: 'Weight',
         required: false,
         type: 'Float',
+        unique: false,
+      },
+      {
+        description: '',
+        name: 'electric',
+        label: 'Electric',
+        required: false,
+        type: 'Boolean',
+        unique: false,
+      },
+      {
+        description: '',
+        name: 'datetime',
+        label: 'DateTime',
+        required: false,
+        type: 'DateTime',
         unique: false,
       },
     ],
@@ -299,6 +331,42 @@ const getInfo = () => {
           validate: ['<Length(min=None, max=32, equal=None, error=None)>'],
         },
       },
+      datetime: {
+        filters: [
+          {
+            name: 'Equal to',
+            operator: 'eq',
+          },
+          {
+            name: 'Greater than',
+            operator: 'gt',
+          },
+          {
+            name: 'Smaller than',
+            operator: 'lt',
+          },
+          {
+            name: 'Not Equal to',
+            operator: 'neq',
+          },
+          {
+            name: 'Smaller equal',
+            operator: 'le',
+          },
+          {
+            name: 'Greater equal',
+            operator: 'ge',
+          },
+        ],
+        schema: {
+          description: '',
+          label: 'DateTime',
+          name: 'datetime',
+          required: false,
+          type: 'DateTime',
+          unique: false,
+        },
+      },
       date: {
         filters: [
           {
@@ -335,42 +403,6 @@ const getInfo = () => {
           unique: false,
         },
       },
-      LE_Flight_Nr: {
-        filters: [
-          {
-            name: 'Equal to',
-            operator: 'eq',
-          },
-          {
-            name: 'Greater than',
-            operator: 'gt',
-          },
-          {
-            name: 'Smaller than',
-            operator: 'lt',
-          },
-          {
-            name: 'Not Equal to',
-            operator: 'neq',
-          },
-          {
-            name: 'Smaller equal',
-            operator: 'le',
-          },
-          {
-            name: 'Greater equal',
-            operator: 'ge',
-          },
-        ],
-        schema: {
-          description: '',
-          label: 'Weight',
-          name: 'weight',
-          required: false,
-          type: 'Float',
-          unique: false,
-        },
-      },
     },
     permissions: ['can_get', 'can_info', 'can_put', 'can_delete', 'can_post'],
     relations: [
@@ -389,9 +421,9 @@ const get = () => {
     count: cars.length,
     ids: cars.map((car) => car.id),
     label_columns: { brand: 'Brand', model: 'Model', date: 'Date', weight: 'Weight' },
-    list_columns: ['brand', 'model', 'date', 'year'],
+    list_columns: ['brand', 'model', 'date', 'datetime', 'year'],
     list_title: 'List Cars',
-    order_columns: ['brand', 'model', 'date', 'year'],
+    order_columns: ['brand', 'model', 'date'],
     result: cars,
   };
 };
@@ -400,12 +432,24 @@ const getItem = (id) => {
   let item = cars.find((car) => car.id == id);
 
   return {
-    show_title: 'Show Flight Summary',
+    show_title: 'Show Cars',
     description_columns: {},
     show_columns: ['brand', 'model', 'date', 'year'],
     label_columns: { brand: 'Brand', model: 'Model', date: 'Date', weight: 'Weight' },
     id: item.id,
     result: item,
+  };
+};
+
+const getEngines = () => {
+  return {
+    count: 0,
+    ids: [],
+    label_columns: { brand: 'Brand', model: 'Model', date: 'Date', weight: 'Weight' },
+    list_columns: ['brand', 'model', 'date', 'year'],
+    list_title: 'List Engine',
+    order_columns: ['brand', 'model', 'date'],
+    result: cars,
   };
 };
 
@@ -427,5 +471,11 @@ export const handlers = [
   }),
   rest.delete('/cars/:id', (req, res, ctx) => {
     return res(ctx.json(getItem(req.params.id)));
+  }),
+  rest.get('/engines/_info', (req, res, ctx) => {
+    return res(ctx.json(getInfo()));
+  }),
+  rest.get('/engines/', (req, res, ctx) => {
+    return res(ctx.json(getEmpty()));
   }),
 ];

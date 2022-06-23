@@ -9,10 +9,14 @@ export default {
   title: 'Components/DataGrid',
   component: DataGrid,
   // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
+  args: {},
 } as ComponentMeta<typeof DataGrid>;
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: ComponentStory<typeof DataGrid> = (args) => <DataGrid {...args} />;
+const Template: ComponentStory<typeof DataGrid> = (args) => {
+  console.log(args);
+  return <DataGrid {...args} />;
+};
 
 const defaultArgTypes = {
   queryParams: {
@@ -30,17 +34,17 @@ const defaultArgTypes = {
       disable: true,
     },
   },
-  AddEntryComponent: {
+  AddComponent: {
     table: {
       disable: true,
     },
   },
-  EditEntryComponent: {
+  EditComponent: {
     table: {
       disable: true,
     },
   },
-  ViewEntryComponent: {
+  ViewComponent: {
     table: {
       disable: true,
     },
@@ -63,7 +67,7 @@ Default.args = {
 };
 
 Default.argTypes = {
-  // foo is the property we want to remove from the UI
+  // fitToParent is the property we want to remove from the controls
   fitToParent: {
     table: {
       disable: true,
@@ -83,6 +87,16 @@ FitToParent.args = {
   path: window.location.origin + '/cars/',
 };
 FitToParent.argTypes = {
+  ...defaultArgTypes,
+};
+
+export const SelectableRow = Template.bind({});
+SelectableRow.decorators = [(Story) => <Story />];
+SelectableRow.args = {
+  path: window.location.origin + '/cars/',
+  onSelect: (event, entry) => console.log(event, entry),
+};
+SelectableRow.argTypes = {
   ...defaultArgTypes,
 };
 
