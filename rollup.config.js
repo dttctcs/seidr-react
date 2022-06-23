@@ -30,7 +30,7 @@ export default [
       }),
       resolve(),
       peerDepsExternal(),
-      commonjs({ include: /node_modules/ }),
+      commonjs({ include: 'node_modules/**' }),
       json(),
       typescript(),
     ],
