@@ -5,7 +5,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useFieldArray, useForm } from 'react-hook-form';
 
 import { ActionIcon, Box, Button, Chip, Divider, Group, Stack, Text } from '@mantine/core';
-import FormField from '../../FormField/FormField';
+import { FormField } from '../../FormField';
 import FormFilterField from './FormFilterField';
 import FormOperatorField from './FormOperatorField';
 import { Plus, Trash } from 'tabler-icons-react';

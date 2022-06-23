@@ -18,7 +18,7 @@ export function Actions({
   onDeleteEntry,
 }) {
   return (
-    <Group sx={{ gap: 4, justifyContent: rtl ? 'flex-end' : undefined }} spacing={0}>
+    <Group sx={{ gap: 4, justifyContent: rtl ? 'flex-end' : undefined }} spacing={0} noWrap>
       {info.permissions.includes('can_get') ? (
         <View
           id={id}

@@ -2,15 +2,13 @@
   "name": "seidrui",
   "version": "0.1.0",
   "description": "A component library for seidr",
-  "main": "dist/index.js",
-  "module": "dist/index.esm.js",
-  "types": "dist/index.d.ts",
+  "main": "lib/index.js",
+  "module": "lib/index.esm.js",
+  "types": "lib/index.d.ts",
   "files": [
-    "dist",
-    "src"
+    "lib"
   ],
   "scripts": {
-    "prepare": "npm run build",
     "test": "echo \"Error: no test specified\" && exit 1",
     "storybook": "start-storybook -p 6006 -s .storybook/public",
     "build-storybook": "build-storybook",
