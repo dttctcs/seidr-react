@@ -1,46 +1,60 @@
 {
   "name": "seidrui",
   "version": "0.1.0",
-  "description": "A component library for seidr",
+  "description": "A react component library for Seidr",
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dttctcs/seidrui/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dttctcs/seidrui.git"
+  },
   "main": "lib/index.js",
   "module": "lib/index.esm.js",
   "types": "lib/index.d.ts",
   "files": [
     "lib"
   ],
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "storybook": "start-storybook -p 6006 -s .storybook/public",
-    "build-storybook": "build-storybook",
-    "build": "rollup -c"
-  },
   "keywords": [
     "seidr"
   ],
-  "author": "datatactics GmbH",
-  "license": "ISC",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 0",
+    "storybook": "start-storybook -p 6006 -s .storybook/public",
+    "build-storybook": "build-storybook",
+    "build": "esno scripts/build",
+    "release": "npm run test && esno scripts/release"
+  },
   "dependencies": {
     "@date-io/date-fns": "^2.14.0",
-    "@hookform/resolvers": "^2.9.1",
+    "@emotion/react": "^11.9.3",
+    "@emotion/styled": "^11.9.3",
+    "@hookform/resolvers": "^2.9.2",
     "@mantine/core": "^4.2.10",
     "@mantine/hooks": "^4.2.10",
-    "@mui/icons-material": "^5.8.3",
-    "@mui/lab": "^5.0.0-alpha.86",
+    "@mui/material": "^5.8.5",
+    "@mui/x-date-pickers": "^5.0.0-alpha.7",
     "date-fns": "^2.28.0",
     "dompurify": "^2.3.8",
-    "html-react-parser": "^1.4.14",
+    "html-react-parser": "^2.0.0",
     "is-html": "^3.0.0",
     "overlayscrollbars-react": "^0.3.0",
-    "react-hook-form": "^7.32.0",
-    "tabler-icons-react": "^1.50.0",
+    "react-hook-form": "^7.33.0",
+    "tabler-icons-react": "^1.51.0",
     "yup": "^0.32.11"
   },
+  "peerDependencies": {
+    "react": ">=16.8.0",
+    "react-dom": ">=16.8.0"
+  },
   "devDependencies": {
-    "@rollup/plugin-commonjs": "^22.0.0",
+    "@babel/core": "^7.18.5",
+    "@rollup/plugin-commonjs": "^22.0.1",
     "@rollup/plugin-json": "^4.1.0",
     "@rollup/plugin-node-resolve": "^13.3.0",
     "@rollup/plugin-typescript": "^8.3.3",
-    "@stitches/react": "^1.2.8",
     "@storybook/addon-a11y": "^6.5.9",
     "@storybook/addon-actions": "^6.5.9",
     "@storybook/addon-backgrounds": "^6.5.9",
@@ -53,26 +67,25 @@
     "@storybook/manager-webpack4": "^6.5.9",
     "@storybook/react": "^6.5.9",
     "@types/react": "^18.0.14",
-    "clsx": "^1.1.1",
+    "babel-loader": "^8.2.5",
+    "chalk": "^5.0.1",
     "eslint": "^8.18.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-airbnb-typescript": "^17.0.0",
     "eslint-config-prettier": "^8.5.0",
-    "eslint-config-react-app": "^7.0.1",
-    "eslint-plugin-react": "^7.30.0",
-    "msw": "^0.42.1",
+    "eslint-plugin-react": "^7.30.1",
+    "esno": "^0.16.3",
+    "msw": "^0.42.3",
     "msw-storybook-addon": "^1.6.3",
-    "npm": "^8.12.2",
-    "react": "^18.1.0",
-    "react-dom": "^18.1.0",
-    "rollup": "^2.75.6",
+    "new-github-release-url": "^2.0.0",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "rollup": "^2.75.7",
     "rollup-plugin-peer-deps-external": "^2.2.4",
     "rollup-plugin-postcss": "^4.0.2",
     "rollup-plugin-visualizer": "^5.6.0",
+    "simple-git": "^3.9.0",
     "typescript": "^4.7.4"
-  },
-  "peerDependencies": {
-    "@mui/material": "^5.8.3",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2"
   },
   "msw": {
     "workerDirectory": ".storybook/public"

@@ -1,10 +1,10 @@
 import { setupWorker } from 'msw';
 import { handlers } from '../src/mocks/handlers';
-import { SeidrProvider } from '../src/components/SeidrProvider';
+import { SeidrProvider } from '../src';
 
 if (typeof global.process === 'undefined') {
   const worker = setupWorker(...handlers);
-  worker.start();
+  worker.start({ onUnhandledRequest: 'bypass' });
 }
 
 export const parameters = {

@@ -3,7 +3,8 @@ import { paginationHeight } from './utils';
 
 import { TablePagination, debounce, Box, IconButton } from '@mui/material';
 import { alpha, lighten, darken } from '@mui/system';
-import { LastPage, FirstPage, KeyboardArrowLeft, KeyboardArrowRight } from '@mui/icons-material';
+
+import { ArrowBarToLeft, ArrowBarToRight, ChevronLeft, ChevronRight } from 'tabler-icons-react';
 
 function TablePaginationActions(props) {
   const { count, page, rowsPerPage, onPageChange } = props;
@@ -27,24 +28,24 @@ function TablePaginationActions(props) {
   return (
     <Box sx={{ flexShrink: 0, ml: 2.5 }}>
       <IconButton onClick={handleFirstPageButtonClick} disabled={page === 0} aria-label="first page">
-        <FirstPage />
+        <ArrowBarToLeft />
       </IconButton>
       <IconButton onClick={handleBackButtonClick} disabled={page === 0} aria-label="previous page">
-        <KeyboardArrowLeft />
+        <ChevronLeft />
       </IconButton>
       <IconButton
         onClick={handleNextButtonClick}
         disabled={page >= Math.ceil(count / rowsPerPage) - 1}
         aria-label="next page"
       >
-        <KeyboardArrowRight />
+        <ChevronRight />
       </IconButton>
       <IconButton
         onClick={handleLastPageButtonClick}
         disabled={page >= Math.ceil(count / rowsPerPage) - 1}
         aria-label="last page"
       >
-        <LastPage />
+        <ArrowBarToRight />
       </IconButton>
     </Box>
   );
