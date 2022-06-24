@@ -38,6 +38,7 @@ export async function buildPackage() {
       const outputs: OutputOptions[] = Array.isArray(config.output) ? config.output : [config.output];
       Promise.all(outputs.map((output) => build.write(output)));
     }
+    logger.info(`seidrui was built in ${chalk.green(`${((Date.now() - startTime) / 1000).toFixed(2)}s`)}`);
   } catch (err) {
     logger.error(`Failed to compile ${chalk.cyan('seidrui')}`);
     console.log(err);
@@ -46,5 +47,3 @@ export async function buildPackage() {
     process.exit(1);
   }
 }
-
-buildPackage();

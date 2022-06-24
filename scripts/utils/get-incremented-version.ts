@@ -6,11 +6,9 @@ const logger = new Logger('increment-version');
 const VERSION_INCREMENT: string[] = ['patch', 'minor', 'major'];
 
 export function getIncrementedVersion(version: string, type: string): string {
-  if (!VERSION_INCREMENT.includes(options.type)) {
+  if (!VERSION_INCREMENT.includes(type)) {
     logger.error(
-      `Incorrect version type: ${chalk.cyan(options.type)}, it should be one of these values: ${VERSION_INCREMENT.join(
-        ', ',
-      )}`,
+      `Incorrect version type: ${chalk.cyan(type)}, it should be one of these values: ${VERSION_INCREMENT.join(', ')}`,
     );
 
     process.exit(1);
@@ -19,16 +17,16 @@ export function getIncrementedVersion(version: string, type: string): string {
   const updateVersion = (raw: string): string => {
     const splitted = raw.split('.');
 
-    if (options.type === 'patch') {
+    if (type === 'patch') {
       splitted[2] = (parseInt(splitted[2], 10) + 1).toString();
     }
 
-    if (options.type === 'minor') {
+    if (type === 'minor') {
       splitted[1] = (parseInt(splitted[1], 10) + 1).toString();
       splitted[2] = '0';
     }
 
-    if (options.type === 'major') {
+    if (type === 'major') {
       splitted[0] = (parseInt(splitted[0], 10) + 1).toString();
       splitted[1] = '0';
       splitted[2] = '0';
@@ -38,7 +36,9 @@ export function getIncrementedVersion(version: string, type: string): string {
   };
 
   try {
-    // release
+    const [rawVersion, rawStage] = version.split('-');
+    console.log(version);
+
     return updateVersion(rawVersion);
   } catch (e) {
     logger.error('Failed to parse core package.json');
