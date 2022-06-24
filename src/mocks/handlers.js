@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import { rest } from 'msw';
 import cars from './mock_data.json';
 
@@ -476,6 +477,6 @@ export const handlers = [
     return res(ctx.json(getInfo()));
   }),
   rest.get('/engines/', (req, res, ctx) => {
-    return res(ctx.json(getEmpty()));
+    return res(ctx.json(getEngines()));
   }),
 ];
