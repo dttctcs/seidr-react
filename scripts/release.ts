@@ -3,6 +3,7 @@ import path from 'path';
 import chalk from 'chalk';
 import simpleGit from 'simple-git';
 import githubRelease from 'new-github-release-url';
+import { setPackageVersion } from './utils/set-package-version';
 
 import { buildPackage } from './build';
 import { Logger } from './utils/Logger';
@@ -21,11 +22,13 @@ const git = simpleGit();
 
   // increment version
   logger.info('Release initiated');
-
   let incrementedVersion = getIncrementedVersion(packageJson.version, argv._[0] as string);
-  let build = buildPackage();
+  setPackageVersion(incrementedVersion);
 
-  // await git.add([path.join(__dirname, '../src'), path.join(__dirname, '../package.json')]);
+  // build
+  let build = buildPackage();
+  // deploy
+  await git.add([path.join(__dirname, '../src'), path.join(__dirname, '../package.json')]);
   // await git.commit(`[release] Version: ${incrementedVersion}`);
   // await git.push();
 
