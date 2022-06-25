@@ -3,7 +3,7 @@
   "version": "0.1.2",
   "description": "A react component library for Seidr",
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/dttctcs/seidrui/issues"
   },
