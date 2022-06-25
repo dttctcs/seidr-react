@@ -37,7 +37,6 @@ export function getIncrementedVersion(version: string, type: string): string {
 
   try {
     const [rawVersion, rawStage] = version.split('-');
-    console.log(version);
 
     return updateVersion(rawVersion);
   } catch (e) {

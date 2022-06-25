@@ -22,35 +22,36 @@ const { argv }: { argv: any } = yargs(hideBin(process.argv)).option('tag', {
 });
 
 (async () => {
-  logger.info('Release initiated');
-  const status = await git.status();
+  // const status = await git.status();
 
   // if (status.files.length !== 0) {
   //   logger.error('Working tree is not clean');
   //   process.exit(1);
   // }
+
+  logger.info('Release initiated');
   // build
-  let build = buildPackage();
+  let build = await buildPackage();
 
   // increment version
   logger.info(`Creating new version...`);
   let incrementedVersion = getIncrementedVersion(packageJson.version, argv._[0] as string);
   logger.success(`Created new version: ${chalk.cyan(incrementedVersion)}`);
   logger.info(`Updating package.json version...`);
-  setPackageVersion(incrementedVersion);
+  await setPackageVersion(incrementedVersion);
   logger.success(`Updated package.json version: ${chalk.cyan(incrementedVersion)}`);
 
   // deploy
-  await git.add([path.join(__dirname, '../src'), path.join(__dirname, '../package.json')]);
-  // await git.commit(`[release] Version: ${incrementedVersion}`);
-  // await git.push();
+  await git.add([path.join(__dirname, '..')]);
+  await git.commit(`[release] Version: ${incrementedVersion}`);
+  await git.push();
 
-  // open(
-  //   githubRelease({
-  //     user: 'mantinedev',
-  //     repo: 'mantine',
-  //     tag: incrementedVersion,
-  //     title: incrementedVersion,
-  //   }),
-  // );
+  open(
+    githubRelease({
+      user: 'dttctcs',
+      repo: 'seidrui',
+      tag: incrementedVersion,
+      title: incrementedVersion,
+    }),
+  );
 })();
