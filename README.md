@@ -57,22 +57,22 @@ You now can use **Seidr UI's** components and hooks anywhere in the application.
 #### DataGrid
 
 | prop             | value                  | description                                                                                                                    |
-| ---------------- | ---------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
-| path             | string                 | The path segment to add to the `baseURL`. The resulting url should point to a valid **Seidr** base route                       |
+| ---------------- | ---------------------- | ------------------------------------------------------------------------------------------------------------------------------|
+| path             | string                 | The path segment to add to the `baseURL`. The resulting url should point to a valid **Seidr** base route                      |
 | fitToParent      | boolean                | Size to be controlled by parent                                                                                                |
-| hideToolbar      | boolean                | Hide toolbar, the toolbar is the upper section containing Settings, Add and Filter                                             |
+| hideToolbar      | boolean                | Hide toolbar, the toolbar is the upper section containing Settings, Add and Filter                                            |
 | hideFilter       | boolean                | Hide filter                                                                                                                    |
 | hideSettings     | boolean                | Hide settings                                                                                                                  |
 | hideActions      | boolean                | Hide Action column on every row                                                                                                |
-| settings         | object: Settings       | Style settings                                                                                                                 |
+| settings         | object: Settings       | Style settings                                                                                                                |
 | queryParams      | object: QueryParams    | Control the grid externally                                                                                                    |
-| rowsPerPageProps | boolean                | Control page size externally                                                                                                   |
+| rowsPerPageProps | boolean                | Control page size externally                                                                                                  |
 | relation         | object: Filter         | A base filter to apply (Currently used in the context of RelatedAPIs)                                                          |
 | AddComponent     | ReactElement           | ReactNode to be rendered on item add. Will provide add info to the component as properties ( columns, schema, defaultValues)   |
 | EditComponent    | ReactElement           | ReactNode to be rendered on item edit. Will provide edit info to the component as properties ( columns, schema, defaultValues) |
 | ViewComponent    | ReactElement           | ReactNode to be rendered on item view Will provide the selected item to the component                                          |
-| onError          | function               | Callback to be fired on DataGrid error                                                                                         |
-| onSelectEntry    | boolean                | Callback to be fired on entry selection (Will apply selection styles to rows)                                                  |
+| onError          | function               | Callback to be fired on DataGrid error                                                                                        |
+| onSelectEntry    | function               | Callback to be fired on entry selection (Will apply selection styles to rows)                                                  |
 | styles           | object: DataGridStyles | Interface to style DataGrid (based on [Mantine's StylesAPI](https://mantine.dev/theming/styles-api/))                          |
 
 #### useSeidrBaseURL
