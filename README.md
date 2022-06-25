@@ -42,13 +42,10 @@ To leverage **Seidr UI** wrap your react application with `SeidrProvider`. `Seid
 
 #### SeidrProvider
 
-| prop         | value                        | description                                                                                                                                       |
-| ------------ | ---------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
-| baseURL      | string                       | The base URL of your **Seidr** application. (Example: www.domain.com/api/v1)                                                                      |
-| theme        | object: ExtendedMantineTheme | A theme object to be merged with interial [`MantineTheme`](https://mantine.dev/theming/extend-theme/)                                             |
-| styles       | object: Styles               | Styling to apply to every component (see [Mantine's StylesAPI](https://mantine.dev/theming/styles-api/))                                          |
-| classNames   | object: Styles               | Styling to apply to every component (see [Mantine's StylesAPI](https://mantine.dev/theming/styles-api/))                                          |
-| defaultProps | object: Styles               | Default props to apply to every component (see [MantineProvider](https://mantine.dev/theming/mantine-provider/#default-props-on-mantineprovider)) |
+| prop    | value                        | description                                                                                           |
+| ------- | ---------------------------- | ----------------------------------------------------------------------------------------------------- |
+| baseURL | string                       | The base URL of your **Seidr** application. (Example: www.domain.com/api/v1)                          |
+| theme   | object: ExtendedMantineTheme | A theme object to be merged with interial [`MantineTheme`](https://mantine.dev/theming/extend-theme/) |
 
 ### Components and Hooks
 
@@ -57,21 +54,21 @@ You now can use **Seidr UI's** components and hooks anywhere in the application.
 #### DataGrid
 
 | prop             | value                  | description                                                                                                                    |
-| ---------------- | ---------------------- | ------------------------------------------------------------------------------------------------------------------------------|
-| path             | string                 | The path segment to add to the `baseURL`. The resulting url should point to a valid **Seidr** base route                      |
+| ---------------- | ---------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| path             | string                 | The path segment to add to the `baseURL`. The resulting url should point to a valid **Seidr** base route                       |
 | fitToParent      | boolean                | Size to be controlled by parent                                                                                                |
-| hideToolbar      | boolean                | Hide toolbar, the toolbar is the upper section containing Settings, Add and Filter                                            |
+| hideToolbar      | boolean                | Hide toolbar, the toolbar is the upper section containing Settings, Add and Filter                                             |
 | hideFilter       | boolean                | Hide filter                                                                                                                    |
 | hideSettings     | boolean                | Hide settings                                                                                                                  |
 | hideActions      | boolean                | Hide Action column on every row                                                                                                |
-| settings         | object: Settings       | Style settings                                                                                                                |
+| settings         | object: Settings       | Style settings                                                                                                                 |
 | queryParams      | object: QueryParams    | Control the grid externally                                                                                                    |
-| rowsPerPageProps | boolean                | Control page size externally                                                                                                  |
+| rowsPerPageProps | boolean                | Control page size externally                                                                                                   |
 | relation         | object: Filter         | A base filter to apply (Currently used in the context of RelatedAPIs)                                                          |
 | AddComponent     | ReactElement           | ReactNode to be rendered on item add. Will provide add info to the component as properties ( columns, schema, defaultValues)   |
 | EditComponent    | ReactElement           | ReactNode to be rendered on item edit. Will provide edit info to the component as properties ( columns, schema, defaultValues) |
 | ViewComponent    | ReactElement           | ReactNode to be rendered on item view Will provide the selected item to the component                                          |
-| onError          | function               | Callback to be fired on DataGrid error                                                                                        |
+| onError          | function               | Callback to be fired on DataGrid error                                                                                         |
 | onSelectEntry    | function               | Callback to be fired on entry selection (Will apply selection styles to rows)                                                  |
 | styles           | object: DataGridStyles | Interface to style DataGrid (based on [Mantine's StylesAPI](https://mantine.dev/theming/styles-api/))                          |
 
@@ -91,16 +88,8 @@ Provides all necessary functions `fetchInfo`, `fetchList`, `fetchEntry`, `create
 
 Provides the merged `MantineThme` throughout your application.
 
-#### useSeidrStyles
-
-Provides styles object throughout your application.
-
-#### useSeidrDefaultProps
-
-Provides defaultProps throughout your application.
-
 ## Concepts
 
 ### Styling
 
-**Seidr UI** provides the same StylesAPI as on [Mantine](https://mantine.dev/theming/styles-api/). This is a work in progress though. It currently works only rudimentary.
+**Seidr UI** provides the same StylesAPI as on [Mantine](https://mantine.dev/theming/styles-api/). This is a work in progress though. The Interface on `DataGrid` is a WIP.

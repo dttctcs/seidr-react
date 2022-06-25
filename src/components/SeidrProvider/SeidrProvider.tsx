@@ -7,9 +7,6 @@ import { useProvideApi } from './useProvideApi';
 
 const SeidrContext = createContext({
   theme: {}, //Provide a default theme here
-  styles: {},
-  classNames: {},
-  defaultProps: {},
 });
 
 export function useSeidrAuth() {
@@ -28,22 +25,9 @@ export function useSeidrTheme() {
   return useMantineTheme() || {};
 }
 
-export function useSeidrStyles(componentName) {
-  const ctx = useContext(SeidrContext);
-  return { styles: ctx.styles[componentName] || {}, classNames: ctx.classNames[componentName] || {} };
-}
-
-export function useSeidrDefaultProps(componentName, defaultProps, props) {
-  const contextProps = useContext(SeidrContext)?.defaultProps?.[component] || {};
-  return { ...defaultProps, ...contextProps, ...filterProps(props) };
-}
-
 export function SeidrProvider({
   baseURL = window.location.origin,
   theme = THEME,
-  styles = DEFAULT_STYLES,
-  classNames = {},
-  defaultProps = DEFAULT_PROPS,
   inheritMantineTheme = false,
   children,
 }) {
@@ -51,14 +35,8 @@ export function SeidrProvider({
   const api = useProvideApi(baseURL);
 
   return (
-    <SeidrContext.Provider value={{ api, auth, baseURL, classNames, styles, theme }}>
-      <MantineProvider
-        theme={theme}
-        styles={styles}
-        classNames={classNames}
-        defaultProps={defaultProps}
-        inherit={inheritMantineTheme}
-      >
+    <SeidrContext.Provider value={{ api, auth, baseURL, theme }}>
+      <MantineProvider theme={theme} inherit={inheritMantineTheme} defaultProps={DEFAULT_PROPS} styles={DEFAULT_STYLES}>
         {children}
       </MantineProvider>
     </SeidrContext.Provider>
