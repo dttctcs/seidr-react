@@ -38,7 +38,7 @@ You have **Seidr** running? Good. All you need is to install **Seidr UI** and le
 
 ### Basic
 
-To leverage **Seidr UI** wrap your react application with `SeidrProvider`. `SeidrProvider` has several props. The most important is `baseURL`. Set it to your Seidr Backend URL. If not set, `SeidrProvider` will assume the `baseURL` to be `window.location.origin`.
+To leverage **Seidr UI** wrap your react application with `SeidrProvider`. `SeidrProvider` has several props. The most important is `baseURL`. Set it to your **Seidr** Backend URL. If not set, `SeidrProvider` will assume the `baseURL` to be `window.location.origin`.
 
 #### SeidrProvider
 
@@ -103,4 +103,4 @@ Provides defaultProps throughout your application.
 
 ### Styling
 
-**Seidr UI** provides the same StylesAPI as based on [Mantine](https://mantine.dev/theming/styles-api/). This is a work in progress though. It currently works only rudimentary.
+**Seidr UI** provides the same StylesAPI as on [Mantine](https://mantine.dev/theming/styles-api/). This is a work in progress though. It currently works only rudimentary.
