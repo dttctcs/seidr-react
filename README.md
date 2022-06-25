@@ -4,7 +4,7 @@ A react component library for Seidr
 
 ## Usage
 
-**Seidr UI** provides react components to interact with [**Seidr's**](https://github.com/dttctcs/seidr) features. :sparkles:
+**Seidr UI** provides react components and hooks to interact with [**Seidr's**](https://github.com/dttctcs/seidr) features. :sparkles:
 
 More components comming soon...
 
@@ -27,11 +27,80 @@ You have **Seidr** running? Good. All you need is to install **Seidr UI** and le
 ### Production
 
 - Install dependencies: `npm install`
-- Run `npm run build` (see also https://create-react-app.dev/docs/production-build/)
+- Run `npm run build`
+
+### Release
+
+- Install dependencies: `npm install`
+- Run `npm run release`
+
+## Configuration
+
+### Basic
+
+To leverage **Seidr UI** wrap your react application with `SeidrProvider`. `SeidrProvider` has several props. The most important is `baseURL`. Set it to your Seidr Backend URL. If not set, `SeidrProvider` will assume the `baseURL` to be `window.location.origin`.
+
+#### SeidrProvider
+
+| prop         | value                        | description                                                                                                                                       |
+| ------------ | ---------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| baseURL      | string                       | The base URL of your **Seidr** application. (Example: www.domain.com/api/v1)                                                                      |
+| theme        | object: ExtendedMantineTheme | A theme object to be merged with interial [`MantineTheme`](https://mantine.dev/theming/extend-theme/)                                             |
+| styles       | object: Styles               | Styling to apply to every component (see [Mantine's StylesAPI](https://mantine.dev/theming/styles-api/))                                          |
+| classNames   | object: Styles               | Styling to apply to every component (see [Mantine's StylesAPI](https://mantine.dev/theming/styles-api/))                                          |
+| defaultProps | object: Styles               | Default props to apply to every component (see [MantineProvider](https://mantine.dev/theming/mantine-provider/#default-props-on-mantineprovider)) |
+
+### Components and Hooks
+
+You now can use **Seidr UI's** components and hooks anywhere in the application. **Seidr UI** currently provides a single component and several hooks.
+
+#### DataGrid
+
+| prop             | value                  | description                                                                                                                    |
+| ---------------- | ---------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| path             | string                 | The path segment to add to the `baseURL`. The resulting url should point to a valid **Seidr** base route                       |
+| fitToParent      | boolean                | Size to be controlled by parent                                                                                                |
+| hideToolbar      | boolean                | Hide toolbar, the toolbar is the upper section containing Settings, Add and Filter                                             |
+| hideFilter       | boolean                | Hide filter                                                                                                                    |
+| hideSettings     | boolean                | Hide settings                                                                                                                  |
+| hideActions      | boolean                | Hide Action column on every row                                                                                                |
+| settings         | object: Settings       | Style settings                                                                                                                 |
+| queryParams      | object: QueryParams    | Control the grid externally                                                                                                    |
+| rowsPerPageProps | boolean                | Control page size externally                                                                                                   |
+| relation         | object: Filter         | A base filter to apply (Currently used in the context of RelatedAPIs)                                                          |
+| AddComponent     | ReactElement           | ReactNode to be rendered on item add. Will provide add info to the component as properties ( columns, schema, defaultValues)   |
+| EditComponent    | ReactElement           | ReactNode to be rendered on item edit. Will provide edit info to the component as properties ( columns, schema, defaultValues) |
+| ViewComponent    | ReactElement           | ReactNode to be rendered on item view Will provide the selected item to the component                                          |
+| onError          | function               | Callback to be fired on DataGrid error                                                                                         |
+| onSelectEntry    | boolean                | Callback to be fired on entry selection (Will apply selection styles to rows)                                                  |
+| styles           | object: DataGridStyles | Interface to style DataGrid (based on [Mantine's StylesAPI](https://mantine.dev/theming/styles-api/))                          |
+
+#### useSeidrBaseURL
+
+Provides the set `baseURL` throughout your application.
+
+#### useSeidrAuth
+
+Provides `user`, `error`, `isLoading`, `signin`, `signout`, `update`, `resetPassword` to interact with **Seidr's** authentication functionality. This hook will also trigger a rerender when `user`, `error` and `isLoading` change (react lifecycle).
+
+#### useSeidrApi
+
+Provides all necessary functions `fetchInfo`, `fetchList`, `fetchEntry`, `createEntry`, `updateEntry`, `deleteEntry` to interact with **Seidr's** `BaseModelRestApi`.
+
+#### useSeidrTheme
+
+Provides the merged `MantineThme` throughout your application.
+
+#### useSeidrStyles
+
+Provides styles object throughout your application.
+
+#### useSeidrDefaultProps
+
+Provides defaultProps throughout your application.
 
 ## Concepts
 
-A concept....a concept? Eh...
+### Styling
 
-- _SeidrProvider_ to provide auth, baseURL, theme and styles to your application (or component subtree)
-- _DataGrid_ API to interact with
+**Seidr UI** provides the same StylesAPI as based on [Mantine](https://mantine.dev/theming/styles-api/). This is a work in progress though. It currently works only rudimentary.
