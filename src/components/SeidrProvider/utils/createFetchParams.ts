@@ -5,7 +5,7 @@ export function createFetchParams({
   body = undefined,
   queryParams = undefined,
 }) {
-  const url = new URL(path, b);
+  const url = new URL(path, base);
 
   if (typeof queryParams === 'object') {
     for (const [key, value] of Object.entries(queryParams)) {
