@@ -1,9 +1,12 @@
+import { useSeidrBaseURL } from './SeidrProvider';
 import { createFetchParams } from './utils';
 
 export function useProvideApi() {
+  const baseURL = useSeidrBaseURL();
+
   const fetchList = async (path, queryParams) => {
     try {
-      const fetchParams = createFetchParams({ path: path, method: 'GET' });
+      const fetchParams = createFetchParams({ base: baseURL, path: path, method: 'GET' });
       if (queryParams) {
         const query = JSON.stringify(queryParams);
         fetchParams.url.searchParams.append('q', query);
@@ -24,7 +27,7 @@ export function useProvideApi() {
 
   const fetchInfo = async (path) => {
     try {
-      const fetchParams = createFetchParams({ path: path + '_info', method: 'GET' });
+      const fetchParams = createFetchParams({ base: baseURL, path: path + '_info', method: 'GET' });
 
       const response = await fetch(fetchParams.url.href, fetchParams.options);
       if (response.ok) {
@@ -40,7 +43,7 @@ export function useProvideApi() {
 
   const fetchEntry = async (path, id) => {
     try {
-      const fetchParams = createFetchParams({ path: path + id, method: 'GET' });
+      const fetchParams = createFetchParams({ base: baseURL, path: path + id, method: 'GET' });
       const response = await fetch(fetchParams.url.href, fetchParams.options);
 
       if (response.ok) {
@@ -56,7 +59,7 @@ export function useProvideApi() {
 
   const createEntry = async (path, data) => {
     try {
-      const fetchParams = createFetchParams({ path: path, method: 'POST', body: data });
+      const fetchParams = createFetchParams({ base: baseURL, path: path, method: 'POST', body: data });
       const response = await fetch(fetchParams.url.href, fetchParams.options);
 
       if (response.ok) {
@@ -72,7 +75,7 @@ export function useProvideApi() {
 
   const updateEntry = async (path, id, data) => {
     try {
-      const fetchParams = createFetchParams({ path: path + id, method: 'PUT', body: data });
+      const fetchParams = createFetchParams({ base: baseURL, path: path + id, method: 'PUT', body: data });
       const response = await fetch(fetchParams.url.href, fetchParams.options);
 
       if (response.ok) {
@@ -88,7 +91,7 @@ export function useProvideApi() {
 
   const deleteEntry = async (path, id) => {
     try {
-      const fetchParams = createFetchParams({ path: path + id, method: 'DELETE' });
+      const fetchParams = createFetchParams({ base: baseURL, path: path + id, method: 'DELETE' });
       const response = await fetch(fetchParams.url.href, fetchParams.options);
 
       if (response.ok) {

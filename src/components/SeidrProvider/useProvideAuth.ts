@@ -1,7 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useSeidrBaseURL } from './SeidrProvider';
 import { createFetchParams } from './utils';
 
 export function useProvideAuth() {
+  const baseURL = useSeidrBaseURL();
   const [user, setUser] = useState(null);
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -15,7 +17,12 @@ export function useProvideAuth() {
   async function signin({ username, password }) {
     setIsLoading(true);
     try {
-      const fetchParams = createFetchParams({ path: 'auth/login', method: 'POST', body: { username, password } });
+      const fetchParams = createFetchParams({
+        base: baseURL,
+        path: 'auth/login',
+        method: 'POST',
+        body: { username, password },
+      });
 
       const response = await fetch(fetchParams.url.href, fetchParams.options);
 
@@ -36,7 +43,7 @@ export function useProvideAuth() {
   async function signout() {
     setIsLoading(true);
     try {
-      const fetchParams = createFetchParams({ path: 'auth/logout', method: 'Get' });
+      const fetchParams = createFetchParams({ base: baseURL, path: 'auth/logout', method: 'Get' });
 
       const response = await fetch(fetchParams.url.href, fetchParams.options);
 
@@ -55,7 +62,7 @@ export function useProvideAuth() {
 
   async function update(data) {
     try {
-      const fetchParams = createFetchParams({ path: 'auth/user', method: 'PUT', body: data });
+      const fetchParams = createFetchParams({ base: baseURL, path: 'auth/user', method: 'PUT', body: data });
 
       const response = await fetch(fetchParams.url.href, fetchParams.options);
 
@@ -73,7 +80,7 @@ export function useProvideAuth() {
   async function resetPassword(data) {
     try {
       delete data.confirmPassword;
-      const fetchParams = createFetchParams({ path: 'auth/resetpassword', method: 'PUT', body: data });
+      const fetchParams = createFetchParams({ base: baseURL, path: 'auth/resetpassword', method: 'PUT', body: data });
       const response = await fetch(fetchParams.url.href, fetchParams.options);
 
       if (!response.ok) {
