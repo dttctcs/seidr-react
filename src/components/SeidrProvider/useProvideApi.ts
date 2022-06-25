@@ -1,9 +1,6 @@
-import { useSeidrBaseURL } from './SeidrProvider';
 import { createFetchParams } from './utils';
 
-export function useProvideApi() {
-  const baseURL = useSeidrBaseURL();
-
+export function useProvideApi(baseURL) {
   const fetchList = async (path, queryParams) => {
     try {
       const fetchParams = createFetchParams({ base: baseURL, path: path, method: 'GET' });

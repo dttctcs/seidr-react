@@ -47,8 +47,8 @@ export function SeidrProvider({
   inheritMantineTheme = false,
   children,
 }) {
-  const auth = useProvideAuth();
-  const api = useProvideApi();
+  const auth = useProvideAuth(baseURL);
+  const api = useProvideApi(baseURL);
 
   return (
     <SeidrContext.Provider value={{ api, auth, baseURL, classNames, styles, theme }}>

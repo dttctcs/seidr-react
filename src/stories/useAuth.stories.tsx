@@ -1,12 +1,19 @@
+import { useEffect } from 'react';
+import { Button } from '@mantine/core';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import { useSeidrAuth } from '../components/SeidrProvider';
+import { useSeidrAuth, useSeidrBaseURL } from '../components/SeidrProvider';
 
 function HookWrapper() {
-  const auth = useSeidrAuth();
+  const baseURL = useSeidrBaseURL(baseURL);
+  const { user, error, isLoading, signin, signout, update, resetPassword } = useSeidrAuth();
+  console.log(baseURL);
+
   return (
     <div>
-      <div>Test useSeidrAuth hook</div>
-      <div>{JSON.stringify(auth)}</div>
+      <Button loading={isLoading} onClick={() => signin({ username: 'admin', password: 'admin' })}>
+        Signin
+      </Button>
+      <div>{JSON.stringify(user)}</div>
     </div>
   );
 }

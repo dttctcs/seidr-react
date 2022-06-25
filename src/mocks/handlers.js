@@ -454,6 +454,32 @@ const getEngines = () => {
   };
 };
 
+const getUser = () => {
+  return {
+    last_name: 'ade',
+    created_on: '2022-05-03T12:14:54.059252',
+    username: 'admin',
+    changed_on: '2022-05-03T12:14:54.059257',
+    roles: [{ name: 'Admin', id: 1 }],
+    email: 'admin@fab.org',
+    last_login: '2022-06-21T11:50:06.607826',
+    first_name: 'admin',
+    active: true,
+    login_count: 96,
+    fail_login_count: 0,
+    permissions: [
+      'OpenApi',
+      'MenuApi',
+      'AuthApi',
+      'UsersApi',
+      'RolesApi',
+      'PermissionsApi',
+      'ViewsMenusApi',
+      'PermissionViewApi',
+    ],
+  };
+};
+
 export const handlers = [
   rest.get('/cars/_info', (req, res, ctx) => {
     return res(ctx.json(getInfo()));
@@ -462,21 +488,35 @@ export const handlers = [
     return res(ctx.json(get()));
   }),
   rest.get('/cars/:id', (req, res, ctx) => {
-    return res(ctx.json(getItem(req.params.id)));
+    return res(ctx.json(getItem(req.params.id)), ctx.delay());
   }),
   rest.post('/cars/:id', (req, res, ctx) => {
-    return res(ctx.json(getItem(req.params.id)));
+    return res(ctx.json(getItem(req.params.id)), ctx.delay());
   }),
   rest.delete('/cars/:id', (req, res, ctx) => {
-    return res(ctx.json(getItem(req.params.id)));
+    return res(ctx.json(getItem(req.params.id)), ctx.delay());
   }),
   rest.delete('/cars/:id', (req, res, ctx) => {
-    return res(ctx.json(getItem(req.params.id)));
+    return res(ctx.json(getItem(req.params.id)), ctx.delay());
   }),
   rest.get('/engines/_info', (req, res, ctx) => {
-    return res(ctx.json(getInfo()));
+    return res(ctx.json(getInfo()), ctx.delay());
   }),
   rest.get('/engines/', (req, res, ctx) => {
-    return res(ctx.json(getEngines()));
+    return res(ctx.json(getEngines()), ctx.delay());
+  }),
+  rest.post('/auth/login', (req, res, ctx) => {
+    const { username, password } = req.body;
+    if (username === 'admin' && password === 'admin') {
+      return res(ctx.json(getUser()), ctx.delay());
+    } else {
+      res(
+        ctx.status(403),
+        ctx.delay(),
+        ctx.json({
+          errorMessage: `User '${username} not found or ${password} invalid!`,
+        }),
+      );
+    }
   }),
 ];

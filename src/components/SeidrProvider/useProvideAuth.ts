@@ -1,18 +1,11 @@
-import { useEffect, useState } from 'react';
-import { useSeidrBaseURL } from './SeidrProvider';
+import { useState } from 'react';
+
 import { createFetchParams } from './utils';
 
-export function useProvideAuth() {
-  const baseURL = useSeidrBaseURL();
+export function useProvideAuth(baseURL) {
   const [user, setUser] = useState(null);
   const [error, setError] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    if (!user) {
-      signin({ username: '', password: '' });
-    }
-  }, [user]);
+  const [isLoading, setIsLoading] = useState(false);
 
   async function signin({ username, password }) {
     setIsLoading(true);
@@ -25,7 +18,7 @@ export function useProvideAuth() {
       });
 
       const response = await fetch(fetchParams.url.href, fetchParams.options);
-
+      console.log(response);
       if (response.ok) {
         const user = await response.json();
         setUser(user);
@@ -35,6 +28,7 @@ export function useProvideAuth() {
 
       setIsLoading(false);
     } catch (error) {
+      console.log(error);
       setError({ error, message: 'Failed to fetch' });
       setIsLoading(false);
     }
