@@ -3,9 +3,9 @@ import { useController } from 'react-hook-form';
 
 import { TextInput, useMantineTheme } from '@mantine/core';
 import { Calendar } from 'tabler-icons-react';
-import AdapterDateFns from '@mui/lab/AdapterDateFns';
-import LocalizationProvider from '@mui/lab/LocalizationProvider';
-import DatePicker from '@mui/lab/DatePicker';
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 
 export function FormDatePicker({ control, name, TextFieldProps, PopperProps, ...props }) {
   const {
