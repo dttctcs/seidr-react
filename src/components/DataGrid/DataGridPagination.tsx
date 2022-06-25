@@ -1,8 +1,8 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { paginationHeight } from './utils';
 
-import { TablePagination, debounce, Box, IconButton } from '@mui/material';
-import { alpha, lighten, darken } from '@mui/system';
+import { TablePagination, debounce } from '@mui/material';
+import { Box, ActionIcon, Group } from '@mantine/core';
 
 import { ArrowBarToLeft, ArrowBarToRight, ChevronLeft, ChevronRight } from 'tabler-icons-react';
 
@@ -26,28 +26,28 @@ function TablePaginationActions(props) {
   };
 
   return (
-    <Box sx={{ flexShrink: 0, ml: 2.5 }}>
-      <IconButton onClick={handleFirstPageButtonClick} disabled={page === 0} aria-label="first page">
+    <Group ml="sm" noWrap>
+      <ActionIcon onClick={handleFirstPageButtonClick} disabled={page === 0} aria-label="first page">
         <ArrowBarToLeft />
-      </IconButton>
-      <IconButton onClick={handleBackButtonClick} disabled={page === 0} aria-label="previous page">
+      </ActionIcon>
+      <ActionIcon onClick={handleBackButtonClick} disabled={page === 0} aria-label="previous page">
         <ChevronLeft />
-      </IconButton>
-      <IconButton
+      </ActionIcon>
+      <ActionIcon
         onClick={handleNextButtonClick}
         disabled={page >= Math.ceil(count / rowsPerPage) - 1}
         aria-label="next page"
       >
         <ChevronRight />
-      </IconButton>
-      <IconButton
+      </ActionIcon>
+      <ActionIcon
         onClick={handleLastPageButtonClick}
         disabled={page >= Math.ceil(count / rowsPerPage) - 1}
         aria-label="last page"
       >
         <ArrowBarToRight />
-      </IconButton>
-    </Box>
+      </ActionIcon>
+    </Group>
   );
 }
 
@@ -79,17 +79,14 @@ function DataGridPagination({ setLoading, dispatch, count, page, pageSize, rowsP
 
   return (
     <Box
-      sx={{
+      sx={(theme) => ({
         flex: '0 1 0',
         height: paginationHeight,
         border: 'none',
         borderTopWidth: '1px',
         borderTopStyle: 'solid',
-        borderColor: (theme) =>
-          theme.palette.mode === 'light'
-            ? lighten(alpha(theme.palette.divider, 1), 0.88)
-            : darken(alpha(theme.palette.divider, 1), 0.68),
-      }}
+        borderColor: theme.colors.gray[4],
+      })}
     >
       <TablePagination
         rowsPerPageOptions={pageSizes}

@@ -33,7 +33,7 @@ function DeleteEntry({ id, onDeleteEntry, selected }) {
           <Trash color={selected ? 'white' : undefined} />
         </ActionIcon>
       </Tooltip>
-      <AlertDialog open={dialogOpen} onClose={handleReject} handleAccept={handleAccept} handleReject={handleReject} />
+      <AlertDialog opened={dialogOpen} onClose={handleReject} handleAccept={handleAccept} handleReject={handleReject} />
     </>
   );
 }
