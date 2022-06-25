@@ -11,9 +11,9 @@
     "type": "git",
     "url": "git+https://github.com/dttctcs/seidrui.git"
   },
-  "main": "lib/index.js",
-  "module": "lib/index.esm.js",
-  "types": "lib/index.d.ts",
+  "main": "lib/cjs/index.js",
+  "module": "lib/esm/index.esm.js",
+  "types": "lib/types/index.d.ts",
   "files": [
     "lib"
   ],
