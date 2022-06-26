@@ -3,8 +3,8 @@ import { createFetchParams } from './utils';
 export function useProvideInfo(baseURL) {
   const fetchInfo = async () => {
     try {
-      const fetchParams = createFetchParams({ base: baseURL, path: 'info', method: 'GET' });
-      console.log(fetchParams.url);
+      const fetchParams = createFetchParams({ base: baseURL, path: 'info/', method: 'GET' });
+
       const response = await fetch(fetchParams.url.href, fetchParams.options);
       if (response.ok) {
         const data = await response.json();
