@@ -1,19 +1,30 @@
+import { useEffect, useState } from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import { useSeidrBaseURL } from '../components/SeidrProvider';
+import { useSeidrInfo } from '../components/SeidrProvider';
 
 function HookWrapper() {
-  const baseURL = useSeidrBaseURL();
+  const { fetchSeidrInfo } = useSeidrInfo();
+  const [info, setInfo] = useState(null);
+
+  useEffect(() => {
+    const infoPromise = fetchSeidrInfo();
+    infoPromise
+      .then((data) => {
+        setInfo(data);
+      })
+      .catch((e) => console.log(e));
+  });
+
   return (
     <div>
-      <div>Test useSeidrBaseURL hook</div>
-      <div>{JSON.stringify(baseURL)}</div>
+      <div>{JSON.stringify(info)}</div>
     </div>
   );
 }
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
-  title: 'hooks/useSeidrBaseUrl',
+  title: 'hooks/useSeidrInfo',
   component: HookWrapper,
   // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
 } as ComponentMeta<typeof HookWrapper>;

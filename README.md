@@ -72,9 +72,9 @@ You now can use **Seidr UI's** components and hooks anywhere in the application.
 | onSelectEntry    | function               | Callback to be fired on entry selection (Will apply selection styles to rows)                                                   |
 | styles           | object: DataGridStyles | Interface to style DataGrid (based on [Mantine's StylesAPI](https://mantine.dev/theming/styles-api/))                           |
 
-#### useSeidrBaseURL
+#### useSeidrInfo
 
-Provides the set `baseURL` throughout your application.
+Provides the set `baseURL` and `fetchInfo` (to fetch **Seidr** meta data) throughout your application.
 
 #### useSeidrAuth
 

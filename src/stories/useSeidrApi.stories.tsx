@@ -5,7 +5,6 @@ function HookWrapper() {
   const api = useSeidrApi();
   return (
     <div>
-      <div>Test useSeidrApi hook</div>
       <div>{JSON.stringify(api)}</div>
     </div>
   );

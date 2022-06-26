@@ -1,12 +1,10 @@
 import { useEffect } from 'react';
 import { Button } from '@mantine/core';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import { useSeidrAuth, useSeidrBaseURL } from '../components/SeidrProvider';
+import { useSeidrAuth } from '../components/SeidrProvider';
 
 function HookWrapper() {
-  const baseURL = useSeidrBaseURL(baseURL);
   const { user, error, isLoading, signin, signout, update, resetPassword } = useSeidrAuth();
-  console.log(baseURL);
 
   return (
     <div>

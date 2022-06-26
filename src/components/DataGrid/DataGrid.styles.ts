@@ -1,5 +1,6 @@
 import { createStyles } from '@mantine/core';
 
+// styles api
 export const DataGridStyles = {
   root: 'Root element',
   toolbar: 'Main control',

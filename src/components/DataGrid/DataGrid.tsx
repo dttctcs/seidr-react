@@ -1,5 +1,5 @@
 import React, { ReactElement, useEffect, useReducer, useState, forwardRef } from 'react';
-import { useSeidrBaseURL, useSeidrApi } from '../SeidrProvider';
+import { useSeidrApi, useSeidrInfo } from '../SeidrProvider';
 import { getDefaultValues, getValidationSchema } from './utils';
 
 import { Box, CircularProgress } from '@mui/material';
@@ -132,7 +132,7 @@ function reducer(state, action) {
 }
 
 export const DataGrid = forwardRef((props: DataGridProps, ref) => {
-  const baseURL = useSeidrBaseURL();
+  const { baseURL } = useSeidrInfo();
   const { fetchInfo, fetchList, fetchEntry, createEntry, updateEntry, deleteEntry } = useSeidrApi();
 
   const {

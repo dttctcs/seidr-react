@@ -5,7 +5,6 @@ function HookWrapper() {
   const theme = useSeidrTheme();
   return (
     <div>
-      <div>Test useSeidrTheme hook</div>
       <div>{JSON.stringify(theme)}</div>
     </div>
   );
