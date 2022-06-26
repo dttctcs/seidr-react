@@ -74,7 +74,7 @@ You now can use **Seidr UI's** components and hooks anywhere in the application.
 
 #### useSeidrInfo
 
-Provides the set `baseURL` and `fetchInfo` (to fetch **Seidr** meta data) throughout your application.
+Provides the set `baseURL` and `fetchSeidrInfo` (to fetch **Seidr** meta data) throughout your application.
 
 #### useSeidrAuth
 

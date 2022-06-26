@@ -32,6 +32,8 @@ export function SeidrProvider({
   inheritMantineTheme = false,
   children,
 }) {
+  // ensure trailing slash
+  baseURL = baseURL.replace(/\/?$/, '/');
   const auth = useProvideAuth(baseURL);
   const api = useProvideApi(baseURL);
   const info = { baseURL, fetchSeidrInfo: useProvideInfo(baseURL) };
