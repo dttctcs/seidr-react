@@ -5,6 +5,26 @@ import { createFetchParams } from './utils';
 export function useProvideAuth(baseURL) {
   const [user, setUser] = useState(null);
 
+  async function getUser() {
+    try {
+      const fetchParams = createFetchParams({
+        base: baseURL,
+        path: 'auth/user',
+        method: 'GET',
+      });
+
+      const response = await fetch(fetchParams.url.href, fetchParams.options);
+
+      if (response.ok) {
+        const user = await response.json();
+        return setUser(user);
+      }
+      Promise.reject({ message: "Coulnd't get user data" });
+    } catch (error) {
+      Promise.reject({ error, message: 'Failed to fetch' });
+    }
+  }
+
   async function signin({ username, password }) {
     try {
       const fetchParams = createFetchParams({
@@ -72,5 +92,5 @@ export function useProvideAuth(baseURL) {
     }
   }
 
-  return { user, signin, signout, update, resetPassword };
+  return { user, getUser, signin, signout, update, resetPassword };
 }

@@ -4,7 +4,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { useSeidrAuth } from '../components/SeidrProvider';
 
 function HookWrapper() {
-  const { user, error, isLoading, signin, signout, update, resetPassword } = useSeidrAuth();
+  const { user, getUser, resetPassword, signin, signout, update } = useSeidrAuth();
 
   return (
     <div>
