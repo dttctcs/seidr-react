@@ -1,23 +1,17 @@
 import { useEffect, useState } from 'react';
+import { Button } from '@mantine/core';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import { useSeidrInfo } from '../components/SeidrProvider';
+import { useSeidrAuth, useSeidrInfo } from '../components/SeidrProvider';
 
 function HookWrapper() {
-  const { fetchSeidrInfo } = useSeidrInfo();
-  const [info, setInfo] = useState(null);
-
-  useEffect(() => {
-    const infoPromise = fetchSeidrInfo();
-    infoPromise
-      .then((data) => {
-        setInfo(data);
-      })
-      .catch((e) => console.log(e));
-  });
+  const { signin } = useSeidrAuth();
+  const { baseURL, apis } = useSeidrInfo();
 
   return (
     <div>
-      <div>{JSON.stringify(info)}</div>
+      <Button onClick={() => signin({ username: 'admin', password: 'admin' })}>Signin</Button>
+      <div>{JSON.stringify(baseURL)}</div>
+      <div>{JSON.stringify(apis)}</div>
     </div>
   );
 }

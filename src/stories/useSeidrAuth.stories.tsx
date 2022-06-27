@@ -8,9 +8,7 @@ function HookWrapper() {
 
   return (
     <div>
-      <Button loading={isLoading} onClick={() => signin({ username: 'admin', password: 'admin' })}>
-        Signin
-      </Button>
+      <Button onClick={() => signin({ username: 'admin', password: 'admin' })}>Signin</Button>
       <div>{JSON.stringify(user)}</div>
     </div>
   );

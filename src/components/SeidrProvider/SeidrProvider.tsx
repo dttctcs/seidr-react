@@ -36,7 +36,7 @@ export function SeidrProvider({
   baseURL = baseURL.replace(/\/?$/, '/');
   const auth = useProvideAuth(baseURL);
   const api = useProvideApi(baseURL);
-  const info = { baseURL, fetchSeidrInfo: useProvideInfo(baseURL) };
+  const info = { baseURL, ...useProvideInfo(baseURL, auth) };
 
   return (
     <SeidrContext.Provider value={{ api, auth, info, theme }}>

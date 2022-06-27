@@ -1,7 +1,17 @@
+import { useEffect, useState } from 'react';
 import { createFetchParams } from './utils';
 
-export function useProvideInfo(baseURL) {
-  const fetchInfo = async () => {
+export function useProvideInfo(baseURL, auth) {
+  const { user } = auth;
+  const [info, setInfo] = useState(null);
+
+  useEffect(() => {
+    if (user) {
+      fetchInfo(baseURL).then((data) => setInfo(data));
+    }
+  }, [user]);
+
+  const fetchInfo = async (baseURL) => {
     try {
       const fetchParams = createFetchParams({ base: baseURL, path: 'info/', method: 'GET' });
 
@@ -13,9 +23,9 @@ export function useProvideInfo(baseURL) {
 
       return Promise.reject('Something went wrong.');
     } catch (error) {
-      return Promise.reject('Failed to fetch');
+      return Promise.reject('Failed to fetch seidr info');
     }
   };
 
-  return fetchInfo;
+  return info;
 }
