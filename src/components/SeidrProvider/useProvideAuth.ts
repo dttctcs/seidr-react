@@ -4,11 +4,8 @@ import { createFetchParams } from './utils';
 
 export function useProvideAuth(baseURL) {
   const [user, setUser] = useState(null);
-  const [error, setError] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
 
   async function signin({ username, password }) {
-    setIsLoading(true);
     try {
       const fetchParams = createFetchParams({
         base: baseURL,
@@ -18,39 +15,29 @@ export function useProvideAuth(baseURL) {
       });
 
       const response = await fetch(fetchParams.url.href, fetchParams.options);
-      console.log(response);
+
       if (response.ok) {
         const user = await response.json();
-        setUser(user);
-      } else {
-        setError({ error, message: "Coulnd't sign in" });
+        return setUser(user);
       }
-
-      setIsLoading(false);
+      Promise.reject({ message: "Coulnd't sign in" });
     } catch (error) {
-      console.log(error);
-      setError({ error, message: 'Failed to fetch' });
-      setIsLoading(false);
+      Promise.reject({ error, message: 'Failed to fetch' });
     }
   }
 
   async function signout() {
-    setIsLoading(true);
     try {
       const fetchParams = createFetchParams({ base: baseURL, path: 'auth/logout', method: 'Get' });
 
       const response = await fetch(fetchParams.url.href, fetchParams.options);
 
       if (response.ok) {
-        setUser(null);
-      } else {
-        setError({ error, message: "Couldn't sign out" });
+        return setUser(null);
       }
-
-      setIsLoading(false);
+      Promise.reject({ message: "Couldn't sign out" });
     } catch (error) {
-      setError({ error, message: 'Failed to fetch' });
-      setIsLoading(false);
+      Promise.reject({ error, message: 'Failed to fetch' });
     }
   }
 
@@ -62,12 +49,11 @@ export function useProvideAuth(baseURL) {
 
       if (response.ok) {
         const data = await response.json();
-        setUser(data);
-      } else {
-        setError({ error, message: "Couldn't update user data" });
+        return setUser(data);
       }
+      Promise.reject({ message: "Couldn't update user data" });
     } catch (error) {
-      setError({ error, message: 'Failed to fetch' });
+      Promise.reject({ error, message: 'Failed to fetch' });
     }
   }
 
@@ -77,13 +63,14 @@ export function useProvideAuth(baseURL) {
       const fetchParams = createFetchParams({ base: baseURL, path: 'auth/resetpassword', method: 'PUT', body: data });
       const response = await fetch(fetchParams.url.href, fetchParams.options);
 
-      if (!response.ok) {
-        setError({ error, message: "Couldn't reset password" });
+      if (response.ok) {
+        Promise.resolve({ message: 'Reset password' });
       }
+      Promise.reject({ message: "Couldn't reset password" });
     } catch (error) {
       return Promise.reject('Failed to fetch');
     }
   }
 
-  return { user, error, isLoading, signin, signout, update, resetPassword };
+  return { user, signin, signout, update, resetPassword };
 }

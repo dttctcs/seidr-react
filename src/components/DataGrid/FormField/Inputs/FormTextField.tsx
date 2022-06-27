@@ -3,7 +3,7 @@ import { useController } from 'react-hook-form';
 
 import { TextInput } from '@mantine/core';
 
-export function FormTextField({ control, name, disableError, helperText, ...props }) {
+export function FormTextField({ control, name, ...props }) {
   const {
     field: { ref, ...inputProps },
     fieldState: { error },
