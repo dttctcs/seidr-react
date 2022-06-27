@@ -480,7 +480,36 @@ const getUser = () => {
   };
 };
 
+const getSeidrInfo = () => {
+  return {
+    apis: [
+      { name: 'CarsApi', type: 'crud', level: 'default' },
+      { name: 'PermissionsApi', type: 'crud', level: 'security' },
+      { name: 'UsersApi', type: 'crud', level: 'security' },
+      { name: 'RolesApi', type: 'crud', level: 'security' },
+    ],
+  };
+};
+
 export const handlers = [
+  rest.get('/info', (req, res, ctx) => {
+    return res(ctx.json(getSeidrInfo()), ctx.delay());
+  }),
+  rest.post('/auth/login', (req, res, ctx) => {
+    const { username, password } = req.body;
+    if (username === 'admin' && password === 'admin') {
+      return res(ctx.json(getUser()), ctx.delay());
+    } else {
+      res(
+        ctx.status(403),
+        ctx.delay(),
+        ctx.json({
+          errorMessage: `User '${username} not found or ${password} invalid!`,
+        }),
+      );
+    }
+  }),
+
   rest.get('/cars/_info', (req, res, ctx) => {
     return res(ctx.json(getInfo()));
   }),
@@ -504,19 +533,5 @@ export const handlers = [
   }),
   rest.get('/engines/', (req, res, ctx) => {
     return res(ctx.json(getEngines()), ctx.delay());
-  }),
-  rest.post('/auth/login', (req, res, ctx) => {
-    const { username, password } = req.body;
-    if (username === 'admin' && password === 'admin') {
-      return res(ctx.json(getUser()), ctx.delay());
-    } else {
-      res(
-        ctx.status(403),
-        ctx.delay(),
-        ctx.json({
-          errorMessage: `User '${username} not found or ${password} invalid!`,
-        }),
-      );
-    }
   }),
 ];
