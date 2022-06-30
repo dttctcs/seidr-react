@@ -20,7 +20,7 @@ export const parameters = {
 export const decorators = [
   (Story) => {
     return (
-      <SeidrProvider>
+      <SeidrProvider baseURL="http://localhost:5005/api/v1">
         <Story />
       </SeidrProvider>
     );
