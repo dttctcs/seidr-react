@@ -1,17 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { getValue } from '../../utils';
 
-import { Box, Grid, Modal, Paper, Stack, Tabs, Text } from '@mantine/core';
+import { Grid, Modal, Paper, Stack, Tabs, Text } from '@mantine/core';
 import RelationPanel from './RelationPanel';
 
 export function ViewDialog({ opened, onClose, id, relations, onViewEntry }) {
-  const [loading, setLoading] = useState(false);
   const [entry, setEntry] = useState(null);
-  const [value, setValue] = useState(0);
-
-  const handleTabChange = (event, newValue) => {
-    setValue(newValue);
-  };
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     onViewEntry(id)

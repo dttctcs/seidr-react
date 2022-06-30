@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { getValue } from '../utils';
 
-import { Box, Table } from '@mantine/core';
+import { Table, Text } from '@mantine/core';
 import { Row } from './Row';
 import { Header } from './Header';
 import { Field } from './Field';
@@ -77,11 +77,11 @@ export function Body({
               );
             })
           ) : (
-            <Row>
-              <Field dense={state.settings.dense} rightBorder={state.settings.rightBorder} loading={loading}>
+            <td colSpan={hideActions ? state.data.list_columns.length : state.data.list_columns.length + 1}>
+              <Text sx={{ padding: '4px', fontStyle: 'italic' }} size="sm" color="dimmed">
                 No data available...
-              </Field>
-            </Row>
+              </Text>
+            </td>
           )}
         </tbody>
       </Table>

@@ -4,6 +4,7 @@ export function useProvideApi(baseURL) {
   const fetchList = async (path, queryParams) => {
     try {
       const fetchParams = createFetchParams({ base: baseURL, path: path, method: 'GET' });
+      console.log(fetchParams);
       if (queryParams) {
         const query = JSON.stringify(queryParams);
         fetchParams.url.searchParams.append('q', query);

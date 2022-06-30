@@ -1,7 +1,7 @@
 import React from 'react';
 import { useController } from 'react-hook-form';
 
-import { MenuItem, Checkbox, ListItemText, TextField, Chip } from '@mui/material';
+import { MultiSelect } from '@mantine/core';
 
 export function FormRelatedListSelect({ control, name, items, ...props }) {
   const {
@@ -12,49 +12,25 @@ export function FormRelatedListSelect({ control, name, items, ...props }) {
     control,
   });
 
-  inputProps.value = items.filter((item) => {
-    for (const inputValue of inputProps.value) {
-      if (item.id === inputValue.id) {
-        return true;
-      }
-    }
-    return false;
-  });
+  const data = items.map((item) => ({ value: item.id, label: item.value }));
+  const currentItems = inputProps.value.map((value) => value.id);
 
   return (
-    <TextField
-      select
-      SelectProps={{
-        sx: { '&:focus': { borderRadius: (theme) => theme.shape.borderRadius } },
-        multiple: true,
-        value: inputProps.value,
-        MenuProps: {
-          sx: { maxHeight: (theme) => theme.spacing(53) },
-        },
-        renderValue: (selected) => {
-          return selected.map((item, _) => {
-            return <Chip key={item.id} sx={{ margin: '0 2px' }} label={item.value} />;
-          });
-        },
-      }}
-      inputRef={ref}
-      error={!!error}
-      helperText={error ? error.message : null}
+    <MultiSelect
+      ref={ref}
+      data={data}
+      error={error ? error.message : null}
+      searchable
       {...inputProps}
+      value={currentItems}
+      onChange={(values) => {
+        const transformedValues = [];
+        values.forEach((id) => {
+          transformedValues.push(items.find((item) => item.id === id));
+        });
+        inputProps.onChange(transformedValues);
+      }}
       {...props}
-    >
-      {items.length > 0 ? (
-        items.map((item, index) => (
-          <MenuItem key={index} value={item}>
-            <Checkbox color="primary" checked={inputProps.value.indexOf(item) > -1} />
-            <ListItemText primary={item.value} />
-          </MenuItem>
-        ))
-      ) : (
-        <MenuItem value="" disabled>
-          <em>Keine {props.group} vorhanden.</em>
-        </MenuItem>
-      )}
-    </TextField>
+    />
   );
 }

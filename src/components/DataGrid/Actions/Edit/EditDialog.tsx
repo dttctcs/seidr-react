@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 
-import { Box, Button, Group, Modal, Stack } from '@mantine/core';
+import { Button, Group, Modal, Stack } from '@mantine/core';
 
 import { FormField } from '../../FormField';
 
@@ -13,9 +13,7 @@ export function EditDialog({ opened, onClose, entry, onEditEntry, columns, schem
     defaultValues: defaultValues,
     resolver: yupResolver(schema),
   });
-
   const [loading, setLoading] = useState(false);
-
   useEffect(() => {
     if (entry) {
       for (const column of columns) {
@@ -45,7 +43,7 @@ export function EditDialog({ opened, onClose, entry, onEditEntry, columns, schem
           />
         ))}
         <Group position="right" mt="xl">
-          <Button onClick={handleSubmit(onSubmit)}>Add</Button>
+          <Button onClick={handleSubmit(onSubmit)}>Save</Button>
         </Group>
       </Stack>
     </Modal>

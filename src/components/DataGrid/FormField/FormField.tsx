@@ -1,6 +1,14 @@
 import React from 'react';
 
-import { FormAutocomplete, FormDatePicker, FormDateTimePicker, FormSelect, FormTextField } from './Inputs';
+import {
+  FormAutocomplete,
+  FormDatePicker,
+  FormRelatedSelect,
+  FormRelatedListSelect,
+  FormSelect,
+  FormDateTimePicker,
+  FormTextField,
+} from './Inputs';
 
 export function FormField({ name, control, schema, filter, ...props }) {
   if (!schema.type) {

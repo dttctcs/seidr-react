@@ -12,6 +12,5 @@ export function FormTextField({ control, name, ...props }) {
     control,
   });
 
-  console.log(inputProps);
   return <TextInput ref={ref} {...inputProps} error={error ? error.message : null} {...props} />;
 }

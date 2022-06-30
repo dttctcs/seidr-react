@@ -12,5 +12,5 @@ export function FormSelect({ control, name, items, ...props }) {
     control,
   });
 
-  return <Select ref={ref} data={items} searchable error={error ? error.message : null} {...inputProps} {...props} />;
+  return <Select ref={ref} data={items} error={error ? error.message : null} searchable {...inputProps} {...props} />;
 }
