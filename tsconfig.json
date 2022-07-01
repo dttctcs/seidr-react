@@ -1,14 +1,16 @@
 {
   "compilerOptions": {
     "module": "esnext",
-    "target": "es5",
+    "target": "es2015",
     "lib": ["esnext", "dom"],
     "sourceMap": true,
     "jsx": "react",
     "moduleResolution": "node",
     "allowSyntheticDefaultImports": true,
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "allowJs": true
   },
-  "include": ["src/**/*"],
-  "exclude": ["node_modules", "build", "lib", "src/**/*.stories.tsx", "src/**/*.test.tsx"]
+
+  "include": ["src/**/*", "./scripts"],
+  "exclude": ["node_modules", "build", "lib", "src/storiestsx", "src/**/*.test.tsx", "src/mocks/**"]
 }

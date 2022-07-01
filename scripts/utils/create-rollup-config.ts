@@ -8,8 +8,6 @@ import commonjs from '@rollup/plugin-commonjs';
 import typescript from '@rollup/plugin-typescript';
 import peerDepsExternal from 'rollup-plugin-peer-deps-external';
 
-import packageJson from '../package.json';
-
 interface PkgConfigInput {
   format: string;
   entry?: string;
@@ -40,7 +38,7 @@ export default async function createRollupConfig(config: PkgConfigInput): Promis
     externalLiveBindings: false,
     sourcemap: true,
   };
-  let externals = [];
+  const externals = [];
 
   if (config.format === 'es') {
     output.dir = path.resolve(config.basePath, 'lib/esm');

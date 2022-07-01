@@ -1,5 +1,5 @@
 import chalk from 'chalk';
-import { Logger } from '../utils/Logger';
+import { Logger } from './Logger';
 
 const logger = new Logger('increment-version');
 
@@ -36,9 +36,7 @@ export function getIncrementedVersion(version: string, type: string): string {
   };
 
   try {
-    const [rawVersion, rawStage] = version.split('-');
-
-    return updateVersion(rawVersion);
+    return updateVersion(version);
   } catch (e) {
     logger.error('Failed to parse core package.json');
     process.exit(1);
