@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { getValue } from '../utils';
+import { getValue } from '../../utils';
 
 import { Text } from '@mantine/core';
 import { Row } from './Row';
 import { Field } from './Field';
-import { Actions } from '../Actions';
+import { Actions } from '../../Actions';
 
 export function Body({
   path,
@@ -39,7 +39,7 @@ export function Body({
               onSelect={onSelect}
             >
               {!hideActions ? (
-                <Field rightBorder={settings.rightBorder} loading={loading}>
+                <Field rtl={settings.rtl} rightBorder={settings.rightBorder} loading={loading}>
                   <Actions
                     id={data.ids[index]}
                     path={path}

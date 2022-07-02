@@ -16,7 +16,6 @@ export function AddDialog({ opened, title, onClose, onAddEntry, columns, schema,
   const [loading, setLoading] = useState(false);
 
   const onSubmit = async (data) => {
-    console.log(data);
     try {
       onAddEntry(data);
     } finally {

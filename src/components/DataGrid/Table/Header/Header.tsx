@@ -7,7 +7,7 @@ export const Header = React.memo(
     return (
       <thead style={{ padding: 0 }}>
         <tr>
-          {!hideActions ? <FieldTitle column="Actions" order={order} /> : null}
+          {!hideActions ? <FieldTitle column="Actions" order={order} rtl={settings.rtl} /> : null}
           {data.list_columns.map((column, index) => (
             <FieldTitle
               key={column}

@@ -2,8 +2,8 @@ import React from 'react';
 
 import { Table as MantineTable } from '@mantine/core';
 import { ScrollArea } from '../../ScrollArea';
-import { Header } from '../Header';
-import { Body } from '../Body';
+import { Header } from './Header';
+import { Body } from './Body';
 
 export function Table({
   path,
@@ -55,8 +55,6 @@ export function Table({
           EditComponent={EditComponent}
           hideActions={hideActions}
         />
-
-        <div className="h-4" />
       </MantineTable>
     </ScrollArea>
   );

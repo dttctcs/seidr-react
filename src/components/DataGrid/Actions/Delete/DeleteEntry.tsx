@@ -20,17 +20,12 @@ function DeleteEntry({ id, onDeleteEntry, selected }) {
     <>
       <Tooltip label="Delete">
         <ActionIcon
-          sx={(theme) => ({
-            '&:hover': {
-              backgroundColor: selected ? theme.fn.rgba(theme.colors.gray[0], 0.45) : undefined,
-            },
-          })}
           size="sm"
           onClick={() => {
             setDialogOpen(true);
           }}
         >
-          <Trash color={selected ? 'white' : undefined} />
+          <Trash />
         </ActionIcon>
       </Tooltip>
       <AlertDialog opened={dialogOpen} onClose={handleReject} handleAccept={handleAccept} handleReject={handleReject} />

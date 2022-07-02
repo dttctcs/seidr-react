@@ -17,7 +17,7 @@ export function FieldTitle({
   styles,
   ...props
 }) {
-  const selectedColumn = order.columm === column;
+  const selectedColumn = order.column === column;
 
   const { classes } = applyStyles({ selectedColumn, selectable, rtl }, { classNames, styles, name: 'DataGrid' });
 

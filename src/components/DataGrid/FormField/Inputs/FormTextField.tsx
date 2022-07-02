@@ -12,5 +12,7 @@ export function FormTextField({ control, name, ...props }) {
     control,
   });
 
-  return <TextInput ref={ref} {...inputProps} error={error ? error.message : null} {...props} />;
+  console.log(inputProps.value);
+  const currentItem = inputProps.value || undefined;
+  return <TextInput ref={ref} {...inputProps} error={error ? error.message : null} value={currentItem} {...props} />;
 }
