@@ -22,7 +22,7 @@ export const getValue = (value) => {
 
 export const getValidationSchema = (columns) => {
   const schema = columns.reduce((schema, column) => {
-    const { name, required, type } = column;
+    let { name, required, type } = column;
 
     switch (type) {
       case 'RelatedList':
