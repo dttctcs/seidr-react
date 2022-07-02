@@ -7,7 +7,7 @@ import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 
-export function FormDatePicker({ control, name, TextFieldProps, PopperProps, ...props }) {
+export function FormDatePicker({ control, name, PopperProps, ...props }) {
   const {
     field: { ref, ...inputProps },
     fieldState: { error },
@@ -27,6 +27,7 @@ export function FormDatePicker({ control, name, TextFieldProps, PopperProps, ...
   }, [customInputRef.current]);
   const colors = theme.fn.variant({ color: theme.colors[theme.primaryColor][theme.fn.primaryShade()] });
 
+  console.log(inputProps);
   return (
     <LocalizationProvider dateAdapter={AdapterDateFns}>
       <DatePicker
@@ -52,7 +53,7 @@ export function FormDatePicker({ control, name, TextFieldProps, PopperProps, ...
           },
           ...PopperProps,
         }}
-        renderInput={({ ref, inputProps, disabled, onChange, value, ...other }) => {
+        renderInput={({ inputProps, ...other }) => {
           return (
             <TextInput
               label={props.label}
@@ -66,7 +67,8 @@ export function FormDatePicker({ control, name, TextFieldProps, PopperProps, ...
         inputRef={ref}
         {...inputProps}
         onChange={(newValue) => {
-          inputProps.onChange(newValue);
+          // format the marshmallow validation will pass
+          inputProps.onChange(newValue.toISOString().split('T')[0]);
         }}
         {...props}
       />

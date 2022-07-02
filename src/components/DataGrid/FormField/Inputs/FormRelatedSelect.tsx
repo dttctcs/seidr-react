@@ -12,5 +12,22 @@ export function FormRelatedSelect({ control, name, items, ...props }) {
     control,
   });
 
-  return <Select ref={ref} data={items} error={error ? error.message : null} searchable {...inputProps} {...props} />;
+  const data = items.map((item) => ({ value: item.id.toString(), label: item.value }));
+  const currentItem = inputProps.value.id ? inputProps.value.id.toString() : null;
+
+  return (
+    <Select
+      ref={ref}
+      data={data}
+      error={error ? error.message : null}
+      {...inputProps}
+      value={currentItem}
+      onChange={(value) => {
+        const newItem = items.find((item) => item.id.toString() === value);
+        inputProps.onChange(newItem);
+      }}
+      searchable
+      {...props}
+    />
+  );
 }

@@ -7,17 +7,56 @@ import { Add } from '../Actions/Add';
 import { Filter } from './Filter';
 
 export const Toolbar = React.memo(
-  ({ classNames, styles, path, filterState, addState, settingsState, hideFilter, hideSettings, dense }) => {
-    const { classes, cx, theme } = applyStyles({ dense }, { classNames, styles, name: 'DataGrid' });
+  ({
+    path,
+    info,
+    settings,
+    queryParams,
+    dispatch,
+    hideToolbar,
+    hideFilter,
+    hideSettings,
+    dense,
 
+    handleAddEntry,
+    AddComponent,
+
+    classNames,
+    styles,
+  }) => {
+    if (hideToolbar) {
+      return null;
+    }
+
+    const { classes } = applyStyles({ dense }, { classNames, styles, name: 'DataGrid' });
+
+    const canPost = info.permissions.includes('can_post');
     return (
       <Box className={classes.toolbarRoot}>
-        <Box>{!hideSettings ? <Settings {...settingsState} /> : null}</Box>
         <Box>
-          {addState.canPost ? <Add {...addState} /> : null}
-          {!hideFilter ? <Filter path={path} {...filterState} /> : null}
+          {!hideSettings ? (
+            <Settings
+              onSettingsChange={(data) => dispatch({ type: 'setSettings', payload: data })}
+              settings={settings}
+            />
+          ) : null}
+        </Box>
+        <Box>
+          {canPost ? (
+            <Add canPost={canPost} onAddEntry={handleAddEntry} AddComponent={AddComponent} {...info.add} />
+          ) : null}
+          {!hideFilter ? (
+            <Filter
+              path={path}
+              filters={info.filters}
+              activeFilters={queryParams.filters}
+              onFiltersChange={(data) => dispatch({ type: 'setFilters', payload: data })}
+            />
+          ) : null}
         </Box>
       </Box>
     );
   },
 );
+
+Toolbar.displayName = 'Toolbar';

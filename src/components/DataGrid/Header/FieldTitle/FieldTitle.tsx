@@ -4,27 +4,33 @@ import applyStyles from './FieldTitle.styles';
 import { Box, Indicator, Tooltip } from '@mantine/core';
 import { ChevronDown, ChevronUp } from 'tabler-icons-react';
 
-export function FieldTitle({ className, classNames, styles, column, onSortBy, state, ...props }) {
-  const selectedColumn = state.queryParams.order_column === column;
-  const selectable = state.data.order_columns.includes(column);
+export function FieldTitle({
+  column,
+  label,
+  order,
+  selectable,
+  related,
+  rtl,
+  onSortBy,
+  className,
+  classNames,
+  styles,
+  ...props
+}) {
+  const selectedColumn = order.columm === column;
 
-  const { classes, cx, theme } = applyStyles(
-    { selectedColumn, selectable, rtl: state.settings.rtl },
-    { classNames, styles, name: 'DataGrid' },
-  );
-
-  const label = state.data.label_columns[column];
+  const { classes } = applyStyles({ selectedColumn, selectable, rtl }, { classNames, styles, name: 'DataGrid' });
 
   return (
     <th className={classes.fieldTitleRoot} onClick={selectable ? () => onSortBy(column) : null}>
       <Box className={classes.fieldTitleWrapper}>
-        <Box className={classes.fieldTitleName}>{label ? label : column}</Box>
-        {state.info.filters[column]?.schema.type === 'Nested' ? (
+        <Box className={classes.fieldTitleName}>{label || column}</Box>
+        {related ? (
           <Tooltip label="Related Field">
             <Indicator label="rel">
               <Box className={classes.fieldTitleIcon}>
                 {selectedColumn ? (
-                  state.queryParams.order_direction === 'asc' ? (
+                  order.direction === 'asc' ? (
                     <ChevronDown size={14} strokeWidth={1.5} />
                   ) : (
                     <ChevronUp size={14} strokeWidth={1.5} />
@@ -36,7 +42,7 @@ export function FieldTitle({ className, classNames, styles, column, onSortBy, st
         ) : (
           <Box className={classes.fieldTitleIcon}>
             {selectedColumn ? (
-              state.queryParams.order_direction === 'asc' ? (
+              order.direction === 'asc' ? (
                 <ChevronDown size={14} strokeWidth={1.5} />
               ) : (
                 <ChevronUp size={14} strokeWidth={1.5} />

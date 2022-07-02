@@ -4,7 +4,7 @@ export default createStyles((theme, { selectable, selectedColumn, rtl }) => ({
   fieldTitleRoot: {
     position: 'sticky',
     top: 0,
-    padding: 0,
+    padding: '0 !important',
     zIndex: 20,
 
     backgroundColor: 'white',

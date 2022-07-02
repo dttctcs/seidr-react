@@ -3,10 +3,10 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 
-import { Box, Button, Modal, Group, Stack } from '@mantine/core';
+import { Button, Modal, Group, Stack } from '@mantine/core';
 import { FormField } from '../../FormField';
 
-export function AddDialog({ opened, onClose, onAddEntry, columns, schema, defaultValues }) {
+export function AddDialog({ opened, title, onClose, onAddEntry, columns, schema, defaultValues }) {
   const { handleSubmit, reset, control } = useForm({
     mode: 'onTouched',
     defaultValues: defaultValues,
@@ -16,9 +16,11 @@ export function AddDialog({ opened, onClose, onAddEntry, columns, schema, defaul
   const [loading, setLoading] = useState(false);
 
   const onSubmit = async (data) => {
+    console.log(data);
     try {
       onAddEntry(data);
     } finally {
+      reset();
       onClose();
     }
   };
@@ -27,13 +29,14 @@ export function AddDialog({ opened, onClose, onAddEntry, columns, schema, defaul
     <Modal
       opened={opened}
       onClose={() => {
-        onClose();
         reset();
+        onClose();
       }}
-      title="Add Item"
+      title={title}
+      centered
     >
       <Stack spacing="md">
-        {columns.map((item, index) => (
+        {columns.map((item) => (
           <FormField
             key={item.name}
             name={item.name}

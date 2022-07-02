@@ -1,18 +1,16 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import { generateBorderStyles } from '../components/SeidrProvider/utils';
 
+import { generateBorderStyles } from '../components/SeidrProvider/utils';
 import { DataGrid } from '../components/DataGrid';
 import { DataGridStyles } from '../components/DataGrid';
 
-// More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
   title: 'Components/DataGrid',
   component: DataGrid,
-  // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
+
   args: {},
 } as ComponentMeta<typeof DataGrid>;
 
-// More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
 const Template: ComponentStory<typeof DataGrid> = (args) => {
   return <DataGrid {...args} />;
 };

@@ -4,20 +4,10 @@ import React, { forwardRef } from 'react';
 
 import { OverlayScrollbarsComponent } from 'overlayscrollbars-react';
 
-export const ScrollArea = forwardRef(
-  (
-    {
-      children,
+export const ScrollArea = forwardRef(({ children, ...others }, ref) => (
+  <OverlayScrollbarsComponent ref={ref} {...others}>
+    {children}
+  </OverlayScrollbarsComponent>
+));
 
-      ...others
-    },
-    ref,
-  ) => {
-    // const { classes, cx } = useStyles(
-    //   { scrollbarSize, offsetScrollbars, scrollbarHovered },
-    //   { name: 'ScrollArea', classNames, styles },
-    // );
-
-    return <OverlayScrollbarsComponent {...others}>{children}</OverlayScrollbarsComponent>;
-  },
-);
+ScrollArea.displayName = 'ScrollArea';

@@ -5,28 +5,11 @@ import { View } from './View';
 import { Edit } from './Edit';
 import DeleteEntry from './Delete/DeleteEntry';
 
-export function Actions({
-  id,
-  path,
-  info,
-  selected,
-  rtl,
-  ViewComponent,
-  EditComponent,
-  onViewEntry,
-  onEditEntry,
-  onDeleteEntry,
-}) {
+export function Actions({ id, path, info, selected, rtl, ViewComponent, EditComponent, onEditEntry, onDeleteEntry }) {
   return (
     <Group sx={{ gap: 4, justifyContent: rtl ? 'flex-end' : undefined }} spacing={0} noWrap>
       {info.permissions.includes('can_get') ? (
-        <View
-          id={id}
-          relations={info.relations}
-          ViewComponent={ViewComponent}
-          onViewEntry={onViewEntry}
-          selected={selected}
-        />
+        <View id={id} path={path} relations={info.relations} ViewComponent={ViewComponent} selected={selected} />
       ) : null}
       {info.permissions.includes('can_put') ? (
         <Edit

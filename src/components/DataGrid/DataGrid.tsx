@@ -1,14 +1,14 @@
+/* eslint-disable no-case-declarations */
 import React, { ReactElement, useEffect, useReducer, useState, forwardRef } from 'react';
-import { useSeidrApi, useSeidrInfo } from '../SeidrProvider';
+import { useSeidrApi } from '../SeidrProvider';
 import { getDefaultValues, getValidationSchema } from './utils';
 
-import { Box, CircularProgress } from '@mui/material';
+import { Box } from '@mantine/core';
 import { Toolbar } from './Toolbar';
+import { Table } from './Table';
 import DataGridPagination from './DataGridPagination';
 
-import { Body } from './Body';
 import { applyStyles } from './DataGrid.styles';
-
 interface Filter {
   foreign_key: string;
   opr: string;
@@ -110,19 +110,18 @@ function reducer(state, action) {
             order_direction: state.queryParams.order_column === action.payload ? otherDirection : direction,
           },
         };
-      } else {
-        delete state.queryParams.order_column;
-        delete state.queryParams.order_direction;
-        return {
-          ...state,
-          queryParams: {
-            columns: state.queryParams.columns,
-            filters: state.queryParams.filters,
-            page: state.queryParams.page,
-            page_size: state.queryParams.page_size,
-          },
-        };
       }
+
+      return {
+        ...state,
+        queryParams: {
+          columns: state.queryParams.columns,
+          filters: state.queryParams.filters,
+          page: state.queryParams.page,
+          page_size: state.queryParams.page_size,
+        },
+      };
+
     case 'setSettings':
       return { ...state, settings: action.payload };
 
@@ -132,12 +131,10 @@ function reducer(state, action) {
 }
 
 export const DataGrid = forwardRef((props: DataGridProps, ref) => {
-  const { baseURL } = useSeidrInfo();
   const { fetchInfo, fetchList, fetchEntry, createEntry, updateEntry, deleteEntry } = useSeidrApi();
 
   const {
     path,
-    fitToParent = false,
     hideToolbar = false,
     hideFilter = false,
     hideSettings = false,
@@ -165,7 +162,7 @@ export const DataGrid = forwardRef((props: DataGridProps, ref) => {
       ...initialState.queryParams,
       ...queryParams,
       page_size: localStorage.getItem(path + 'pageSize')
-        ? parseInt(localStorage.getItem(path + 'pageSize'))
+        ? parseInt(localStorage.getItem(path + 'pageSize'), 10)
         : rowsPerPageProps?.pageSizeDefault ?? 25,
     },
     settings: JSON.parse(localStorage.getItem(path + 'gridSettings')) || {
@@ -182,24 +179,18 @@ export const DataGrid = forwardRef((props: DataGridProps, ref) => {
     if (state.queryParams) {
       localStorage.setItem(path + 'pageSize', JSON.stringify(state.queryParams.page_size));
     }
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [state.queryParams]);
 
   useEffect(() => {
     if (state.settings) {
       localStorage.setItem(path + 'gridSettings', JSON.stringify(state.settings));
     }
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [state.settings]);
 
   useEffect(() => {
     if (queryParams) {
       dispatch({ type: 'setFilters', payload: queryParams.filters });
     }
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [queryParams]);
 
   useEffect(() => {
@@ -214,8 +205,6 @@ export const DataGrid = forwardRef((props: DataGridProps, ref) => {
     } else {
       getData().finally(() => setLoading(false));
     }
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [state.queryParams]);
 
   const getData = async () => {
@@ -261,14 +250,6 @@ export const DataGrid = forwardRef((props: DataGridProps, ref) => {
     }
   };
 
-  const handleViewEntry = async (id) => {
-    try {
-      return await fetchEntry(path, id);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   const handleAddEntry = async (data) => {
     setLoading(true);
     try {
@@ -305,101 +286,55 @@ export const DataGrid = forwardRef((props: DataGridProps, ref) => {
     }
   };
 
-  return state.data && state.info ? (
-    <Box className={classes.root} sx={{ height: 1, display: 'flex', flexDirection: 'column', ...sx }}>
+  if (!state.data || !state.info) {
+    return null;
+  }
+
+  return (
+    <Box
+      ref={ref}
+      className={classes.root}
+      sx={{ position: 'relative', height: '100%', display: 'flex', flexDirection: 'column', ...sx }}
+    >
       {!hideToolbar ? (
         <Toolbar
           path={path}
-          filterState={{
-            filters: state.info.filters,
-            activeFilters: state.queryParams.filters,
-            onFiltersChange: (data) => dispatch({ type: 'setFilters', payload: data }),
-          }}
-          addState={{
-            canPost: state.info.permissions.includes('can_post'),
-            onAddEntry: handleAddEntry,
-            AddComponent: AddComponent,
-            ...state.info.add,
-          }}
-          settingsState={{
-            onSettingsChange: (data) => dispatch({ type: 'setSettings', payload: data }),
-            settings: state.settings,
-          }}
+          info={state.info}
+          settings={state.settings}
+          queryParams={state.queryParams}
+          dispatch={dispatch}
           hideFilter={hideFilter}
           hideSettings={hideSettings}
           dense={state.settings.dense}
+          handleAddEntry={handleAddEntry}
+          AddComponent={AddComponent}
         />
       ) : null}
-      {fitToParent ? (
-        <Box
-          style={{
-            height: '100%',
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'space-between',
-            minHeight: 0,
-          }}
-        >
-          <Body
-            path={path}
-            state={state}
-            dispatch={dispatch}
-            loading={loading}
-            onSelect={onSelectEntry}
-            onViewEntry={handleViewEntry}
-            onEditEntry={handleEditEntry}
-            onDeleteEntry={handleDeleteEntry}
-            ViewComponent={ViewComponent}
-            EditComponent={EditComponent}
-            hideActions={hideActions}
-          />
-          <DataGridPagination
-            setLoading={setLoading}
-            dispatch={dispatch}
-            count={state.data.count}
-            page={state.queryParams.page}
-            pageSize={state.queryParams.page_size}
-            rowsPerPageProps={rowsPerPageProps}
-          />
-        </Box>
-      ) : (
-        <>
-          <Body
-            path={path}
-            state={state}
-            dispatch={dispatch}
-            loading={loading}
-            onSelect={onSelectEntry}
-            onViewEntry={handleViewEntry}
-            onEditEntry={handleEditEntry}
-            onDeleteEntry={handleDeleteEntry}
-            ViewComponent={ViewComponent}
-            EditComponent={EditComponent}
-            hideActions={hideActions}
-          />
-          <DataGridPagination
-            setLoading={setLoading}
-            dispatch={dispatch}
-            count={state.data.count}
-            page={state.queryParams.page}
-            pageSize={state.queryParams.page_size}
-            rowsPerPageProps={rowsPerPageProps}
-          />
-        </>
-      )}
+      <Table
+        path={path}
+        data={state.data}
+        info={state.info}
+        settings={state.settings}
+        order={{ column: state.queryParams.order_column, direction: state.queryParams.order_direction }}
+        loading={loading}
+        hideActions={hideActions}
+        dispatch={dispatch}
+        onSelect={onSelectEntry}
+        onDeleteEntry={handleDeleteEntry}
+        onEditEntry={handleEditEntry}
+        ViewComponent={ViewComponent}
+        EditComponent={EditComponent}
+      />
+      <DataGridPagination
+        setLoading={setLoading}
+        dispatch={dispatch}
+        count={state.data.count}
+        page={state.queryParams.page}
+        pageSize={state.queryParams.page_size}
+        rowsPerPageProps={rowsPerPageProps}
+      />
     </Box>
-  ) : loading ? (
-    <Box
-      sx={{
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        width: 1,
-        height: 1,
-        p: 2,
-      }}
-    >
-      <CircularProgress size={28} />
-    </Box>
-  ) : null;
+  );
 });
+
+DataGrid.displayName = 'DataGrid';

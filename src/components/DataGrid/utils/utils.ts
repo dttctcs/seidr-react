@@ -10,7 +10,7 @@ export const getValue = (value) => {
   }
 
   if (Array.isArray(value)) {
-    return value.map((entryItem, index) => entryItem._name).join(', ');
+    return value.map((entryItem) => entryItem._name).join(', ');
   }
 
   if (typeof value === 'object') {
@@ -22,7 +22,7 @@ export const getValue = (value) => {
 
 export const getValidationSchema = (columns) => {
   const schema = columns.reduce((schema, column) => {
-    let { name, required, type } = column;
+    const { name, required, type } = column;
 
     switch (type) {
       case 'RelatedList':
@@ -32,7 +32,7 @@ export const getValidationSchema = (columns) => {
         type = 'object';
         break;
       case 'Date':
-        type = 'date';
+        type = 'string';
         break;
       case 'Integer':
       case 'Float':

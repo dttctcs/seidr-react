@@ -6,8 +6,8 @@ import DOMPurify from 'dompurify';
 import { Skeleton } from '@mantine/core';
 import applyStyles from './Field.style';
 
-export function Field({ children, loading, dense, rightBorder, rtl, classNames, styles, ...props }) {
-  const { classes, cx, theme } = applyStyles({ loading, rightBorder, rtl }, { classNames, styles, name: 'DataGrid' });
+export const Field = React.memo(({ children, loading, rightBorder, rtl, classNames, styles, ...props }) => {
+  const { classes, cx, theme } = applyStyles({ rightBorder, rtl }, { classNames, styles, name: 'DataGrid' });
 
   let clean;
   if (typeof children === 'string' && isHtml(children)) {
@@ -19,4 +19,6 @@ export function Field({ children, loading, dense, rightBorder, rtl, classNames, 
       <Skeleton visible={loading}>{clean ? clean : children}</Skeleton>
     </td>
   );
-}
+});
+
+Field.displayName = 'Field';

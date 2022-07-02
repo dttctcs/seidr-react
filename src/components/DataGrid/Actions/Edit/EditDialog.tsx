@@ -7,17 +7,18 @@ import { Button, Group, Modal, Stack } from '@mantine/core';
 
 import { FormField } from '../../FormField';
 
-export function EditDialog({ opened, onClose, entry, onEditEntry, columns, schema, defaultValues }) {
-  const { handleSubmit, setValue, control } = useForm({
+export function EditDialog({ opened, title, onClose, entry, onEditEntry, columns, schema, defaultValues }) {
+  const { handleSubmit, reset, setValue, control } = useForm({
     mode: 'onTouched',
     defaultValues: defaultValues,
     resolver: yupResolver(schema),
   });
   const [loading, setLoading] = useState(false);
+
   useEffect(() => {
     if (entry) {
       for (const column of columns) {
-        setValue(column.name, entry[column.name]);
+        setValue(column.name, entry.result[column.name]);
       }
     }
   }, [entry, columns, setValue]);
@@ -26,12 +27,21 @@ export function EditDialog({ opened, onClose, entry, onEditEntry, columns, schem
     try {
       onEditEntry(entry.id, data);
     } finally {
+      reset();
       onClose();
     }
   };
 
   return (
-    <Modal opened={opened} onClose={onClose} title="Edit Item">
+    <Modal
+      opened={opened}
+      onClose={() => {
+        onClose();
+        reset();
+      }}
+      title={`${title}  (#${entry?.id})`}
+      centered
+    >
       <Stack spacing="md">
         {columns.map((item, index) => (
           <FormField

@@ -1,11 +1,14 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useSeidrApi } from '../../../SeidrProvider';
 
 import { ActionIcon, Tooltip } from '@mantine/core';
 import { ViewDialog } from './ViewDialog';
 import { Eye } from 'tabler-icons-react';
 
-export function View({ id, relations, selected, onViewEntry, ViewComponent }) {
+export function View({ id, path, relations, selected, ViewComponent }) {
   const [dialogOpen, setDialogOpen] = useState(false);
+  const [entry, setEntry] = useState(null);
+  const { fetchEntry } = useSeidrApi();
 
   return (
     <>
@@ -18,7 +21,12 @@ export function View({ id, relations, selected, onViewEntry, ViewComponent }) {
           })}
           size="sm"
           onClick={() => {
-            setDialogOpen(true);
+            const entryPromise = fetchEntry(path, id);
+
+            entryPromise.then((data) => {
+              setEntry(data);
+              setDialogOpen(true);
+            });
           }}
         >
           <Eye color={selected ? 'white' : undefined} />
@@ -26,21 +34,9 @@ export function View({ id, relations, selected, onViewEntry, ViewComponent }) {
       </Tooltip>
 
       {ViewComponent ? (
-        <ViewComponent
-          opened={dialogOpen}
-          onClose={() => setDialogOpen(false)}
-          id={id}
-          relations={relations}
-          onViewEntry={onViewEntry}
-        />
+        <ViewComponent opened={dialogOpen} onClose={() => setDialogOpen(false)} id={id} relations={relations} />
       ) : (
-        <ViewDialog
-          opened={dialogOpen}
-          onClose={() => setDialogOpen(false)}
-          id={id}
-          relations={relations}
-          onViewEntry={onViewEntry}
-        />
+        <ViewDialog opened={dialogOpen} onClose={() => setDialogOpen(false)} entry={entry} relations={relations} />
       )}
     </>
   );

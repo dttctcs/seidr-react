@@ -24,7 +24,7 @@ export function Edit({ id, path, onEditEntry, EditComponent, selected, ...props 
             const entryPromise = fetchEntry(path, id);
 
             entryPromise.then((data) => {
-              setEntry({ id: data.id, ...data.result });
+              setEntry(data);
               setDialogOpen(true);
             });
           }}

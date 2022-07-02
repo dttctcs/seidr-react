@@ -4,20 +4,21 @@ import { getValue } from '../../utils';
 import { Grid, Modal, Paper, Stack, Tabs, Text } from '@mantine/core';
 import RelationPanel from './RelationPanel';
 
-export function ViewDialog({ opened, onClose, id, relations, onViewEntry }) {
-  const [entry, setEntry] = useState(null);
+export function ViewDialog({ entry, opened, onClose, relations }) {
   const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    onViewEntry(id)
-      .then((data) => setEntry(data))
-      .catch((error) => console.log(error));
-  }, [onViewEntry, id]);
-
-  const title = entry?.show_title.substr(entry?.show_title.indexOf(' ') + 1) + ` (#${entry?.id})`;
+  if (!entry || loading) {
+    return null;
+  }
 
   return entry && !loading ? (
-    <Modal styles={{ root: { minHeight: '640px' } }} opened={opened} title={title} onClose={onClose}>
+    <Modal
+      styles={{ root: { minHeight: '640px' } }}
+      opened={opened}
+      title={`${entry.show_title} (#${entry?.id})`}
+      onClose={onClose}
+      centered
+    >
       <Tabs>
         <Tabs.Tab value={0} label="Details">
           <Paper p="md" withBorder>
@@ -48,7 +49,7 @@ export function ViewDialog({ opened, onClose, id, relations, onViewEntry }) {
           return (
             <Tabs.Tab key={index} label={relation.name}>
               <Paper withBorder>
-                <RelationPanel relation={{ ...relation, id }} />
+                <RelationPanel relation={{ ...relation, id: entry.id }} />
               </Paper>
             </Tabs.Tab>
           );
