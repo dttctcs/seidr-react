@@ -84,7 +84,7 @@ export function useProvideAuth(baseURL) {
       const response = await fetch(fetchParams.url.href, fetchParams.options);
 
       if (response.ok) {
-        Promise.resolve({ message: 'Reset password' });
+        return Promise.resolve({ message: 'Reset password' });
       }
       Promise.reject({ message: "Couldn't reset password" });
     } catch (error) {
