@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Table as MantineTable } from '@mantine/core';
+import { Table as MantineTable, useMantineTheme } from '@mantine/core';
 import { ScrollArea } from '../../ScrollArea';
 import { Header } from './Header';
 import { Body } from './Body';
@@ -23,8 +23,13 @@ export function Table({
   ViewComponent,
   EditComponent,
 }) {
+  const theme = useMantineTheme();
+
   return (
-    <ScrollArea style={{ flex: 1, flexDirection: 'column' }}>
+    <ScrollArea
+      options={{ className: theme.colorScheme === 'dark' ? 'os-theme-light' : undefined }}
+      style={{ flex: 1, flexDirection: 'column' }}
+    >
       <MantineTable
         verticalSpacing={settings.dense ? 'xs' : 'md'}
         horizontalSpacing={settings.dense ? 'xs' : 'md'}

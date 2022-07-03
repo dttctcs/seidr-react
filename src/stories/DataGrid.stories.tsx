@@ -1,8 +1,9 @@
+import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
-import { generateBorderStyles } from '../components/SeidrProvider/utils';
 import { DataGrid } from '../components/DataGrid';
 import { DataGridStyles } from '../components/DataGrid';
+import { generateBorderStyles } from '../components/SeidrProvider/utils';
 
 export default {
   title: 'Components/DataGrid',
@@ -59,41 +60,17 @@ const defaultArgTypes = {
 };
 
 export const Default = Template.bind({});
-Default.args = {
-  path: window.location.origin + '/cars/',
-};
-
-Default.argTypes = {
-  // fitToParent is the property we want to remove from the controls
-  fitToParent: {
-    table: {
-      disable: true,
-    },
-  },
-};
-
-export const FitToParent = Template.bind({});
-FitToParent.decorators = [
+Default.decorators = [
   (Story) => (
-    <div style={{ height: '300px', padding: '40px', margin: '3em' }}>
+    <div style={{ height: '400px', padding: '40px', margin: '3em' }}>
       <Story />
     </div>
   ),
 ];
-FitToParent.args = {
+Default.args = {
   path: window.location.origin + '/cars/',
 };
-FitToParent.argTypes = {
-  ...defaultArgTypes,
-};
-
-export const SelectableRow = Template.bind({});
-SelectableRow.decorators = [(Story) => <Story />];
-SelectableRow.args = {
-  path: window.location.origin + '/cars/',
-  onSelect: (event, entry) => console.log(event, entry),
-};
-SelectableRow.argTypes = {
+Default.argTypes = {
   ...defaultArgTypes,
 };
 
@@ -101,7 +78,7 @@ export const StylesAPI = Template.bind({});
 StylesAPI.decorators = [
   (Story, ctx) => {
     return (
-      <div style={{ height: '300px', padding: '40px', margin: '3em' }}>
+      <div style={{ height: '400px', padding: '40px', margin: '3em' }}>
         <Story />
       </div>
     );
@@ -112,5 +89,22 @@ StylesAPI.args = {
   styles: generateBorderStyles(DataGridStyles),
 };
 StylesAPI.argTypes = {
+  ...defaultArgTypes,
+};
+
+export const Theming = Template.bind({});
+Theming.decorators = [
+  (Story, ctx) => {
+    return (
+      <div style={{ height: '400px', padding: '40px', margin: '3em' }}>
+        <Story />
+      </div>
+    );
+  },
+];
+Theming.args = {
+  path: window.location.origin + '/cars/',
+};
+Theming.argTypes = {
   ...defaultArgTypes,
 };

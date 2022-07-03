@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { paginationHeight } from './utils';
+import { paginationHeight } from '../utils';
 
 import { TablePagination, debounce } from '@mui/material';
 import { Box, ActionIcon, Group } from '@mantine/core';
@@ -51,7 +51,7 @@ function TablePaginationActions(props) {
   );
 }
 
-function DataGridPagination({ setLoading, dispatch, count, page, pageSize, rowsPerPageProps, ...props }) {
+export const Pagination = React.memo(({ setLoading, dispatch, count, page, pageSize, rowsPerPageProps, ...props }) => {
   const pageSizes = rowsPerPageProps ? rowsPerPageProps.pageSizes : [10, 25, 50];
   const rowsPerPage = rowsPerPageProps ? rowsPerPageProps.pageSizeDefault : pageSize;
   const [cachedPage, setCachedPage] = useState(page);
@@ -89,6 +89,12 @@ function DataGridPagination({ setLoading, dispatch, count, page, pageSize, rowsP
       })}
     >
       <TablePagination
+        sx={{
+          color: 'inherit',
+          '& .MuiSvgIcon-root': {
+            color: 'inherit',
+          },
+        }}
         rowsPerPageOptions={pageSizes}
         component="div"
         count={count}
@@ -101,6 +107,6 @@ function DataGridPagination({ setLoading, dispatch, count, page, pageSize, rowsP
       />
     </Box>
   );
-}
+});
 
-export default React.memo(DataGridPagination);
+Pagination.displayName = 'Pagination';

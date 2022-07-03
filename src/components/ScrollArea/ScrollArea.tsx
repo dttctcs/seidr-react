@@ -4,8 +4,8 @@ import React, { forwardRef } from 'react';
 
 import { OverlayScrollbarsComponent } from 'overlayscrollbars-react';
 
-export const ScrollArea = forwardRef(({ children, ...others }, ref) => (
-  <OverlayScrollbarsComponent ref={ref} {...others}>
+export const ScrollArea = forwardRef(({ children, options, ...others }, ref) => (
+  <OverlayScrollbarsComponent ref={ref} options={options} {...others}>
     {children}
   </OverlayScrollbarsComponent>
 ));

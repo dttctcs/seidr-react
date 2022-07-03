@@ -7,7 +7,7 @@ export default createStyles((theme, { selectable, selectedColumn, rtl }) => ({
     padding: '0 !important',
     zIndex: 20,
 
-    backgroundColor: 'white',
+    backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[7] : theme.white,
   },
   fieldTitleWrapper: {
     boxSizing: 'border-box',

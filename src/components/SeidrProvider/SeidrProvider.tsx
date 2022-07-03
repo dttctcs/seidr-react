@@ -1,4 +1,4 @@
-import React, { createContext, useContext } from 'react';
+import React, { createContext, useContext, useEffect } from 'react';
 import { THEME, DEFAULT_PROPS, DEFAULT_STYLES } from './theme';
 
 import { MantineProvider, useMantineTheme } from '@mantine/core';
@@ -26,12 +26,8 @@ export function useSeidrTheme() {
   return useMantineTheme() || {};
 }
 
-export function SeidrProvider({
-  baseURL = window.location.origin,
-  theme = THEME,
-  inheritMantineTheme = false,
-  children,
-}) {
+export function SeidrProvider({ baseURL = window.location.origin, theme, inheritMantineTheme = false, children }) {
+  theme = inheritMantineTheme ? { ...useMantineTheme(), ...theme } : { ...THEME, ...theme };
   // ensure trailing slash
   baseURL = baseURL.replace(/\/?$/, '/');
   const auth = useProvideAuth(baseURL);
@@ -40,7 +36,7 @@ export function SeidrProvider({
 
   return (
     <SeidrContext.Provider value={{ api, auth, info, theme }}>
-      <MantineProvider theme={theme} inherit={inheritMantineTheme} defaultProps={DEFAULT_PROPS} styles={DEFAULT_STYLES}>
+      <MantineProvider theme={theme} defaultProps={DEFAULT_PROPS} styles={DEFAULT_STYLES}>
         {children}
       </MantineProvider>
     </SeidrContext.Provider>

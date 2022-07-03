@@ -3,10 +3,10 @@ import React, { ReactElement, useEffect, useReducer, useState, forwardRef } from
 import { useSeidrApi } from '../SeidrProvider';
 import { getDefaultValues, getValidationSchema } from './utils';
 
-import { Box } from '@mantine/core';
+import { LoadingOverlay, Paper } from '@mantine/core';
 import { Toolbar } from './Toolbar';
 import { Table } from './Table';
-import DataGridPagination from './DataGridPagination';
+import { Pagination } from './Pagination';
 
 import { applyStyles } from './DataGrid.styles';
 interface Filter {
@@ -35,8 +35,6 @@ interface QueryParams {
 export interface DataGridProps {
   /** The Seidr path to interact with */
   path: string;
-  /** Grid size to be controlled by parent */
-  fitToParent?: boolean;
   /** Hide toolbar, the toolbar is the upper section containing Settings, Add and Filter */
   hideToolbar?: boolean;
   /** Hide filters */
@@ -286,54 +284,60 @@ export const DataGrid = forwardRef((props: DataGridProps, ref) => {
     }
   };
 
-  if (!state.data || !state.info) {
-    return null;
-  }
-
   return (
-    <Box
+    <Paper
       ref={ref}
       className={classes.root}
       sx={{ position: 'relative', height: '100%', display: 'flex', flexDirection: 'column', ...sx }}
     >
-      {!hideToolbar ? (
-        <Toolbar
-          path={path}
-          info={state.info}
-          settings={state.settings}
-          queryParams={state.queryParams}
-          dispatch={dispatch}
-          hideFilter={hideFilter}
-          hideSettings={hideSettings}
-          dense={state.settings.dense}
-          handleAddEntry={handleAddEntry}
-          AddComponent={AddComponent}
-        />
-      ) : null}
-      <Table
-        path={path}
-        data={state.data}
-        info={state.info}
-        settings={state.settings}
-        order={{ column: state.queryParams.order_column, direction: state.queryParams.order_direction }}
-        loading={loading}
-        hideActions={hideActions}
-        dispatch={dispatch}
-        onSelect={onSelectEntry}
-        onDeleteEntry={handleDeleteEntry}
-        onEditEntry={handleEditEntry}
-        ViewComponent={ViewComponent}
-        EditComponent={EditComponent}
+      <LoadingOverlay
+        loaderProps={{ size: 'sm', variant: 'dots' }}
+        overlayOpacity={0.1}
+        overlayColor="#c5c5c5"
+        visible={loading}
       />
-      <DataGridPagination
-        setLoading={setLoading}
-        dispatch={dispatch}
-        count={state.data.count}
-        page={state.queryParams.page}
-        pageSize={state.queryParams.page_size}
-        rowsPerPageProps={rowsPerPageProps}
-      />
-    </Box>
+      {state.info && state.data && !loading && (
+        <>
+          {!hideToolbar ? (
+            <Toolbar
+              path={path}
+              info={state.info}
+              settings={state.settings}
+              queryParams={state.queryParams}
+              dispatch={dispatch}
+              hideFilter={hideFilter}
+              hideSettings={hideSettings}
+              dense={state.settings.dense}
+              handleAddEntry={handleAddEntry}
+              AddComponent={AddComponent}
+            />
+          ) : null}
+          <Table
+            path={path}
+            data={state.data}
+            info={state.info}
+            settings={state.settings}
+            order={{ column: state.queryParams.order_column, direction: state.queryParams.order_direction }}
+            loading={loading}
+            hideActions={hideActions}
+            dispatch={dispatch}
+            onSelect={onSelectEntry}
+            onDeleteEntry={handleDeleteEntry}
+            onEditEntry={handleEditEntry}
+            ViewComponent={ViewComponent}
+            EditComponent={EditComponent}
+          />
+          <Pagination
+            setLoading={setLoading}
+            dispatch={dispatch}
+            count={state.data.count}
+            page={state.queryParams.page}
+            pageSize={state.queryParams.page_size}
+            rowsPerPageProps={rowsPerPageProps}
+          />
+        </>
+      )}
+    </Paper>
   );
 });
 
