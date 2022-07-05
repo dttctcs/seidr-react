@@ -3,11 +3,13 @@ import { createFetchParams } from './utils';
 
 export function useProvideInfo(baseURL, auth) {
   const { user } = auth;
-  const [info, setInfo] = useState(null);
+  const [info, setInfo] = useState({ error: '401 Not authorized', message: 'User is not logged in.' });
 
   useEffect(() => {
     if (user) {
-      fetchInfo(baseURL).then((data) => setInfo(data));
+      fetchInfo(baseURL)
+        .then((data) => setInfo(data))
+        .catch(() => setInfo({ error: '404 Not found', message: 'Info endpoint is not available.' }));
     }
   }, [user]);
 
