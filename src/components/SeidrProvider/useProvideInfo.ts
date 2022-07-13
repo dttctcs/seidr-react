@@ -15,9 +15,9 @@ export function useProvideInfo(baseURL, auth) {
 
   const fetchInfo = async (baseURL) => {
     try {
-      const fetchParams = createFetchParams({ path: urlJoin(baseURL, 'info/'), method: 'GET' });
+      const { fetchPath, options } = createFetchParams({ path: urlJoin(baseURL, 'info/'), method: 'GET' });
 
-      const response = await fetch(fetchParams.url.href, fetchParams.options);
+      const response = await fetch(fetchPath, options);
       if (response.ok) {
         const data = await response.json();
         return data;
