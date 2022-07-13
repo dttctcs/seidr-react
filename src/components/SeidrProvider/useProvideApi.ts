@@ -6,7 +6,7 @@ export function useProvideApi(baseURL) {
       const { fetchPath, options } = createFetchParams({
         path: urlJoin(baseURL, path, '/'),
         method: 'GET',
-        queryParams,
+        queryParams: { q: JSON.stringify(queryParams) },
       });
 
       const response = await fetch(fetchPath, options);
