@@ -1,16 +1,15 @@
-import { createFetchParams } from './utils';
+import { createFetchParams, urlJoin } from './utils';
 
 export function useProvideApi(baseURL) {
   const fetchList = async (path, queryParams) => {
     try {
-      const fetchParams = createFetchParams({ base: baseURL, path: path, method: 'GET' });
+      const { fetchPath, options } = createFetchParams({
+        path: urlJoin(baseURL, path, '/'),
+        method: 'GET',
+        queryParams,
+      });
 
-      if (queryParams) {
-        const query = JSON.stringify(queryParams);
-        fetchParams.url.searchParams.append('q', query);
-      }
-
-      const response = await fetch(fetchParams.url.href, fetchParams.options);
+      const response = await fetch(fetchPath, options);
       if (response.ok) {
         const data = await response.json();
         return data;
@@ -25,9 +24,9 @@ export function useProvideApi(baseURL) {
 
   const fetchInfo = async (path) => {
     try {
-      const fetchParams = createFetchParams({ base: baseURL, path: path + '_info', method: 'GET' });
+      const { fetchPath, options } = createFetchParams({ path: urlJoin(baseURL, path, '_info'), method: 'GET' });
 
-      const response = await fetch(fetchParams.url.href, fetchParams.options);
+      const response = await fetch(fetchPath, options);
       if (response.ok) {
         const data = await response.json();
         return data;
@@ -41,8 +40,8 @@ export function useProvideApi(baseURL) {
 
   const fetchEntry = async (path, id) => {
     try {
-      const fetchParams = createFetchParams({ base: baseURL, path: path + id, method: 'GET' });
-      const response = await fetch(fetchParams.url.href, fetchParams.options);
+      const { fetchPath, options } = createFetchParams({ path: urlJoin(baseURL, path, id), method: 'GET' });
+      const response = await fetch(fetchPath, options);
 
       if (response.ok) {
         const data = await response.json();
@@ -57,8 +56,12 @@ export function useProvideApi(baseURL) {
 
   const createEntry = async (path, data) => {
     try {
-      const fetchParams = createFetchParams({ base: baseURL, path: path, method: 'POST', body: data });
-      const response = await fetch(fetchParams.url.href, fetchParams.options);
+      const { fetchPath, options } = createFetchParams({
+        path: urlJoin(baseURL, path, '/'),
+        method: 'POST',
+        body: data,
+      });
+      const response = await fetch(fetchPath, options);
 
       if (response.ok) {
         const data = await response.json();
@@ -73,8 +76,8 @@ export function useProvideApi(baseURL) {
 
   const updateEntry = async (path, id, data) => {
     try {
-      const fetchParams = createFetchParams({ base: baseURL, path: path + id, method: 'PUT', body: data });
-      const response = await fetch(fetchParams.url.href, fetchParams.options);
+      const { fetchPath, options } = createFetchParams({ path: urlJoin(baseURL, path, id), method: 'PUT', body: data });
+      const response = await fetch(fetchPath, options);
 
       if (response.ok) {
         const data = await response.json();
@@ -89,8 +92,8 @@ export function useProvideApi(baseURL) {
 
   const deleteEntry = async (path, id) => {
     try {
-      const fetchParams = createFetchParams({ base: baseURL, path: path + id, method: 'DELETE' });
-      const response = await fetch(fetchParams.url.href, fetchParams.options);
+      const { fetchPath, options } = createFetchParams({ path: urlJoin(baseURL, path, id), method: 'DELETE' });
+      const response = await fetch(fetchPath, options);
 
       if (response.ok) {
         const data = await response.json();

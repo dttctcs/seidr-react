@@ -1,19 +1,15 @@
 import { useState } from 'react';
 
-import { createFetchParams } from './utils';
+import { createFetchParams, urlJoin } from './utils';
 
 export function useProvideAuth(baseURL) {
   const [user, setUser] = useState(null);
 
   async function getUser() {
     try {
-      const fetchParams = createFetchParams({
-        base: baseURL,
-        path: 'auth/user',
-        method: 'GET',
-      });
+      const { fetchPath, options } = createFetchParams({ path: urlJoin(baseURL, 'auth/user'), method: 'GET' });
 
-      const response = await fetch(fetchParams.url.href, fetchParams.options);
+      const response = await fetch(fetchPath, options);
 
       if (response.ok) {
         const user = await response.json();
@@ -27,14 +23,13 @@ export function useProvideAuth(baseURL) {
 
   async function signin({ username, password }) {
     try {
-      const fetchParams = createFetchParams({
-        base: baseURL,
-        path: 'auth/login',
+      const { fetchPath, options } = createFetchParams({
+        path: urlJoin(baseURL, 'auth/login'),
         method: 'POST',
         body: { username, password },
       });
 
-      const response = await fetch(fetchParams.url.href, fetchParams.options);
+      const response = await fetch(fetchPath, options);
 
       if (response.ok) {
         const user = await response.json();
@@ -48,9 +43,9 @@ export function useProvideAuth(baseURL) {
 
   async function signout() {
     try {
-      const fetchParams = createFetchParams({ base: baseURL, path: 'auth/logout', method: 'Get' });
+      const { fetchPath, options } = createFetchParams({ path: urlJoin(baseURL, 'auth/logout'), method: 'Get' });
 
-      const response = await fetch(fetchParams.url.href, fetchParams.options);
+      const response = await fetch(fetchPath, options);
 
       if (response.ok) {
         return setUser(null);
@@ -63,9 +58,13 @@ export function useProvideAuth(baseURL) {
 
   async function update(data) {
     try {
-      const fetchParams = createFetchParams({ base: baseURL, path: 'auth/user', method: 'PUT', body: data });
+      const { fetchPath, options } = createFetchParams({
+        path: urlJoin(baseURL, 'auth/user'),
+        method: 'PUT',
+        body: data,
+      });
 
-      const response = await fetch(fetchParams.url.href, fetchParams.options);
+      const response = await fetch(fetchPath, options);
 
       if (response.ok) {
         const data = await response.json();
@@ -80,8 +79,12 @@ export function useProvideAuth(baseURL) {
   async function resetPassword(data) {
     try {
       delete data.confirmPassword;
-      const fetchParams = createFetchParams({ base: baseURL, path: 'auth/resetpassword', method: 'PUT', body: data });
-      const response = await fetch(fetchParams.url.href, fetchParams.options);
+      const { fetchPath, options } = createFetchParams({
+        path: urlJoin(baseURL, 'auth/resetpassword'),
+        method: 'PUT',
+        body: data,
+      });
+      const response = await fetch(fetchPath, options);
 
       if (response.ok) {
         return Promise.resolve({ message: 'Reset password' });
