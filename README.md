@@ -46,7 +46,7 @@ To leverage **Seidr UI** wrap your react application with `SeidrProvider`. `Seid
 | ------- | ---------------------------- | ----------------------------------------------------------------------------------------------------- |
 | baseURL | string                       | The base URL of your **Seidr** application. (Example: www.domain.com/api/v1)                          |
 | theme   | object: ExtendedMantineTheme | A theme object to style Seidr components (DataGrid) globally|
-| inheritMantineTheme | Determines if a `MantineTheme` form an outer scope should be merged with **Seidr's** default theme or the `MantineTheme` provided (see `theme` property)|
+| inheritMantineTheme | boolean | Determines if a `MantineTheme` form an outer scope should be merged with **Seidr's** default theme or the `MantineTheme` provided (see `theme` property)|
 
 ### Components and Hooks
 
