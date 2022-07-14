@@ -79,7 +79,7 @@ Provides the `baseURL` and information from **Seidr's** `InfoApi` throughout you
 
 #### useSeidrAuth
 
-Provides `user`, `error`, `isLoading`, `signin`, `signout`, `update`, `resetPassword` to interact with **Seidr's** authentication functionality. This hook will also trigger a rerender when `user`, `error` and `isLoading` change (react lifecycle).
+Provides `user`, `error`, `isLoading`, `getUser`, `signin`, `signout`, `update`, `resetPassword` to interact with **Seidr's** authentication functionality. This hook will also trigger a rerender when `user`, `error` and `isLoading` change (react lifecycle).
 
 #### useSeidrApi
 
@@ -90,6 +90,16 @@ Provides all necessary functions `fetchInfo`, `fetchList`, `fetchEntry`, `create
 Provides the merged `MantineThme` throughout your application.
 
 ## Concepts
+
+### DataGrid
+
+`DataGrid` relies on an implementation of **Seidr's** `BaseModelRestApi`. Just provide the `resource_name` used in the implementation of the `BaseModelRestApi` and (assuming the paths are correct) enjoy the power of `DataGrid`.
+
+`DataGrid` leverages `useSeidrApi` internally. Meaning, you can interact with your `BaseModleRestApi` implementatoin using the api methods provided by `useSeidrApi`. Or write your own code to interact with your backend.
+
+### Authentication
+
+`useSeidrAuth` assumes the presence of `AuthApi` provided by **Seidr** in your backend. Given this and correctly set paths, you gain the full capability of a session based authentication feature which has the same (except OIDC) functionality as [Flask Appbuilder's](https://flask-appbuilder.readthedocs.io/en/latest/security.html)
 
 ### Styling
 
