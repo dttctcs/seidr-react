@@ -45,7 +45,8 @@ To leverage **Seidr UI** wrap your react application with `SeidrProvider`. `Seid
 | prop    | value                        | description                                                                                           |
 | ------- | ---------------------------- | ----------------------------------------------------------------------------------------------------- |
 | baseURL | string                       | The base URL of your **Seidr** application. (Example: www.domain.com/api/v1)                          |
-| theme   | object: ExtendedMantineTheme | A theme object to be merged with internal [`MantineTheme`](https://mantine.dev/theming/extend-theme/) |
+| theme   | object: ExtendedMantineTheme | A theme object to style Seidr components (DataGrid) globally|
+| inheritMantineTheme | Determines if a `MantineTheme` form an outer scope should be merged with **Seidr's** default theme or the `MantineTheme` provided (see `theme` property)|
 
 ### Components and Hooks
 
@@ -74,7 +75,7 @@ You now can use **Seidr UI's** components and hooks anywhere in the application.
 
 #### useSeidrInfo
 
-Provides the set `baseURL` and `fetchSeidrInfo` (to fetch **Seidr** meta data) throughout your application.
+Provides the `baseURL` and information from **Seidr's** `InfoApi` throughout your application. `InfoApi` data will automatically retrieved, once the user is authenticated (WIP).
 
 #### useSeidrAuth
 
