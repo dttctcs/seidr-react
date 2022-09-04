@@ -16,4 +16,7 @@ module.exports = {
     fastRefresh: true,
     // strictMode: true, // causes issues
   },
+  features: {
+    previewMdx2: true,
+  },
 };
