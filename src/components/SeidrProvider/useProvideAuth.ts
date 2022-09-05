@@ -23,10 +23,10 @@ export function useProvideAuth(baseURL) {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   useEffect(() => {
-    getUser();
+    authenticate();
   }, []);
 
-  async function getUser() {
+  async function authenticate() {
     dispatch({ type: 'initCall' });
 
     try {
