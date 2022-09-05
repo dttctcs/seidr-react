@@ -17,15 +17,19 @@ export function FormDateTimePicker({ control, name, TextFieldProps, PopperProps,
   });
 
   const theme = useMantineTheme();
-  const [refState, setRefState] = useState(refState);
+  // const [refState, setRefState] = useState(refState);
   const customInputRef = useRef();
 
-  useEffect(() => {
-    if (customInputRef) {
-      setRefState(!refState);
-    }
-  }, [customInputRef.current]);
-  const colors = theme.fn.variant({ color: theme.colors[theme.primaryColor][theme.fn.primaryShade()] });
+  // useEffect(() => {
+  //   if (customInputRef) {
+  //     setRefState(!refState);
+  //   }
+  // }, [customInputRef.current]);
+
+  const colors = theme.fn.variant({
+    variant: 'light',
+    color: theme.colors[theme.primaryColor][theme.fn.primaryShade()],
+  });
 
   return (
     <LocalizationProvider dateAdapter={AdapterDateFns}>

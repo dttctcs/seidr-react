@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useController } from 'react-hook-form';
 
-import { TextInput, useMantineTheme } from '@mantine/core';
+import { TextInput, useMantineTheme, MantineColor } from '@mantine/core';
 import { Calendar } from 'tabler-icons-react';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
@@ -17,17 +17,20 @@ export function FormDatePicker({ control, name, PopperProps, ...props }) {
   });
 
   const theme = useMantineTheme();
-  const [refState, setRefState] = useState(refState);
+  // const [refState, setRefState] = useState(refState);
   const customInputRef = useRef();
 
-  useEffect(() => {
-    if (customInputRef) {
-      setRefState(!refState);
-    }
-  }, [customInputRef.current]);
-  const colors = theme.fn.variant({ color: theme.colors[theme.primaryColor][theme.fn.primaryShade()] });
+  // useEffect(() => {
+  //   if (customInputRef) {
+  //     setRefState(!refState);
+  //   }
+  // }, [customInputRef.current]);
 
-  console.log(inputProps);
+  const colors = theme.fn.variant({
+    variant: 'light',
+    color: theme.colors[theme.primaryColor][theme.fn.primaryShade()],
+  });
+
   return (
     <LocalizationProvider dateAdapter={AdapterDateFns}>
       <DatePicker
