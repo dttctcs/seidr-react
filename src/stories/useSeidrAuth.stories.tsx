@@ -1,14 +1,16 @@
-import { useEffect } from 'react';
+import React from 'react';
 import { Button } from '@mantine/core';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { useSeidrAuth } from '../components/SeidrProvider';
 
 function HookWrapper() {
-  const { user, getUser, resetPassword, signin, signout, update } = useSeidrAuth();
+  const { user, loading, signin } = useSeidrAuth();
 
   return (
     <div>
-      <Button onClick={() => signin({ username: 'admin', password: 'admin' })}>Signin</Button>
+      <Button onClick={() => signin({ username: 'admin', password: 'admin' })} loading={loading}>
+        Signin
+      </Button>
       <div>{JSON.stringify(user)}</div>
     </div>
   );
@@ -22,7 +24,7 @@ export default {
 } as ComponentMeta<typeof HookWrapper>;
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: ComponentStory<typeof HookWrapper> = (args) => <HookWrapper {...args} />;
+const Template: ComponentStory<typeof HookWrapper> = () => <HookWrapper />;
 
 export const Default = Template.bind({});
 Default.args = {};

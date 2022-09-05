@@ -4,8 +4,11 @@ export const THEME = {
     Tooltip: {
       styles: (theme) => ({
         body: {
-          padding: theme.spacing.sm,
-          fontSize: theme.fontSizes.sm,
+          padding: 0.5 * theme.spacing.xs,
+          paddingTop: 0.25 * theme.spacing.xs,
+          paddingBottom: 0.25 * theme.spacing.xs,
+          fontSize: theme.fontSizes.xs,
+          backgroundColor: theme.colors.gray[6],
         },
       }),
 
@@ -21,7 +24,7 @@ export const THEME = {
     ActionIcon: {
       styles: (theme) => ({
         hover: {
-          color: theme.colors.gray[2],
+          color: theme.colors.gray[6],
         },
       }),
     },

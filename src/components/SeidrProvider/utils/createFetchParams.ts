@@ -5,7 +5,7 @@ export function createFetchParams({ path = undefined, method = undefined, body =
     path = path + '?' + searchParams;
   }
 
-  const options = {
+  const options: RequestInit = {
     method: method,
     mode: 'cors',
     credentials: 'include',

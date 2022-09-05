@@ -1,3 +1,4 @@
+import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { useSeidrApi } from '../components/SeidrProvider';
 
@@ -18,7 +19,7 @@ export default {
 } as ComponentMeta<typeof HookWrapper>;
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: ComponentStory<typeof HookWrapper> = (args) => <HookWrapper {...args} />;
+const Template: ComponentStory<typeof HookWrapper> = () => <HookWrapper />;
 
 export const Default = Template.bind({});
 Default.args = {};

@@ -1,11 +1,34 @@
-import { useState } from 'react';
-
+import { useEffect, useReducer } from 'react';
 import { createFetchParams, urlJoin } from './utils';
+import { AuthState } from './types';
+import { UserUpdate } from './types';
+
+const initialState: AuthState = { user: null, loading: true, error: null };
+
+function reducer(state: AuthState, action) {
+  switch (action.type) {
+    case 'initCall':
+      return { ...state, loading: true, error: null };
+    case 'setUser':
+      return { ...state, user: action.payload, loading: false, error: false };
+    case 'setError':
+      return { ...state, user: null, loading: false, error: action.payload };
+
+    default:
+      return state;
+  }
+}
 
 export function useProvideAuth(baseURL) {
-  const [user, setUser] = useState(null);
+  const [state, dispatch] = useReducer(reducer, initialState);
+
+  useEffect(() => {
+    getUser();
+  }, []);
 
   async function getUser() {
+    dispatch({ type: 'initCall' });
+
     try {
       const { fetchPath, options } = createFetchParams({ path: urlJoin(baseURL, 'auth/user'), method: 'GET' });
 
@@ -13,15 +36,18 @@ export function useProvideAuth(baseURL) {
 
       if (response.ok) {
         const user = await response.json();
-        return setUser(user);
+        dispatch({ payload: user, type: 'setUser' });
+      } else {
+        dispatch({ payload: "Couldn't get user data", type: 'setError' });
       }
-      Promise.reject({ message: "Coulnd't get user data" });
     } catch (error) {
-      Promise.reject({ error, message: 'Failed to fetch' });
+      dispatch({ payload: 'Failed to fetch', type: 'setError' });
     }
   }
 
   async function signin({ username, password }) {
+    dispatch({ type: 'initCall' });
+
     try {
       const { fetchPath, options } = createFetchParams({
         path: urlJoin(baseURL, 'auth/login'),
@@ -33,30 +59,36 @@ export function useProvideAuth(baseURL) {
 
       if (response.ok) {
         const user = await response.json();
-        return setUser(user);
+        dispatch({ payload: user, type: 'setUser' });
+      } else {
+        dispatch({ payload: "Couldn't sign in user.", type: 'setError' });
       }
-      Promise.reject({ message: "Coulnd't sign in" });
     } catch (error) {
-      Promise.reject({ error, message: 'Failed to fetch' });
+      dispatch({ payload: 'Failed to fetch', type: 'setError' });
     }
   }
 
   async function signout() {
+    dispatch({ type: 'initCall' });
+
     try {
       const { fetchPath, options } = createFetchParams({ path: urlJoin(baseURL, 'auth/logout'), method: 'Get' });
 
       const response = await fetch(fetchPath, options);
 
       if (response.ok) {
-        return setUser(null);
+        dispatch({ payload: null, type: 'setUser' });
+      } else {
+        dispatch({ payload: "Couldn't sign out user.", type: 'setError' });
       }
-      Promise.reject({ message: "Couldn't sign out" });
     } catch (error) {
-      Promise.reject({ error, message: 'Failed to fetch' });
+      dispatch({ payload: 'Failed to fetch', type: 'setError' });
     }
   }
 
-  async function update(data) {
+  async function update(data: UserUpdate) {
+    dispatch({ type: 'initCall' });
+
     try {
       const { fetchPath, options } = createFetchParams({
         path: urlJoin(baseURL, 'auth/user'),
@@ -67,33 +99,41 @@ export function useProvideAuth(baseURL) {
       const response = await fetch(fetchPath, options);
 
       if (response.ok) {
-        const data = await response.json();
-        return setUser(data);
+        const user = await response.json();
+        dispatch({ payload: user, type: 'setUser' });
       }
-      Promise.reject({ message: "Couldn't update user data" });
+      dispatch({ payload: "Couldn't update user data.", type: 'setError' });
     } catch (error) {
-      Promise.reject({ error, message: 'Failed to fetch' });
+      dispatch({ payload: 'Failed to post', type: 'setError' });
     }
   }
 
-  async function resetPassword(data) {
+  async function resetPassword(password: string) {
     try {
-      delete data.confirmPassword;
       const { fetchPath, options } = createFetchParams({
         path: urlJoin(baseURL, 'auth/resetpassword'),
         method: 'PUT',
-        body: data,
+        body: { password },
       });
       const response = await fetch(fetchPath, options);
 
       if (response.ok) {
-        return Promise.resolve({ message: 'Reset password' });
+        dispatch({ payload: { ...state.user }, type: 'setUser' });
+      } else {
+        dispatch({ payload: "Couldn't reset password.", type: 'setError' });
       }
-      Promise.reject({ message: "Couldn't reset password" });
     } catch (error) {
-      return Promise.reject('Failed to fetch');
+      dispatch({ payload: 'Failed to post', type: 'setError' });
     }
   }
 
-  return { user, getUser, signin, signout, update, resetPassword };
+  return {
+    user: state.user,
+    loading: state.loading,
+    error: state.error,
+    signin,
+    signout,
+    update,
+    resetPassword,
+  };
 }
