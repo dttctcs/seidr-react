@@ -61,7 +61,7 @@ export function useProvideAuth(baseURL) {
         const user = await response.json();
         dispatch({ payload: user, type: 'setUser' });
       } else {
-        dispatch({ payload: 'Username or password word.', type: 'setError' });
+        dispatch({ payload: 'Username or password wrong.', type: 'setError' });
       }
     } catch (error) {
       dispatch({ payload: 'Failed to fetch', type: 'setError' });
