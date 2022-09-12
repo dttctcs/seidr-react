@@ -38,13 +38,13 @@ You have **Seidr** running? Good. All you need is to install **Seidr UI** and le
 
 ### Basic
 
-To leverage **Seidr UI** wrap your react application with `SeidrProvider`. `SeidrProvider` has several props. The most important is `baseURL`. Set it to your **Seidr** Backend URL. If not set, `SeidrProvider` will assume the `baseURL` to be `window.location.origin`.
+To leverage **Seidr UI** wrap your react application with `SeidrProvider`. `SeidrProvider` has several props. The most important is `baseUrl`. Set it to your **Seidr** Backend URL. If not set, `SeidrProvider` will assume the `baseUrl` to be `window.location.origin`.
 
 #### SeidrProvider
 
 | prop                | value                        | description                                                                                                                                              |
 | ------------------- | ---------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| baseURL             | string                       | The base URL of your **Seidr** application. (Example: www.domain.com/api/v1)                                                                             |
+| baseUrl             | string                       | The base URL of your **Seidr** application. (Example: www.domain.com/api/v1)                                                                             |
 | theme               | object: ExtendedMantineTheme | A theme object to style Seidr components (Table) globally                                                                                                |
 | inheritMantineTheme | boolean                      | Determines if a `MantineTheme` from an outer scope should be merged with **Seidr's** default theme or the `MantineTheme` provided (see `theme` property) |
 
@@ -52,50 +52,55 @@ To leverage **Seidr UI** wrap your react application with `SeidrProvider`. `Seid
 
 You now can use **Seidr UI's** components and hooks anywhere in the application. **Seidr UI** currently provides a single component and several hooks.
 
-#### Table
-
-| prop             | value               | description                                                                                                                     |
-| ---------------- | ------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
-| path             | string              | The path segment to add to the `baseURL`. The resulting url should point to a valid **Seidr** base route                        |
-| fitToParent      | boolean             | Size to be controlled by parent                                                                                                 |
-| hideToolbar      | boolean             | Hide toolbar, the toolbar is the upper section containing Settings, Add and Filter                                              |
-| hideFilter       | boolean             | Hide filter                                                                                                                     |
-| hideSettings     | boolean             | Hide settings                                                                                                                   |
-| hideActions      | boolean             | Hide action column on every row                                                                                                 |
-| settings         | object: Settings    | Style settings                                                                                                                  |
-| queryParams      | object: QueryParams | Control filters (triggers rerender) externally                                                                                  |
-| rowsPerPageProps | boolean             | Control page size (triggers rerender)                                                                                           |
-| relation         | object: Filter      | A base filter to apply (currently used in the context of RelatedAPIs)                                                           |
-| AddComponent     | ReactElement        | ReactNode to be rendered on item add. (will provide add info to the component as properties (columns, schema, defaultValues)).  |
-| EditComponent    | ReactElement        | ReactNode to be rendered on item edit. (will provide edit info to the component as properties (columns, schema, defaultValues)) |
-| ViewComponent    | ReactElement        | ReactNode to be rendered on item view (will provide the selected item to the component)                                         |
-| onError          | function            | Callback to be fired on Table error                                                                                             |
-| onSelectEntry    | function            | Callback to be fired on entry selection (Will apply selection styles to rows)                                                   |
-| styles           | object: TableStyles | Interface to style Table (based on [Mantine's StylesAPI](https://mantine.dev/theming/styles-api/))                              |
-
 #### useSeidrInfo
 
-Provides the `baseURL` and information from **Seidr's** `InfoApi` throughout your application. `InfoApi` data will automatically retrieved, once the user is authenticated (WIP).
+Provides the `baseUrl` and information from **Seidr's** `InfoApi` throughout your application. `InfoApi` data will automatically retrieved, once the user is authenticated (WIP).
 
 #### useSeidrAuth
 
 Provides `user`, `error`, `isLoading`, `getUser`, `signin`, `signout`, `update`, `resetPassword` to interact with **Seidr's** authentication functionality. This hook will also trigger a rerender when `user`, `error` and `isLoading` change (react lifecycle).
 
-#### useSeidrApi
-
-Provides all necessary functions `fetchInfo`, `fetchList`, `fetchEntry`, `createEntry`, `updateEntry`, `deleteEntry` to interact with **Seidr's** `BaseModelRestApi`.
-
 #### useSeidrTheme
 
 Provides the merged `MantineThme` throughout your application.
 
+#### TableProvider
+
+| prop        | value               | description                                                                                              |
+| ----------- | ------------------- | -------------------------------------------------------------------------------------------------------- |
+| path        | string              | The path segment to add to the `baseUrl`. The resulting url should point to a valid **Seidr** base route |
+| settings    | object: Settings    | Style settings                                                                                           |
+| queryParams | object: QueryParams | Control filters (triggers rerender) externally                                                           |
+| relation    | object: Filter      | A base filter to apply (currently used in the context of RelatedAPIs)                                    |
+
+#### useTable
+
+Provides `data`, `info`, `queryParams`, `path`, `getEntry`, `addEntry`, `setQueryParams`, `getEntry`, `addEntry`, `updateEntry`, `deleteEntry`, `update`, `resetPassword` to interact with **Seidr's** `BaseModelRestApi`. Setting `queryParams` via `setQueryparams` will trigger an update of `data`.
+
+Can only be used inside of `TableProvider`.
+
+#### Table
+
+A table component that leverages `useTable` internally.
+
+| prop          | value               | description                                                                                        |
+| ------------- | ------------------- | -------------------------------------------------------------------------------------------------- |
+| hideToolbar   | boolean             | Hide toolbar, the toolbar is the upper section containing Settings, Add and Filter                 |
+| hideFilter    | boolean             | Hide filter                                                                                        |
+| hideSettings  | boolean             | Hide settings                                                                                      |
+| hideActions   | boolean             | Hide action column on every row                                                                    |
+| settings      | object: Settings    | Style settings                                                                                     |
+| onError       | function            | Callback to be fired on Table error                                                                |
+| onSelectEntry | function            | Callback to be fired on entry selection (Will apply selection styles to rows)                      |
+| styles        | object: TableStyles | Interface to style Table (based on [Mantine's StylesAPI](https://mantine.dev/theming/styles-api/)) |
+
 ## Concepts
 
-### Table
+### TableProvider
 
-`Table` relies on an implementation of **Seidr's** `BaseModelRestApi`. Just provide the `resource_name` used in the implementation of the `BaseModelRestApi` and (assuming the paths are correct) enjoy the power of `Table`.
+`TableProvider` relies on an implementation of **Seidr's** `BaseModelRestApi`. Just provide the `resource_name` used in the implementation of the `BaseModelRestApi` and (assuming the paths are correct) enjoy the power of `TableProvider`.
 
-`Table` leverages `useSeidrApi` internally. Meaning, you can interact with your `BaseModleRestApi` implementatoin using the api methods provided by `useSeidrApi`. Or write your own code to interact with your backend.
+`Table` leverages `useTable` internally. Meaning, you can interact with your `BaseModleRestApi` implementation using the api methods provided by `useTable`.
 
 ### Authentication
 
