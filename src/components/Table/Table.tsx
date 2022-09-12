@@ -119,7 +119,7 @@ export const Table = forwardRef<HTMLDivElement, TableProps>((props, ref) => {
           ) : null}
           <Main settings={state.settings} hideActions={hideActions} loading={loading} onSelect={onSelectEntry} />
 
-          {/* <Pagination /> */}
+          <Pagination />
         </>
       )}
     </Paper>
