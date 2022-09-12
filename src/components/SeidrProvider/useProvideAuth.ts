@@ -13,6 +13,8 @@ function reducer(state: AuthState, action) {
       return { ...state, user: action.payload, loading: false, error: false };
     case 'setError':
       return { ...state, user: null, loading: false, error: action.payload };
+    case 'setLoading':
+      return { ...state, loading: action.payload };
 
     default:
       return state;
@@ -39,8 +41,11 @@ export function useProvideAuth(baseURL) {
         dispatch({ payload: user, type: 'setUser' });
         return user;
       }
+      dispatch({ payload: false, type: 'setLoading' });
+
       throw new Error('Something went wrong');
     } catch (error) {
+      dispatch({ payload: false, type: 'setLoading' });
       throw new Error('Something went wrong');
     }
   }
