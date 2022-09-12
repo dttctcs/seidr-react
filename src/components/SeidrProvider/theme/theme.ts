@@ -1,3 +1,5 @@
+import { createTheme } from '@mui/material/styles';
+
 export const THEME = {
   primaryColor: 'blue',
   components: {
@@ -30,3 +32,5 @@ export const THEME = {
     },
   },
 };
+
+export const MUI_THEME = createTheme({});

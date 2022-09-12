@@ -1,7 +1,8 @@
 import React, { ReactNode, createContext, useContext } from 'react';
 import { SeidrAuth, SeidrInfo } from './types';
-import { THEME } from './theme';
+import { THEME, MUI_THEME } from './theme';
 
+import { ThemeProvider } from '@mui/material/styles';
 import { MantineProvider, MantineThemeOverride, useMantineTheme } from '@mantine/core';
 import { useProvideAuth } from './useProvideAuth';
 import { useProvideInfo } from './useProvideInfo';
@@ -39,7 +40,9 @@ export function SeidrProvider({ baseUrl = '', theme, inheritMantineTheme = false
 
   return (
     <SeidrContext.Provider value={{ theme, auth, info }}>
-      <MantineProvider theme={theme}>{children}</MantineProvider>
+      <MantineProvider theme={theme}>
+        <ThemeProvider theme={MUI_THEME}>{children}</ThemeProvider>
+      </MantineProvider>
     </SeidrContext.Provider>
   );
 }
