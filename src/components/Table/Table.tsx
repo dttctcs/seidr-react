@@ -60,12 +60,10 @@ export const Table = forwardRef<HTMLDivElement, TableProps>((props, ref) => {
     hideSettings = false,
     hideActions = false,
     settings = null,
-    rowsPerPageProps = null,
     sx = null,
     onError = null,
     onSelectEntry = null,
     styles,
-    ...others
   } = props;
 
   const { classes, cx, theme } = applyStyles({}, { styles, name: 'Table' });
