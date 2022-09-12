@@ -1,7 +1,7 @@
 import { createStyles } from '@mantine/core';
 
 // styles api
-export const DataGridStyles = {
+export const TableStyles = {
   root: 'Root element',
   toolbar: 'Main control',
   body: 'Track element, contains all other elements',

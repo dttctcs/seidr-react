@@ -7,7 +7,7 @@ import { Toolbar } from './Toolbar';
 import { Main } from './Main';
 import { Pagination } from './Pagination';
 
-import { applyStyles } from './DataGrid.styles';
+import { applyStyles } from './TableStyles.styles';
 import { useTable } from '../TableProvider';
 
 const initialState = {
@@ -19,7 +19,7 @@ const initialState = {
   },
 };
 
-export interface DataGridProps {
+export interface TableProps {
   /** Hide toolbar, the toolbar is the upper section containing Settings, Add and Filter */
   hideToolbar?: boolean;
   /** Hide filters */
@@ -52,7 +52,7 @@ function reducer(state, action) {
   }
 }
 
-export const DataGrid = forwardRef<HTMLDivElement, DataGridProps>((props, ref) => {
+export const Table = forwardRef<HTMLDivElement, TableProps>((props, ref) => {
   const { path, data, info } = useTable();
   const {
     hideToolbar = false,
@@ -119,11 +119,11 @@ export const DataGrid = forwardRef<HTMLDivElement, DataGridProps>((props, ref) =
           ) : null}
           <Main settings={state.settings} hideActions={hideActions} loading={loading} onSelect={onSelectEntry} />
 
-          <Pagination />
+          {/* <Pagination /> */}
         </>
       )}
     </Paper>
   );
 });
 
-DataGrid.displayName = 'DataGrid';
+Table.displayName = 'DataGrid';

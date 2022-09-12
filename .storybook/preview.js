@@ -1,6 +1,5 @@
 import { setupWorker } from 'msw';
 import { handlers } from '../src/mocks/handlers';
-import { MantineProvider } from '@mantine/core';
 import { SeidrProvider } from '../src';
 
 if (typeof global.process === 'undefined') {

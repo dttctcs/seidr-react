@@ -2,15 +2,15 @@ import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
 import { TableProvider } from '../components/TableProvider';
-import { DataGrid } from '../components/Table';
-import { DataGridStyles } from '../components/Table';
+import { Table } from '../components/Table';
+import { TableStyles } from '../components/Table';
 import { generateBorderStyles } from '../utils';
 
 function Wrapper() {
   return (
     <div>
       <TableProvider path={'http://localhost:5005/api/v1/employees'}>
-        <DataGrid />
+        <Table />
       </TableProvider>
     </div>
   );
@@ -97,7 +97,7 @@ StylesAPI.decorators = [
 ];
 StylesAPI.args = {
   path: window.location.origin + '/cars/',
-  styles: generateBorderStyles(DataGridStyles),
+  styles: generateBorderStyles(TableStyles),
 };
 StylesAPI.argTypes = {
   ...defaultArgTypes,

@@ -15,7 +15,7 @@ interface FieldProps {
 }
 
 export const Field = React.memo(({ loading, rightBorder, rtl, children, ...props }: FieldProps) => {
-  const { classes, cx, theme } = applyStyles({ rightBorder, rtl }, { name: 'DataGrid' });
+  const { classes, cx, theme } = applyStyles({ rightBorder, rtl }, { name: 'Table' });
 
   let clean;
   if (typeof children === 'string' && isHtml(children)) {

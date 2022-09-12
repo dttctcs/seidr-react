@@ -32,7 +32,7 @@ export function FieldTitle({
 
   const selectedColumn = queryParams.order_column === column;
 
-  const { classes } = applyStyles({ selectedColumn, selectable, rtl }, { classNames, styles, name: 'DataGrid' });
+  const { classes } = applyStyles({ selectedColumn, selectable, rtl }, { classNames, styles, name: 'Table' });
 
   console.log(queryParams);
   return (
@@ -42,8 +42,6 @@ export function FieldTitle({
         selectable
           ? () =>
               setQueryParams({
-                ...queryParams.columns,
-
                 order_column: column,
                 order_direction: queryParams.order_direction === 'asc' ? 'desc' : 'asc',
               })

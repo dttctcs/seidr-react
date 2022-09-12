@@ -2,8 +2,7 @@ import React from 'react';
 import { TableProvider, useTable } from '../../../TableProvider';
 import { Relation } from '../../../TableProvider/types';
 
-import { Box } from '@mantine/core';
-import { DataGrid } from '../../DataGrid';
+import { Table } from '../../Table';
 import { urlJoin } from '../../../../utils';
 
 interface RelationPanelProps extends Relation {
@@ -20,7 +19,7 @@ function RelationPanel({ relatedPath, ...relation }: RelationPanelProps) {
 
   return (
     <TableProvider path={joinedPath} relation={relation}>
-      <DataGrid hideToolbar />
+      <Table hideToolbar />
     </TableProvider>
   );
 }

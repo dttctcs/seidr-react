@@ -20,7 +20,7 @@ interface ToolbarProps {
 export const Toolbar = React.memo<ToolbarProps>(({ settings, hideFilter, hideSettings, dense, dispatch }) => {
   const { info } = useTable();
 
-  const { classes } = applyStyles({ dense }, { name: 'DataGrid' });
+  const { classes } = applyStyles({ dense }, { name: 'Table' });
 
   const canPost = info.permissions.includes('can_post');
   return (

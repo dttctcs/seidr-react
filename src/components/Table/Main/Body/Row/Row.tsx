@@ -13,7 +13,7 @@ interface RowProps {
 }
 
 export function Row({ entry, selected, striped, onSelect, setSelectedItem, children }: RowProps) {
-  const { classes } = applyStyles({ selected, selectable: !!onSelect, striped }, { name: 'DataGrid' });
+  const { classes } = applyStyles({ selected, selectable: !!onSelect, striped }, { name: 'Table' });
 
   return (
     <tr

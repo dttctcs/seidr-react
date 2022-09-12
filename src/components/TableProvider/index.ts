@@ -1,1 +1,1 @@
-export { TableProvider, useTable } from './DataGridProvider';
+export { TableProvider, useTable } from './TableProvider';
