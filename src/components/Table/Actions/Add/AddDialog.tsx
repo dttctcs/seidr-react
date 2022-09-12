@@ -34,6 +34,7 @@ export function AddDialog({ opened, onClose }) {
         onClose();
       }}
       title={info.add.title}
+      size="lg"
       centered
     >
       <Stack spacing="md">

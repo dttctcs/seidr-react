@@ -56,6 +56,7 @@ export function EditDialog({ id, opened, onClose }) {
         reset();
       }}
       title={`${info.edit.title}  (#${item?.id})`}
+      size="lg"
       centered
     >
       <Stack spacing="md">

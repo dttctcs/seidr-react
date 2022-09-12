@@ -26,8 +26,9 @@ export function ViewDialog({ id, opened, onClose }) {
     <Modal
       styles={{ root: { minHeight: '640px' } }}
       opened={opened}
-      title={`${item?.show_title} (#${item?.id})`}
       onClose={onClose}
+      title={`${item?.show_title} (#${item?.id})`}
+      size="lg"
       centered
     >
       <LoadingOverlay visible={loading} />
