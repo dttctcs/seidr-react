@@ -66,12 +66,14 @@ Provides the merged `MantineThme` throughout your application.
 
 #### TableProvider
 
-| prop        | value               | description                                                                                              |
-| ----------- | ------------------- | -------------------------------------------------------------------------------------------------------- |
-| path        | string              | The path segment to add to the `baseUrl`. The resulting url should point to a valid **Seidr** base route |
-| settings    | object: Settings    | Style settings                                                                                           |
-| queryParams | object: QueryParams | Control filters (triggers rerender) externally                                                           |
-| relation    | object: Filter      | A base filter to apply (currently used in the context of RelatedAPIs)                                    |
+`TableProvider` interacts with **Seidr's** `BaseModelRestApi`. Path should be the same as `resource_name` used in `BaseModelRestApi`.
+
+| prop        | value               | description                                                                                                                                                                |
+| ----------- | ------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| path        | string              | The path segment to add to the `baseUrl` provided to SeidrProvider. The resulting url should point to a valid **Seidr** base route. Will ignore `baseUrl`, if it is a URL. |
+| settings    | object: Settings    | Style settings                                                                                                                                                             |
+| queryParams | object: QueryParams | Control filters (triggers rerender) externally                                                                                                                             |
+| relation    | object: Filter      | A base filter to apply (currently used in the context of RelatedAPIs)                                                                                                      |
 
 #### useTable
 
@@ -81,7 +83,7 @@ Can only be used inside of `TableProvider`.
 
 #### Table
 
-A table component that leverages `useTable` internally.
+A table component that leverages `useTable` internally. Use this, if you don't want to implement your own table.
 
 | prop          | value               | description                                                                                        |
 | ------------- | ------------------- | -------------------------------------------------------------------------------------------------- |
@@ -99,8 +101,6 @@ A table component that leverages `useTable` internally.
 ### TableProvider
 
 `TableProvider` relies on an implementation of **Seidr's** `BaseModelRestApi`. Just provide the `resource_name` used in the implementation of the `BaseModelRestApi` and (assuming the paths are correct) enjoy the power of `TableProvider`.
-
-`Table` leverages `useTable` internally. Meaning, you can interact with your `BaseModleRestApi` implementation using the api methods provided by `useTable`.
 
 ### Authentication
 
