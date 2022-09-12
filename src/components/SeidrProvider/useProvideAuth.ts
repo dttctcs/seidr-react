@@ -37,11 +37,11 @@ export function useProvideAuth(baseURL) {
       if (response.ok) {
         const user = await response.json();
         dispatch({ payload: user, type: 'setUser' });
-      } else {
-        dispatch({ payload: "Couldn't get user data", type: 'setError' });
+        return user;
       }
+      throw new Error('Something went wrong');
     } catch (error) {
-      dispatch({ payload: 'Failed to fetch', type: 'setError' });
+      throw new Error('Something went wrong');
     }
   }
 
