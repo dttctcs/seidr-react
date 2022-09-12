@@ -1,1 +1,1 @@
-export { SeidrProvider, useSeidrApi, useSeidrAuth, useSeidrInfo, useSeidrTheme } from './SeidrProvider';
+export { SeidrProvider, useSeidrAuth, useSeidrInfo, useSeidrTheme } from './SeidrProvider';

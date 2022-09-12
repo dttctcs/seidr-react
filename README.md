@@ -42,36 +42,36 @@ To leverage **Seidr UI** wrap your react application with `SeidrProvider`. `Seid
 
 #### SeidrProvider
 
-| prop    | value                        | description                                                                                           |
-| ------- | ---------------------------- | ----------------------------------------------------------------------------------------------------- |
-| baseURL | string                       | The base URL of your **Seidr** application. (Example: www.domain.com/api/v1)                          |
-| theme   | object: ExtendedMantineTheme | A theme object to style Seidr components (DataGrid) globally|
-| inheritMantineTheme | boolean | Determines if a `MantineTheme` from an outer scope should be merged with **Seidr's** default theme or the `MantineTheme` provided (see `theme` property)|
+| prop                | value                        | description                                                                                                                                              |
+| ------------------- | ---------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| baseURL             | string                       | The base URL of your **Seidr** application. (Example: www.domain.com/api/v1)                                                                             |
+| theme               | object: ExtendedMantineTheme | A theme object to style Seidr components (Table) globally                                                                                                |
+| inheritMantineTheme | boolean                      | Determines if a `MantineTheme` from an outer scope should be merged with **Seidr's** default theme or the `MantineTheme` provided (see `theme` property) |
 
 ### Components and Hooks
 
 You now can use **Seidr UI's** components and hooks anywhere in the application. **Seidr UI** currently provides a single component and several hooks.
 
-#### DataGrid
+#### Table
 
-| prop             | value                  | description                                                                                                                     |
-| ---------------- | ---------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
-| path             | string                 | The path segment to add to the `baseURL`. The resulting url should point to a valid **Seidr** base route                        |
-| fitToParent      | boolean                | Size to be controlled by parent                                                                                                 |
-| hideToolbar      | boolean                | Hide toolbar, the toolbar is the upper section containing Settings, Add and Filter                                              |
-| hideFilter       | boolean                | Hide filter                                                                                                                     |
-| hideSettings     | boolean                | Hide settings                                                                                                                   |
-| hideActions      | boolean                | Hide action column on every row                                                                                                 |
-| settings         | object: Settings       | Style settings                                                                                                                  |
-| queryParams      | object: QueryParams    | Control filters (triggers rerender) externally                                                                                  |
-| rowsPerPageProps | boolean                | Control page size (triggers rerender)                                                                                           |
-| relation         | object: Filter         | A base filter to apply (currently used in the context of RelatedAPIs)                                                           |
-| AddComponent     | ReactElement           | ReactNode to be rendered on item add. (will provide add info to the component as properties (columns, schema, defaultValues)).  |
-| EditComponent    | ReactElement           | ReactNode to be rendered on item edit. (will provide edit info to the component as properties (columns, schema, defaultValues)) |
-| ViewComponent    | ReactElement           | ReactNode to be rendered on item view (will provide the selected item to the component)                                         |
-| onError          | function               | Callback to be fired on DataGrid error                                                                                          |
-| onSelectEntry    | function               | Callback to be fired on entry selection (Will apply selection styles to rows)                                                   |
-| styles           | object: DataGridStyles | Interface to style DataGrid (based on [Mantine's StylesAPI](https://mantine.dev/theming/styles-api/))                           |
+| prop             | value               | description                                                                                                                     |
+| ---------------- | ------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| path             | string              | The path segment to add to the `baseURL`. The resulting url should point to a valid **Seidr** base route                        |
+| fitToParent      | boolean             | Size to be controlled by parent                                                                                                 |
+| hideToolbar      | boolean             | Hide toolbar, the toolbar is the upper section containing Settings, Add and Filter                                              |
+| hideFilter       | boolean             | Hide filter                                                                                                                     |
+| hideSettings     | boolean             | Hide settings                                                                                                                   |
+| hideActions      | boolean             | Hide action column on every row                                                                                                 |
+| settings         | object: Settings    | Style settings                                                                                                                  |
+| queryParams      | object: QueryParams | Control filters (triggers rerender) externally                                                                                  |
+| rowsPerPageProps | boolean             | Control page size (triggers rerender)                                                                                           |
+| relation         | object: Filter      | A base filter to apply (currently used in the context of RelatedAPIs)                                                           |
+| AddComponent     | ReactElement        | ReactNode to be rendered on item add. (will provide add info to the component as properties (columns, schema, defaultValues)).  |
+| EditComponent    | ReactElement        | ReactNode to be rendered on item edit. (will provide edit info to the component as properties (columns, schema, defaultValues)) |
+| ViewComponent    | ReactElement        | ReactNode to be rendered on item view (will provide the selected item to the component)                                         |
+| onError          | function            | Callback to be fired on Table error                                                                                             |
+| onSelectEntry    | function            | Callback to be fired on entry selection (Will apply selection styles to rows)                                                   |
+| styles           | object: TableStyles | Interface to style Table (based on [Mantine's StylesAPI](https://mantine.dev/theming/styles-api/))                              |
 
 #### useSeidrInfo
 
@@ -91,11 +91,11 @@ Provides the merged `MantineThme` throughout your application.
 
 ## Concepts
 
-### DataGrid
+### Table
 
-`DataGrid` relies on an implementation of **Seidr's** `BaseModelRestApi`. Just provide the `resource_name` used in the implementation of the `BaseModelRestApi` and (assuming the paths are correct) enjoy the power of `DataGrid`.
+`Table` relies on an implementation of **Seidr's** `BaseModelRestApi`. Just provide the `resource_name` used in the implementation of the `BaseModelRestApi` and (assuming the paths are correct) enjoy the power of `Table`.
 
-`DataGrid` leverages `useSeidrApi` internally. Meaning, you can interact with your `BaseModleRestApi` implementatoin using the api methods provided by `useSeidrApi`. Or write your own code to interact with your backend.
+`Table` leverages `useSeidrApi` internally. Meaning, you can interact with your `BaseModleRestApi` implementatoin using the api methods provided by `useSeidrApi`. Or write your own code to interact with your backend.
 
 ### Authentication
 

@@ -1,5 +1,5 @@
 import { useEffect, useReducer } from 'react';
-import { createFetchParams, urlJoin } from './utils';
+import { createFetchParams, urlJoin } from '../../utils';
 import { AuthState } from './types';
 import { UserUpdate } from './types';
 

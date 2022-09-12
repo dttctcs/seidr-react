@@ -1,25 +1,20 @@
 import React, { ReactNode, createContext, useContext } from 'react';
-import { SeidrAuth } from './types';
-import { THEME } from './theme';
+import { SeidrAuth, SeidrInfo } from './types';
+import { THEME, MUI_THEME } from './theme';
 
+import { ThemeProvider } from '@mui/material/styles';
 import { MantineProvider, MantineThemeOverride, useMantineTheme } from '@mantine/core';
 import { useProvideAuth } from './useProvideAuth';
-import { useProvideApi } from './useProvideApi';
 import { useProvideInfo } from './useProvideInfo';
 
 const SeidrContext = createContext({
   theme: {} as MantineThemeOverride, //Provide a default theme here
   auth: {} as SeidrAuth,
-  api: {},
-  info: {},
+  info: {} as SeidrInfo,
 });
 
 export function useSeidrAuth() {
   return useContext(SeidrContext).auth;
-}
-
-export function useSeidrApi() {
-  return useContext(SeidrContext).api;
 }
 
 export function useSeidrInfo() {
@@ -30,23 +25,24 @@ export function useSeidrTheme() {
   return useMantineTheme() || {};
 }
 
-export interface SeidrporviderProps {
-  baseURL?: string;
+export interface SeidrProviderProps {
+  baseUrl?: string;
   theme?: MantineThemeOverride;
-  inheritMantinetheme?: boolean;
+  inheritMantineTheme?: boolean;
   children: ReactNode;
 }
 
-export function SeidrProvider({ baseURL = '', theme, inheritMantineTheme = false, children }) {
+export function SeidrProvider({ baseUrl = '', theme, inheritMantineTheme = false, children }: SeidrProviderProps) {
   theme = inheritMantineTheme ? { ...useMantineTheme(), ...theme } : { ...THEME, ...theme };
 
-  const auth = useProvideAuth(baseURL);
-  const api = useProvideApi(baseURL);
-  const info = { baseURL, ...useProvideInfo(baseURL, auth) };
+  const auth = useProvideAuth(baseUrl);
+  const info = { baseUrl, ...useProvideInfo(baseUrl, auth) };
 
   return (
-    <SeidrContext.Provider value={{ theme, auth, api, info }}>
-      <MantineProvider theme={theme}>{children}</MantineProvider>
+    <SeidrContext.Provider value={{ theme, auth, info }}>
+      <MantineProvider theme={theme}>
+        <ThemeProvider theme={MUI_THEME}>{children}</ThemeProvider>
+      </MantineProvider>
     </SeidrContext.Provider>
   );
 }

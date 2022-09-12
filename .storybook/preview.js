@@ -1,6 +1,5 @@
 import { setupWorker } from 'msw';
 import { handlers } from '../src/mocks/handlers';
-import { MantineProvider } from '@mantine/core';
 import { SeidrProvider } from '../src';
 
 if (typeof global.process === 'undefined') {
@@ -21,7 +20,7 @@ export const parameters = {
 export const decorators = [
   (Story) => {
     return (
-      <SeidrProvider baseURL="http://localhost:5005/api/v1" inheritMantineTheme>
+      <SeidrProvider baseUrl="http://localhost:5005/api/v1" inheritMantineTheme>
         <Story />
       </SeidrProvider>
     );

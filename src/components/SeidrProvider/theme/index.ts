@@ -1,1 +1,1 @@
-export { THEME } from './theme';
+export { THEME, MUI_THEME } from './theme';
