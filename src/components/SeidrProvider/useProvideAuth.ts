@@ -41,12 +41,10 @@ export function useProvideAuth(baseURL) {
         dispatch({ payload: user, type: 'setUser' });
         return user;
       }
-      dispatch({ payload: false, type: 'setLoading' });
 
       throw new Error('Something went wrong');
     } catch (error) {
       dispatch({ payload: false, type: 'setLoading' });
-      throw new Error('Something went wrong');
     }
   }
 
