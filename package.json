@@ -1,6 +1,6 @@
 {
   "name": "seidrui",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "A react component library for Seidr",
   "author": "",
   "license": "MIT",
@@ -89,6 +89,7 @@
     "rollup-plugin-postcss": "^4.0.2",
     "rollup-plugin-visualizer": "^5.8.0",
     "simple-git": "^3.13.0",
+    "tslib": "^2.4.0",
     "typescript": "^4.7.4",
     "yargs": "^17.5.1"
   },
