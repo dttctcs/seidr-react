@@ -40,7 +40,7 @@ function reducer(state, action) {
     case 'setFilters':
       return { ...state, queryParams: { ...state.queryParams, page: 0, filters: action.payload } };
     case 'setPage':
-      return { ...state, queryParams: { ...state.queryParams, page: action.payload.page } };
+      return { ...state, queryParams: { ...state.queryParams, page: action.payload } };
     case 'setPageSize':
       return { ...state, queryParams: { ...state.queryParams, page: 0, page_size: action.payload } };
     case 'setOrder':
@@ -93,22 +93,22 @@ export function useProvideTable(props: UseProvideTableProps): Table {
   }, [state.queryParams]);
 
   const setQueryParams = (queryParams: QueryParams) => {
-    if (queryParams.columns) {
+    if (queryParams.hasOwnProperty('columns')) {
       dispatch({ type: 'setColumns', payload: queryParams.columns });
     }
-    if (queryParams.filters) {
+    if (queryParams.hasOwnProperty('filters')) {
       dispatch({ type: 'setFilters', payload: queryParams.filters });
     }
-    if (queryParams.order_column || queryParams.order_direction) {
+    if (queryParams.hasOwnProperty('order_column') || queryParams.hasOwnProperty('order_direction')) {
       dispatch({
         type: 'setOrder',
         payload: { order_column: queryParams.order_column, order_direction: queryParams.order_direction },
       });
     }
-    if (queryParams.page) {
+    if (queryParams.hasOwnProperty('page')) {
       dispatch({ type: 'setPage', payload: queryParams.page });
     }
-    if (queryParams.page_size) {
+    if (queryParams.hasOwnProperty('page_size')) {
       dispatch({ type: 'setPageSize', payload: queryParams.page_size });
     }
   };
