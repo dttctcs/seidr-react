@@ -20,7 +20,7 @@ export const parameters = {
 export const decorators = [
   (Story) => {
     return (
-      <SeidrProvider baseURL="http://localhost:5005/api/v1" inheritMantineTheme>
+      <SeidrProvider baseUrl="http://localhost:5005/api/v1" inheritMantineTheme>
         <Story />
       </SeidrProvider>
     );

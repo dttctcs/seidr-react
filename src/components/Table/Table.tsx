@@ -7,7 +7,7 @@ import { Toolbar } from './Toolbar';
 import { Main } from './Main';
 import { Pagination } from './Pagination';
 
-import { applyStyles } from './TableStyles.styles';
+import { applyStyles } from './Table.styles';
 import { useTable } from '../TableProvider';
 
 const initialState = {
@@ -33,7 +33,7 @@ export interface TableProps {
   /** Externally control page size */
   rowsPerPageProps?: number;
 
-  // /** Callback to be fired on DataGrid error */
+  // /** Callback to be fired on Table error */
   onError?: () => void;
   // /** Callback to be fired on entry selection */
   onSelectEntry?: () => void;
@@ -68,7 +68,7 @@ export const Table = forwardRef<HTMLDivElement, TableProps>((props, ref) => {
     ...others
   } = props;
 
-  const { classes, cx, theme } = applyStyles({}, { styles, name: 'DataGrid' });
+  const { classes, cx, theme } = applyStyles({}, { styles, name: 'Table' });
 
   const [state, dispatch] = useReducer(reducer, {
     ...initialState,
@@ -126,4 +126,4 @@ export const Table = forwardRef<HTMLDivElement, TableProps>((props, ref) => {
   );
 });
 
-Table.displayName = 'DataGrid';
+Table.displayName = 'Table';

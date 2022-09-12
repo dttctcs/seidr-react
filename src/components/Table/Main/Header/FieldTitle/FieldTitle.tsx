@@ -34,7 +34,6 @@ export function FieldTitle({
 
   const { classes } = applyStyles({ selectedColumn, selectable, rtl }, { classNames, styles, name: 'Table' });
 
-  console.log(queryParams);
   return (
     <th
       className={classes.fieldTitleRoot}

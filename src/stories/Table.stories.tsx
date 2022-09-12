@@ -9,7 +9,7 @@ import { generateBorderStyles } from '../utils';
 function Wrapper() {
   return (
     <div>
-      <TableProvider path={'http://localhost:5005/api/v1/employees'}>
+      <TableProvider path={'/departments'}>
         <Table />
       </TableProvider>
     </div>

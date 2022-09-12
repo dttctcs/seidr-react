@@ -1,4 +1,4 @@
-export { DataGrid } from './DataGrid';
-export { DataGridStyles } from './DataGrid.styles';
+export { Table } from './Table';
+export { TableStyles } from './Table.styles';
 
-export type { DataGridProps } from './DataGrid';
+export type { TableProps } from './Table';
