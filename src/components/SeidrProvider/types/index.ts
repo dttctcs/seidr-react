@@ -1,3 +1,4 @@
 export { AuthState } from './AuthState';
-export { SeidrAuth } from './SeidrAuth';
 export { UserUpdate } from './User';
+export { SeidrAuth } from './SeidrAuth';
+export { SeidrInfo } from './SeidrInfo';

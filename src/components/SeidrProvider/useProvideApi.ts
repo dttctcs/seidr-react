@@ -1,4 +1,4 @@
-import { createFetchParams, urlJoin } from './utils';
+import { createFetchParams, urlJoin } from '../../utils';
 
 export function useProvideApi(baseURL) {
   const fetchList = async (path, queryParams) => {

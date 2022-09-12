@@ -1,2 +1,2 @@
 export * from './components/SeidrProvider';
-export * from './components/DataGrid';
+export * from './components/Table';
