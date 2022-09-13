@@ -492,10 +492,10 @@ const getSeidrInfo = () => {
 };
 
 export const handlers = [
-  rest.get('/info', (req, res, ctx) => {
+  rest.get('/api/v1/info', (req, res, ctx) => {
     return res(ctx.json(getSeidrInfo()), ctx.delay());
   }),
-  rest.post('/auth/login', (req, res, ctx) => {
+  rest.post('/api/v1/auth/login', (req, res, ctx) => {
     const { username, password } = req.body;
     if (username === 'admin' && password === 'admin') {
       return res(ctx.json(getUser()), ctx.delay());
@@ -510,28 +510,28 @@ export const handlers = [
     }
   }),
 
-  rest.get('/cars/_info', (req, res, ctx) => {
+  rest.get('/api/v1/cars/_info', (req, res, ctx) => {
     return res(ctx.json(getInfo()));
   }),
-  rest.get('/cars', (req, res, ctx) => {
+  rest.get('/api/v1/cars', (req, res, ctx) => {
     return res(ctx.json(get()));
   }),
-  rest.get('/cars/:id', (req, res, ctx) => {
+  rest.get('/api/v1/cars/:id', (req, res, ctx) => {
     return res(ctx.json(getItem(req.params.id)), ctx.delay());
   }),
-  rest.post('/cars/:id', (req, res, ctx) => {
+  rest.post('/api/v1/cars/:id', (req, res, ctx) => {
     return res(ctx.json(getItem(req.params.id)), ctx.delay());
   }),
-  rest.delete('/cars/:id', (req, res, ctx) => {
+  rest.delete('/api/v1/cars/:id', (req, res, ctx) => {
     return res(ctx.json(getItem(req.params.id)), ctx.delay());
   }),
-  rest.delete('/cars/:id', (req, res, ctx) => {
+  rest.delete('/api/v1/cars/:id', (req, res, ctx) => {
     return res(ctx.json(getItem(req.params.id)), ctx.delay());
   }),
-  rest.get('/engines/_info', (req, res, ctx) => {
+  rest.get('/api/v1/engines/_info', (req, res, ctx) => {
     return res(ctx.json(getInfo()), ctx.delay());
   }),
-  rest.get('/engines/', (req, res, ctx) => {
+  rest.get('/api/v1/engines/', (req, res, ctx) => {
     return res(ctx.json(getEngines()), ctx.delay());
   }),
 ];
