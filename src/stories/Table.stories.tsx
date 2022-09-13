@@ -96,7 +96,7 @@ StylesAPI.decorators = [
   },
 ];
 StylesAPI.args = {
-  path: window.location.origin + '/cars/',
+  path: 'cars',
   styles: generateBorderStyles(TableStyles),
 };
 StylesAPI.argTypes = {
@@ -114,7 +114,7 @@ Theming.decorators = [
   },
 ];
 Theming.args = {
-  path: window.location.origin + '/cars/',
+  path: 'cars',
 };
 Theming.argTypes = {
   ...defaultArgTypes,
