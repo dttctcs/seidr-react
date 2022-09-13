@@ -8,24 +8,14 @@ import { Button, Group, Modal, Stack } from '@mantine/core';
 
 import { FormField } from '../../FormField';
 
-export function EditDialog({ id, opened, onClose }) {
-  const { info, getEntry, updateEntry } = useTable();
-
-  const [item, setItem] = useState(null);
-  const [loading, setLoading] = useState(false);
+export function EditDialog({ item, info, loading, opened, onClose }) {
+  const { updateEntry } = useTable();
 
   const { handleSubmit, reset, setValue, control } = useForm({
     mode: 'onTouched',
     defaultValues: info.edit.defaultValues,
     resolver: yupResolver(info.edit.schema),
   });
-
-  useEffect(() => {
-    setLoading(true);
-    getEntry(id)
-      .then((data) => setItem(data))
-      .finally(() => setLoading(false));
-  }, [opened]);
 
   useEffect(() => {
     if (item) {

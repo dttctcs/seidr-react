@@ -1,27 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useTable } from '../../../TableProvider';
 import { getValue } from '../../utils';
 
 import { Grid, LoadingOverlay, Modal, Paper, Stack, Tabs, Text } from '@mantine/core';
 import RelationPanel from './RelationPanel';
 
-export function ViewDialog({ id, opened, onClose }) {
-  const { info, getEntry } = useTable();
-
-  const [item, setItem] = useState(null);
-  const [loading, setLoading] = useState(false);
-
-  useEffect(() => {
-    setLoading(true);
-    getEntry(id)
-      .then((data) => setItem(data))
-      .finally(() => setLoading(false));
-  }, [id]);
-
-  if (!item) {
-    return null;
-  }
-
+export function ViewDialog({ item, info, loading, opened, onClose }) {
   return (
     <Modal
       styles={{ root: { minHeight: '640px' } }}

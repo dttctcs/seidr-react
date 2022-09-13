@@ -1,10 +1,15 @@
 import React, { useState } from 'react';
+import { useTable } from '../../../TableProvider';
 
 import { ActionIcon, Tooltip } from '@mantine/core';
 import { ViewDialog } from './ViewDialog';
 import { Eye } from 'tabler-icons-react';
 
 export function View({ id }) {
+  const { info, getEntry } = useTable();
+
+  const [item, setItem] = useState(null);
+  const [loading, setLoading] = useState(false);
   const [dialogOpen, setDialogOpen] = useState(false);
 
   return (
@@ -13,14 +18,21 @@ export function View({ id }) {
         <ActionIcon
           size="sm"
           onClick={() => {
-            setDialogOpen(true);
+            setLoading(true);
+            const entryPromise = getEntry(id);
+
+            entryPromise.then((data) => {
+              setItem(data);
+              setLoading(false);
+              setDialogOpen(true);
+            });
           }}
         >
           <Eye />
         </ActionIcon>
       </Tooltip>
 
-      <ViewDialog id={id} opened={dialogOpen} onClose={() => setDialogOpen(false)} />
+      <ViewDialog item={item} info={info} loading={loading} opened={dialogOpen} onClose={() => setDialogOpen(false)} />
     </>
   );
 }

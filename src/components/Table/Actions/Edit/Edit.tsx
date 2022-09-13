@@ -1,10 +1,15 @@
 import React, { useState } from 'react';
+import { useTable } from '../../../TableProvider';
 
 import { ActionIcon, Tooltip } from '@mantine/core';
 import { EditDialog } from './EditDialog';
 import { Pencil } from 'tabler-icons-react';
 
 export function Edit({ id }) {
+  const { info, getEntry } = useTable();
+
+  const [item, setItem] = useState(null);
+  const [loading, setLoading] = useState(false);
   const [dialogOpen, setDialogOpen] = useState(false);
 
   return (
@@ -13,14 +18,21 @@ export function Edit({ id }) {
         <ActionIcon
           size="sm"
           onClick={() => {
-            setDialogOpen(true);
+            setLoading(true);
+            const entryPromise = getEntry(id);
+
+            entryPromise.then((data) => {
+              setItem(data);
+              setLoading(false);
+              setDialogOpen(true);
+            });
           }}
         >
           <Pencil />
         </ActionIcon>
       </Tooltip>
 
-      <EditDialog id={id} opened={dialogOpen} onClose={() => setDialogOpen(false)} />
+      <EditDialog item={item} info={info} loading={loading} opened={dialogOpen} onClose={() => setDialogOpen(false)} />
     </>
   );
 }
