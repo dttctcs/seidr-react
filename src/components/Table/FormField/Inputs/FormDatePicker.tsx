@@ -27,6 +27,7 @@ export function FormDatePicker({ control, name, PopperProps, ...props }) {
   // }, [customInputRef.current]);
 
   const colors = theme.fn.variant({
+    variant: 'default',
     color: theme.colors[theme.primaryColor][theme.fn.primaryShade()],
   });
 

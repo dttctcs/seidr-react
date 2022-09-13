@@ -7,7 +7,7 @@ import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 
-export function FormDateTimePicker({ control, name, TextFieldProps, PopperProps, ...props }) {
+export function FormDateTimePicker({ control, name, PopperProps, ...props }) {
   const {
     field: { ref, ...inputProps },
     fieldState: { error },
@@ -27,6 +27,7 @@ export function FormDateTimePicker({ control, name, TextFieldProps, PopperProps,
   // }, [customInputRef.current]);
 
   const colors = theme.fn.variant({
+    variant: 'default',
     color: theme.colors[theme.primaryColor][theme.fn.primaryShade()],
   });
 

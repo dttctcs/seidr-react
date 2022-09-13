@@ -31,10 +31,12 @@ export async function buildPackage() {
         ...options,
         basePath: './',
         format,
+        minify: false,
+        analyze: false,
       });
 
       const build = await rollup(config);
-      const outputs: OutputOptions[] = Array.isArray(config.output) ? config.output : [config.output];
+      const outputs = Array.isArray(config.output) ? config.output : [config.output];
       await Promise.all(outputs.map((output) => build.write(output)));
     }
     logger.info(`seidrui was built in ${chalk.green(`${((Date.now() - startTime) / 1000).toFixed(2)}s`)}`);

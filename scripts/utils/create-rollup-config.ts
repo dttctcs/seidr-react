@@ -12,6 +12,7 @@ interface PkgConfigInput {
   format: string;
   entry?: string;
   publicPath?: string;
+  basePath?: string;
   externals?: string[];
   sourcemap: boolean;
   minify: boolean;

@@ -31,11 +31,11 @@ const { argv }: { argv: any } = yargs(hideBin(process.argv)).option('tag', {
 
   logger.info('Release initiated');
   // build
-  let build = await buildPackage();
+  await buildPackage();
 
   // increment version
   logger.info(`Creating new version...`);
-  let incrementedVersion = getIncrementedVersion(packageJson.version, argv._[0] as string);
+  const incrementedVersion = getIncrementedVersion(packageJson.version, argv._[0] as string);
   logger.success(`Created new version: ${chalk.cyan(incrementedVersion)}`);
   logger.info(`Updating package.json version...`);
   await setPackageVersion(incrementedVersion);
