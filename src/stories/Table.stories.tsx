@@ -6,10 +6,10 @@ import { Table } from '../components/Table';
 import { TableStyles } from '../components/Table';
 import { generateBorderStyles } from '../utils';
 
-function Wrapper() {
+function Wrapper({ path }) {
   return (
     <div>
-      <TableProvider path={'/departments'}>
+      <TableProvider path={path}>
         <Table />
       </TableProvider>
     </div>
@@ -79,7 +79,7 @@ Default.decorators = [
   ),
 ];
 Default.args = {
-  path: window.location.origin + '/cars/',
+  path: 'cars',
 };
 Default.argTypes = {
   ...defaultArgTypes,

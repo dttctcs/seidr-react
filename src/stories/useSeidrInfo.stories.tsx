@@ -5,13 +5,13 @@ import { useSeidrAuth, useSeidrInfo } from '../components/SeidrProvider';
 
 function HookWrapper() {
   const { signin } = useSeidrAuth();
-  const { baseURL, apis } = useSeidrInfo();
+  const { baseUrl, info } = useSeidrInfo();
 
   return (
     <div>
       <Button onClick={() => signin({ username: 'admin', password: 'admin' })}>Signin</Button>
-      <div>{JSON.stringify(baseURL)}</div>
-      <div>{JSON.stringify(apis)}</div>
+      <div>{JSON.stringify(baseUrl)}</div>
+      <div>{JSON.stringify(info)}</div>
     </div>
   );
 }
