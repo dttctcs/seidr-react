@@ -21,25 +21,18 @@ You have **Seidr** running? Good. All you need is to install **Seidr React** and
 
 ### Development
 
-- Install dependencies: `npm install`
+- Install dependencies: `npm ci`\*
+
 - Run: `npm run storybook`
 
-#### Creating a release
+_\*`npm i` will update `package-lock.json` if changes occured, while `npm ci` will wipe your `node_modules` folder and install dependencies only from `package-lock.json` (opt for `npm ci` when possible)_
+
+### Release
 
 The inbuilt script uses Semantic Versioning according to https://semver.org/.
 
 - Create a release: `npm run releae <version>` while version is one of patch/minor/major
 - This will create a commit with the given release version as tag and project version and open the github release page after build. Select `Generate release notes` to create changelog based on commits and press `publish release`
-
-### Production
-
-- Install dependencies: `npm install`
-- Run `npm run build`
-
-### Release
-
-- Install dependencies: `npm install`
-- Run `npm run release`
 
 ## Configuration
 
