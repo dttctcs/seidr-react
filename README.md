@@ -24,6 +24,13 @@ You have **Seidr** running? Good. All you need is to install **Seidr React** and
 - Install dependencies: `npm install`
 - Run: `npm run storybook`
 
+#### Creating a release
+
+The inbuilt script uses Semantic Versioning according to https://semver.org/.
+
+- Create a release: `npm run releae <version>` while version is one of patch/minor/major
+- This will create a commit with the given release version as tag and project version and open the github release page after build. Select `Generate release notes` to create changelog based on commits and press `publish release`
+
 ### Production
 
 - Install dependencies: `npm install`
