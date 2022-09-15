@@ -31,7 +31,7 @@ _\*`npm i` will update `package-lock.json` if changes occured, while `npm ci` wi
 
 The inbuilt script uses Semantic Versioning according to https://semver.org/.
 
-- Create a release: `npm run releae <version>` while version is one of patch/minor/major
+- Create a release: `npm run release <version>` while version is one of patch/minor/major
 - This will create a commit with the given release version as tag and project version and open the github release page after build. Select `Generate release notes` to create changelog based on commits and press `publish release`
 
 ## Configuration
