@@ -31,7 +31,7 @@ export default create({
   //   inputTextColor: 'black',
   //   inputBorderRadius: 4,
 
-  // brandTitle: 'SEIDR UI',
+  // brandTitle: 'Seidr React',
   //   brandUrl: 'https://example.com',
   //   brandImage: 'https://place-hold.it/350x150',
   // brandTarget: '_self',

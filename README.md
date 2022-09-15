@@ -1,16 +1,16 @@
-# Seidr UI
+# Seidr React
 
 A react component library for Seidr
 
 ## Usage
 
-**Seidr UI** provides react components and hooks to interact with [**Seidr's**](https://github.com/dttctcs/seidr) features. :sparkles:
+**Seidr React** provides react components and hooks to interact with [**Seidr's**](https://github.com/dttctcs/seidr) features. :sparkles:
 
 More components comming soon...
 
 ### Prerequisites
 
-You have **Seidr** running? Good. All you need is to install **Seidr UI** and leverage its components (See [Concepts](#Concepts) for more information).
+You have **Seidr** running? Good. All you need is to install **Seidr React** and leverage its components (See [Concepts](#Concepts) for more information).
 
 - Create a react project
 - Install requirements
@@ -38,7 +38,7 @@ You have **Seidr** running? Good. All you need is to install **Seidr UI** and le
 
 ### Basic
 
-To leverage **Seidr UI** wrap your react application with `SeidrProvider`. `SeidrProvider` has several props. The most important is `baseUrl`. Set it to your **Seidr** Backend URL. If not set, `SeidrProvider` will assume the `baseUrl` to be `window.location.origin`.
+To leverage **Seidr React** wrap your react application with `SeidrProvider`. `SeidrProvider` has several props. The most important is `baseUrl`. Set it to your **Seidr** Backend URL. If not set, `SeidrProvider` will assume the `baseUrl` to be `window.location.origin`.
 
 #### SeidrProvider
 
@@ -50,7 +50,7 @@ To leverage **Seidr UI** wrap your react application with `SeidrProvider`. `Seid
 
 ### Components and Hooks
 
-You now can use **Seidr UI's** components and hooks anywhere in the application. **Seidr UI** currently provides a single component and several hooks.
+You now can use **Seidr React's** components and hooks anywhere in the application. **Seidr React** currently provides a single component and several hooks.
 
 #### useSeidrInfo
 
@@ -64,9 +64,9 @@ Provides `user`, `error`, `isLoading`, `getUser`, `signin`, `signout`, `update`,
 
 Provides the merged `MantineThme` throughout your application.
 
-#### TableProvider
+#### SeidrApiProvider
 
-`TableProvider` interacts with **Seidr's** `BaseModelRestApi`. Path should be the same as `resource_name` used in `BaseModelRestApi`.
+`SeidrApiProvider` interacts with **Seidr's** `BaseModelRestApi`. Path should be the same as `resource_name` used in `BaseModelRestApi`.
 
 | prop        | value               | description                                                                                                                                                                |
 | ----------- | ------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -79,7 +79,7 @@ Provides the merged `MantineThme` throughout your application.
 
 Provides `data`, `info`, `queryParams`, `path`, `getEntry`, `addEntry`, `setQueryParams`, `getEntry`, `addEntry`, `updateEntry`, `deleteEntry` to interact with **Seidr's** `BaseModelRestApi`. Setting `queryParams` via `setQueryparams` will trigger an update of `data`.
 
-Can only be used inside of `TableProvider`.
+Can only be used inside of `SeidrApiProvider`.
 
 #### Table
 
@@ -98,9 +98,9 @@ A table component that leverages `useTable` internally. Use this, if you don't w
 
 ## Concepts
 
-### TableProvider
+### SeidrApiProvider
 
-`TableProvider` relies on an implementation of **Seidr's** `BaseModelRestApi`. Just provide the `resource_name` used in the implementation of the `BaseModelRestApi` and (assuming the paths are correct) enjoy the power of `TableProvider`.
+`SeidrApiProvider` relies on an implementation of **Seidr's** `BaseModelRestApi`. Just provide the `resource_name` used in the implementation of the `BaseModelRestApi` and (assuming the paths are correct) enjoy the power of `SeidrApiProvider`.
 
 ### Authentication
 
@@ -108,4 +108,4 @@ A table component that leverages `useTable` internally. Use this, if you don't w
 
 ### Styling
 
-**Seidr UI** provides the same StylesAPI as on [Mantine](https://mantine.dev/theming/styles-api/). This is a work in progress...
+**Seidr React** provides the same StylesAPI as on [Mantine](https://mantine.dev/theming/styles-api/). This is a work in progress...
