@@ -45,7 +45,7 @@ To leverage **Seidr React** wrap your react application with `SeidrProvider`. `S
 | prop                | value                        | description                                                                                                                                              |
 | ------------------- | ---------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | baseUrl             | string                       | The base URL of your **Seidr** application. (Example: www.domain.com/api/v1)                                                                             |
-| theme               | object: ExtendedMantineTheme | A theme object to style Seidr components (Table) globally                                                                                                |
+| theme               | object: ExtendedMantineTheme | A theme object to style Seidr components (DataGrid) globally                                                                                                |
 | inheritMantineTheme | boolean                      | Determines if a `MantineTheme` from an outer scope should be merged with **Seidr's** default theme or the `MantineTheme` provided (see `theme` property) |
 
 ### Components and Hooks
@@ -75,15 +75,15 @@ Provides the merged `MantineThme` throughout your application.
 | queryParams | object: QueryParams | Control filters (triggers rerender) externally                                                                                                                             |
 | relation    | object: Filter      | A base filter to apply (currently used in the context of RelatedAPIs)                                                                                                      |
 
-#### useTable
+#### useApi
 
 Provides `data`, `info`, `queryParams`, `path`, `getEntry`, `addEntry`, `setQueryParams`, `getEntry`, `addEntry`, `updateEntry`, `deleteEntry` to interact with **Seidr's** `BaseModelRestApi`. Setting `queryParams` via `setQueryparams` will trigger an update of `data`.
 
 Can only be used inside of `SeidrApiProvider`.
 
-#### Table
+#### DataGrid
 
-A table component that leverages `useTable` internally. Use this, if you don't want to implement your own table.
+A feature rich table component that leverages `useApi` internally. Use this, if you don't want to implement your own table.
 
 | prop          | value               | description                                                                                        |
 | ------------- | ------------------- | -------------------------------------------------------------------------------------------------- |
@@ -92,9 +92,9 @@ A table component that leverages `useTable` internally. Use this, if you don't w
 | hideSettings  | boolean             | Hide settings                                                                                      |
 | hideActions   | boolean             | Hide action column on every row                                                                    |
 | settings      | object: Settings    | Style settings                                                                                     |
-| onError       | function            | Callback to be fired on Table error                                                                |
+| onError       | function            | Callback to be fired on DataGrid error                                                                |
 | onSelectEntry | function            | Callback to be fired on entry selection (Will apply selection styles to rows)                      |
-| styles        | object: TableStyles | Interface to style Table (based on [Mantine's StylesAPI](https://mantine.dev/theming/styles-api/)) |
+| styles        | object: DataGridStyles | Interface to style DataGrid (based on [Mantine's StylesAPI](https://mantine.dev/theming/styles-api/)) |
 
 ## Concepts
 
