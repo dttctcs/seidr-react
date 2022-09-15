@@ -49,7 +49,7 @@ const { argv }: { argv: any } = yargs(hideBin(process.argv)).option('tag', {
   open(
     githubRelease({
       user: 'dttctcs',
-      repo: 'seidrui',
+      repo: 'seidr-react',
       tag: incrementedVersion,
       title: incrementedVersion,
     }),

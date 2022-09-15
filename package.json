@@ -1,15 +1,15 @@
 {
-  "name": "seidrui",
+  "name": "seidr-react",
   "version": "0.5.3",
   "description": "A react component library for Seidr",
   "author": "",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/dttctcs/seidrui/issues"
+    "url": "https://github.com/dttctcs/seidr-react/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/dttctcs/seidrui.git"
+    "url": "git+https://github.com/dttctcs/seidr-react.git"
   },
   "main": "lib/cjs/index.js",
   "module": "lib/esm/index.esm.js",

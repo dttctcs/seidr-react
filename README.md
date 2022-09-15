@@ -14,8 +14,8 @@ You have **Seidr** running? Good. All you need is to install **Seidr UI** and le
 
 - Create a react project
 - Install requirements
-  - Either `npm install git+ssh://git@github.com:dttctcs/seidrui.git`
-  - Or add `"seidrui": "github:dttctcs/seidrui"` to your `package.json` dependency list and do `npm install`
+  - Either `npm install git+ssh://git@github.com:dttctcs/seidr-react.git`
+  - Or add `"seidr-react": "github:dttctcs/seidr-react"` to your `package.json` dependency list and do `npm install`
 
 ## Contribution
 
