@@ -6,13 +6,17 @@ import { Button } from '@mantine/core';
 function MyComponent() {
   const { data, queryParams } = useApi();
 
+  console.log(data);
   return <>{queryParams ? JSON.stringify(data) : 'no data'}</>;
 }
 
 function MyParamsSetter() {
-  const { path, setQueryParams } = useApi();
+  const { path, queryParams, setQueryParams } = useApi();
 
-  return <Button onClick={() => setQueryParams({ filters: [] })}>Set QueryPrams {path}</Button>;
+  const page = queryParams ? queryParams.page : -1;
+  return (
+    <Button onClick={() => setQueryParams({ page: page > 0 ? page - 1 : page + 1 })}>Set QueryPrams {path}</Button>
+  );
 }
 
 function Wrapper({ pathFirst, pathSecond }) {

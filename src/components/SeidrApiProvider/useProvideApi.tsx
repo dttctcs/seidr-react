@@ -29,7 +29,7 @@ function reducer(state, action) {
     case 'setInfo':
       return { ...state, info: action.payload, loading: false, error: null };
     case 'setQueryParams':
-      return { ...state, queryParams: action.payload };
+      return { ...state, queryParams: { ...action.payload } };
     case 'setError':
       return {
         ...state,
@@ -52,6 +52,8 @@ export function useProvideApi(props: UseProvideApiProps): Api {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   useEffect(() => {
+    console.log('stati');
+    console.log(state);
     if (!state.info) {
       getInfo();
     }
@@ -61,12 +63,16 @@ export function useProvideApi(props: UseProvideApiProps): Api {
   }, [state.queryParams]);
 
   const setQueryParams = (partialQueryParams: QueryParams) => {
+    console.log('setting query params');
+    console.log(state);
+    // add validation to queryParams
     const queryParams = createQueryParams(state.queryParams, partialQueryParams);
 
     dispatch({ type: 'setQueryParams', payload: queryParams });
   };
 
   const getData = async () => {
+    console.log('getting data');
     try {
       const relatedQueryParams = props.relation
         ? {
