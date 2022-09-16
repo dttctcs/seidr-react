@@ -1,8 +1,8 @@
-import { createFetchParams, urlJoin } from '../../../utils';
+import { createFetchParams, urlJoin } from '../../../../utils';
 
-export const deleteItem = async (path, id) => {
+export const updateItem = async (path, id, data) => {
   try {
-    const { fetchPath, options } = createFetchParams({ path: urlJoin(path, id.toString()), method: 'DELETE' });
+    const { fetchPath, options } = createFetchParams({ path: urlJoin(path, id.toString()), method: 'PUT', body: data });
     const response = await fetch(fetchPath, options);
 
     if (response.ok) {

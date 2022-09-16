@@ -2,6 +2,7 @@ import { useEffect, useReducer } from 'react';
 import { QueryParams, Relation, Api, ApiState } from './types';
 
 import {
+  createQueryParams,
   getList,
   getListInfo,
   getItem,
@@ -16,14 +17,7 @@ const initialState: ApiState = {
   data: null,
   info: null,
 
-  queryParams: {
-    columns: [],
-    filters: [],
-    // keys: [],
-
-    page: 0,
-    page_size: 25,
-  },
+  queryParams: null,
   loading: true,
   error: undefined,
 };
@@ -34,23 +28,8 @@ function reducer(state, action) {
       return { ...state, data: action.payload, loading: false, error: null };
     case 'setInfo':
       return { ...state, info: action.payload, loading: false, error: null };
-    case 'setColumns':
-      return { ...state, queryParams: { ...state.queryParams, page: 0, columns: action.payload } };
-    case 'setFilters':
-      return { ...state, queryParams: { ...state.queryParams, page: 0, filters: action.payload } };
-    case 'setPage':
-      return { ...state, queryParams: { ...state.queryParams, page: action.payload } };
-    case 'setPageSize':
-      return { ...state, queryParams: { ...state.queryParams, page: 0, page_size: action.payload } };
-    case 'setOrder':
-      return {
-        ...state,
-        queryParams: {
-          ...state.queryParams,
-          order_column: action.payload.order_column,
-          order_direction: action.payload.order_direction,
-        },
-      };
+    case 'setQueryParams':
+      return { ...state, queryParams: action.payload };
     case 'setError':
       return {
         ...state,
@@ -65,48 +44,26 @@ function reducer(state, action) {
 export interface UseProvideApiProps {
   /** The Seidr path to interact with */
   path?: string;
-  /** Initial query parameters */
-  initialQueryParams?: QueryParams;
   /** A base filter to apply (Currently used in the context of RelatedAPIs) */
   relation?: Relation;
 }
 
 export function useProvideApi(props: UseProvideApiProps): Api {
-  const [state, dispatch] = useReducer(reducer, {
-    ...initialState,
-    queryParams: {
-      ...initialState.queryParams,
-      ...props.initialQueryParams,
-    },
-  });
+  const [state, dispatch] = useReducer(reducer, initialState);
 
   useEffect(() => {
     if (!state.info) {
       getInfo();
     }
-  }, []);
+    if (state.queryParams) {
+      getData();
+    }
+  }, [state.queryParams]);
 
-  const setQueryParams = (queryParams: QueryParams) => {
-    if (queryParams.hasOwnProperty('columns')) {
-      dispatch({ type: 'setColumns', payload: queryParams.columns });
-    }
-    if (queryParams.hasOwnProperty('filters')) {
-      dispatch({ type: 'setFilters', payload: queryParams.filters });
-    }
-    if (queryParams.hasOwnProperty('order_column') || queryParams.hasOwnProperty('order_direction')) {
-      dispatch({
-        type: 'setOrder',
-        payload: { order_column: queryParams.order_column, order_direction: queryParams.order_direction },
-      });
-    }
-    if (queryParams.hasOwnProperty('page')) {
-      dispatch({ type: 'setPage', payload: queryParams.page });
-    }
-    if (queryParams.hasOwnProperty('page_size')) {
-      dispatch({ type: 'setPageSize', payload: queryParams.page_size });
-    }
+  const setQueryParams = (partialQueryParams: QueryParams) => {
+    const queryParams = createQueryParams(state.queryParams, partialQueryParams);
 
-    getData();
+    dispatch({ type: 'setQueryParams', payload: queryParams });
   };
 
   const getData = async () => {
@@ -120,6 +77,7 @@ export function useProvideApi(props: UseProvideApiProps): Api {
             ],
           }
         : state.queryParams;
+
       const data = await getList(props.path, relatedQueryParams);
       dispatch({ type: 'setData', payload: data });
       return data;
@@ -198,8 +156,8 @@ export function useProvideApi(props: UseProvideApiProps): Api {
     path: props.path,
     data: state.data,
     info: state.info,
-
     queryParams: state.queryParams,
+
     setQueryParams,
     getEntry,
     addEntry,

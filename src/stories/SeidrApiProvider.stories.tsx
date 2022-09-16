@@ -10,9 +10,9 @@ function MyComponent() {
 }
 
 function MyParamsSetter() {
-  const { path, queryParams, setQueryParams } = useApi();
+  const { path, setQueryParams } = useApi();
 
-  return <Button onClick={() => setQueryParams(queryParams)}>Set QueryPrams {path}</Button>;
+  return <Button onClick={() => setQueryParams({ filters: [] })}>Set QueryPrams {path}</Button>;
 }
 
 function Wrapper({ pathFirst, pathSecond }) {

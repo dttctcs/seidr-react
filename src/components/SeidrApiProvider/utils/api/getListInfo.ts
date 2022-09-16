@@ -1,4 +1,4 @@
-import { createFetchParams, urlJoin } from '../../../utils';
+import { createFetchParams, urlJoin } from '../../../../utils';
 
 export const getListInfo = async (path) => {
   try {

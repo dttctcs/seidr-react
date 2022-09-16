@@ -1,14 +1,14 @@
-import { createFetchParams, urlJoin } from '../../../utils';
+import { createFetchParams, urlJoin } from '../../../../utils';
 
-export const createItem = async (path, data) => {
+export const getList = async (path, queryParams) => {
   try {
     const { fetchPath, options } = createFetchParams({
       path: urlJoin(path, '/'),
-      method: 'POST',
-      body: data,
+      method: 'GET',
+      queryParams: { q: JSON.stringify(queryParams) },
     });
-    const response = await fetch(fetchPath, options);
 
+    const response = await fetch(fetchPath, options);
     if (response.ok) {
       const data = await response.json();
       return data;

@@ -1,8 +1,8 @@
-import { createFetchParams, urlJoin } from '../../../utils';
+import { createFetchParams, urlJoin } from '../../../../utils';
 
-export const updateItem = async (path, id, data) => {
+export const getItem = async (path, id) => {
   try {
-    const { fetchPath, options } = createFetchParams({ path: urlJoin(path, id.toString()), method: 'PUT', body: data });
+    const { fetchPath, options } = createFetchParams({ path: urlJoin(path, id.toString()), method: 'GET' });
     const response = await fetch(fetchPath, options);
 
     if (response.ok) {
