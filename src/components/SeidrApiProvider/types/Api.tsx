@@ -5,8 +5,9 @@ export interface Api {
   data: any;
   info?: any;
   queryParams?: QueryParams;
-  setQueryParams: (queryParams: QueryParams) => void;
+  loading?: boolean;
 
+  setQueryParams: (queryParams: QueryParams) => void;
   getEntry: (id: number) => any;
   addEntry: (data: any) => void;
   updateEntry: (id: number, data: any) => void;

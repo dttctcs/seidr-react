@@ -18,7 +18,7 @@ const initialState: ApiState = {
   info: null,
 
   queryParams: null,
-  loading: true,
+  loading: false,
   error: undefined,
 };
 
@@ -30,6 +30,8 @@ function reducer(state, action) {
       return { ...state, info: action.payload, loading: false, error: null };
     case 'setQueryParams':
       return { ...state, queryParams: { ...action.payload } };
+    case 'setLoading':
+      return { ...state, loading: action.payload };
     case 'setError':
       return {
         ...state,
@@ -68,6 +70,7 @@ export function useProvideApi(props: UseProvideApiProps): Api {
   };
 
   const getData = async () => {
+    dispatch({ type: 'setLoading', payload: true });
     try {
       const relatedQueryParams = props.relation
         ? {
@@ -158,6 +161,7 @@ export function useProvideApi(props: UseProvideApiProps): Api {
     data: state.data,
     info: state.info,
     queryParams: state.queryParams,
+    loading: state.loading,
 
     setQueryParams,
     getEntry,

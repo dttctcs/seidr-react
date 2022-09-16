@@ -11,11 +11,13 @@ function MyComponent() {
 }
 
 function MyParamsSetter() {
-  const { path, queryParams, setQueryParams } = useApi();
+  const { path, queryParams, loading, setQueryParams } = useApi();
 
   const page = queryParams ? queryParams.page : -1;
   return (
-    <Button onClick={() => setQueryParams({ page: page > 0 ? page - 1 : page + 1 })}>Set QueryPrams {path}</Button>
+    <Button onClick={() => setQueryParams({ page: page > 0 ? page - 1 : page + 1 })} loading={loading}>
+      Set QueryPrams {path}
+    </Button>
   );
 }
 
