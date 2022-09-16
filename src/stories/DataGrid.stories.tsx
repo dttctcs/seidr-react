@@ -1,6 +1,7 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
+import { Box } from '@mantine/core';
 import { SeidrApiProvider } from '../components/SeidrApiProvider';
 import { DataGrid } from '../components/DataGrid';
 import { DataGridStyles } from '../components/DataGrid';
@@ -10,7 +11,9 @@ function Wrapper({ path }) {
   return (
     <div>
       <SeidrApiProvider path={path}>
-        <DataGrid />
+        <Box sx={{ height: 1, minHeight: '400px' }}>
+          <DataGrid />
+        </Box>
       </SeidrApiProvider>
     </div>
   );

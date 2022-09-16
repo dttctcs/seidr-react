@@ -55,7 +55,7 @@ function reducer(state, action) {
 }
 
 export const DataGrid = forwardRef<HTMLDivElement, DataGridProps>((props, ref) => {
-  const { path, data, info, queryParams, setQueryParams } = useApi();
+  const { path, data, loading, info, setQueryParams } = useApi();
   const {
     hideToolbar = false,
     hideFilter = false,
@@ -81,8 +81,6 @@ export const DataGrid = forwardRef<HTMLDivElement, DataGridProps>((props, ref) =
     },
   });
 
-  const [loading, setLoading] = useState(false);
-
   // useEffect(() => {
   //   if (state.queryParams) {
   //     localStorage.setItem(path + 'pageSize', JSON.stringify(state.queryParams.page_size));
@@ -90,8 +88,9 @@ export const DataGrid = forwardRef<HTMLDivElement, DataGridProps>((props, ref) =
   // }, [state.queryParams]);
 
   useEffect(() => {
+    // Trigger inital data load
     if (!data && fetchOnMount) {
-      setQueryParams(queryParams);
+      setQueryParams({});
     }
   }, [data]);
 
