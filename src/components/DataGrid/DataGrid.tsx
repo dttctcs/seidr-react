@@ -32,6 +32,8 @@ export interface DataGridProps {
   settings?: Settings;
   /** Externally control page size */
   rowsPerPageProps?: number;
+  /** Determines if the table should trigger a data fetch on mount, defaults to true */
+  fetchOnMount?: boolean;
 
   // /** Callback to be fired on DataGrid error */
   onError?: () => void;
@@ -53,7 +55,7 @@ function reducer(state, action) {
 }
 
 export const DataGrid = forwardRef<HTMLDivElement, DataGridProps>((props, ref) => {
-  const { path, data, info } = useApi();
+  const { path, data, info, queryParams, setQueryParams } = useApi();
   const {
     hideToolbar = false,
     hideFilter = false,
@@ -63,6 +65,7 @@ export const DataGrid = forwardRef<HTMLDivElement, DataGridProps>((props, ref) =
     sx = null,
     onError = null,
     onSelectEntry = null,
+    fetchOnMount = true,
     styles,
   } = props;
 
@@ -85,6 +88,12 @@ export const DataGrid = forwardRef<HTMLDivElement, DataGridProps>((props, ref) =
   //     localStorage.setItem(path + 'pageSize', JSON.stringify(state.queryParams.page_size));
   //   }
   // }, [state.queryParams]);
+
+  useEffect(() => {
+    if (!data && fetchOnMount) {
+      setQueryParams(queryParams);
+    }
+  }, [data]);
 
   useEffect(() => {
     if (state.settings) {
