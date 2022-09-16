@@ -27,7 +27,7 @@ function reducer(state, action) {
     case 'setData':
       return { ...state, data: action.payload, loading: false, error: null };
     case 'setInfo':
-      return { ...state, info: action.payload, loading: false, error: null };
+      return { ...state, info: action.payload };
     case 'setQueryParams':
       return { ...state, queryParams: { ...action.payload } };
     case 'setLoading':
