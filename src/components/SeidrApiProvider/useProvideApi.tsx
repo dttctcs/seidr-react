@@ -82,14 +82,9 @@ export function useProvideApi(props: UseProvideApiProps): Api {
 
   useEffect(() => {
     if (!state.info) {
-      const dataInfoPromise = Promise.all([getData(), getInfo()]);
-      dataInfoPromise.catch((error) => {
-        dispatch({ type: 'setError', payload: "Couldn't fetch list data" });
-      });
-    } else {
-      getData();
+      getInfo();
     }
-  }, [state.queryParams]);
+  }, []);
 
   const setQueryParams = (queryParams: QueryParams) => {
     if (queryParams.hasOwnProperty('columns')) {
@@ -110,6 +105,8 @@ export function useProvideApi(props: UseProvideApiProps): Api {
     if (queryParams.hasOwnProperty('page_size')) {
       dispatch({ type: 'setPageSize', payload: queryParams.page_size });
     }
+
+    getData();
   };
 
   const getData = async () => {
@@ -155,7 +152,7 @@ export function useProvideApi(props: UseProvideApiProps): Api {
       await dispatch({ type: 'setInfo', payload: info });
       return info;
     } catch (error) {
-      console.log(error);
+      dispatch({ type: 'setError', payload: "Couldn't fetch list info" });
     }
   };
 

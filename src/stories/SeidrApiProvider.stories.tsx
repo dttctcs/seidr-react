@@ -1,24 +1,35 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { SeidrApiProvider, useApi } from '../components/SeidrApiProvider';
+import { Button } from '@mantine/core';
 
-function DataGrid() {
+function MyComponent() {
   const { data, queryParams } = useApi();
 
   return <>{queryParams ? JSON.stringify(data) : 'no data'}</>;
+}
+
+function MyParamsSetter() {
+  const { path, queryParams, setQueryParams } = useApi();
+
+  return <Button onClick={() => setQueryParams(queryParams)}>Set QueryPrams {path}</Button>;
 }
 
 function Wrapper({ pathFirst, pathSecond }) {
   return (
     <div>
       <SeidrApiProvider path={pathFirst}>
-        <DataGrid />
+        <div style={{ display: 'flex', flexDirection: 'column' }}>
+          <MyParamsSetter />
+          <MyComponent />
+          {pathSecond ? (
+            <SeidrApiProvider path={pathSecond}>
+              <MyParamsSetter />
+              <MyComponent />
+            </SeidrApiProvider>
+          ) : null}
+        </div>
       </SeidrApiProvider>
-      {pathSecond ? (
-        <SeidrApiProvider path={pathSecond}>
-          <DataGrid />
-        </SeidrApiProvider>
-      ) : null}
     </div>
   );
 }
