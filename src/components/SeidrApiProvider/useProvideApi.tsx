@@ -64,13 +64,12 @@ export function useProvideApi(props: UseProvideApiProps): Api {
 
   const setQueryParams = (partialQueryParams: QueryParams) => {
     // add validation to queryParams
+    dispatch({ type: 'setLoading', payload: true });
     const queryParams = createQueryParams(state.queryParams, partialQueryParams);
-
     dispatch({ type: 'setQueryParams', payload: queryParams });
   };
 
   const getData = async () => {
-    dispatch({ type: 'setLoading', payload: true });
     try {
       const relatedQueryParams = props.relation
         ? {
