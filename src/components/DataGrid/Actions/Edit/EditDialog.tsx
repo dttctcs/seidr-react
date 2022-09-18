@@ -40,6 +40,7 @@ export function EditDialog({ item, info, loading, opened, onClose }) {
 
   return (
     <Modal
+      styles={{ root: { zIndex: 3000 } }}
       opened={opened}
       onClose={() => {
         onClose();

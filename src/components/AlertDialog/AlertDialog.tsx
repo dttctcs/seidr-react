@@ -5,6 +5,7 @@ import { Button, Group, Modal } from '@mantine/core';
 export function AlertDialog({ opened, onClose, handleAccept, handleReject }) {
   return (
     <Modal
+      styles={{ root: { zIndex: 3000 } }}
       opened={opened}
       onClose={onClose}
       aria-labelledby="alert-dialog-title"

@@ -8,7 +8,7 @@ import RelationPanel from './RelationPanel';
 export function ViewDialog({ item, info, loading, opened, onClose }) {
   return (
     <Modal
-      styles={{ root: { minHeight: '640px' } }}
+      styles={{ root: { minHeight: '640px', zIndex: 3000 } }}
       opened={opened}
       onClose={onClose}
       title={`${item?.show_title} (#${item?.id})`}

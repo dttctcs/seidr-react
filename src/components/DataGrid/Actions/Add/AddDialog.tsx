@@ -28,6 +28,7 @@ export function AddDialog({ opened, onClose }) {
 
   return (
     <Modal
+      styles={{ root: { zIndex: 3000 } }}
       opened={opened}
       onClose={() => {
         reset();
