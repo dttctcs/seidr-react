@@ -94,6 +94,7 @@ export function useProvideApi(props: UseProvideApiProps): Api {
       const data = await getListInfo(props.path);
 
       const info = {
+        ...data,
         add: {
           columns: data.add_columns,
           title: data.add_title,
@@ -106,9 +107,6 @@ export function useProvideApi(props: UseProvideApiProps): Api {
           schema: getValidationSchema(data.edit_columns),
           defaultValues: getDefaultValues(data.edit_columns),
         },
-        filters: data.filters,
-        permissions: data.permissions,
-        relations: data.relations,
       };
       await dispatch({ type: 'setInfo', payload: info });
       return info;
