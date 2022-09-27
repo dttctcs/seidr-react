@@ -40,7 +40,7 @@ export function SeidrProvider({ baseUrl = '', theme, inheritMantineTheme = false
 
   return (
     <SeidrContext.Provider value={{ theme, auth, info }}>
-      <MantineProvider theme={theme}>
+      <MantineProvider theme={theme} withCSSVariables withNormalizeCSS>
         <ThemeProvider theme={MUI_THEME}>{children}</ThemeProvider>
       </MantineProvider>
     </SeidrContext.Provider>
