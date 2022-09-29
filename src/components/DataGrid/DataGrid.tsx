@@ -6,6 +6,7 @@ import { LoadingOverlay, Paper } from '@mantine/core';
 import { Toolbar } from './Toolbar';
 import { Main } from './Main';
 import { Pagination } from './Pagination';
+import { Error } from './Error';
 
 import { applyStyles } from './DataGrid.styles';
 import { useApi } from '../SeidrApiProvider';
@@ -29,14 +30,13 @@ export interface DataGridProps {
   /** Hide Action column on every row */
   hideActions?: boolean;
   /** Style settings */
+
   settings?: Settings;
   /** Externally control page size */
   rowsPerPageProps?: number;
   /** Determines if the table should trigger a data fetch on mount, defaults to true */
   fetchOnMount?: boolean;
 
-  // /** Callback to be fired on DataGrid error */
-  onError?: () => void;
   // /** Callback to be fired on entry selection */
   onSelectEntry?: () => void;
   // /** A mantine sx prop */
@@ -63,7 +63,6 @@ export const DataGrid = forwardRef<HTMLDivElement, DataGridProps>((props, ref) =
     hideActions = false,
     settings = null,
     sx = null,
-    onError = null,
     onSelectEntry = null,
     fetchOnMount = true,
     styles,
@@ -80,12 +79,6 @@ export const DataGrid = forwardRef<HTMLDivElement, DataGridProps>((props, ref) =
       rightBorder: settings?.rightBorder ?? false,
     },
   });
-
-  // useEffect(() => {
-  //   if (state.queryParams) {
-  //     localStorage.setItem(path + 'pageSize', JSON.stringify(state.queryParams.page_size));
-  //   }
-  // }, [state.queryParams]);
 
   useEffect(() => {
     // Trigger inital data load
@@ -128,6 +121,7 @@ export const DataGrid = forwardRef<HTMLDivElement, DataGridProps>((props, ref) =
           <Pagination />
         </>
       )}
+      <Error />
     </Paper>
   );
 });

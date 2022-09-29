@@ -6,6 +6,7 @@ export interface Api {
   info?: any;
   queryParams?: QueryParams;
   loading?: boolean;
+  error?: { message: string; originalError: string };
 
   setQueryParams: (queryParams: QueryParams) => void;
   getEntry: (id: number) => any;
@@ -20,5 +21,5 @@ export interface ApiState {
 
   queryParams: QueryParams;
   loading: boolean;
-  error: string;
+  error: { message: string; originalError: string };
 }

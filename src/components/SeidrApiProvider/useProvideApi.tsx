@@ -85,7 +85,7 @@ export function useProvideApi(props: UseProvideApiProps): Api {
       dispatch({ type: 'setData', payload: data });
       return data;
     } catch (error) {
-      dispatch({ payload: 'Failed to fetch', type: 'setError' });
+      dispatch({ type: 'setError', payload: { message: `Couldn't fetch list`, originalError: error } });
     }
   };
 
@@ -111,7 +111,7 @@ export function useProvideApi(props: UseProvideApiProps): Api {
       await dispatch({ type: 'setInfo', payload: info });
       return info;
     } catch (error) {
-      dispatch({ type: 'setError', payload: "Couldn't fetch list info" });
+      dispatch({ type: 'setError', payload: { message: `Couldn't fetch list info`, originalError: error } });
     }
   };
 
@@ -119,7 +119,7 @@ export function useProvideApi(props: UseProvideApiProps): Api {
     try {
       return await getItem(props.path, id);
     } catch (error) {
-      console.log(error);
+      dispatch({ type: 'setError', payload: { message: `Couldn't fetch item with id ${id}`, originalError: error } });
     }
   };
 
@@ -129,7 +129,7 @@ export function useProvideApi(props: UseProvideApiProps): Api {
       getData();
       return data;
     } catch (error) {
-      console.log(error);
+      dispatch({ type: 'setError', payload: { message: `Couldnt add item.`, originalError: error } });
     }
   };
 
@@ -139,7 +139,7 @@ export function useProvideApi(props: UseProvideApiProps): Api {
       getData();
       return data;
     } catch (error) {
-      console.log(error);
+      dispatch({ type: 'setError', payload: { message: `Couldn't update item with id ${id}`, originalError: error } });
     }
   };
 
@@ -149,7 +149,7 @@ export function useProvideApi(props: UseProvideApiProps): Api {
       getData();
       return data;
     } catch (error) {
-      console.log(error);
+      dispatch({ type: 'setError', payload: { message: `Couldn't delete item with id ${id}`, originalError: error } });
     }
   };
 
@@ -159,6 +159,7 @@ export function useProvideApi(props: UseProvideApiProps): Api {
     info: state.info,
     queryParams: state.queryParams,
     loading: state.loading,
+    error: state.error,
 
     setQueryParams,
     getEntry,

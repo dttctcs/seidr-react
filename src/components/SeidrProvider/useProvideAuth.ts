@@ -82,7 +82,7 @@ export function useProvideAuth(baseURL) {
       if (response.ok) {
         dispatch({ payload: null, type: 'setUser' });
       } else {
-        dispatch({ payload: "Couldn't sign out user.", type: 'setError' });
+        dispatch({ payload: "Couldn't sign out user", type: 'setError' });
       }
     } catch (error) {
       dispatch({ payload: 'Failed to fetch', type: 'setError' });
@@ -105,7 +105,7 @@ export function useProvideAuth(baseURL) {
         const user = await response.json();
         dispatch({ payload: user, type: 'setUser' });
       }
-      dispatch({ payload: "Couldn't update user data.", type: 'setError' });
+      dispatch({ payload: "Couldn't update user data", type: 'setError' });
     } catch (error) {
       dispatch({ payload: 'Failed to post', type: 'setError' });
     }
@@ -123,7 +123,7 @@ export function useProvideAuth(baseURL) {
       if (response.ok) {
         dispatch({ payload: { ...state.user }, type: 'setUser' });
       } else {
-        dispatch({ payload: "Couldn't reset password.", type: 'setError' });
+        dispatch({ payload: "Couldn't reset password", type: 'setError' });
       }
     } catch (error) {
       dispatch({ payload: 'Failed to post', type: 'setError' });

@@ -23,10 +23,10 @@ export function useProvideInfo(baseUrl, auth) {
         const data = await response.json();
         setInfo(data);
       } else {
-        setError({ error: '404 Not Found', message: "Couldn't fetch info." });
+        setError({ error: '404 Not Found', message: "Couldn't fetch info" });
       }
     } catch (error) {
-      setError({ error: 'Network error', message: 'Failed to fetch.' });
+      setError({ error: 'Network error', message: 'Failed to fetch' });
     } finally {
       setLoading(false);
     }

@@ -18,12 +18,10 @@ export function AddDialog({ opened, onClose }) {
   });
 
   const onSubmit = async (data) => {
-    try {
-      addEntry(data);
-    } finally {
-      reset();
-      onClose();
-    }
+    await addEntry(data);
+
+    reset();
+    onClose();
   };
 
   return (

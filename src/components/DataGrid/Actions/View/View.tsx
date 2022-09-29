@@ -17,15 +17,15 @@ export function View({ id }) {
       <Tooltip label="Details">
         <ActionIcon
           size="sm"
-          onClick={() => {
+          onClick={async () => {
             setLoading(true);
-            const entryPromise = getEntry(id);
+            const entry = await getEntry(id);
 
-            entryPromise.then((data) => {
-              setItem(data);
+            if (entry) {
+              setItem(entry);
               setLoading(false);
               setDialogOpen(true);
-            });
+            }
           }}
         >
           <Eye />

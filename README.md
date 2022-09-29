@@ -77,7 +77,7 @@ Provides the merged `MantineThme` throughout your application.
 
 #### useApi
 
-Provides `path`, `data`, `info`, `queryParams`, `loading`, `setQueryParams`, `getEntry`, `addEntry`, `updateEntry`, `deleteEntry` to interact with **Seidr's** `BaseModelRestApi`. Setting `queryParams` via `setQueryparams` will trigger an update of `data`.
+Provides `path`, `data`, `info`, `queryParams`, `loading`, `erroe`, `setQueryParams`, `getEntry`, `addEntry`, `updateEntry`, `deleteEntry` to interact with **Seidr's** `BaseModelRestApi`. Setting `queryParams` via `setQueryparams` will trigger an update of `data`.
 
 Can only be used inside of `SeidrApiProvider`.
 
@@ -86,13 +86,12 @@ Can only be used inside of `SeidrApiProvider`.
 A feature rich table component that leverages `useApi` internally. Use this, if you don't want to implement your own table.
 
 | prop          | value                  | description                                                                                           |
-| ------------- | ---------------------- | ----------------------------------------------------------------------------------------------------- |
+| ------------- | ---------------------- | ----------------------------------------------------------------------------------------------------- | --- |
 | hideToolbar   | boolean                | Hide toolbar, the toolbar is the upper section containing Settings, Add and Filter                    |
 | hideFilter    | boolean                | Hide filter                                                                                           |
 | hideSettings  | boolean                | Hide settings                                                                                         |
 | hideActions   | boolean                | Hide action column on every row                                                                       |
-| settings      | object: Settings       | Style settings                                                                                        |
-| onError       | function               | Callback to be fired on DataGrid error                                                                |
+| settings      | object: Settings       | Style settings                                                                                        |     |
 | onSelectEntry | function               | Callback to be fired on entry selection (Will apply selection styles to rows)                         |
 | styles        | object: DataGridStyles | Interface to style DataGrid (based on [Mantine's StylesAPI](https://mantine.dev/theming/styles-api/)) |
 
