@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useApi } from '../../../SeidrApiProvider';
+import { dirtyValues } from '../../utils';
 
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -8,10 +9,10 @@ import { Button, Group, Modal, Stack } from '@mantine/core';
 
 import { FormField } from '../../FormField';
 
-export function EditDialog({ item, info, loading, opened, onClose }) {
+export function EditDialog({ item, info, opened, onClose }) {
   const { updateEntry } = useApi();
 
-  const { handleSubmit, reset, setValue, control } = useForm({
+  const { handleSubmit, reset, setValue, formState, control } = useForm({
     mode: 'onTouched',
     defaultValues: info.edit.defaultValues,
     resolver: yupResolver(info.edit.schema),
@@ -25,13 +26,14 @@ export function EditDialog({ item, info, loading, opened, onClose }) {
     }
   }, [item, info.edit.columns, setValue]);
 
+  // since it is a proxy object //see https://github.com/react-hook-form/react-hook-form/issues/3402
+  const { dirty } = formState.dirtyFields;
   const onSubmit = async (data) => {
-    try {
-      updateEntry(item.id, data);
-    } finally {
-      onClose();
-      reset();
-    }
+    data = dirtyValues(formState.dirtyFields, data);
+
+    await updateEntry(item.id, data);
+    reset();
+    onClose();
   };
 
   if (!item) {

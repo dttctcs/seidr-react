@@ -1,5 +1,6 @@
 import React from 'react';
 import { useApi } from '../../../SeidrApiProvider';
+import { dirtyValues } from '../../utils';
 
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -10,16 +11,19 @@ import { FormValues } from '../../types';
 
 export function AddDialog({ opened, onClose }) {
   const { info, addEntry } = useApi();
-
-  const { handleSubmit, reset, control } = useForm<FormValues>({
-    mode: 'onTouched',
+  const { handleSubmit, reset, formState, control } = useForm<FormValues>({
+    mode: 'onChange',
     defaultValues: info.add.defaultValues,
     resolver: yupResolver(info.add.schema),
   });
 
+  // leave this here, if fomrState.dirtyFields is not read, we won't get the actual value on submit,
+  // since it is a proxy object //see https://github.com/react-hook-form/react-hook-form/issues/3402
+  const { dirty } = formState.dirtyFields;
   const onSubmit = async (data) => {
-    await addEntry(data);
+    data = dirtyValues(formState.dirtyFields, data);
 
+    await addEntry(data);
     reset();
     onClose();
   };

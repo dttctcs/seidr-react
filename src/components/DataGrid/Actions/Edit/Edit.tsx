@@ -19,6 +19,7 @@ export function Edit({ id }) {
           size="sm"
           onClick={async () => {
             setLoading(true);
+
             const entry = await getEntry(id);
 
             if (entry) {
@@ -32,7 +33,7 @@ export function Edit({ id }) {
         </ActionIcon>
       </Tooltip>
 
-      <EditDialog item={item} info={info} loading={loading} opened={dialogOpen} onClose={() => setDialogOpen(false)} />
+      <EditDialog item={item} info={info} opened={dialogOpen} onClose={() => setDialogOpen(false)} />
     </>
   );
 }

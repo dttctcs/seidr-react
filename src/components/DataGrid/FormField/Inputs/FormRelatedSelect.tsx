@@ -5,7 +5,7 @@ import { Select } from '@mantine/core';
 
 export function FormRelatedSelect({ control, name, items, ...props }) {
   const {
-    field: { ref, ...inputProps },
+    field: { ...inputProps },
     fieldState: { error },
   } = useController({
     name,
@@ -13,17 +13,17 @@ export function FormRelatedSelect({ control, name, items, ...props }) {
   });
 
   const data = items.map((item) => ({ value: item.id.toString(), label: item.value }));
-  const currentItem = inputProps.value.id ? inputProps.value.id.toString() : null;
+  const currentItem = inputProps.value?.id ? inputProps.value.id.toString() : null;
 
   return (
     <Select
-      ref={ref}
       data={data}
       error={error ? error.message : null}
       {...inputProps}
       value={currentItem}
       onChange={(value) => {
         const newItem = items.find((item) => item.id.toString() === value);
+
         inputProps.onChange(newItem);
       }}
       searchable
