@@ -6,7 +6,6 @@ import { Button } from '@mantine/core';
 function MyComponent() {
   const { data, queryParams } = useApi();
 
-  console.log(data);
   return <>{queryParams ? JSON.stringify(data) : 'no data'}</>;
 }
 

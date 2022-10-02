@@ -4,7 +4,7 @@ import { useApi } from '../SeidrApiProvider';
 import { Group, Modal, Text } from '@mantine/core';
 import { AlertCircle } from 'tabler-icons-react';
 
-export function Error() {
+export function ErrorDialog() {
   const { error } = useApi();
 
   const [dialogOpen, setDialogOpen] = useState(false);

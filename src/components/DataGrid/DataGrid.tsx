@@ -1,12 +1,12 @@
 /* eslint-disable no-case-declarations */
-import React, { useEffect, useReducer, useState, forwardRef } from 'react';
+import React, { useEffect, useReducer, forwardRef } from 'react';
 import { Settings } from './types';
 
 import { LoadingOverlay, Paper } from '@mantine/core';
 import { Toolbar } from './Toolbar';
 import { Main } from './Main';
 import { Pagination } from './Pagination';
-import { Error } from './Error';
+import { ErrorDialog } from './ErrorDialog';
 
 import { applyStyles } from './DataGrid.styles';
 import { useApi } from '../SeidrApiProvider';
@@ -121,7 +121,7 @@ export const DataGrid = forwardRef<HTMLDivElement, DataGridProps>((props, ref) =
           <Pagination />
         </>
       )}
-      <Error />
+      <ErrorDialog />
     </Paper>
   );
 });

@@ -43,6 +43,7 @@ export async function buildPackage() {
   } catch (err) {
     logger.error(`Failed to compile ${chalk.cyan('seidr-react')}`);
     process.stdout.write(`${err.toString('minimal')}\n`);
+    console.log(err);
 
     process.exit(1);
   }
