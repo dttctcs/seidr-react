@@ -62,6 +62,10 @@ export function useProvideApi(props: UseProvideApiProps): Api {
     }
   }, [state.queryParams]);
 
+  useEffect(() => {
+    getInfo();
+  }, [props.path]);
+
   const setQueryParams = (partialQueryParams: QueryParams) => {
     // add validation to queryParams
     dispatch({ type: 'setLoading', payload: true });

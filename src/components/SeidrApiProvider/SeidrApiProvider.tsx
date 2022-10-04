@@ -3,24 +3,24 @@ import { useSeidrInfo } from '../SeidrProvider';
 import { useProvideApi } from './useProvideApi';
 import { urlJoin } from '../../utils';
 
-import { QueryParams, Relation, DataGrid } from './types';
+import { QueryParams, Relation, Api } from './types';
 
-interface DataGridContextType {
-  DataGrid: DataGrid;
+interface SeidrApiProviderContextType {
+  Api: Api;
 }
 
-const DataGridContext = createContext<DataGridContextType>({
-  DataGrid: null,
+const SeidrApiContext = createContext<SeidrApiProviderContextType>({
+  Api: null,
 });
 
 export function useApi() {
   // get nearest context value
-  const context = useContext(DataGridContext);
+  const context = useContext(SeidrApiContext);
   if (context === undefined) {
     throw new Error('useApi must be used within a SeidrApiProvider');
   }
 
-  return context.DataGrid;
+  return context.Api;
 }
 
 export interface SeidrApiProviderProps {
@@ -33,7 +33,7 @@ export interface SeidrApiProviderProps {
 export function SeidrApiProvider({ path = '', initialQueryParams, relation, children }: SeidrApiProviderProps) {
   const { baseUrl } = useSeidrInfo();
 
-  const DataGrid = useProvideApi({ path: urlJoin(baseUrl, path), initialQueryParams, relation });
+  const Api = useProvideApi({ path: urlJoin(baseUrl, path), initialQueryParams, relation });
 
-  return <DataGridContext.Provider value={{ DataGrid }}>{children}</DataGridContext.Provider>;
+  return <SeidrApiContext.Provider value={{ Api }}>{children}</SeidrApiContext.Provider>;
 }
