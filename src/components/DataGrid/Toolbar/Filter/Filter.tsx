@@ -21,7 +21,7 @@ export function Filter() {
         <Tooltip opened={opened ? false : null} label="Filter">
           <ActionIcon onClick={() => setOpened(true)}>
             {queryParams.filters.length ? (
-              <Indicator styles={(theme) => ({ indicator: { padding: '3px' } })} label={queryParams.filters.length}>
+              <Indicator styles={(theme) => ({ indicator: { paddingTop: '2px' } })} label={queryParams.filters.length}>
                 <FilterIcon />
               </Indicator>
             ) : (

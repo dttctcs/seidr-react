@@ -51,7 +51,10 @@ export function FieldTitle({
         <Box className={classes.fieldTitleName}>{label || column}</Box>
         {related ? (
           <Tooltip label="Related Field">
-            <Indicator label="rel">
+            <Indicator
+              label="rel"
+              styles={(theme) => ({ indicator: { top: `-1px !important`, right: `-2px !important`, padding: '4px' } })}
+            >
               <Box className={classes.fieldTitleIcon}>
                 {selectedColumn ? (
                   queryParams.order_direction === 'asc' ? (
