@@ -46,12 +46,17 @@ function reducer(state, action) {
 export interface UseProvideApiProps {
   /** The Seidr path to interact with */
   path?: string;
+  /** Initial QueryParams */
+  initialQueryParams?: QueryParams;
   /** A base filter to apply (Currently used in the context of RelatedAPIs) */
   relation?: Relation;
 }
 
 export function useProvideApi(props: UseProvideApiProps): Api {
-  const [state, dispatch] = useReducer(reducer, initialState);
+  const [state, dispatch] = useReducer(reducer, {
+    ...initialState,
+    queryParams: props.initialQueryParams ? createQueryParams(null, props.initialQueryParams) : null,
+  });
 
   useEffect(() => {
     if (!state.info) {
