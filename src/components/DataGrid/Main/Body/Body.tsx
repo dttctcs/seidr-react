@@ -27,7 +27,7 @@ export function Body({
           return (
             <Row
               key={index}
-              entry={entry}
+              entry={{ ...entry, id }}
               striped={settings.striped}
               selected={selectedItem?.id === id}
               setSelectedItem={setSelectedItem}
