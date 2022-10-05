@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useController } from 'react-hook-form';
 
 import { MultiSelect } from '@mantine/core';
@@ -13,7 +13,15 @@ export function FormFilterIn({ control, name, ...props }) {
     control,
   });
 
-  const currentItems = inputProps.value ? inputProps.value : [];
+  useEffect(() => {
+    if (inputProps.value) {
+      const currentItems = JSON.parse(inputProps.value);
+      setData([...currentItems]);
+      inputProps.onChange(currentItems);
+    } else {
+      inputProps.onChange([]);
+    }
+  }, []);
 
   return (
     <MultiSelect
@@ -24,12 +32,11 @@ export function FormFilterIn({ control, name, ...props }) {
       creatable
       error={error ? error.message : null}
       {...inputProps}
-      value={currentItems}
+      value={inputProps.value}
       getCreateLabel={(query) => `+ Add ${query}`}
       onCreate={(query) => {
-        const item = { value: query, label: query };
-        setData((current) => [...current, item]);
-        return item;
+        setData((current) => [...current, query]);
+        return query;
       }}
       onChange={(values) => {
         console.log(values);

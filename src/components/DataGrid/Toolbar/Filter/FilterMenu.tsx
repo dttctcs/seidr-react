@@ -48,7 +48,13 @@ function FilterMenu({ onClose }) {
   }, [queryParams.filters, setValue]);
 
   const onSubmit = (data) => {
-    setQueryParams({ filters: JSON.parse(JSON.stringify(data.filters)) });
+    const filters = JSON.parse(JSON.stringify(data.filters));
+    filters.forEach((filter) => {
+      if (filter.opr === 'in' && Array.isArray(filter.value)) {
+        filter.value = JSON.stringify(filter.value);
+      }
+    });
+    setQueryParams({ filters });
     onClose();
   };
 
