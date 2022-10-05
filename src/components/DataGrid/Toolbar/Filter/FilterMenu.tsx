@@ -10,6 +10,7 @@ import { FormField } from '../../FormField';
 import FormFilterField from './FormFilterField';
 import FormOperatorField from './FormOperatorField';
 import { Plus, Trash } from 'tabler-icons-react';
+import { FormFilterIn } from './FormFilterIn';
 
 const schema = yup.object({
   filters: yup.array().of(
@@ -83,12 +84,16 @@ function FilterMenu({ onClose }) {
                 </Box>
                 <Box sx={{ width: '192px' }}>
                   {field.col ? (
-                    <FormField
-                      name={`filters.${index}.value`}
-                      control={control}
-                      schema={info.filters[field.col].schema}
-                      filter
-                    />
+                    field.opr === 'in' ? (
+                      <FormFilterIn name={`filters.${index}.value`} control={control} />
+                    ) : (
+                      <FormField
+                        name={`filters.${index}.value`}
+                        control={control}
+                        schema={info.filters[field.col].schema}
+                        filter
+                      />
+                    )
                   ) : null}
                 </Box>
                 <ActionIcon
