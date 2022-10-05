@@ -40,7 +40,7 @@ export function Body({
               ) : null}
               {data.list_columns.map((column, columnIndex) => (
                 <Field key={columnIndex} rtl={settings.rtl} rightBorder={settings.rightBorder} loading={loading}>
-                  {getValue(entry[column])}
+                  {getValue(entry, column)}
                 </Field>
               ))}
             </Row>

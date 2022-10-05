@@ -1,6 +1,7 @@
 import * as yup from 'yup';
 
-export const getValue = (value) => {
+export const getValue = (entry, column) => {
+  const value = column.split('.').reduce((previous, current) => previous[current], entry);
   if (!value) {
     return null;
   }
