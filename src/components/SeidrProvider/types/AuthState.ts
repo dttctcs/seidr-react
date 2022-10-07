@@ -1,7 +1,7 @@
 import { User } from './User';
 
 export interface AuthState {
-  user: User;
+  user: User | null;
   loading: boolean;
-  error: string;
+  error?: string;
 }

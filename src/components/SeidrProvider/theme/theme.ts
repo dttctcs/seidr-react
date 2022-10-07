@@ -4,7 +4,7 @@ export const THEME = {
   primaryColor: 'blue',
   components: {
     Tooltip: {
-      styles: (theme) => ({
+      styles: (theme: any) => ({
         body: {
           padding: 0.5 * theme.spacing.xs,
           paddingTop: 0.25 * theme.spacing.xs,
@@ -24,7 +24,7 @@ export const THEME = {
       },
     },
     ActionIcon: {
-      styles: (theme) => ({
+      styles: (theme: any) => ({
         hover: {
           color: theme.colors.gray[6],
         },

@@ -44,7 +44,7 @@ export interface DataGridProps {
   styles?: any;
 }
 
-function reducer(state, action) {
+function reducer(state: any, action: { type: string; payload: any }) {
   switch (action.type) {
     case 'setSettings':
       return { ...state, settings: action.payload };
@@ -68,7 +68,7 @@ export const DataGrid = forwardRef<HTMLDivElement, DataGridProps>((props, ref) =
     styles,
   } = props;
 
-  const { classes, cx, theme } = applyStyles({}, { styles, name: 'DataGrid' });
+  const { classes, cx, theme } = applyStyles();
 
   const [state, dispatch] = useReducer(reducer, {
     ...initialState,

@@ -19,10 +19,10 @@ const initialState: ApiState = {
 
   queryParams: null,
   loading: false,
-  error: undefined,
+  error: null,
 };
 
-function reducer(state, action) {
+function reducer(state: ApiState, action: { type: string; payload: any }) {
   switch (action.type) {
     case 'setData':
       return { ...state, data: action.payload, loading: false, error: null };
@@ -124,7 +124,7 @@ export function useProvideApi(props: UseProvideApiProps): Api {
     }
   };
 
-  const getEntry = async (id) => {
+  const getEntry = async (id: number) => {
     try {
       return await getItem(props.path, id);
     } catch (error) {
@@ -132,7 +132,7 @@ export function useProvideApi(props: UseProvideApiProps): Api {
     }
   };
 
-  const addEntry = async (item) => {
+  const addEntry = async (item: any) => {
     try {
       const data = await createItem(props.path, item);
       getData();
@@ -142,7 +142,7 @@ export function useProvideApi(props: UseProvideApiProps): Api {
     }
   };
 
-  const updateEntry = async (id, item) => {
+  const updateEntry = async (id: number, item: any) => {
     try {
       const data = await updateItem(props.path, id, item);
       getData();

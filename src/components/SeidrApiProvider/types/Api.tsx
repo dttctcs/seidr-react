@@ -1,7 +1,7 @@
 import { QueryParams } from './QueryParams';
 
 export interface Api {
-  path: string;
+  path?: string;
   data: any;
   info?: any;
   queryParams?: QueryParams;
@@ -19,7 +19,7 @@ export interface ApiState {
   data?: any;
   info?: any;
 
-  queryParams: QueryParams;
+  queryParams: QueryParams | null;
   loading: boolean;
-  error: { message: string; originalError: string };
+  error: { message: string; originalError: string } | null;
 }

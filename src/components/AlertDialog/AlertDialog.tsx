@@ -2,7 +2,14 @@ import React from 'react';
 
 import { Button, Group, Modal } from '@mantine/core';
 
-export function AlertDialog({ opened, onClose, handleAccept, handleReject }) {
+interface AlertDialogPorps {
+  opened: boolean;
+  onClose: any;
+  handleAccept: any;
+  handleReject: any;
+}
+
+export function AlertDialog({ opened, onClose, handleAccept, handleReject }: AlertDialogPorps) {
   return (
     <Modal
       styles={{ root: { zIndex: 3000 } }}

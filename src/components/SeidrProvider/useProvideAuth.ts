@@ -3,9 +3,9 @@ import { createFetchParams, urlJoin } from '../../utils';
 import { AuthState } from './types';
 import { UserUpdate } from './types';
 
-const initialState: AuthState = { user: null, loading: true, error: null };
+const initialState: AuthState = { user: null, loading: true };
 
-function reducer(state: AuthState, action) {
+function reducer(state: AuthState, action: { type: string; payload?: any }) {
   switch (action.type) {
     case 'initCall':
       return { ...state, loading: true, error: null };
