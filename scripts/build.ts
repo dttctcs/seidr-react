@@ -2,6 +2,7 @@
 import chalk from 'chalk';
 import { rollup } from 'rollup';
 import createRollupConfig from './utils/create-rollup-config';
+import createRollupDtsConfig from './utils/create-rollup-dts-config';
 import { Logger } from './utils/Logger';
 
 const logger = new Logger('build');
@@ -31,9 +32,8 @@ export async function buildPackage() {
         ...options,
         basePath: './',
         format,
-        minify: false,
-        analyze: false,
       });
+      const dtsConfig = createRollupDtsConfig();
 
       const build = await rollup(config);
       const outputs = Array.isArray(config.output) ? config.output : [config.output];

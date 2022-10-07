@@ -8,15 +8,13 @@ import commonjs from '@rollup/plugin-commonjs';
 import typescript from '@rollup/plugin-typescript';
 import peerDepsExternal from 'rollup-plugin-peer-deps-external';
 
-interface PkgConfigInput {
+export interface PkgConfigInput {
   format: string;
   entry?: string;
   publicPath?: string;
   basePath?: string;
   externals?: string[];
   sourcemap: boolean;
-  minify: boolean;
-  analyze: boolean;
 }
 
 export default async function createRollupConfig(config: PkgConfigInput): Promise<RollupOptions> {

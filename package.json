@@ -11,12 +11,12 @@
     "type": "git",
     "url": "git+https://github.com/dttctcs/seidr-react.git"
   },
-  "main": "lib/cjs/index.js",
-  "module": "lib/esm/index.esm.js",
-  "types": "lib/types/index.d.ts",
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
   "files": [
-    "lib"
+    "dist"
   ],
+  "types": "dist/index.d.ts",
   "keywords": [
     "seidr"
   ],
@@ -87,6 +87,7 @@
     "react": ">=18.2.0",
     "react-dom": ">=18.2.0",
     "rollup": "^2.78.1",
+    "rollup-plugin-dts": "^4.2.2",
     "rollup-plugin-peer-deps-external": "^2.2.4",
     "rollup-plugin-postcss": "^4.0.2",
     "rollup-plugin-visualizer": "^5.8.0",
