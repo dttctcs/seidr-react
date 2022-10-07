@@ -1,6 +1,6 @@
 import { createStyles } from '@mantine/core';
 
-export default createStyles((theme, { dense }) => ({
+export default createStyles((theme, { dense }: { dense: boolean }) => ({
   toolbarRoot: {
     display: 'flex',
     justifyContent: 'space-between',
