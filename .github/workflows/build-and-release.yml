@@ -6,7 +6,7 @@ on:
       - '*.*.*'
 
 jobs:
-  build:
+  build-and-release:
     runs-on: ubuntu-latest
 
     steps:
@@ -17,24 +17,17 @@ jobs:
         uses: actions/setup-node@v3
         with:
           cache: 'npm'
-      - name: Upgrade NPM
-        run: npm install -g npm
       - name: Get tag
         run: echo "RELEASE_VERSION=$(git describe --tags --abbrev=0)" >> $GITHUB_ENV
 
-      - name: Build library
-        run: npm ci
-      - run: npm run build
-
-      - run: npm run release  ${{ env.RELEASE_VERSION }}
-      - uses: actions/checkout@v3
-        with:
-          ref: ${{ github.ref_name }}
-      - uses: EndBug/add-and-commit@v9
-        with:
-          add: .
-          message: 'release Version ${{ env.RELEASE_VERSION }}'
-          tag: '${{ env.RELEASE_VERSION }} --force'
+      - name: Build
+        run: npm ci && npm run build && npm run release ${{ env.RELEASE_VERSION }}
+      - name: Commit & Push
+        run: |
+          git config --global user.name 'Your Name'
+          git config --global user.email 'your-username@users.noreply.github.com'
+          git commit -am "Automated report"
+          git push
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
