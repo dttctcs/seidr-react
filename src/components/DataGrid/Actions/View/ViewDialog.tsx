@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import { useApi } from '../../../SeidrApiProvider';
+import React from 'react';
 import { getValue } from '../../utils';
 
 import { Grid, LoadingOverlay, Modal, Paper, Stack, Tabs, Text } from '@mantine/core';
@@ -47,7 +46,7 @@ export function ViewDialog({ item, info, loading, opened, onClose }) {
                       </Grid.Col>
                       <Grid.Col span={4}>
                         <Text size="md" color="dimmed" sx={{}}>
-                          {getValue(item.result[column])}
+                          {getValue(item.result, column)}
                         </Text>
                       </Grid.Col>
                     </Grid>
