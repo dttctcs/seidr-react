@@ -10,9 +10,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
-        with:
-          ref: ${{ github.ref_name }}
       - name: Use Node
         uses: actions/setup-node@v3
         with:
@@ -27,6 +24,9 @@ jobs:
       - run: npm run build
 
       - run: npm run release  ${{ env.RELEASE_VERSION }}
+      - uses: actions/checkout@v3
+        with:
+          ref: ${{ github.ref_name }}
       - uses: EndBug/add-and-commit@v9
         with:
           add: .
