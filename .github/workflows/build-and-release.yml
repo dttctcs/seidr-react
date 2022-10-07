@@ -6,23 +6,28 @@ on:
       - '*.*.*'
 
 jobs:
-  build:
+  build-and-release:
     runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v3
+        with:
+          ref: main
       - name: Use Node
         uses: actions/setup-node@v3
         with:
           cache: 'npm'
-      - name: Upgrade NPM
-        run: npm install -g npm
       - name: Get tag
         run: echo "RELEASE_VERSION=$(git describe --tags --abbrev=0)" >> $GITHUB_ENV
-
-      - name: Build library
-        run: npm ci
-      - run: npm run build
-      - run: npm run release ${{ ${{ env.RELEASE_VERSION }} }}
+      - name: Build
+        run: npm ci && npm run build && npm run release ${{ env.RELEASE_VERSION }}
+      - name: Publish
+        run: git config --global user.name 'Your Name' &&
+          git config --global user.email 'your-username@users.noreply.github.com' &&
+          git add -A &&
+          git commit -m "Automated report" &&
+          git push
       - name: Release
         uses: softprops/action-gh-release@v1
+        with:
+          generate_release_notes: true

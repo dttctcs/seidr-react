@@ -1,0 +1,1 @@
+{"version":3,"file":"RelationPanel.d.ts","sourceRoot":"","sources":["../../../../../src/components/DataGrid/Actions/View/RelationPanel.tsx"],"names":[],"mappings":"AAAA,OAAO,KAAK,MAAM,OAAO,CAAC;AAE1B,OAAO,EAAE,QAAQ,EAAE,MAAM,iCAAiC,CAAC;AAK3D,UAAU,kBAAmB,SAAQ,QAAQ;IAC3C,WAAW,EAAE,MAAM,CAAC;CACrB;AAED,iBAAS,aAAa,CAAC,EAAE,WAAW,EAAE,GAAG,QAAQ,EAAE,EAAE,kBAAkB,eAatE;;AAED,wBAAyC"}
