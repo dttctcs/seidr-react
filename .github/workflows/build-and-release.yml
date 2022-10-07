@@ -25,8 +25,11 @@ jobs:
       - run: npm run build
 
       - run: npm run release  ${{ env.RELEASE_VERSION }}
-      - run: git add .
-      - run: git commit -m "[release] Version ${{ env.RELEASE_VERSION }}"
+      - uses: EndBug/add-and-commit@v9
+        with:
+          add: .
+          message: 'Your commit message'
+          tag: '${{ env.RELEASE_VERSION }} --force'
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
