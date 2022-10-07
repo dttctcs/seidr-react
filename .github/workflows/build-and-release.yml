@@ -23,6 +23,6 @@ jobs:
       - name: Build library
         run: npm ci
       - run: npm run build
-      - run: npm run release ${{ ${{ env.RELEASE_VERSION }} }}
+      - run: npm run release  ${{ env.RELEASE_VERSION }}
       - name: Release
         uses: softprops/action-gh-release@v1
