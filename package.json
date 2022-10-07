@@ -11,12 +11,12 @@
     "type": "git",
     "url": "git+https://github.com/dttctcs/seidr-react.git"
   },
-  "main": "dist/cjs/index.js",
-  "module": "dist/esm/index.js",
+  "main": "lib/cjs/index.js",
+  "module": "lib/esm/index.js",
   "files": [
-    "dist"
+    "lib"
   ],
-  "types": "dist/index.d.ts",
+  "types": "lib/index.d.ts",
   "keywords": [
     "seidr"
   ],
@@ -24,8 +24,8 @@
     "test": "echo \"Error: no test specified\" && exit 0",
     "storybook": "start-storybook -p 6006 -s .storybook/public",
     "build-storybook": "build-storybook",
-    "build": "esno scripts/build",
-    "release": "npm run test && esno scripts/release"
+    "build": "rollup -c",
+    "release": "esno ./scripts/release"
   },
   "dependencies": {
     "@date-io/date-fns": "^2.15.0",

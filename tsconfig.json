@@ -2,23 +2,28 @@
   "compilerOptions": {
     "module": "esnext",
     "target": "es2015",
-    "forceConsistentCasingInFileNames": true,
-    "strict": true,
-    "skipLibCheck": true,
-
     "lib": ["esnext", "dom"],
-    "sourceMap": true,
-    "jsx": "react",
     "moduleResolution": "node",
+    "jsx": "react",
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
+    // "noEmitOnError": true,
     "allowJs": true,
-    "outDir": "dist",
+    "baseUrl": ".",
+
+    "rootDir": "src",
+    "outDir": "lib",
     "declaration": true,
+    "declarationMap": true,
     "declarationDir": "types",
-    "emitDeclarationOnly": true
+    "emitDeclarationOnly": true,
+    "sourceMap": true
   },
 
-  "include": ["src/**/*", "./scripts"],
-  "exclude": ["node_modules", "build", "lib", "src/storiestsx", "src/**/*.test.tsx", "src/mocks/**"]
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "build", "lib", "src/stories", "src/**/*.test.tsx", "src/mocks/**"]
 }

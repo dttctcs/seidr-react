@@ -8,7 +8,6 @@ import { hideBin } from 'yargs/helpers';
 import { setPackageVersion } from './utils/set-package-version';
 import { getIncrementedVersion } from './utils/get-incremented-version';
 
-import { buildPackage } from './build';
 import { Logger } from './utils/Logger';
 import packageJson from '../package.json';
 
@@ -22,36 +21,24 @@ const { argv }: { argv: any } = yargs(hideBin(process.argv)).option('tag', {
 });
 
 (async () => {
-  // const status = await git.status();
-
-  // if (status.files.length !== 0) {
-  //   logger.error('Working tree is not clean');
-  //   process.exit(1);
-  // }
-
-  logger.info('Release initiated');
-  // build
-  await buildPackage();
-
   // increment version
   logger.info(`Creating new version...`);
-  const incrementedVersion = getIncrementedVersion(packageJson.version, argv._[0] as string);
-  logger.success(`Created new version: ${chalk.cyan(incrementedVersion)}`);
+  const version = argv._[0];
+  logger.success(`Created new version: ${chalk.cyan(version)}`);
   logger.info(`Updating package.json version...`);
-  await setPackageVersion(incrementedVersion);
-  logger.success(`Updated package.json version: ${chalk.cyan(incrementedVersion)}`);
+  await setPackageVersion(version);
+  logger.success(`Updated package.json version: ${chalk.cyan(version)}`);
 
-  // deploy
-  await git.add([path.join(__dirname, '..')]);
-  await git.commit(`[release] Version: ${incrementedVersion}`);
-  await git.push();
+  // await git.add([path.join(__dirname, '..')]);
+  // await git.commit(`[release] Version: ${incrementedVersion}`);
+  // await git.push();
 
-  open(
-    githubRelease({
-      user: 'dttctcs',
-      repo: 'seidr-react',
-      tag: incrementedVersion,
-      title: incrementedVersion,
-    }),
-  );
+  // open(
+  //   githubRelease({
+  //     user: 'dttctcs',
+  //     repo: 'seidr-react',
+  //     tag: incrementedVersion,
+  //     title: incrementedVersion,
+  //   }),
+  // );
 })();

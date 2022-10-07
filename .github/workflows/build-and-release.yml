@@ -1,0 +1,28 @@
+name: Node CI
+
+on:
+  push:
+    tags:
+      - '*.*.*'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Use Node
+        uses: actions/setup-node@v3
+        with:
+          cache: 'npm'
+      - name: Upgrade NPM
+        run: npm install -g npm
+      - name: Get tag
+        run: echo "RELEASE_VERSION=$(git describe --tags --abbrev=0)" >> $GITHUB_ENV
+
+      - name: Build library
+        run: npm ci
+      - run: npm run build
+      - run: npm run release ${{ ${{ env.RELEASE_VERSION }} }}
+      - name: Release
+        uses: softprops/action-gh-release@v1
