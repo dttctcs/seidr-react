@@ -11,6 +11,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
+        with:
+          ref: ${{ github.ref_name }}
       - name: Use Node
         uses: actions/setup-node@v3
         with:
@@ -28,7 +30,7 @@ jobs:
       - uses: EndBug/add-and-commit@v9
         with:
           add: .
-          message: 'Your commit message'
+          message: 'release Version ${{ env.RELEASE_VERSION }}'
           tag: '${{ env.RELEASE_VERSION }} --force'
       - name: Release
         uses: softprops/action-gh-release@v1
