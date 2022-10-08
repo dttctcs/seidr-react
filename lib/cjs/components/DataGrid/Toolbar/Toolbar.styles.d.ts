@@ -6,4 +6,3 @@ declare const _default: (params: {
     theme: import("@mantine/core").MantineTheme;
 };
 export default _default;
-//# sourceMappingURL=Toolbar.styles.d.ts.map

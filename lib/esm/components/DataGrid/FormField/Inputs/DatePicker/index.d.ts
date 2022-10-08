@@ -10,4 +10,3 @@ export declare function DateTimePicker({ value, onChange, inputFormat, closeCale
     clearable?: boolean | undefined;
     disabled?: boolean | undefined;
 }): JSX.Element;
-//# sourceMappingURL=index.d.ts.map

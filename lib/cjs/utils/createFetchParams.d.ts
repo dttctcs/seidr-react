@@ -7,4 +7,3 @@ export declare function createFetchParams({ path, method, body, queryParams }: {
     fetchPath: undefined;
     options: RequestInit;
 };
-//# sourceMappingURL=createFetchParams.d.ts.map

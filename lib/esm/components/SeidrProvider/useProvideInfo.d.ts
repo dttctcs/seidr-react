@@ -6,4 +6,3 @@ export declare function useProvideInfo(baseUrl: any, auth: any): {
         message: string;
     };
 };
-//# sourceMappingURL=useProvideInfo.d.ts.map

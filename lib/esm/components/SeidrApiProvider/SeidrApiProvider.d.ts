@@ -8,4 +8,3 @@ export interface SeidrApiProviderProps {
     children: ReactNode;
 }
 export declare function SeidrApiProvider({ path, initialQueryParams, relation, children }: SeidrApiProviderProps): JSX.Element;
-//# sourceMappingURL=SeidrApiProvider.d.ts.map

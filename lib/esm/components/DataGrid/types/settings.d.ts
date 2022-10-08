@@ -4,4 +4,3 @@ export interface Settings {
     striped?: boolean;
     rightBorder?: boolean;
 }
-//# sourceMappingURL=settings.d.ts.map

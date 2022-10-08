@@ -8,4 +8,3 @@ interface MainProps {
 }
 export declare function Main({ settings, hideActions, loading, onSelect, }: MainProps): JSX.Element;
 export {};
-//# sourceMappingURL=Main.d.ts.map

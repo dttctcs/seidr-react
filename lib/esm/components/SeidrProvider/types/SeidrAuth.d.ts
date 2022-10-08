@@ -13,4 +13,3 @@ export declare type SeidrAuth = {
     resetPassword: (password: string) => void;
 };
 export {};
-//# sourceMappingURL=SeidrAuth.d.ts.map

@@ -11,4 +11,3 @@ export interface SeidrProviderProps {
     children: ReactNode;
 }
 export declare function SeidrProvider({ baseUrl, theme, inheritMantineTheme, children }: SeidrProviderProps): JSX.Element;
-//# sourceMappingURL=SeidrProvider.d.ts.map

@@ -6,4 +6,3 @@ export declare function ViewDialog({ item, info, loading, opened, onClose }: {
     opened: any;
     onClose: any;
 }): JSX.Element;
-//# sourceMappingURL=ViewDialog.d.ts.map

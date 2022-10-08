@@ -11,4 +11,3 @@ export declare function useProvideAuth(baseURL: any): {
     update: (data: UserUpdate) => Promise<void>;
     resetPassword: (password: string) => Promise<void>;
 };
-//# sourceMappingURL=useProvideAuth.d.ts.map

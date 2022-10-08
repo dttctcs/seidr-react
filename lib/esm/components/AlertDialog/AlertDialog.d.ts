@@ -7,4 +7,3 @@ interface AlertDialogPorps {
 }
 export declare function AlertDialog({ opened, onClose, handleAccept, handleReject }: AlertDialogPorps): JSX.Element;
 export {};
-//# sourceMappingURL=AlertDialog.d.ts.map

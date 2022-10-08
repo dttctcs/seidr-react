@@ -5,4 +5,3 @@ export declare function EditDialog({ item, info, opened, onClose }: {
     opened: any;
     onClose: any;
 }): JSX.Element | null;
-//# sourceMappingURL=EditDialog.d.ts.map

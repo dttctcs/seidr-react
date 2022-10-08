@@ -9,4 +9,3 @@ interface ToolbarProps {
 }
 export declare const Toolbar: React.NamedExoticComponent<ToolbarProps>;
 export {};
-//# sourceMappingURL=Toolbar.d.ts.map

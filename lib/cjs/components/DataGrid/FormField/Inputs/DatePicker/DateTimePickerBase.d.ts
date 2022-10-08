@@ -13,4 +13,3 @@ export declare function DateTimePickerBase({ opened, setOpened, required, label,
     onClear: any;
     onChange: any;
 }): JSX.Element;
-//# sourceMappingURL=DateTimePickerBase.d.ts.map

@@ -5,4 +5,3 @@ export declare function FormRelatedSelect({ control, name, items, ...props }: {
     name: any;
     items: any;
 }): JSX.Element;
-//# sourceMappingURL=FormRelatedSelect.d.ts.map

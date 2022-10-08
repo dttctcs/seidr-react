@@ -6,4 +6,3 @@ interface RelationPanelProps extends Relation {
 declare function RelationPanel({ relatedPath, ...relation }: RelationPanelProps): JSX.Element;
 declare const _default: React.MemoExoticComponent<typeof RelationPanel>;
 export default _default;
-//# sourceMappingURL=RelationPanel.d.ts.map

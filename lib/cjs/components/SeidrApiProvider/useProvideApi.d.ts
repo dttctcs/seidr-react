@@ -8,4 +8,3 @@ export interface UseProvideApiProps {
     relation?: Relation;
 }
 export declare function useProvideApi(props: UseProvideApiProps): Api;
-//# sourceMappingURL=useProvideApi.d.ts.map

@@ -4,4 +4,3 @@ declare const _default: (params: void, options?: import("@mantine/core").UseStyl
     theme: import("@mantine/core").MantineTheme;
 };
 export default _default;
-//# sourceMappingURL=Body.styles.d.ts.map

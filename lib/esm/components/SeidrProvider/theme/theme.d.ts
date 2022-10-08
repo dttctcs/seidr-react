@@ -34,4 +34,3 @@ export declare const THEME: {
     };
 };
 export declare const MUI_THEME: import("@mui/material/styles").Theme;
-//# sourceMappingURL=theme.d.ts.map

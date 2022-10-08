@@ -20,4 +20,3 @@ export interface DataGridProps {
     styles?: any;
 }
 export declare const DataGrid: React.ForwardRefExoticComponent<DataGridProps & React.RefAttributes<HTMLDivElement>>;
-//# sourceMappingURL=DataGrid.d.ts.map

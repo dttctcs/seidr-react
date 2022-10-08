@@ -5,4 +5,3 @@ export declare function FormDatePicker({ control, name, PopperProps, ...props }:
     name: any;
     PopperProps: any;
 }): JSX.Element;
-//# sourceMappingURL=FormDatePicker.d.ts.map

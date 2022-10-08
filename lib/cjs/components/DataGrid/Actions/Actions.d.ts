@@ -4,4 +4,3 @@ export declare function Actions({ id, selected, rtl }: {
     selected: any;
     rtl: any;
 }): JSX.Element;
-//# sourceMappingURL=Actions.d.ts.map

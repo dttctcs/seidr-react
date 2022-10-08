@@ -10,4 +10,3 @@ export declare const applyStyles: (params: void, options?: import("@mantine/core
     cx: (...args: any) => string;
     theme: import("@mantine/core").MantineTheme;
 };
-//# sourceMappingURL=DataGrid.styles.d.ts.map

@@ -5,4 +5,3 @@ export declare function Body({ settings, loading, onSelect, hideActions, }: {
     onSelect: any;
     hideActions: any;
 }): JSX.Element;
-//# sourceMappingURL=Body.d.ts.map

@@ -25,4 +25,3 @@ export interface ApiState {
         originalError: string;
     } | null;
 }
-//# sourceMappingURL=Api.d.ts.map

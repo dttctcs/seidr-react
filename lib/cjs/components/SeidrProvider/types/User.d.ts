@@ -20,4 +20,3 @@ export interface UserUpdate {
     lastname: string;
 }
 export {};
-//# sourceMappingURL=User.d.ts.map

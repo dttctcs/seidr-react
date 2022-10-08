@@ -6,4 +6,3 @@ interface HeaderProps {
 }
 export declare const Header: React.NamedExoticComponent<HeaderProps>;
 export {};
-//# sourceMappingURL=Header.d.ts.map

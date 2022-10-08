@@ -4,4 +4,3 @@ export interface AuthState {
     loading: boolean;
     error?: string;
 }
-//# sourceMappingURL=AuthState.d.ts.map

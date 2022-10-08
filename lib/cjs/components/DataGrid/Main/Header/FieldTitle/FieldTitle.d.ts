@@ -10,4 +10,3 @@ interface FiledTitleProps {
 }
 export declare function FieldTitle({ column, label, selecDataGrid, related, rtl, classNames, styles, }: FiledTitleProps): JSX.Element;
 export {};
-//# sourceMappingURL=FieldTitle.d.ts.map

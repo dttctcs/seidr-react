@@ -5,4 +5,3 @@ export declare function FormSelect({ control, name, items, ...props }: {
     name: any;
     items: any;
 }): JSX.Element;
-//# sourceMappingURL=FormSelect.d.ts.map

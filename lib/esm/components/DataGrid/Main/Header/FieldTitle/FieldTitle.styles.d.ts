@@ -8,4 +8,3 @@ declare const _default: (params: {
     theme: import("@mantine/core").MantineTheme;
 };
 export default _default;
-//# sourceMappingURL=FieldTitle.styles.d.ts.map
