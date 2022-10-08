@@ -10,12 +10,12 @@
     "type": "git",
     "url": "git+https://github.com/dttctcs/seidr-react.git"
   },
-  "main": "lib/cjs/index.js",
-  "module": "lib/esm/index.js",
+  "main": "./lib/cjs/index.js",
+  "module": "./lib/esm/index.js",
   "files": [
-    "lib"
+    "./lib"
   ],
-  "types": "lib/index.d.ts",
+  "types": "./lib/index.d.ts",
   "keywords": [
     "seidr"
   ],
