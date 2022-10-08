@@ -4,7 +4,6 @@ import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
 import typescript from '@rollup/plugin-typescript';
 import peerDepsExternal from 'rollup-plugin-peer-deps-external';
-import sourcemaps from 'rollup-plugin-sourcemaps';
 import dts from 'rollup-plugin-dts';
 
 import packageJson from './package.json';
@@ -32,7 +31,6 @@ export default [
       commonjs(),
       json(),
       typescript({ tsconfig: './tsconfig.json' }),
-      sourcemaps(),
       postcss({
         minimize: true,
       }),
