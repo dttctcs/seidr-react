@@ -29,10 +29,11 @@ _\*`npm i` will update `package-lock.json` if changes occured, while `npm ci` wi
 
 ### Release
 
-The inbuilt script uses Semantic Versioning according to https://semver.org/.
+The project uses Semantic Versioning according to https://semver.org/.
 
-- Create a release: `npm run release <version>` while version is one of patch/minor/major
-- This will create a commit with the given release version as tag and project version and open the github release page after build. Select `Generate release notes` to create changelog based on commits and press `publish release`
+- Create a tag: `git tag <version>`, where `<version>` is a semver version number (without the prefix `v`)
+- Push your tag: `git push --tag`
+  - This will run the github workflow `build-and-release`, which builds the application and publishes it to github. It will also create a release on github with the commit log since the last release
 
 ## Configuration
 
