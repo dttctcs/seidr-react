@@ -24,7 +24,7 @@ jobs:
           echo ${{ env.RELEASE_VERSION }}
           echo ${{ $GITHUB_REF_NAME }}
           echo ${{ github.ref_name }}
-          echo ${{ ${{env.GITHUB_REF_NAME}} }}
+          echo ${{env.GITHUB_REF_NAME}}
       - name: Build
         run: |
           npm ci
