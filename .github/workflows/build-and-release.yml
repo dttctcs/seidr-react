@@ -27,11 +27,7 @@ jobs:
           npm run set-version ${{ env.RELEASE_VERSION }}
           git config --global user.name 'github-actions'
           git config --global user.email 'github-actions@users.noreply.github.com'
-          git add .
-          git commit -m "[release] Version: ${{ env.RELEASE_VERSION }}"
-          git push
-          git tag ${{ env.RELEASE_VERSION }} --force
-          git push --tag --force
+          git status
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
