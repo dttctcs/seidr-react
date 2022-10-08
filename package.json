@@ -14,7 +14,8 @@
   "main": "lib/cjs/index.js",
   "module": "lib/esm/index.js",
   "files": [
-    "lib"
+    "lib",
+    "src"
   ],
   "types": "lib/index.d.ts",
   "keywords": [
