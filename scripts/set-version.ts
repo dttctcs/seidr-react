@@ -25,10 +25,7 @@ const { argv }: { argv: any } = yargs(hideBin(process.argv)).option('tag', {
 });
 
 (async () => {
-  // increment version
-  logger.info(`Creating new version...`);
   const version = argv._[0];
-  logger.success(`Created new version: ${chalk.cyan(version)}`);
   logger.info(`Updating package.json version...`);
   await setPackageVersion(version);
   logger.success(`Updated package.json version: ${chalk.cyan(version)}`);
