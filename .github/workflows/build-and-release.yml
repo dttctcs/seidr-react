@@ -24,11 +24,11 @@ jobs:
         run: |
           npm ci
           npm run build
-          npm run release ${{ env.RELEASE_VERSION }}
+          npm run increment ${{ env.RELEASE_VERSION }}
           git config --global user.name 'github-actions'
           git config --global user.email 'github-actions@users.noreply.github.com'
-          git add -A
-          git commit -m "release Version: ${{ env.RELEASE_VERSION }}"
+          git add .
+          git commit -m "[release] Version: ${{ env.RELEASE_VERSION }}"
           git push
           git tag ${{ env.RELEASE_VERSION }} --force
           git push --tag --force

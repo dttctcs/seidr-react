@@ -24,7 +24,7 @@
     "storybook": "start-storybook -p 6006 -s .storybook/public",
     "build-storybook": "build-storybook",
     "build": "rollup -c",
-    "release": "esno ./scripts/release"
+    "set-version": "esno ./scripts/set-version"
   },
   "dependencies": {
     "@date-io/date-fns": "^2.15.0",
