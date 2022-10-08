@@ -14,11 +14,11 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '16'
-      - name: Build & Publish
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v3
         with:
           ref: main
           fetch-depth: 0
+      - name: Build & Publish
         run: |
           echo "RELEASE_VERSION=$(git describe --tags --abbrev=0)" >> $GITHUB_ENV
           npm ci
