@@ -10,26 +10,28 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Use Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          cache: 'npm'
       - uses: actions/checkout@v3
         with:
           ref: main
           fetch-depth: 0
-      - name: Use Node
-        uses: actions/setup-node@v3
-        with:
-          cache: 'npm'
-      - name: Get tag
+      - name: Get Tag
         run: echo "RELEASE_VERSION=$(git describe --tags --abbrev=0)" >> $GITHUB_ENV
-      - name: Build
-        run: npm ci && npm run build && npm run release ${{ env.RELEASE_VERSION }}
-      - name: Publish
+      - name: Build & Publish
         run: |
-          git config --global user.name 'github-actions' &&
-          git config --global user.email 'github-actions@users.noreply.github.com' &&
-          git add -A &&
-          git commit -m "release Version: ${{ env.RELEASE_VERSION }}" &&
-          git push origin/main &&
-          git tag ${{ env.RELEASE_VERSION }} --force &&
+          npm ci
+          npm run build
+          npm run release ${{ env.RELEASE_VERSION }}
+          git config --global user.name 'github-actions'
+          git config --global user.email 'github-actions@users.noreply.github.com'
+          git add -A
+          git commit -m "release Version: ${{ env.RELEASE_VERSION }}"
+          git push origin/main
+          git tag ${{ env.RELEASE_VERSION }} --force
           git push --tag --force
       - name: Release
         uses: softprops/action-gh-release@v1
