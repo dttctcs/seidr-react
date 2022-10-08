@@ -19,7 +19,12 @@ jobs:
           ref: main
           fetch-depth: 0
       - name: Get Tag
-        run: echo "RELEASE_VERSION=$(git describe --tags --abbrev=0)" >> $GITHUB_ENV
+        run: |
+          echo "RELEASE_VERSION=$(git describe --tags --abbrev=0)" >> $GITHUB_ENV
+          echo ${{ env.RELEASE_VERSION }}
+          echo ${{ $GITHUB_REF_NAME }}
+          echo ${{ github.ref_name }}
+          echo ${{ ${{env.GITHUB_REF_NAME}} }}
       - name: Build
         run: |
           npm ci
