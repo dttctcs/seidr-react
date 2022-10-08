@@ -3,7 +3,6 @@ import fs from 'fs-extra';
 import chalk from 'chalk';
 import yargs from 'yargs/yargs';
 import { hideBin } from 'yargs/helpers';
-import { setPackageVersion } from './utils/set-package-version';
 
 import { Logger } from './utils/Logger';
 
