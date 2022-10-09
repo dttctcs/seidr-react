@@ -1,4 +1,5 @@
-export declare function useProvideInfo(baseUrl: any, auth: any): {
+import { AuthState } from './types';
+export declare function useProvideInfo(baseUrl: string, auth: AuthState): {
     info: null;
     loading: boolean;
     error: {

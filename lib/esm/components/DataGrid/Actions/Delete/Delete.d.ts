@@ -1,4 +1,6 @@
 /// <reference types="react" />
-export declare function Delete({ id }: {
-    id: any;
-}): JSX.Element;
+interface DeleteProps {
+    id: number;
+}
+export declare function Delete({ id }: DeleteProps): JSX.Element;
+export {};

@@ -1,9 +1,9 @@
-export declare function createFetchParams({ path, method, body, queryParams }: {
-    path?: undefined;
-    method?: undefined;
-    body?: undefined;
-    queryParams?: undefined;
+export declare function createFetchParams({ path, method, body, queryParams, }: {
+    path: string;
+    method: string;
+    body?: any;
+    queryParams?: Record<string, string>;
 }): {
-    fetchPath: undefined;
+    fetchPath: string;
     options: RequestInit;
 };

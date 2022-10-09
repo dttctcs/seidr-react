@@ -1,5 +1,7 @@
 /// <reference types="react" />
-export declare function AddDialog({ opened, onClose }: {
-    opened: any;
-    onClose: any;
-}): JSX.Element;
+interface AddDialogProps {
+    opened: boolean;
+    onClose: () => void;
+}
+export declare function AddDialog({ opened, onClose }: AddDialogProps): JSX.Element;
+export {};

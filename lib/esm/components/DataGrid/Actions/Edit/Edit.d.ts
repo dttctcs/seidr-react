@@ -1,4 +1,6 @@
 /// <reference types="react" />
-export declare function Edit({ id }: {
-    id: any;
-}): JSX.Element;
+interface EditProps {
+    id: number;
+}
+export declare function Edit({ id }: EditProps): JSX.Element;
+export {};

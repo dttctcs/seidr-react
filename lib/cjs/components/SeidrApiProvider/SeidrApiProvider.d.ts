@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 import { QueryParams, Relation, Api } from './types';
-export declare function useApi(): Api | undefined;
+export declare function useApi(): Api;
 export interface SeidrApiProviderProps {
     path?: string;
     relation?: Relation;

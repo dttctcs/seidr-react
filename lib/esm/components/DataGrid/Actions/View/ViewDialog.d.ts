@@ -1,8 +1,10 @@
 /// <reference types="react" />
-export declare function ViewDialog({ item, info, loading, opened, onClose }: {
+interface ViewDialogProps {
     item: any;
     info: any;
-    loading: any;
-    opened: any;
-    onClose: any;
-}): JSX.Element;
+    loading: boolean;
+    opened: boolean;
+    onClose: () => void;
+}
+export declare function ViewDialog({ item, info, loading, opened, onClose }: ViewDialogProps): JSX.Element;
+export {};

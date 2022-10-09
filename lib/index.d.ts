@@ -73,7 +73,7 @@ interface Api {
     data: any;
     info?: any;
     queryParams?: QueryParams;
-    loading?: boolean;
+    loading: boolean;
     error?: {
         message: string;
         originalError: string;
@@ -91,7 +91,7 @@ interface Relation {
     id: string | number;
 }
 
-declare function useApi(): Api | undefined;
+declare function useApi(): Api;
 interface SeidrApiProviderProps {
     path?: string;
     relation?: Relation;

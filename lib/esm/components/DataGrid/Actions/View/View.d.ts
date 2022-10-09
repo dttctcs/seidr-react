@@ -1,4 +1,6 @@
 /// <reference types="react" />
-export declare function View({ id }: {
-    id: any;
-}): JSX.Element;
+interface ViewProps {
+    id: number;
+}
+export declare function View({ id }: ViewProps): JSX.Element;
+export {};

@@ -1,7 +1,9 @@
 /// <reference types="react" />
-export declare function EditDialog({ item, info, opened, onClose }: {
+interface EditDialogProps {
     item: any;
     info: any;
-    opened: any;
-    onClose: any;
-}): JSX.Element | null;
+    opened: boolean;
+    onClose: () => void;
+}
+export declare function EditDialog({ item, info, opened, onClose }: EditDialogProps): JSX.Element | null;
+export {};
