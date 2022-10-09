@@ -15,7 +15,7 @@ interface FieldProps {
 }
 
 export const Field = React.memo(({ loading, rightBorder, rtl, children, ...props }: FieldProps) => {
-  const { classes, cx } = applyStyles();
+  const { classes, cx } = applyStyles({ rightBorder, rtl });
 
   let clean;
   if (typeof children === 'string' && isHtml(children)) {
