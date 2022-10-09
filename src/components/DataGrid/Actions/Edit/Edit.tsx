@@ -5,7 +5,11 @@ import { ActionIcon, Tooltip } from '@mantine/core';
 import { EditDialog } from './EditDialog';
 import { Pencil } from 'tabler-icons-react';
 
-export function Edit({ id }) {
+interface EditProps {
+  id: number;
+}
+
+export function Edit({ id }: EditProps) {
   const { info, getEntry } = useApi();
 
   const [item, setItem] = useState(null);

@@ -1,4 +1,14 @@
-export function createFetchParams({ path = undefined, method = undefined, body = undefined, queryParams = undefined }) {
+export function createFetchParams({
+  path,
+  method,
+  body = undefined,
+  queryParams = undefined,
+}: {
+  path: string;
+  method: string;
+  body?: any;
+  queryParams?: Record<string, string>;
+}) {
   let searchParams = {};
   if (typeof queryParams === 'object') {
     searchParams = new URLSearchParams(queryParams);

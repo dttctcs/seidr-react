@@ -21,7 +21,7 @@ function reducer(state: AuthState, action: { type: string; payload?: any }) {
   }
 }
 
-export function useProvideAuth(baseURL) {
+export function useProvideAuth(baseURL: string) {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   useEffect(() => {
@@ -48,7 +48,7 @@ export function useProvideAuth(baseURL) {
     }
   }
 
-  async function signin({ username, password }) {
+  async function signin({ username, password }: { username: string; password: string }) {
     dispatch({ type: 'initCall' });
 
     try {

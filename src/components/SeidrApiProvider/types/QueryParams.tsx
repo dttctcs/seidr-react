@@ -4,11 +4,6 @@ export interface Filter {
   value: string | number;
 }
 
-interface Order {
-  order_column: string;
-  order_direction: 'asc' | 'desc';
-}
-
 export interface QueryParams {
   columns?: Array<string>;
   filters?: Array<Filter>;

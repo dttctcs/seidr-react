@@ -9,7 +9,14 @@ import { Button, Group, Modal, Stack } from '@mantine/core';
 
 import { FormField } from '../../FormField';
 
-export function EditDialog({ item, info, opened, onClose }) {
+interface EditDialogProps {
+  item: any;
+  info: any;
+  opened: boolean;
+  onClose: () => void;
+}
+
+export function EditDialog({ item, info, opened, onClose }: EditDialogProps) {
   const { updateEntry } = useApi();
 
   const { handleSubmit, reset, setValue, formState, control } = useForm({
@@ -26,9 +33,10 @@ export function EditDialog({ item, info, opened, onClose }) {
     }
   }, [item, info.edit.columns, setValue]);
 
+  // This has to bere here. dirtyFields won't include the changes if not,
   // since it is a proxy object //see https://github.com/react-hook-form/react-hook-form/issues/3402
   const { dirty } = formState.dirtyFields;
-  const onSubmit = async (data) => {
+  const onSubmit = async (data: any) => {
     data = dirtyValues(formState.dirtyFields, data);
 
     await updateEntry(item.id, data);
@@ -53,7 +61,7 @@ export function EditDialog({ item, info, opened, onClose }) {
       centered
     >
       <Stack spacing="md">
-        {info.edit.columns.map((item, index) => (
+        {info.edit.columns.map((item: any) => (
           <FormField
             key={item.name}
             name={item.name}

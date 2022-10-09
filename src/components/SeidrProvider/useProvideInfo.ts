@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import { createFetchParams, urlJoin } from '../../utils';
+import { AuthState } from './types';
 
-export function useProvideInfo(baseUrl, auth) {
+export function useProvideInfo(baseUrl: string, auth: AuthState) {
   const { user } = auth;
   const [info, setInfo] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -13,7 +14,7 @@ export function useProvideInfo(baseUrl, auth) {
     }
   }, [user]);
 
-  const fetchInfo = async (baseUrl) => {
+  const fetchInfo = async (baseUrl: string) => {
     setLoading(true);
     try {
       const { fetchPath, options } = createFetchParams({ path: urlJoin(baseUrl, 'info/'), method: 'GET' });

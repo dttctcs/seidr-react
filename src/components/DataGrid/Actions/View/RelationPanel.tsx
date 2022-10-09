@@ -13,7 +13,7 @@ function RelationPanel({ relatedPath, ...relation }: RelationPanelProps) {
   const { path } = useApi();
 
   const joinedPath = urlJoin(
-    path.substring(0, path.lastIndexOf('/')),
+    path ? path.substring(0, path.lastIndexOf('/')) : '',
     relatedPath.substring(0, relatedPath.lastIndexOf('/')),
   );
 

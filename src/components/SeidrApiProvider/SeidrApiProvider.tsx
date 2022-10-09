@@ -6,10 +6,12 @@ import { urlJoin } from '../../utils';
 import { QueryParams, Relation, Api } from './types';
 
 interface SeidrApiProviderContextType {
-  Api?: Api;
+  Api: Api;
 }
 
-const SeidrApiContext = createContext<SeidrApiProviderContextType>({});
+const SeidrApiContext = createContext<SeidrApiProviderContextType>({
+  Api: {} as Api,
+});
 
 export function useApi() {
   // get nearest context value

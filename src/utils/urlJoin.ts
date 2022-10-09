@@ -1,4 +1,4 @@
-export function normalize(strArray) {
+export function normalize(strArray: string[]) {
   const resultArray = [];
   if (strArray.length === 0) {
     return '';
@@ -59,7 +59,7 @@ export function normalize(strArray) {
   return str;
 }
 
-export function urlJoin(...args) {
+export function urlJoin(...args: string[]) {
   const parts = Array.from(Array.isArray(args[0]) ? args[0] : args);
   return normalize(parts);
 }

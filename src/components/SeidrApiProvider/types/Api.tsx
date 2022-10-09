@@ -5,7 +5,7 @@ export interface Api {
   data: any;
   info?: any;
   queryParams?: QueryParams;
-  loading?: boolean;
+  loading: boolean;
   error?: { message: string; originalError: string };
 
   setQueryParams: (queryParams: QueryParams) => void;

@@ -5,7 +5,11 @@ import { ActionIcon, Tooltip } from '@mantine/core';
 import { AlertDialog } from '../../../AlertDialog';
 import { Trash } from 'tabler-icons-react';
 
-export function Delete({ id }) {
+interface DeleteProps {
+  id: number;
+}
+
+export function Delete({ id }: DeleteProps) {
   const { deleteEntry } = useApi();
 
   const [dialogOpen, setDialogOpen] = useState(false);

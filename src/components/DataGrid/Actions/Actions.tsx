@@ -6,7 +6,13 @@ import { View } from './View';
 import { Edit } from './Edit';
 import { Delete } from './Delete';
 
-export function Actions({ id, selected, rtl }) {
+interface ActionsProps {
+  id: number;
+  selected: boolean;
+  rtl: boolean;
+}
+
+export function Actions({ id, selected, rtl }: ActionsProps) {
   const { info } = useApi();
 
   return (

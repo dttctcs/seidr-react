@@ -9,7 +9,12 @@ import { Button, Modal, Group, Stack } from '@mantine/core';
 import { FormField } from '../../FormField';
 import { FormValues } from '../../types';
 
-export function AddDialog({ opened, onClose }) {
+interface AddDialogProps {
+  opened: boolean;
+  onClose: () => void;
+}
+
+export function AddDialog({ opened, onClose }: AddDialogProps) {
   const { info, addEntry } = useApi();
   const { handleSubmit, reset, formState, control } = useForm<FormValues>({
     mode: 'onChange',
@@ -20,7 +25,7 @@ export function AddDialog({ opened, onClose }) {
   // leave this here, if fomrState.dirtyFields is not read, we won't get the actual value on submit,
   // since it is a proxy object //see https://github.com/react-hook-form/react-hook-form/issues/3402
   const { dirty } = formState.dirtyFields;
-  const onSubmit = async (data) => {
+  const onSubmit = async (data: any) => {
     data = dirtyValues(formState.dirtyFields, data);
 
     await addEntry(data);
@@ -41,7 +46,7 @@ export function AddDialog({ opened, onClose }) {
       centered
     >
       <Stack spacing="md">
-        {info.add.columns.map((item) => (
+        {info.add.columns.map((item: any) => (
           <FormField
             key={item.name}
             name={item.name}

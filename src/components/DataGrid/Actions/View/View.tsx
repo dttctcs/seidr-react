@@ -5,7 +5,11 @@ import { ActionIcon, Tooltip } from '@mantine/core';
 import { ViewDialog } from './ViewDialog';
 import { Eye } from 'tabler-icons-react';
 
-export function View({ id }) {
+interface ViewProps {
+  id: number;
+}
+
+export function View({ id }: ViewProps) {
   const { info, getEntry } = useApi();
 
   const [item, setItem] = useState(null);

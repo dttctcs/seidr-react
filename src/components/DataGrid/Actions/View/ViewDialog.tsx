@@ -4,7 +4,15 @@ import { getValue } from '../../utils';
 import { Grid, LoadingOverlay, Modal, Paper, Stack, Tabs, Text } from '@mantine/core';
 import RelationPanel from './RelationPanel';
 
-export function ViewDialog({ item, info, loading, opened, onClose }) {
+interface ViewDialogProps {
+  item: any;
+  info: any;
+  loading: boolean;
+  opened: boolean;
+  onClose: () => void;
+}
+
+export function ViewDialog({ item, info, loading, opened, onClose }: ViewDialogProps) {
   return (
     <Modal
       styles={{ root: { minHeight: '640px', zIndex: 3000 } }}
@@ -20,7 +28,7 @@ export function ViewDialog({ item, info, loading, opened, onClose }) {
         <Tabs defaultValue="details">
           <Tabs.List>
             <Tabs.Tab value="details">Details</Tabs.Tab>
-            {info.relations.map((relation, index) => {
+            {info.relations.map((relation: any, index: number) => {
               return (
                 <Tabs.Tab key={index} value={relation.name}>
                   {relation.name}
@@ -31,7 +39,7 @@ export function ViewDialog({ item, info, loading, opened, onClose }) {
           <Tabs.Panel pt="xs" value="details">
             <Paper p="xs" withBorder>
               <Stack spacing="md">
-                {item.show_columns.map((column, index) => {
+                {item.show_columns.map((column: string, index: number) => {
                   return (
                     <Grid key={index}>
                       <Grid.Col span={4}>
@@ -55,7 +63,7 @@ export function ViewDialog({ item, info, loading, opened, onClose }) {
               </Stack>
             </Paper>
           </Tabs.Panel>
-          {info.relations.map((relation, index) => {
+          {info.relations.map((relation: any, index: number) => {
             return (
               <Tabs.Panel pt="xs" key={index} value={relation.name}>
                 <Paper withBorder>
