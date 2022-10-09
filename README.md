@@ -6,7 +6,7 @@ A react component library for Seidr
 
 **Seidr React** provides react components and hooks to interact with [**Seidr's**](https://github.com/dttctcs/seidr) features. :sparkles:
 
-More components comming soon...
+More components coming soon...
 
 ### Prerequisites
 
