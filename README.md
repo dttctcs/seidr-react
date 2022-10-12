@@ -73,7 +73,7 @@ Provides the merged `MantineThme` throughout your application.
 | ----------- | ------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | path        | string              | The path segment to add to the `baseUrl` provided to SeidrProvider. The resulting url should point to a valid **Seidr** base route. Will ignore `baseUrl`, if it is a URL. |
 | settings    | object: Settings    | Style settings                                                                                                                                                             |
-| initialQueryParams | object: QueryParams | Set initial query paramters                                                                                                                           |
+| initialQueryParams | object: QueryParams | Set initial query parameters                                                                                                                           |
 | relation    | object: Filter      | A base filter to apply (currently used in the context of RelatedAPIs)                                                                                                      |
 
 #### useApi
