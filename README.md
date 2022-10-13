@@ -97,7 +97,23 @@ A feature rich table component that leverages `useApi` internally. Use this, if 
 | onSelectEntry | function               | Callback to be fired on entry selection (Will apply selection styles to rows)                         |
 | styles        | object: DataGridStyles | Interface to style DataGrid (based on [Mantine's StylesAPI](https://mantine.dev/theming/styles-api/)) |
 
-## Concepts
+#### UserMenu
+
+Creates a dropdown according to Mantine's menu. The dropdown includes links to `react-router` routes with the following paths:
+
+- `/users`
+- `/roles`
+- `/permissions`
+- `/viewmenus`
+- `/permissionviews`
+
+These paths will be appended the provided `basePath`.
+
+| prop     | value     | description                                                                               |
+| -------- | --------- | ----------------------------------------------------------------------------------------- |
+| basePath | string    | Determines the base path to append the routes' paths to, defaults to `/security`          |
+| Target   | ReactNode | A react element to render instead of the default button                                   |
+| children | ReactNode | A set of mantine's `Menu.Divider`, `Menu.Label` and `Menu.Item` to append to the dropdown |
 
 ### SeidrApiProvider
 

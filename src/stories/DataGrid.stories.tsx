@@ -10,7 +10,17 @@ import { generateBorderStyles } from '../utils';
 function Wrapper({ path }) {
   return (
     <div>
-      <SeidrApiProvider path={path}>
+      <SeidrApiProvider path="/employees">
+        <Box sx={{ height: 1, minHeight: '400px' }}>
+          <DataGrid />
+        </Box>
+      </SeidrApiProvider>
+      <SeidrApiProvider path="/departments">
+        <Box sx={{ height: 1, minHeight: '400px' }}>
+          <DataGrid />
+        </Box>
+      </SeidrApiProvider>
+      <SeidrApiProvider path="/functions">
         <Box sx={{ height: 1, minHeight: '400px' }}>
           <DataGrid />
         </Box>
