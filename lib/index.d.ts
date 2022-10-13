@@ -136,4 +136,11 @@ declare const DataGridStyles: {
     header: string;
 };
 
-export { DataGrid, DataGridProps, DataGridStyles, SeidrApiProvider, SeidrProvider, useApi, useSeidrAuth, useSeidrInfo, useSeidrTheme };
+interface UserMenuProps {
+    basePath?: string;
+    Target?: ReactNode;
+    children?: ReactNode;
+}
+declare function UserMenu({ basePath, Target, children }: UserMenuProps): JSX.Element;
+
+export { DataGrid, DataGridProps, DataGridStyles, SeidrApiProvider, SeidrProvider, UserMenu, useApi, useSeidrAuth, useSeidrInfo, useSeidrTheme };
