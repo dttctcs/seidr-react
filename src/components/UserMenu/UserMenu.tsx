@@ -32,7 +32,7 @@ export function UserMenu({ basePath = '/security', Target, children }: UserMenuP
   const navigate = useNavigate();
   const { user, signout } = useSeidrAuth();
   const { classes, cx } = useStyles();
-  const [userMenuOpened, setUserMenuOpened] = useState(false);
+  const [opened, setOpened] = useState(false);
 
   const securityRoutes = [
     { path: basePath + '/users', label: 'Users', name: 'UsersApi', Icon: Users },
@@ -49,12 +49,14 @@ export function UserMenu({ basePath = '/security', Target, children }: UserMenuP
       width={260}
       position="bottom-end"
       transition="pop-top-right"
-      onClose={() => setUserMenuOpened(false)}
-      onOpen={() => setUserMenuOpened(true)}
+      opened={opened}
+      onClose={() => setOpened(false)}
+      onOpen={() => setOpened(true)}
     >
       <Menu.Target>
+        {/* Fix me, I only work with forwardRefs */}
         {Target || (
-          <UnstyledButton className={cx(classes.user, { [classes.userActive]: userMenuOpened })}>
+          <UnstyledButton className={cx(classes.user, { [classes.userActive]: opened })}>
             <Group sx={{ flexWrap: 'nowrap' }} spacing={7}>
               <Text weight={500} size="sm" sx={{ lineHeight: 1, whiteSpace: 'nowrap' }} mr={3}>
                 {`${user.first_name} ${user.last_name}`}
