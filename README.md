@@ -119,7 +119,7 @@ _Can only be used inside of `SeidrApiProvider`._
 
 #### MultiSelect
 
-Creates a CheckBox Group based on a quickfilter of the type `multiselect`
+Creates a CheckBox Group based on a quickfilter of the type `multiselect` that creates a new filter of the type {col: <quickfilter.column>, opr: 'in', value: <selectedValues>} (FilterIn) if it doesn't exist, else updates it
 
 | prop | value  | description                                                 |
 | ---- | ------ | ----------------------------------------------------------- |
