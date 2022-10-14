@@ -72,7 +72,7 @@ export const DataGrid = forwardRef<HTMLDivElement, DataGridProps>((props, ref) =
 
   const [state, dispatch] = useReducer(reducer, {
     ...initialState,
-    settings: JSON.parse(localStorage.getItem(path + 'gridSettings')) || {
+    settings: JSON.parse(localStorage.getItem(path + 'datagrid')) || {
       rtl: settings?.rtl ?? false,
       dense: settings?.dense ?? false,
       striped: settings?.striped ?? false,
