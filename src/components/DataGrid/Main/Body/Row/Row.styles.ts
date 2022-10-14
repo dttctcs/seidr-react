@@ -6,13 +6,18 @@ export default createStyles((theme, { selected, pointer, hover }) => {
     variant: 'light',
   });
 
+  console.log(colors);
   return {
     row: {
-      backgroundColor: selected ? `${colors.background} !important` : undefined,
+      backgroundColor: selected ? `${colors.hover} !important` : undefined,
 
       ':hover': {
         cursor: pointer ? 'pointer' : 'default',
-        backgroundColor: hover ? `${colors.hover} !important` : undefined,
+        backgroundColor: hover
+          ? selected
+            ? `${colors.hover} !important`
+            : `${colors.background} !important`
+          : undefined,
       },
     },
   };
