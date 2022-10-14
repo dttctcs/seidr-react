@@ -1,5 +1,6 @@
+/// <reference types="react" />
 import * as _mantine_core from '@mantine/core';
-import { MantineThemeOverride } from '@mantine/core';
+import { MantineThemeOverride, CheckboxGroupProps } from '@mantine/core';
 import React, { ReactNode } from 'react';
 
 interface Role {
@@ -55,7 +56,7 @@ interface SeidrProviderProps {
 declare function SeidrProvider({ baseUrl, theme, inheritMantineTheme, children }: SeidrProviderProps): JSX.Element;
 
 interface Filter {
-    foreign_key: string;
+    col: string;
     opr: string;
     value: string | number;
 }
@@ -105,6 +106,7 @@ interface Settings {
     dense?: boolean;
     striped?: boolean;
     rightBorder?: boolean;
+    hover?: boolean;
 }
 
 interface DataGridProps {
@@ -136,6 +138,11 @@ declare const DataGridStyles: {
     header: string;
 };
 
+interface MultiSelectProps extends Omit<CheckboxGroupProps, 'value' | 'children' | 'defaultValue' | 'onChange'> {
+    name: string;
+}
+declare function MultiSelect({ name, ...props }: MultiSelectProps): JSX.Element | null;
+
 interface UserMenuProps {
     basePath?: string;
     Target?: ReactNode;
@@ -143,4 +150,4 @@ interface UserMenuProps {
 }
 declare function UserMenu({ basePath, Target, children }: UserMenuProps): JSX.Element;
 
-export { DataGrid, DataGridProps, DataGridStyles, SeidrApiProvider, SeidrProvider, UserMenu, useApi, useSeidrAuth, useSeidrInfo, useSeidrTheme };
+export { DataGrid, DataGridProps, DataGridStyles, MultiSelect, SeidrApiProvider, SeidrProvider, UserMenu, useApi, useSeidrAuth, useSeidrInfo, useSeidrTheme };

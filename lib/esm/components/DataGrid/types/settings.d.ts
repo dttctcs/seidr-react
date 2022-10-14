@@ -3,4 +3,5 @@ export interface Settings {
     dense?: boolean;
     striped?: boolean;
     rightBorder?: boolean;
+    hover?: boolean;
 }
