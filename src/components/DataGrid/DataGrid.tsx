@@ -17,6 +17,7 @@ const initialState = {
     dense: false,
     striped: false,
     rightBorder: false,
+    hover: false,
   },
 };
 
@@ -30,7 +31,6 @@ export interface DataGridProps {
   /** Hide Action column on every row */
   hideActions?: boolean;
   /** Style settings */
-
   settings?: Settings;
   /** Externally control page size */
   rowsPerPageProps?: number;
@@ -77,6 +77,7 @@ export const DataGrid = forwardRef<HTMLDivElement, DataGridProps>((props, ref) =
       dense: settings?.dense ?? false,
       striped: settings?.striped ?? false,
       rightBorder: settings?.rightBorder ?? false,
+      hover: settings?.hover ?? false,
     },
   });
 

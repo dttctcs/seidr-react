@@ -4,17 +4,18 @@ import { ActionIcon, Tooltip, Menu, Switch } from '@mantine/core';
 import { Settings as SettingsIcon, BorderRight, Resize, Contrast2 } from 'tabler-icons-react';
 
 export function Settings({ onSettingsChange, settings }) {
-  const [tooltip, setTooltip] = useState(null);
+  const [opened, setOpened] = useState(false);
 
   return (
     <Menu
       position="bottom-start"
-      onOpen={() => setTooltip(false)}
-      onClose={() => setTooltip(null)}
+      onOpen={() => setOpened(true)}
+      onClose={() => setOpened(false)}
+      opened={opened}
       closeOnItemClick={false}
     >
       <Menu.Target>
-        <Tooltip opened={tooltip ? null : tooltip} label="Settings">
+        <Tooltip opened={opened ? false : undefined} label="Settings">
           <ActionIcon>
             <SettingsIcon />
           </ActionIcon>

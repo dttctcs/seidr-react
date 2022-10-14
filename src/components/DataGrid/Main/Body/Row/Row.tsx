@@ -4,7 +4,7 @@ import applyStyles from './Row.styles';
 interface RowProps {
   entry: any;
   selected: boolean;
-  striped: boolean;
+  hover: boolean;
 
   onSelect: any;
   setSelectedItem: any;
@@ -12,8 +12,8 @@ interface RowProps {
   children: ReactNode;
 }
 
-export function Row({ entry, selected, striped, onSelect, setSelectedItem, children }: RowProps) {
-  const { classes } = applyStyles({ selected, selecDataGrid: !!onSelect, striped }, { name: 'DataGrid' });
+export function Row({ entry, selected, hover, onSelect, setSelectedItem, children }: RowProps) {
+  const { classes } = applyStyles({ selected, hover: onSelect || hover, pointer: !!onSelect }, { name: 'DataGrid' });
 
   return (
     <tr

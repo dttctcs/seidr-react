@@ -28,8 +28,8 @@ export function Body({
             <Row
               key={index}
               entry={{ ...entry, id }}
-              striped={settings.striped}
               selected={selectedItem?.id === id}
+              hover={settings.hover}
               setSelectedItem={setSelectedItem}
               onSelect={onSelect}
             >
