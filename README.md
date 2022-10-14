@@ -57,45 +57,13 @@ You now can use **Seidr React's** components and hooks anywhere in the applicati
 
 Provides the `baseUrl` and information from **Seidr's** `InfoApi` throughout your application. `InfoApi` data will automatically retrieved, once the user is authenticated (WIP).
 
-#### useSeidrAuth
-
-Provides `user`, `error`, `loading`, `getUser`, `signin`, `signout`, `update`, `resetPassword` to interact with **Seidr's** authentication functionality. This hook will also trigger a rerender when `user`, `error` and `loading` change (react lifecycle).
-
 #### useSeidrTheme
 
 Provides the merged `MantineThme` throughout your application.
 
-#### SeidrApiProvider
+#### useSeidrAuth
 
-`SeidrApiProvider` interacts with **Seidr's** `BaseModelRestApi`. Path should be the same as `resource_name` used in `BaseModelRestApi`.
-
-| prop        | value               | description                                                                                                                                                                |
-| ----------- | ------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| path        | string              | The path segment to add to the `baseUrl` provided to SeidrProvider. The resulting url should point to a valid **Seidr** base route. Will ignore `baseUrl`, if it is a URL. |
-| settings    | object: Settings    | Style settings                                                                                                                                                             |
-| initialQueryParams | object: QueryParams | Set initial query parameters                                                                                                                           |
-| relation    | object: Filter      | A base filter to apply (currently used in the context of RelatedAPIs)                                                                                                      |
-
-#### useApi
-
-Provides `path`, `data`, `info`, `queryParams`, `loading`, `error`, `setQueryParams`, `getEntry`, `addEntry`, `updateEntry`, `deleteEntry` to interact with **Seidr's** `BaseModelRestApi`. Setting `queryParams` via `setQueryparams` will trigger an update of `data`.
-
-Can only be used inside of `SeidrApiProvider`.
-
-#### DataGrid
-
-A feature rich table component that leverages `useApi` internally. Use this, if you don't want to implement your own table.
-
-| prop          | value                  | description                                                                                           |
-| ------------- | ---------------------- | ----------------------------------------------------------------------------------------------------- |
-| fetchOnMount  | boolean                | Determines if DataGrid should trigger a load on mount, defaults to true                               |
-| hideToolbar   | boolean                | Hide toolbar, the toolbar is the upper section containing Settings, Add and Filter                    |
-| hideFilter    | boolean                | Hide filter                                                                                           |
-| hideSettings  | boolean                | Hide settings                                                                                         |
-| hideActions   | boolean                | Hide action column on every row                                                                       |
-| settings      | object: Settings       | Style settings                                                                                        |
-| onSelectEntry | function               | Callback to be fired on entry selection (Will apply selection styles to rows)                         |
-| styles        | object: DataGridStyles | Interface to style DataGrid (based on [Mantine's StylesAPI](https://mantine.dev/theming/styles-api/)) |
+Provides `user`, `error`, `loading`, `getUser`, `signin`, `signout`, `update`, `resetPassword` to interact with **Seidr's** authentication functionality. This hook will also trigger a rerender when `user`, `error` and `loading` change (react lifecycle).
 
 #### UserMenu
 
@@ -115,9 +83,51 @@ These paths will be appended the provided `basePath`.
 | Target   | ReactNode | A react element to render instead of the default button                                   |
 | children | ReactNode | A set of mantine's `Menu.Divider`, `Menu.Label` and `Menu.Item` to append to the dropdown |
 
-### SeidrApiProvider
+#### SeidrApiProvider
 
-`SeidrApiProvider` relies on an implementation of **Seidr's** `BaseModelRestApi`. Just provide the `resource_name` used in the implementation of the `BaseModelRestApi` and (assuming the paths are correct) enjoy the power of `SeidrApiProvider`.
+`SeidrApiProvider` interacts with **Seidr's** `BaseModelRestApi`. Path should be the same as `resource_name` used in `BaseModelRestApi`.
+
+| prop               | value               | description                                                                                                                                                                |
+| ------------------ | ------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| path               | string              | The path segment to add to the `baseUrl` provided to SeidrProvider. The resulting url should point to a valid **Seidr** base route. Will ignore `baseUrl`, if it is a URL. |
+| settings           | object: Settings    | Style settings                                                                                                                                                             |
+| initialQueryParams | object: QueryParams | Set initial query parameters                                                                                                                                               |
+| relation           | object: Filter      | A base filter to apply (currently used in the context of RelatedAPIs)                                                                                                      |
+
+#### useApi
+
+Provides `path`, `data`, `info`, `queryParams`, `loading`, `error`, `setQueryParams`, `getEntry`, `addEntry`, `updateEntry`, `deleteEntry` to interact with **Seidr's** `BaseModelRestApi`. Setting `queryParams` via `setQueryparams` will trigger an update of `data`.
+
+_Can only be used inside of `SeidrApiProvider`._
+
+#### DataGrid
+
+A feature rich table component that leverages `useApi` internally. Use this, if you don't want to implement your own table.
+
+| prop          | value                  | description                                                                                           |
+| ------------- | ---------------------- | ----------------------------------------------------------------------------------------------------- |
+| fetchOnMount  | boolean                | Determines if DataGrid should trigger a load on mount, defaults to true                               |
+| hideToolbar   | boolean                | Hide toolbar, the toolbar is the upper section containing Settings, Add and Filter                    |
+| hideFilter    | boolean                | Hide filter                                                                                           |
+| hideSettings  | boolean                | Hide settings                                                                                         |
+| hideActions   | boolean                | Hide action column on every row                                                                       |
+| settings      | object: Settings       | Style settings                                                                                        |
+| onSelectEntry | function               | Callback to be fired on entry selection (Will apply selection styles to rows)                         |
+| styles        | object: DataGridStyles | Interface to style DataGrid (based on [Mantine's StylesAPI](https://mantine.dev/theming/styles-api/)) |
+
+_Can only be used inside of `SeidrApiProvider`._
+
+#### MultiSelect
+
+Creates a CheckBox Group based on a quickfilter of the type `multiselect`
+
+| prop | value  | description                                                 |
+| ---- | ------ | ----------------------------------------------------------- |
+| name | string | Name of the quickfilter to leverage provided by the backend |
+
+_\*supports also any prop for [Mantine's CheckBox.Group](https://mantine.dev/core/checkbox/?t=props)_
+
+_Can only be used inside of `SeidrApiProvider`._
 
 ### Authentication
 

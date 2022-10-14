@@ -39,7 +39,6 @@ export function FormFilterIn({ control, name, ...props }) {
         return query;
       }}
       onChange={(values) => {
-        console.log(values);
         inputProps.onChange(values);
       }}
     />

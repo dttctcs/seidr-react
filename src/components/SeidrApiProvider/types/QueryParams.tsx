@@ -1,5 +1,5 @@
 export interface Filter {
-  foreign_key: string;
+  col: string;
   opr: string;
   value: string | number;
 }

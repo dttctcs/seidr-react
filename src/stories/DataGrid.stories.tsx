@@ -41,41 +41,6 @@ const Template: ComponentStory<typeof Wrapper> = (args) => {
 };
 
 const defaultArgTypes = {
-  queryParams: {
-    DataGrid: {
-      disable: true,
-    },
-  },
-  rowsPerPageProps: {
-    DataGrid: {
-      disable: true,
-    },
-  },
-  relation: {
-    DataGrid: {
-      disable: true,
-    },
-  },
-  AddComponent: {
-    DataGrid: {
-      disable: true,
-    },
-  },
-  EditComponent: {
-    DataGrid: {
-      disable: true,
-    },
-  },
-  ViewComponent: {
-    DataGrid: {
-      disable: true,
-    },
-  },
-  onError: {
-    DataGrid: {
-      disable: true,
-    },
-  },
   onSelectEntry: {
     DataGrid: {
       disable: true,
