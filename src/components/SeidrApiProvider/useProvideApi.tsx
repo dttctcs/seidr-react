@@ -59,9 +59,6 @@ export function useProvideApi(props: UseProvideApiProps): Api {
   });
 
   useEffect(() => {
-    if (!state.info) {
-      getInfo();
-    }
     if (state.queryParams) {
       getData();
     }
@@ -135,6 +132,7 @@ export function useProvideApi(props: UseProvideApiProps): Api {
   const addEntry = async (item: any) => {
     try {
       const data = await createItem(props.path, item);
+      getInfo();
       getData();
       return data;
     } catch (error) {
@@ -145,6 +143,7 @@ export function useProvideApi(props: UseProvideApiProps): Api {
   const updateEntry = async (id: number, item: any) => {
     try {
       const data = await updateItem(props.path, id, item);
+      getInfo();
       getData();
       return data;
     } catch (error) {
@@ -155,6 +154,7 @@ export function useProvideApi(props: UseProvideApiProps): Api {
   const deleteEntry = async (id: number) => {
     try {
       const data = await deleteItem(props.path, id);
+      getInfo();
       getData();
       return data;
     } catch (error) {
