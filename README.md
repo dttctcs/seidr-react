@@ -129,6 +129,8 @@ _\*supports also any prop for [Mantine's CheckBox.Group](https://mantine.dev/cor
 
 _Can only be used inside of `SeidrApiProvider`._
 
+## Concepts
+  
 ### Authentication
 
 `useSeidrAuth` assumes the presence of `AuthApi` provided by **Seidr** in your backend. Given this and correctly set paths, you gain the full capability of a session based authentication feature which has the same (except OIDC) functionality as [Flask Appbuilder's](https://flask-appbuilder.readthedocs.io/en/latest/security.html)
