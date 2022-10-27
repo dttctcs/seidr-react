@@ -49,6 +49,7 @@ function FilterMenu({ onClose }) {
 
   const onSubmit = (data) => {
     const filters = JSON.parse(JSON.stringify(data.filters));
+
     filters.forEach((filter) => {
       if (filter.opr === 'in' && Array.isArray(filter.value)) {
         filter.value = JSON.stringify(filter.value);
@@ -64,7 +65,7 @@ function FilterMenu({ onClose }) {
         controlledFields.map((field, index) => {
           return (
             <React.Fragment key={field.id}>
-              <Group mt="lg" spacing="md">
+              <Group mt="lg" spacing="md" noWrap>
                 <Box sx={{ width: '192px' }}>
                   <FormFilterField
                     name={`filters.${index}.col`}
