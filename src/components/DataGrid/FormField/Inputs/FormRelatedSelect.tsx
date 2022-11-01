@@ -3,7 +3,7 @@ import { useController } from 'react-hook-form';
 
 import { Select } from '@mantine/core';
 
-export function FormRelatedSelect({ control, name, items, ...props }) {
+export function FormRelatedSelect({ control, name, items, filter, ...props }) {
   const {
     field: { ...inputProps },
     fieldState: { error },
@@ -13,7 +13,13 @@ export function FormRelatedSelect({ control, name, items, ...props }) {
   });
 
   const data = items.map((item) => ({ value: item.id.toString(), label: item.value }));
-  const currentItem = inputProps.value?.id ? inputProps.value.id.toString() : null;
+
+  let currentItem = null;
+  if (filter && inputProps.value) {
+    currentItem = inputProps.value.toString();
+  } else if (inputProps.value?.id) {
+    currentItem = inputProps.value.id.toString();
+  }
 
   return (
     <Select
@@ -22,8 +28,11 @@ export function FormRelatedSelect({ control, name, items, ...props }) {
       {...inputProps}
       value={currentItem}
       onChange={(value) => {
+        if (filter) {
+          inputProps.onChange(value);
+          return;
+        }
         const newItem = items.find((item) => item.id.toString() === value);
-
         inputProps.onChange(newItem);
       }}
       searchable

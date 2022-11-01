@@ -45,7 +45,7 @@ export function FormField({ name, control, schema, filter, ...props }: FormField
     return <FormRelatedListSelect name={name} control={control} items={schema.values} {...props} />;
   }
   if (schema.type === 'Related') {
-    return <FormRelatedSelect name={name} control={control} items={schema.values} {...props} />;
+    return <FormRelatedSelect name={name} control={control} items={schema.values} filter={filter} {...props} />;
   }
 
   if (schema.type === 'DateTime') {
