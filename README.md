@@ -164,4 +164,4 @@ your `node_modules` folder and install dependencies only from `package-lock.json
 [^mantine_checkbox_group_props]: Also supports any prop
 for [Mantine's CheckBox.Group](https://mantine.dev/core/checkbox/?t=props)
 [^mantine_multiselect_props]: Also supports any prop
-for [Mantine's CheckBox.Group](https://mantine.dev/core/multi-select/?t=props)
+for [Mantine's MultiSelect](https://mantine.dev/core/multi-select/?t=props)
