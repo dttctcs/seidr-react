@@ -10,8 +10,6 @@ A react component library for [Seidr](https://github.com/dttctcs/seidr).
 
 **Seidr React** provides react components and hooks to interact with **Seidr's** features.
 
-More components coming soon...
-
 ### Prerequisites
 
 You have **Seidr** running? Good. All you need is to install **Seidr React** and leverage its components.
@@ -132,17 +130,23 @@ table.
 | onSelectEntry      | function               | Callback to be fired on entry selection                                                                |
 | styles             | object: DataGridStyles | Interface to style DataGrid (based on [Mantine's StylesAPI](https://mantine.dev/theming/styles-api/))  |
 
-##### Quick filter
-
-###### MultiSelect[^mantine_checkbox_group_props]
-
-Creates a [Mantine checkbox group](https://mantine.dev/core/checkbox/#checkboxgroup) based on a quick filter of the
-type `multiselect` that creates a new filter of the type {col: <quickfilter.column>, opr: 'in', value: <selectedValues>
-} (FilterIn) if it doesn't exist, else updates it.
+##### Quick Filter
 
 | prop | value  | description                                                  |
 |------|--------|--------------------------------------------------------------|
 | name | string | Name of the quick filter to leverage provided by the backend |
+
+###### CheckBoxGroup[^mantine_checkbox_group_props]
+
+Creates a [Mantine Checkbox.Group](https://mantine.dev/core/checkbox/#checkboxgroup) based on a quick filter of the
+type `multiselect` that creates a new filter of the type {col: <quickfilter.column>, opr: 'in', value: <selectedValues>
+} (FilterIn) if it doesn't exist, else updates it.
+
+###### MultiSelect[^mantine_multiselect_props]
+
+Creates a [Mantine MultiSelect](https://mantine.dev/core/multi-select/) based on a quick filter of the
+type `multiselect` that creates a new filter of the type {col: <quickfilter.column>, opr: 'in', value: <selectedValues>
+} (FilterIn) if it doesn't exist, else updates it.
 
 ### Authentication
 
@@ -159,3 +163,5 @@ your `node_modules` folder and install dependencies only from `package-lock.json
 [^inside_seidr_api_provider]: Can only be used inside of `SeidrApiProvider`.
 [^mantine_checkbox_group_props]: Also supports any prop
 for [Mantine's CheckBox.Group](https://mantine.dev/core/checkbox/?t=props)
+[^mantine_multiselect_props]: Also supports any prop
+for [Mantine's CheckBox.Group](https://mantine.dev/core/multi-select/?t=props)

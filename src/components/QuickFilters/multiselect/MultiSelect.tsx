@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useApi } from '../../SeidrApiProvider';
 
-import { Checkbox, CheckboxGroupProps } from '@mantine/core';
+import { MultiSelect as MantineMultiSelect, MultiSelectProps as MantineMultiSelectProps } from '@mantine/core';
 import { QuickFilter } from '../types/QuickFilter';
 import { Filter } from '../../SeidrApiProvider/types';
 
-interface MultiSelectProps extends Omit<CheckboxGroupProps, 'value' | 'children' | 'defaultValue' | 'onChange'> {
+interface MultiSelectProps extends Omit<MantineMultiSelectProps, 'value' | 'children' | 'defaultValue' | 'onChange'> {
   name: string;
 }
 
@@ -32,7 +32,7 @@ export function MultiSelect({ name, ...props }: MultiSelectProps) {
   }, [queryParams]);
 
   return quickFilter ? (
-    <Checkbox.Group
+    <MantineMultiSelect
       value={activeFilter && typeof activeFilter.value === 'string' ? JSON.parse(activeFilter.value) : []}
       label={quickFilter.label}
       onChange={(values) => {
@@ -45,10 +45,7 @@ export function MultiSelect({ name, ...props }: MultiSelectProps) {
         });
       }}
       {...props}
-    >
-      {quickFilter.options.map((option) => {
-        return <Checkbox key={option.value} value={option.value} label={option.label} />;
-      })}
-    </Checkbox.Group>
+      data={quickFilter.options}
+    />
   ) : null;
 }
