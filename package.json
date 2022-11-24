@@ -25,7 +25,7 @@
     "test": "echo \"Error: no test specified\" && exit 0",
     "storybook": "start-storybook -p 6006 -s .storybook/public",
     "build-storybook": "build-storybook",
-    "build": "rollup -c",
+    "build": "rollup -c --bundleConfigAsCjs",
     "set-version": "esno ./scripts/set-version"
   },
   "dependencies": {
