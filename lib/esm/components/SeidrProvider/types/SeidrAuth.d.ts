@@ -3,7 +3,7 @@ interface UserCredentials {
     username: string;
     password: string;
 }
-export declare type SeidrAuth = {
+export type SeidrAuth = {
     user: User;
     loading: boolean;
     error: string;
