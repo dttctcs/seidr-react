@@ -1,4 +1,4 @@
-import 'overlayscrollbars/css/OverlayScrollbars.css';
+import 'overlayscrollbars/overlayscrollbars.css';
 
 import React, { forwardRef } from 'react';
 
