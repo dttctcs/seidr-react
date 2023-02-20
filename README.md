@@ -118,17 +118,17 @@ in `BaseModelRestApi`.
 A feature rich table component that leverages `useApi` internally. Use this, if you don't want to implement your own
 table.
 
-| prop               | value                  | description                                                                                            |
-|--------------------|------------------------|--------------------------------------------------------------------------------------------------------|
-| hideToolbar        | boolean                | Hide toolbar, the toolbar is the upper section containing Settings, Add and Filter                     |
-| hideFilter         | boolean                | Hide filters                                                                                           |
-| hideSettings       | boolean                | Hide settings                                                                                          |
-| hideActions        | boolean                | Hide Action column on every row                     >                                                  |
-| settings           | object: Settings       | Style settings                                                                                         |
-| rowsPerPageProps   | number                 | Externally control page size                                                                           |
-| fetchOnMount       | boolean                | Determines if the table should trigger a data fetch on mount, defaults to true                         |
-| onSelectEntry      | function               | Callback to be fired on entry selection                                                                |
-| styles             | object: DataGridStyles | Interface to style DataGrid (based on [Mantine's StylesAPI](https://mantine.dev/theming/styles-api/))  |
+| prop             | value                  | description                                                                                           |
+|------------------|------------------------|-------------------------------------------------------------------------------------------------------|
+| hideToolbar      | boolean                | Hide toolbar, the toolbar is the upper section containing Settings, Add and Filter                    |
+| hideFilter       | boolean                | Hide filters                                                                                          |
+| hideSettings     | boolean                | Hide settings                                                                                         |
+| hideActions      | boolean                | Hide Action column on every row                     >                                                 |
+| settings         | object: Settings       | Style settings                                                                                        |
+| rowsPerPageProps | number                 | Externally control page size                                                                          |
+| fetchOnMount     | boolean                | Determines if the table should trigger a data fetch on mount, defaults to true                        |
+| onSelectEntry    | function               | Callback to be fired on entry selection                                                               |
+| styles           | object: DataGridStyles | Interface to style DataGrid (based on [Mantine's StylesAPI](https://mantine.dev/theming/styles-api/)) |
 
 ##### Quick Filter
 
@@ -148,6 +148,12 @@ Creates a [Mantine MultiSelect](https://mantine.dev/core/multi-select/) based on
 type `multiselect` that creates a new filter of the type {col: <quickfilter.column>, opr: 'in', value: <selectedValues>
 } (FilterIn) if it doesn't exist, else updates it.
 
+###### Select[^mantine_select_props]
+
+Creates a [Mantine Select](https://mantine.dev/core/select/) based on a quick filter of the
+type `select` that creates a new filter of the type {col: <quickfilter.column>, opr: 'eq', value: <selectedValue>
+} (FilterEqual) if it doesn't exist, else updates it.
+
 ### Authentication
 
 `useSeidrAuth` assumes the presence of `AuthApi` provided by **Seidr** in your backend. Given this and correctly set
@@ -165,3 +171,4 @@ your `node_modules` folder and install dependencies only from `package-lock.json
 for [Mantine's CheckBox.Group](https://mantine.dev/core/checkbox/?t=props)
 [^mantine_multiselect_props]: Also supports any prop
 for [Mantine's MultiSelect](https://mantine.dev/core/multi-select/?t=props)
+[^mantine_select_props]: Also supports any prop for [Mantine's Select](https://mantine.dev/core/select/?t=props)
