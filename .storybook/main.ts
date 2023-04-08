@@ -1,4 +1,6 @@
-module.exports = {
+import { StorybookConfig } from '@storybook/react-webpack5';
+
+const config: StorybookConfig = {
   stories: ['../src/**/*.stories.mdx', '../src/**/*.stories.@(js|jsx|ts|tsx)'],
   addons: [
     '@storybook/addon-controls',
@@ -16,10 +18,11 @@ module.exports = {
       fastRefresh: true,
     },
   },
-  features: {
-    previewMdx2: true,
+  core: {
+    disableTelemetry: true,
   },
   docs: {
     autodocs: true,
   },
 };
+export default config;

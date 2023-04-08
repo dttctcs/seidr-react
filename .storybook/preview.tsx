@@ -1,15 +1,14 @@
-import { initialize, mswDecorator } from 'msw-storybook-addon';
 import { handlers } from '../src/mocks/handlers';
-import { SeidrProvider } from '../src';
+import { SeidrProvider, SeidrApiProvider } from '../src';
+import { Preview } from '@storybook/react';
+import { setupWorker } from 'msw';
 
-initialize();
+if (typeof global.process === 'undefined') {
+  const worker = setupWorker(...handlers);
+  worker.start({ onUnhandledRequest: 'bypass' });
+}
 
-// if (typeof global.process === 'undefined') {
-//   const worker = setupWorker(...handlers);
-//   worker.start({ onUnhandledRequest: 'bypass' });
-// }
-
-const preview = {
+const preview: Preview = {
   parameters: {
     actions: { argTypesRegex: '^on[A-Z].*' },
     controls: {
@@ -26,7 +25,9 @@ export const decorators = [
   (Story) => {
     return (
       <SeidrProvider baseUrl='http://localhost:6060/api/v1'>
-        <Story />
+        <SeidrApiProvider path='/assets'>
+          <Story />
+        </SeidrApiProvider>
       </SeidrProvider>
     );
   },

@@ -1,456 +1,119 @@
-/* eslint-disable camelcase */
 import { rest } from 'msw';
-import cars from './mock_data.json';
+import assets from './assets.json';
+import units from './units.json';
 
-const getInfo = () => {
+export const handlers = [
+  rest.get('/api/v1/info', (req, res, ctx) => {
+    return res(ctx.json(getSeidrInfo()), ctx.delay());
+  }),
+  rest.post('/api/v1/auth/login', (req, res, ctx) => {
+    const { username, password } = req.json();
+    if (username === 'admin' && password === 'admin') {
+      return res(ctx.json(getUser()), ctx.delay());
+    } else {
+      res(
+        ctx.status(403),
+        ctx.delay(),
+        ctx.json({
+          errorMessage: `User '${username} not found or ${password} invalid!`,
+        }),
+      );
+    }
+  }),
+
+  rest.get('/api/v1/units/_info', (req, res, ctx) => {
+    return res(ctx.json(getInfoUnits()));
+  }),
+  rest.get('/api/v1/units', (req, res, ctx) => {
+    return res(ctx.json(getUnits()));
+  }),
+  rest.get('/api/v1/units/:id', (req, res, ctx) => {
+    return res(ctx.json(getUnit(req.params.id)), ctx.delay());
+  }),
+  rest.post('/api/v1/units/:id', (req, res, ctx) => {
+    return res(ctx.json(getUnit(req.params.id)), ctx.delay());
+  }),
+  rest.delete('/api/v1/units/:id', (req, res, ctx) => {
+    return res(ctx.json(getUnit(req.params.id)), ctx.delay());
+  }),
+
+  rest.get('/api/v1/assets/_info', (req, res, ctx) => {
+    return res(ctx.json(getInfoAssets()));
+  }),
+  rest.get('/api/v1/assets', (req, res, ctx) => {
+    return res(ctx.json(getAssets()));
+  }),
+  rest.get('/api/v1/assets/:id', (req, res, ctx) => {
+    return res(ctx.json(getAsset(req.params.id)), ctx.delay());
+  }),
+  rest.post('/api/v1/assets/:id', (req, res, ctx) => {
+    return res(ctx.json(getAsset(req.params.id)), ctx.delay());
+  }),
+  rest.delete('/api/v1/assets/:id', (req, res, ctx) => {
+    return res(ctx.json(getAsset(req.params.id)), ctx.delay());
+  }),
+];
+
+const getSeidrInfo = () => {
   return {
-    add_columns: [
+    'apis': [
       {
-        description: '',
-        name: 'brand',
-        label: 'Brand',
-        required: false,
-        type: 'String',
-        unique: false,
+        'icon': 'Table',
+        'level': 'security',
+        'name': 'Permissionview',
+        'path': 'permissionview',
+        'permission_name': 'PermissionViewApi',
+        'type': 'table',
       },
       {
-        description: '',
-        name: 'model',
-        label: 'Model',
-        required: false,
-        type: 'String',
-        unique: false,
+        'icon': 'Table',
+        'level': 'security',
+        'name': 'Permissions',
+        'path': 'permissions',
+        'permission_name': 'PermissionsApi',
+        'type': 'table',
       },
       {
-        description: '',
-        name: 'date',
-        label: 'Date',
-        required: false,
-        type: 'Date',
-        unique: false,
+        'icon': 'Table',
+        'level': 'security',
+        'name': 'Roles',
+        'path': 'roles',
+        'permission_name': 'RolesApi',
+        'type': 'table',
       },
       {
-        description: '',
-        name: 'weight',
-        label: 'Weight',
-        required: false,
-        type: 'Float',
-        unique: false,
+        'icon': 'Table',
+        'level': 'security',
+        'name': 'Users',
+        'path': 'users',
+        'permission_name': 'UsersApi',
+        'type': 'table',
       },
       {
-        description: '',
-        name: 'electric',
-        label: 'Electric',
-        required: false,
-        type: 'Boolean',
-        unique: false,
+        'icon': 'Table',
+        'level': 'security',
+        'name': 'Viewsmenus',
+        'path': 'viewsmenus',
+        'permission_name': 'ViewsMenusApi',
+        'type': 'table',
       },
       {
-        description: '',
-        name: 'datetime',
-        label: 'DateTime',
-        required: false,
-        type: 'DateTime',
-        unique: false,
+        'icon': 'Table',
+        'level': 'default',
+        'name': 'Assets',
+        'path': 'assets',
+        'permission_name': 'AssetApi',
+        'type': 'table',
+      },
+      {
+        'icon': 'Table',
+        'level': 'default',
+        'name': 'Units',
+        'path': 'units',
+        'permission_name': 'UnitApi',
+        'type': 'table',
       },
     ],
-    add_title: 'Add Car',
-    schema: {
-      type: 'object',
-      _whitelist: {
-        list: {},
-        refs: {},
-      },
-      _blacklist: {
-        list: {},
-        refs: {},
-      },
-      exclusiveTests: {},
-      deps: [],
-      conditions: [],
-      tests: [],
-      transforms: [null],
-      spec: {
-        strip: false,
-        strict: false,
-        abortEarly: true,
-        recursive: true,
-        nullable: false,
-        presence: 'optional',
-      },
-      fields: {
-        brand: {
-          type: 'string',
-          _whitelist: {
-            list: {},
-            refs: {},
-          },
-          _blacklist: {
-            list: {},
-            refs: {},
-          },
-          exclusiveTests: {},
-          deps: [],
-          conditions: [],
-          tests: [],
-          transforms: [null],
-          spec: {
-            strip: false,
-            strict: false,
-            abortEarly: true,
-            recursive: true,
-            nullable: true,
-            presence: 'optional',
-          },
-        },
-        model: {
-          type: 'string',
-          _whitelist: {
-            list: {},
-            refs: {},
-          },
-          _blacklist: {
-            list: {},
-            refs: {},
-          },
-          exclusiveTests: {},
-          deps: [],
-          conditions: [],
-          tests: [],
-          transforms: [null],
-          spec: {
-            strip: false,
-            strict: false,
-            abortEarly: true,
-            recursive: true,
-            nullable: true,
-            presence: 'optional',
-          },
-        },
-        date: {
-          type: 'string',
-          _whitelist: {
-            list: {},
-            refs: {},
-          },
-          _blacklist: {
-            list: {},
-            refs: {},
-          },
-          exclusiveTests: {},
-          deps: [],
-          conditions: [],
-          tests: [],
-          transforms: [null],
-          spec: {
-            strip: false,
-            strict: false,
-            abortEarly: true,
-            recursive: true,
-            nullable: true,
-            presence: 'optional',
-          },
-        },
-        weight: {
-          type: 'number',
-          _whitelist: {
-            list: {},
-            refs: {},
-          },
-          _blacklist: {
-            list: {},
-            refs: {},
-          },
-          exclusiveTests: {},
-          deps: [],
-          conditions: [],
-          tests: [],
-          transforms: [null],
-          spec: {
-            strip: false,
-            strict: false,
-            abortEarly: true,
-            recursive: true,
-            nullable: true,
-            presence: 'optional',
-          },
-        },
-      },
-      _nodes: ['brand', 'model', 'date', 'weight'],
-      _excludedEdges: [],
-    },
-
-    edit_columns: [
-      {
-        description: '',
-        name: 'brand',
-        label: 'Brand',
-        required: false,
-        type: 'String',
-        unique: false,
-      },
-      {
-        description: '',
-        name: 'model',
-        label: 'Model',
-        required: false,
-        type: 'String',
-        unique: false,
-      },
-      {
-        description: '',
-        name: 'date',
-        label: 'Date',
-        required: false,
-        type: 'Date',
-        unique: false,
-      },
-      {
-        description: '',
-        name: 'weight',
-        label: 'Weight',
-        required: false,
-        type: 'Float',
-        unique: false,
-      },
-      {
-        description: '',
-        name: 'electric',
-        label: 'Electric',
-        required: false,
-        type: 'Boolean',
-        unique: false,
-      },
-      {
-        description: '',
-        name: 'datetime',
-        label: 'DateTime',
-        required: false,
-        type: 'DateTime',
-        unique: false,
-      },
-    ],
-
-    edit_title: 'Edit Car',
-
-    filters: {
-      brand: {
-        filters: [
-          {
-            name: 'Starts with',
-            operator: 'sw',
-          },
-          {
-            name: 'Ends with',
-            operator: 'ew',
-          },
-          {
-            name: 'Contains',
-            operator: 'ct',
-          },
-          {
-            name: 'Equal to',
-            operator: 'eq',
-          },
-          {
-            name: 'Not Starts with',
-            operator: 'nsw',
-          },
-          {
-            name: 'Not Ends with',
-            operator: 'new',
-          },
-          {
-            name: 'Not Contains',
-            operator: 'nct',
-          },
-          {
-            name: 'Not Equal to',
-            operator: 'neq',
-          },
-          {
-            name: 'One of',
-            operator: 'in',
-          },
-        ],
-        schema: {
-          description: '',
-          label: 'Brand',
-          name: 'brand',
-          required: false,
-          type: 'String',
-          unique: false,
-          validate: ['<Length(min=None, max=32, equal=None, error=None)>'],
-        },
-      },
-      model: {
-        filters: [
-          {
-            name: 'Starts with',
-            operator: 'sw',
-          },
-          {
-            name: 'Ends with',
-            operator: 'ew',
-          },
-          {
-            name: 'Contains',
-            operator: 'ct',
-          },
-          {
-            name: 'Equal to',
-            operator: 'eq',
-          },
-          {
-            name: 'Not Starts with',
-            operator: 'nsw',
-          },
-          {
-            name: 'Not Ends with',
-            operator: 'new',
-          },
-          {
-            name: 'Not Contains',
-            operator: 'nct',
-          },
-          {
-            name: 'Not Equal to',
-            operator: 'neq',
-          },
-          {
-            name: 'One of',
-            operator: 'in',
-          },
-        ],
-        schema: {
-          description: '',
-          label: 'Brand',
-          name: 'brand',
-          required: false,
-          type: 'String',
-          unique: false,
-          validate: ['<Length(min=None, max=32, equal=None, error=None)>'],
-        },
-      },
-      datetime: {
-        filters: [
-          {
-            name: 'Equal to',
-            operator: 'eq',
-          },
-          {
-            name: 'Greater than',
-            operator: 'gt',
-          },
-          {
-            name: 'Smaller than',
-            operator: 'lt',
-          },
-          {
-            name: 'Not Equal to',
-            operator: 'neq',
-          },
-          {
-            name: 'Smaller equal',
-            operator: 'le',
-          },
-          {
-            name: 'Greater equal',
-            operator: 'ge',
-          },
-        ],
-        schema: {
-          description: '',
-          label: 'DateTime',
-          name: 'datetime',
-          required: false,
-          type: 'DateTime',
-          unique: false,
-        },
-      },
-      date: {
-        filters: [
-          {
-            name: 'Equal to',
-            operator: 'eq',
-          },
-          {
-            name: 'Greater than',
-            operator: 'gt',
-          },
-          {
-            name: 'Smaller than',
-            operator: 'lt',
-          },
-          {
-            name: 'Not Equal to',
-            operator: 'neq',
-          },
-          {
-            name: 'Smaller equal',
-            operator: 'le',
-          },
-          {
-            name: 'Greater equal',
-            operator: 'ge',
-          },
-        ],
-        schema: {
-          description: '',
-          label: 'Date',
-          name: 'date',
-          required: false,
-          type: 'Date',
-          unique: false,
-        },
-      },
-    },
-    permissions: ['can_get', 'can_info', 'can_put', 'can_delete', 'can_post'],
-    relations: [
-      {
-        foreign_key: 'id',
-        name: 'Engine',
-        path: 'engine/',
-        type: 'rel_o_m',
-      },
-    ],
-  };
-};
-
-const get = () => {
-  return {
-    count: cars.length,
-    ids: cars.map((car) => car.id),
-    label_columns: { brand: 'Brand', model: 'Model', date: 'Date', weight: 'Weight' },
-    list_columns: ['brand', 'model', 'date', 'datetime', 'year'],
-    list_title: 'List Cars',
-    order_columns: ['brand', 'model', 'date'],
-    result: cars,
-  };
-};
-
-const getItem = (id) => {
-  let item = cars.find((car) => car.id == id);
-
-  return {
-    show_title: 'Show Cars',
-    description_columns: {},
-    show_columns: ['brand', 'model', 'date', 'year'],
-    label_columns: { brand: 'Brand', model: 'Model', date: 'Date', weight: 'Weight' },
-    id: item.id,
-    result: item,
-  };
-};
-
-const getEngines = () => {
-  return {
-    count: 0,
-    ids: [],
-    label_columns: { brand: 'Brand', model: 'Model', date: 'Date', weight: 'Weight' },
-    list_columns: ['brand', 'model', 'date', 'year'],
-    list_title: 'List Engine',
-    order_columns: ['brand', 'model', 'date'],
-    result: cars,
   };
 };
 
@@ -480,58 +143,909 @@ const getUser = () => {
   };
 };
 
-const getSeidrInfo = () => {
+const getInfoUnits = () => {
   return {
-    apis: [
-      { name: 'CarsApi', type: 'crud', level: 'default' },
-      { name: 'PermissionsApi', type: 'crud', level: 'security' },
-      { name: 'UsersApi', type: 'crud', level: 'security' },
-      { name: 'RolesApi', type: 'crud', level: 'security' },
+    'add_columns': [
+      {
+        'description': 'Name of the unit',
+        'label': 'Name',
+        'name': 'name',
+        'required': true,
+        'type': 'String',
+        'unique': false,
+        'validate': [
+          '<Length(min=None, max=512, equal=None, error=None)>',
+        ],
+      },
+      {
+        'count': 300,
+        'description': '',
+        'label': 'Owner',
+        'name': 'owner',
+        'required': false,
+        'type': 'RelatedList',
+        'unique': false,
+        'values': [
+          {
+            'id': 1,
+            'value': 'asset_0',
+          },
+          {
+            'id': 2,
+            'value': 'asset_1',
+          },
+          {
+            'id': 3,
+            'value': 'asset_2',
+          },
+          {
+            'id': 4,
+            'value': 'asset_3',
+          },
+          {
+            'id': 5,
+            'value': 'asset_4',
+          },
+          {
+            'id': 6,
+            'value': 'asset_5',
+          },
+          {
+            'id': 7,
+            'value': 'asset_6',
+          },
+          {
+            'id': 8,
+            'value': 'asset_7',
+          },
+          {
+            'id': 9,
+            'value': 'asset_8',
+          },
+          {
+            'id': 10,
+            'value': 'asset_9',
+          },
+          {
+            'id': 11,
+            'value': 'asset_10',
+          },
+          {
+            'id': 12,
+            'value': 'asset_11',
+          },
+          {
+            'id': 13,
+            'value': 'asset_12',
+          },
+          {
+            'id': 14,
+            'value': 'asset_13',
+          },
+          {
+            'id': 15,
+            'value': 'asset_14',
+          },
+          {
+            'id': 16,
+            'value': 'asset_15',
+          },
+          {
+            'id': 17,
+            'value': 'asset_16',
+          },
+          {
+            'id': 18,
+            'value': 'asset_17',
+          },
+          {
+            'id': 19,
+            'value': 'asset_18',
+          },
+          {
+            'id': 20,
+            'value': 'asset_19',
+          },
+        ],
+      },
     ],
+    'add_title': 'Add Unit',
+    'edit_columns': [
+      {
+        'description': 'Name of the unit',
+        'label': 'Name',
+        'name': 'name',
+        'required': true,
+        'type': 'String',
+        'unique': false,
+        'validate': [
+          '<Length(min=None, max=512, equal=None, error=None)>',
+        ],
+      },
+      {
+        'count': 300,
+        'description': '',
+        'label': 'Owner',
+        'name': 'owner',
+        'required': false,
+        'type': 'RelatedList',
+        'unique': false,
+        'values': [
+          {
+            'id': 1,
+            'value': 'asset_0',
+          },
+          {
+            'id': 2,
+            'value': 'asset_1',
+          },
+          {
+            'id': 3,
+            'value': 'asset_2',
+          },
+          {
+            'id': 4,
+            'value': 'asset_3',
+          },
+          {
+            'id': 5,
+            'value': 'asset_4',
+          },
+          {
+            'id': 6,
+            'value': 'asset_5',
+          },
+          {
+            'id': 7,
+            'value': 'asset_6',
+          },
+          {
+            'id': 8,
+            'value': 'asset_7',
+          },
+          {
+            'id': 9,
+            'value': 'asset_8',
+          },
+          {
+            'id': 10,
+            'value': 'asset_9',
+          },
+          {
+            'id': 11,
+            'value': 'asset_10',
+          },
+          {
+            'id': 12,
+            'value': 'asset_11',
+          },
+          {
+            'id': 13,
+            'value': 'asset_12',
+          },
+          {
+            'id': 14,
+            'value': 'asset_13',
+          },
+          {
+            'id': 15,
+            'value': 'asset_14',
+          },
+          {
+            'id': 16,
+            'value': 'asset_15',
+          },
+          {
+            'id': 17,
+            'value': 'asset_16',
+          },
+          {
+            'id': 18,
+            'value': 'asset_17',
+          },
+          {
+            'id': 19,
+            'value': 'asset_18',
+          },
+          {
+            'id': 20,
+            'value': 'asset_19',
+          },
+        ],
+      },
+    ],
+    'edit_title': 'Edit Unit',
+    'filters': {
+      'name': {
+        'filters': [
+          {
+            'name': 'Starts with',
+            'operator': 'sw',
+          },
+          {
+            'name': 'Ends with',
+            'operator': 'ew',
+          },
+          {
+            'name': 'Contains',
+            'operator': 'ct',
+          },
+          {
+            'name': 'Equal to',
+            'operator': 'eq',
+          },
+          {
+            'name': 'Not Starts with',
+            'operator': 'nsw',
+          },
+          {
+            'name': 'Not Ends with',
+            'operator': 'new',
+          },
+          {
+            'name': 'Not Contains',
+            'operator': 'nct',
+          },
+          {
+            'name': 'Not Equal to',
+            'operator': 'neq',
+          },
+          {
+            'name': 'One of',
+            'operator': 'in',
+          },
+        ],
+        'label': 'Name',
+        'schema': {
+          'description': 'Name of the unit',
+          'label': 'Name',
+          'name': 'name',
+          'required': true,
+          'type': 'String',
+          'unique': false,
+          'validate': [
+            '<Length(min=None, max=512, equal=None, error=None)>',
+          ],
+        },
+      },
+      'owner': {
+        'filters': [
+          {
+            'name': 'Relation as Many',
+            'operator': 'rel_m_m',
+          },
+        ],
+        'label': 'Owner',
+        'schema': {
+          'count': 300,
+          'description': '',
+          'label': 'Owner',
+          'name': 'owner',
+          'required': false,
+          'type': 'RelatedList',
+          'unique': false,
+          'values': [
+            {
+              'id': 1,
+              'value': 'asset_0',
+            },
+            {
+              'id': 2,
+              'value': 'asset_1',
+            },
+            {
+              'id': 3,
+              'value': 'asset_2',
+            },
+            {
+              'id': 4,
+              'value': 'asset_3',
+            },
+            {
+              'id': 5,
+              'value': 'asset_4',
+            },
+            {
+              'id': 6,
+              'value': 'asset_5',
+            },
+            {
+              'id': 7,
+              'value': 'asset_6',
+            },
+            {
+              'id': 8,
+              'value': 'asset_7',
+            },
+            {
+              'id': 9,
+              'value': 'asset_8',
+            },
+            {
+              'id': 10,
+              'value': 'asset_9',
+            },
+            {
+              'id': 11,
+              'value': 'asset_10',
+            },
+            {
+              'id': 12,
+              'value': 'asset_11',
+            },
+            {
+              'id': 13,
+              'value': 'asset_12',
+            },
+            {
+              'id': 14,
+              'value': 'asset_13',
+            },
+            {
+              'id': 15,
+              'value': 'asset_14',
+            },
+            {
+              'id': 16,
+              'value': 'asset_15',
+            },
+            {
+              'id': 17,
+              'value': 'asset_16',
+            },
+            {
+              'id': 18,
+              'value': 'asset_17',
+            },
+            {
+              'id': 19,
+              'value': 'asset_18',
+            },
+            {
+              'id': 20,
+              'value': 'asset_19',
+            },
+          ],
+        },
+      },
+    },
+    'permissions': [
+      'can_put',
+      'can_post',
+      'can_get',
+      'can_info',
+      'can_delete',
+    ],
+    'quickfilters': [
+      {
+        'column': 'name',
+        'label': 'Unit Name',
+        'name': 'unit_name',
+        'options': [
+          {
+            'label': 'unit_0',
+            'value': 'unit_0',
+          },
+          {
+            'label': 'unit_1',
+            'value': 'unit_1',
+          },
+          {
+            'label': 'unit_2',
+            'value': 'unit_2',
+          },
+          {
+            'label': 'unit_3',
+            'value': 'unit_3',
+          },
+          {
+            'label': 'unit_4',
+            'value': 'unit_4',
+          },
+          {
+            'label': 'unit_5',
+            'value': 'unit_5',
+          },
+          {
+            'label': 'unit_6',
+            'value': 'unit_6',
+          },
+          {
+            'label': 'unit_7',
+            'value': 'unit_7',
+          },
+          {
+            'label': 'unit_8',
+            'value': 'unit_8',
+          },
+          {
+            'label': 'unit_9',
+            'value': 'unit_9',
+          },
+        ],
+        'type': 'multiselect',
+      },
+    ],
+    'relations': [],
+  };
+};
+const getInfoAssets = () => {
+  return {
+    'add_columns': [
+      {
+        'count': 50,
+        'description': 'Owner of the asset',
+        'label': 'Owner',
+        'name': 'owner',
+        'required': false,
+        'type': 'Related',
+        'unique': false,
+        'values': [
+          {
+            'id': 1,
+            'value': 'unit_0',
+          },
+          {
+            'id': 2,
+            'value': 'unit_1',
+          },
+          {
+            'id': 3,
+            'value': 'unit_2',
+          },
+          {
+            'id': 4,
+            'value': 'unit_3',
+          },
+          {
+            'id': 5,
+            'value': 'unit_4',
+          },
+          {
+            'id': 6,
+            'value': 'unit_5',
+          },
+          {
+            'id': 7,
+            'value': 'unit_6',
+          },
+          {
+            'id': 8,
+            'value': 'unit_7',
+          },
+          {
+            'id': 9,
+            'value': 'unit_8',
+          },
+          {
+            'id': 10,
+            'value': 'unit_9',
+          },
+          {
+            'id': 11,
+            'value': 'unit_0',
+          },
+          {
+            'id': 12,
+            'value': 'unit_1',
+          },
+          {
+            'id': 13,
+            'value': 'unit_2',
+          },
+          {
+            'id': 14,
+            'value': 'unit_3',
+          },
+          {
+            'id': 15,
+            'value': 'unit_4',
+          },
+          {
+            'id': 16,
+            'value': 'unit_5',
+          },
+          {
+            'id': 17,
+            'value': 'unit_6',
+          },
+          {
+            'id': 18,
+            'value': 'unit_7',
+          },
+          {
+            'id': 19,
+            'value': 'unit_8',
+          },
+          {
+            'id': 20,
+            'value': 'unit_9',
+          },
+        ],
+      },
+      {
+        'description': 'Name of the asset',
+        'label': 'Name',
+        'name': 'name',
+        'required': true,
+        'type': 'String',
+        'unique': false,
+        'validate': [
+          '<Length(min=None, max=512, equal=None, error=None)>',
+        ],
+      },
+    ],
+    'add_title': 'Add Asset',
+    'edit_columns': [
+      {
+        'count': 50,
+        'description': 'Owner of the asset',
+        'label': 'Owner',
+        'name': 'owner',
+        'required': false,
+        'type': 'Related',
+        'unique': false,
+        'values': [
+          {
+            'id': 1,
+            'value': 'unit_0',
+          },
+          {
+            'id': 2,
+            'value': 'unit_1',
+          },
+          {
+            'id': 3,
+            'value': 'unit_2',
+          },
+          {
+            'id': 4,
+            'value': 'unit_3',
+          },
+          {
+            'id': 5,
+            'value': 'unit_4',
+          },
+          {
+            'id': 6,
+            'value': 'unit_5',
+          },
+          {
+            'id': 7,
+            'value': 'unit_6',
+          },
+          {
+            'id': 8,
+            'value': 'unit_7',
+          },
+          {
+            'id': 9,
+            'value': 'unit_8',
+          },
+          {
+            'id': 10,
+            'value': 'unit_9',
+          },
+          {
+            'id': 11,
+            'value': 'unit_0',
+          },
+          {
+            'id': 12,
+            'value': 'unit_1',
+          },
+          {
+            'id': 13,
+            'value': 'unit_2',
+          },
+          {
+            'id': 14,
+            'value': 'unit_3',
+          },
+          {
+            'id': 15,
+            'value': 'unit_4',
+          },
+          {
+            'id': 16,
+            'value': 'unit_5',
+          },
+          {
+            'id': 17,
+            'value': 'unit_6',
+          },
+          {
+            'id': 18,
+            'value': 'unit_7',
+          },
+          {
+            'id': 19,
+            'value': 'unit_8',
+          },
+          {
+            'id': 20,
+            'value': 'unit_9',
+          },
+        ],
+      },
+      {
+        'description': 'Name of the asset',
+        'label': 'Name',
+        'name': 'name',
+        'required': true,
+        'type': 'String',
+        'unique': false,
+        'validate': [
+          '<Length(min=None, max=512, equal=None, error=None)>',
+        ],
+      },
+    ],
+    'edit_title': 'Edit Asset',
+    'filters': {
+      'name': {
+        'filters': [
+          {
+            'name': 'Starts with',
+            'operator': 'sw',
+          },
+          {
+            'name': 'Ends with',
+            'operator': 'ew',
+          },
+          {
+            'name': 'Contains',
+            'operator': 'ct',
+          },
+          {
+            'name': 'Equal to',
+            'operator': 'eq',
+          },
+          {
+            'name': 'Not Starts with',
+            'operator': 'nsw',
+          },
+          {
+            'name': 'Not Ends with',
+            'operator': 'new',
+          },
+          {
+            'name': 'Not Contains',
+            'operator': 'nct',
+          },
+          {
+            'name': 'Not Equal to',
+            'operator': 'neq',
+          },
+          {
+            'name': 'One of',
+            'operator': 'in',
+          },
+        ],
+        'label': 'Name',
+        'schema': {
+          'description': 'Name of the asset',
+          'label': 'Name',
+          'name': 'name',
+          'required': true,
+          'type': 'String',
+          'unique': false,
+          'validate': [
+            '<Length(min=None, max=512, equal=None, error=None)>',
+          ],
+        },
+      },
+      'owner': {
+        'filters': [
+          {
+            'name': 'Relation',
+            'operator': 'rel_o_m',
+          },
+          {
+            'name': 'No Relation',
+            'operator': 'nrel_o_m',
+          },
+        ],
+        'label': 'Owner',
+        'schema': {
+          'count': 50,
+          'description': 'Owner of the asset',
+          'label': 'Owner',
+          'name': 'owner',
+          'required': false,
+          'type': 'Related',
+          'unique': false,
+          'values': [
+            {
+              'id': 1,
+              'value': 'unit_0',
+            },
+            {
+              'id': 2,
+              'value': 'unit_1',
+            },
+            {
+              'id': 3,
+              'value': 'unit_2',
+            },
+            {
+              'id': 4,
+              'value': 'unit_3',
+            },
+            {
+              'id': 5,
+              'value': 'unit_4',
+            },
+            {
+              'id': 6,
+              'value': 'unit_5',
+            },
+            {
+              'id': 7,
+              'value': 'unit_6',
+            },
+            {
+              'id': 8,
+              'value': 'unit_7',
+            },
+            {
+              'id': 9,
+              'value': 'unit_8',
+            },
+            {
+              'id': 10,
+              'value': 'unit_9',
+            },
+            {
+              'id': 11,
+              'value': 'unit_0',
+            },
+            {
+              'id': 12,
+              'value': 'unit_1',
+            },
+            {
+              'id': 13,
+              'value': 'unit_2',
+            },
+            {
+              'id': 14,
+              'value': 'unit_3',
+            },
+            {
+              'id': 15,
+              'value': 'unit_4',
+            },
+            {
+              'id': 16,
+              'value': 'unit_5',
+            },
+            {
+              'id': 17,
+              'value': 'unit_6',
+            },
+            {
+              'id': 18,
+              'value': 'unit_7',
+            },
+            {
+              'id': 19,
+              'value': 'unit_8',
+            },
+            {
+              'id': 20,
+              'value': 'unit_9',
+            },
+          ],
+        },
+      },
+    },
+    'permissions': [
+      'can_info',
+      'can_delete',
+      'can_get',
+      'can_put',
+      'can_post',
+    ],
+    'quickfilters': [
+      {
+        'column': 'name',
+        'label': 'Asset Name',
+        'name': 'asset_name',
+        'options': [
+          {
+            'label': 'asset_0',
+            'value': 'asset_0',
+          },
+          {
+            'label': 'asset_1',
+            'value': 'asset_1',
+          },
+          {
+            'label': 'asset_2',
+            'value': 'asset_2',
+          },
+          {
+            'label': 'asset_3',
+            'value': 'asset_3',
+          },
+          {
+            'label': 'asset_4',
+            'value': 'asset_4',
+          },
+          {
+            'label': 'asset_5',
+            'value': 'asset_5',
+          },
+          {
+            'label': 'asset_6',
+            'value': 'asset_6',
+          },
+          {
+            'label': 'asset_7',
+            'value': 'asset_7',
+          },
+          {
+            'label': 'asset_8',
+            'value': 'asset_8',
+          },
+          {
+            'label': 'asset_9',
+            'value': 'asset_9',
+          },
+        ],
+        'type': 'multiselect',
+      },
+    ],
+    'relations': [],
   };
 };
 
-export const handlers = [
-  rest.get('/api/v1/info', (req, res, ctx) => {
-    return res(ctx.json(getSeidrInfo()), ctx.delay());
-  }),
-  rest.post('/api/v1/auth/login', (req, res, ctx) => {
-    const { username, password } = req.body;
-    if (username === 'admin' && password === 'admin') {
-      return res(ctx.json(getUser()), ctx.delay());
-    } else {
-      res(
-        ctx.status(403),
-        ctx.delay(),
-        ctx.json({
-          errorMessage: `User '${username} not found or ${password} invalid!`,
-        }),
-      );
-    }
-  }),
+const getUnits = () => {
+  return {
+    count: units.length,
+    ids: units.map((car) => car.id),
+    label_columns: { name: 'Name' },
+    list_columns: ['name'],
+    list_title: 'List units',
+    order_columns: ['name'],
+    result: units,
+  };
+};
 
-  rest.get('/api/v1/cars/_info', (req, res, ctx) => {
-    return res(ctx.json(getInfo()));
-  }),
-  rest.get('/api/v1/cars', (req, res, ctx) => {
-    return res(ctx.json(get()));
-  }),
-  rest.get('/api/v1/cars/:id', (req, res, ctx) => {
-    return res(ctx.json(getItem(req.params.id)), ctx.delay());
-  }),
-  rest.post('/api/v1/cars/:id', (req, res, ctx) => {
-    return res(ctx.json(getItem(req.params.id)), ctx.delay());
-  }),
-  rest.delete('/api/v1/cars/:id', (req, res, ctx) => {
-    return res(ctx.json(getItem(req.params.id)), ctx.delay());
-  }),
-  rest.delete('/api/v1/cars/:id', (req, res, ctx) => {
-    return res(ctx.json(getItem(req.params.id)), ctx.delay());
-  }),
-  rest.get('/api/v1/engines/_info', (req, res, ctx) => {
-    return res(ctx.json(getInfo()), ctx.delay());
-  }),
-  rest.get('/api/v1/engines/', (req, res, ctx) => {
-    return res(ctx.json(getEngines()), ctx.delay());
-  }),
-];
+const getAssets = () => {
+  return {
+    count: assets.length,
+    ids: assets.map((asset) => asset.id),
+    label_columns: { name: 'Name', owner: 'Owner' },
+    list_columns: ['name', 'owner'],
+    list_title: 'List assets',
+    order_columns: ['name', 'owner'],
+    result: assets,
+  };
+};
+
+const getUnit = (id) => {
+  let item = units.find((unit) => unit.id === id);
+
+  return {
+    show_title: 'Show unit',
+    description_columns: {},
+    show_columns: ['name'],
+    label_columns: { name: 'Name' },
+    id: item.id,
+    result: item,
+  };
+};
+
+const getAsset = (id) => {
+  let item = assets.find((asset) => asset.id === id);
+
+  return {
+    show_title: 'Show asset',
+    description_columns: {},
+    show_columns: ['name', 'owner'],
+    label_columns: { name: 'Name', owner: 'Owner' },
+    id: item.id,
+    result: item,
+  };
+};

@@ -1,13 +1,15 @@
-import React from 'react';
+import type { Meta, StoryObj } from '@storybook/react';
 import { MemoryRouter, Routes, Route, Outlet } from 'react-router-dom';
 import { Box, Button, Paper } from '@mantine/core';
-import { ComponentStory, ComponentMeta } from '@storybook/react';
-import { useSeidrAuth, SeidrApiProvider, DataGrid, UserMenu } from '..';
+import { SeidrApiProvider } from '../../components/SeidrApiProvider';
+import { DataGrid } from '../../components/DataGrid';
+import { UserMenu } from '../../components/UserMenu';
+import { useSeidrAuth } from '../../components/SeidrProvider';
 
 function Permissions() {
   return (
     <Paper sx={{ flex: 1 }}>
-      <SeidrApiProvider path="permissions/">
+      <SeidrApiProvider path='permissions/'>
         <DataGrid />
       </SeidrApiProvider>
     </Paper>
@@ -17,7 +19,7 @@ function Permissions() {
 function PermissionView() {
   return (
     <Paper sx={{ flex: 1 }}>
-      <SeidrApiProvider path="permissionview/">
+      <SeidrApiProvider path='permissionview/'>
         <DataGrid />
       </SeidrApiProvider>
     </Paper>
@@ -27,7 +29,7 @@ function PermissionView() {
 function Roles() {
   return (
     <Paper sx={{ flex: 1 }}>
-      <SeidrApiProvider path="roles/">
+      <SeidrApiProvider path='roles/'>
         <DataGrid />
       </SeidrApiProvider>
     </Paper>
@@ -37,7 +39,7 @@ function Roles() {
 function Users() {
   return (
     <Paper sx={{ flex: 1 }}>
-      <SeidrApiProvider path="users/">
+      <SeidrApiProvider path='users/'>
         <DataGrid />
       </SeidrApiProvider>
     </Paper>
@@ -47,7 +49,7 @@ function Users() {
 function ViewsMenus() {
   return (
     <Paper sx={{ flex: 1 }}>
-      <SeidrApiProvider path="viewsmenus/">
+      <SeidrApiProvider path='viewsmenus/'>
         <DataGrid />
       </SeidrApiProvider>
     </Paper>
@@ -83,12 +85,12 @@ function Wrapper() {
     <>
       <MemoryRouter>
         <Routes>
-          <Route path="/" element={<Frame />}>
-            <Route path="/security/permissions" element={<Permissions />} />
-            <Route path="/security/permissionviews" element={<PermissionView />} />
-            <Route path="/security/roles" element={<Roles />} />
-            <Route path="/security/users" element={<Users />} />
-            <Route path="/security/viewsmenus" element={<ViewsMenus />} />
+          <Route path='/' element={<Frame />}>
+            <Route path='/security/permissions' element={<Permissions />} />
+            <Route path='/security/permissionviews' element={<PermissionView />} />
+            <Route path='/security/roles' element={<Roles />} />
+            <Route path='/security/users' element={<Users />} />
+            <Route path='/security/viewsmenus' element={<ViewsMenus />} />
           </Route>
         </Routes>
       </MemoryRouter>
@@ -96,16 +98,15 @@ function Wrapper() {
   );
 }
 
-// More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
-export default {
+// TODO: Use Storybook Addon React Router v6
+// https://storybook.js.org/addons/storybook-addon-react-router-v6
+
+const meta: Meta<typeof Wrapper> = {
   title: 'components/UserMenu',
   component: Wrapper,
-  // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
-} as ComponentMeta<typeof Wrapper>;
+};
 
-// More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: ComponentStory<typeof Wrapper> = () => <Wrapper />;
+export default meta;
+type Story = StoryObj<typeof Wrapper>
 
-export const Default = Template.bind({});
-Default.args = {};
-Default.parameters = {};
+export const Primary: Story = {};
