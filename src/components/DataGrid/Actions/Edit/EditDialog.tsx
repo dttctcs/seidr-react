@@ -67,6 +67,7 @@ export function EditDialog({ item, info, opened, onClose }: EditDialogProps) {
             name={item.name}
             control={control}
             label={`${item.label}${item.required ? '*' : ''}`}
+            description={item.description}
             schema={item}
           />
         ))}

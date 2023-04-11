@@ -16,6 +16,7 @@ import {
 interface FormFieldProps {
   name: string;
   label: string;
+  description: string;
   control: Control<FormValues>;
   schema: any;
 
@@ -53,8 +54,8 @@ export function FormField({ name, control, schema, filter, ...props }: FormField
       <FormDateTimePicker
         control={control}
         name={name}
-        mask="__.__.____ __:__"
-        inputFormat="dd.MM.yyyy HH:mm"
+        mask='__.__.____ __:__'
+        inputFormat='dd.MM.yyyy HH:mm'
         PopperProps={filter && { placement: 'bottom-end' }}
         {...props}
       />
@@ -66,8 +67,8 @@ export function FormField({ name, control, schema, filter, ...props }: FormField
       <FormDatePicker
         control={control}
         name={name}
-        mask="__.__.____"
-        inputFormat="dd.MM.yyyy"
+        mask='__.__.____'
+        inputFormat='dd.MM.yyyy'
         PopperProps={filter && { placement: 'bottom-end' }}
         {...props}
       />

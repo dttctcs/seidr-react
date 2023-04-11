@@ -52,6 +52,7 @@ export function AddDialog({ opened, onClose }: AddDialogProps) {
             name={item.name}
             control={control}
             label={`${item.name}${item.required ? '*' : ''}`}
+            description={item.description}
             schema={item}
           />
         ))}
