@@ -5,7 +5,7 @@ import { paginationHeight } from '../utils';
 import { TablePagination, debounce } from '@mui/material';
 import { Box, ActionIcon, Group } from '@mantine/core';
 
-import { ArrowBarToLeft, ArrowBarToRight, ChevronLeft, ChevronRight } from 'tabler-icons-react';
+import { IconArrowBarToLeft, IconArrowBarToRight, IconChevronLeft, IconChevronRight } from '@tabler/icons-react';
 
 function DataGridPaginationActions(props) {
   const { count, page, rowsPerPage, onPageChange } = props;
@@ -27,26 +27,26 @@ function DataGridPaginationActions(props) {
   };
 
   return (
-    <Group ml="sm" noWrap>
-      <ActionIcon onClick={handleFirstPageButtonClick} disabled={page === 0} aria-label="first page">
-        <ArrowBarToLeft />
+    <Group ml='sm' noWrap>
+      <ActionIcon onClick={handleFirstPageButtonClick} disabled={page === 0} aria-label='first page'>
+        <IconArrowBarToLeft />
       </ActionIcon>
-      <ActionIcon onClick={handleBackButtonClick} disabled={page === 0} aria-label="previous page">
-        <ChevronLeft />
+      <ActionIcon onClick={handleBackButtonClick} disabled={page === 0} aria-label='previous page'>
+        <IconChevronLeft />
       </ActionIcon>
       <ActionIcon
         onClick={handleNextButtonClick}
         disabled={page >= Math.ceil(count / rowsPerPage) - 1}
-        aria-label="next page"
+        aria-label='next page'
       >
-        <ChevronRight />
+        <IconChevronRight />
       </ActionIcon>
       <ActionIcon
         onClick={handleLastPageButtonClick}
         disabled={page >= Math.ceil(count / rowsPerPage) - 1}
-        aria-label="last page"
+        aria-label='last page'
       >
-        <ArrowBarToRight />
+        <IconArrowBarToRight />
       </ActionIcon>
     </Group>
   );
@@ -99,7 +99,7 @@ export const Pagination = React.memo(({ ...props }) => {
           },
         }}
         rowsPerPageOptions={pageSizes}
-        component="div"
+        component='div'
         count={data.count}
         rowsPerPage={rowsPerPage}
         page={cachedPage}

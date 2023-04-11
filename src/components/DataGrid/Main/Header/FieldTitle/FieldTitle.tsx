@@ -3,7 +3,7 @@ import { useApi } from '../../../../SeidrApiProvider';
 import applyStyles from './FieldTitle.styles';
 
 import { Box, Indicator, Tooltip } from '@mantine/core';
-import { ChevronDown, ChevronUp } from 'tabler-icons-react';
+import { IconChevronDown, IconChevronUp } from '@tabler/icons-react';
 
 interface FiledTitleProps {
   column: string;
@@ -18,16 +18,16 @@ interface FiledTitleProps {
 }
 
 export function FieldTitle({
-  column,
-  label,
+                             column,
+                             label,
 
-  selecDataGrid,
-  related,
-  rtl,
+                             selecDataGrid,
+                             related,
+                             rtl,
 
-  classNames,
-  styles,
-}: FiledTitleProps) {
+                             classNames,
+                             styles,
+                           }: FiledTitleProps) {
   const { queryParams, setQueryParams } = useApi();
 
   const selectedColumn = queryParams.order_column === column;
@@ -40,27 +40,27 @@ export function FieldTitle({
       onClick={
         selecDataGrid
           ? () =>
-              setQueryParams({
-                order_column: column,
-                order_direction: queryParams.order_direction === 'asc' ? 'desc' : 'asc',
-              })
+            setQueryParams({
+              order_column: column,
+              order_direction: queryParams.order_direction === 'asc' ? 'desc' : 'asc',
+            })
           : null
       }
     >
       <Box className={classes.fieldTitleWrapper}>
         <Box className={classes.fieldTitleName}>{label || column}</Box>
         {related ? (
-          <Tooltip label="Related Field">
+          <Tooltip label='Related Field'>
             <Indicator
-              label="rel"
+              label='rel'
               styles={(theme) => ({ indicator: { top: `-1px !important`, right: `-2px !important`, padding: '4px' } })}
             >
               <Box className={classes.fieldTitleIcon}>
                 {selectedColumn ? (
                   queryParams.order_direction === 'asc' ? (
-                    <ChevronDown size={14} strokeWidth={1.5} />
+                    <IconChevronDown size={14} strokeWidth={1.5} />
                   ) : (
-                    <ChevronUp size={14} strokeWidth={1.5} />
+                    <IconChevronUp size={14} strokeWidth={1.5} />
                   )
                 ) : null}
               </Box>
@@ -70,9 +70,9 @@ export function FieldTitle({
           <Box className={classes.fieldTitleIcon}>
             {selectedColumn ? (
               queryParams.order_direction === 'asc' ? (
-                <ChevronDown size={14} strokeWidth={1.5} />
+                <IconChevronDown size={14} strokeWidth={1.5} />
               ) : (
-                <ChevronUp size={14} strokeWidth={1.5} />
+                <IconChevronUp size={14} strokeWidth={1.5} />
               )
             ) : null}
           </Box>

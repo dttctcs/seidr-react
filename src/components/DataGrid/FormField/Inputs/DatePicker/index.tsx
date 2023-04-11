@@ -6,7 +6,7 @@ import { Anchor, Button, Group, useMantineTheme } from '@mantine/core';
 import { Calendar, TimeInput } from '@mantine/dates';
 import { upperFirst } from '@mantine/hooks';
 
-import { Clock } from 'tabler-icons-react';
+import { IconClock } from '@tabler/icons-react';
 
 interface DateTimePickerProps {
   value: any;
@@ -49,19 +49,19 @@ interface DateTimePickerProps {
 }
 
 export function DateTimePicker({
-  value,
-  onChange,
-  inputFormat,
+                                 value,
+                                 onChange,
+                                 inputFormat,
 
-  closeCalendarOnChange = false,
-  labelFormat = 'MMMM YYYY',
+                                 closeCalendarOnChange = false,
+                                 labelFormat = 'MMMM YYYY',
 
-  name = 'date',
-  clearable = true,
-  disabled = false,
+                                 name = 'date',
+                                 clearable = true,
+                                 disabled = false,
 
-  ...others
-}) {
+                                 ...others
+                               }) {
   const theme = useMantineTheme();
   const locale = theme.datesLocale;
   const dateFormat = inputFormat || theme.other.dateTimeFormat;
@@ -148,23 +148,23 @@ export function DateTimePicker({
         onChange={handleValueChange}
         labelFormat={labelFormat}
         preventFocus={false}
-        mb="sm"
+        mb='sm'
       />
 
-      <Group align="center">
-        <Anchor ml="xs" component="button" color="blue" onClick={handleNow}>
+      <Group align='center'>
+        <Anchor ml='xs' component='button' color='blue' onClick={handleNow}>
           Now
         </Anchor>
         <TimeInput
           sx={{ flexGrow: 1 }}
-          icon={<Clock />}
+          icon={<IconClock />}
           styles={{ controls: { justifyContent: 'center', marginLeft: -20 } }}
           disabled={!_value}
           value={_value}
           onChange={handleTimeChange}
         />
         {!closeCalendarOnChange && (
-          <Button mr="xs" disabled={!_value} onClick={handleSubmit}>
+          <Button mr='xs' disabled={!_value} onClick={handleSubmit}>
             OK
           </Button>
         )}

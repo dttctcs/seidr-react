@@ -3,7 +3,7 @@ import { useApi } from '../../../SeidrApiProvider';
 
 import { ActionIcon, Tooltip } from '@mantine/core';
 import { AlertDialog } from '../../../AlertDialog';
-import { Trash } from 'tabler-icons-react';
+import { IconTrash } from '@tabler/icons-react';
 
 interface DeleteProps {
   id: number;
@@ -25,14 +25,14 @@ export function Delete({ id }: DeleteProps) {
 
   return (
     <>
-      <Tooltip label="Delete">
+      <Tooltip label='Delete'>
         <ActionIcon
-          size="sm"
+          size='sm'
           onClick={() => {
             setDialogOpen(true);
           }}
         >
-          <Trash />
+          <IconTrash />
         </ActionIcon>
       </Tooltip>
       <AlertDialog opened={dialogOpen} onClose={handleReject} handleAccept={handleAccept} handleReject={handleReject} />

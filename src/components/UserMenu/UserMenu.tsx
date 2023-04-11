@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useSeidrAuth } from '../SeidrProvider';
 
 import { Group, Menu, Text, UnstyledButton, createStyles } from '@mantine/core';
-import { AppWindow, IdBadge2, Lock, Logout, Users, ChevronDown } from 'tabler-icons-react';
+import { IconAppWindow, IconIdBadge2, IconLock, IconLogout, IconUsers, IconChevronDown } from '@tabler/icons-react';
 
 interface UserMenuProps {
   basePath?: string;
@@ -35,11 +35,11 @@ export function UserMenu({ basePath = '/security', Target, children }: UserMenuP
   const [opened, setOpened] = useState(false);
 
   const securityRoutes = [
-    { path: basePath + '/users', label: 'Users', name: 'UsersApi', Icon: Users },
-    { path: basePath + '/roles', label: 'Roles', name: 'RolesApi', Icon: IdBadge2 },
-    { path: basePath + '/permissions', label: 'Base Permissions', name: 'PermissionsApi', Icon: Lock },
-    { path: basePath + '/permissionviews', label: 'Permission on Views', name: 'PermissionViewApi', Icon: Lock },
-    { path: basePath + '/viewsmenus', label: 'Views/Menus', name: 'ViewsMenusApi', Icon: AppWindow },
+    { path: basePath + '/users', label: 'Users', name: 'UsersApi', Icon: IconUsers },
+    { path: basePath + '/roles', label: 'Roles', name: 'RolesApi', Icon: IconIdBadge2 },
+    { path: basePath + '/permissions', label: 'Base Permissions', name: 'PermissionsApi', Icon: IconLock },
+    { path: basePath + '/permissionviews', label: 'Permission on Views', name: 'PermissionViewApi', Icon: IconLock },
+    { path: basePath + '/viewsmenus', label: 'Views/Menus', name: 'ViewsMenusApi', Icon: IconAppWindow },
   ];
 
   const availableRoutes = securityRoutes.filter((route) => user.permissions.includes(route.name));
@@ -47,8 +47,8 @@ export function UserMenu({ basePath = '/security', Target, children }: UserMenuP
   return (
     <Menu
       width={260}
-      position="bottom-end"
-      transition="pop-top-right"
+      position='bottom-end'
+      transition='pop-top-right'
       opened={opened}
       onClose={() => setOpened(false)}
       onOpen={() => setOpened(true)}
@@ -58,10 +58,10 @@ export function UserMenu({ basePath = '/security', Target, children }: UserMenuP
         {Target || (
           <UnstyledButton className={cx(classes.user, { [classes.userActive]: opened })}>
             <Group sx={{ flexWrap: 'nowrap' }} spacing={7}>
-              <Text weight={500} size="sm" sx={{ lineHeight: 1, whiteSpace: 'nowrap' }} mr={3}>
+              <Text weight={500} size='sm' sx={{ lineHeight: 1, whiteSpace: 'nowrap' }} mr={3}>
                 {`${user.first_name} ${user.last_name}`}
               </Text>
-              <ChevronDown size={12} />
+              <IconChevronDown size={12} />
             </Group>
           </UnstyledButton>
         )}
@@ -83,7 +83,7 @@ export function UserMenu({ basePath = '/security', Target, children }: UserMenuP
           </>
         ) : null}
         {children}
-        <Menu.Item icon={<Logout size={14} />} onClick={signout}>
+        <Menu.Item icon={<IconLogout size={14} />} onClick={signout}>
           Logout
         </Menu.Item>
       </Menu.Dropdown>

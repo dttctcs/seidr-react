@@ -3,7 +3,7 @@ import { useApi } from '../../../SeidrApiProvider';
 
 import { ActionIcon, Tooltip } from '@mantine/core';
 import { ViewDialog } from './ViewDialog';
-import { Eye } from 'tabler-icons-react';
+import { IconEye } from '@tabler/icons-react';
 
 interface ViewProps {
   id: number;
@@ -18,9 +18,9 @@ export function View({ id }: ViewProps) {
 
   return (
     <>
-      <Tooltip label="Details">
+      <Tooltip label='Details'>
         <ActionIcon
-          size="sm"
+          size='sm'
           onClick={async () => {
             setLoading(true);
             const entry = await getEntry(id);
@@ -32,7 +32,7 @@ export function View({ id }: ViewProps) {
             }
           }}
         >
-          <Eye />
+          <IconEye />
         </ActionIcon>
       </Tooltip>
 

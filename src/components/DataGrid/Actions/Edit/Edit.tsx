@@ -3,7 +3,7 @@ import { useApi } from '../../../SeidrApiProvider';
 
 import { ActionIcon, Tooltip } from '@mantine/core';
 import { EditDialog } from './EditDialog';
-import { Pencil } from 'tabler-icons-react';
+import { IconPencil } from '@tabler/icons-react';
 
 interface EditProps {
   id: number;
@@ -18,9 +18,9 @@ export function Edit({ id }: EditProps) {
 
   return (
     <>
-      <Tooltip label="Edit">
+      <Tooltip label='Edit'>
         <ActionIcon
-          size="sm"
+          size='sm'
           onClick={async () => {
             setLoading(true);
 
@@ -33,7 +33,7 @@ export function Edit({ id }: EditProps) {
             }
           }}
         >
-          <Pencil />
+          <IconPencil />
         </ActionIcon>
       </Tooltip>
 

@@ -9,7 +9,7 @@ import { ActionIcon, Box, Button, Divider, Group, Text } from '@mantine/core';
 import { FormField } from '../../FormField';
 import FormFilterField from './FormFilterField';
 import FormOperatorField from './FormOperatorField';
-import { Plus, Trash } from 'tabler-icons-react';
+import { IconPlus, IconTrash } from '@tabler/icons-react';
 import { FormFilterIn } from './FormFilterIn';
 
 const schema = yup.object({
@@ -109,7 +109,7 @@ function FilterMenu({ onClose }) {
                     remove(index);
                   }}
                 >
-                  <Trash />
+                  <IconTrash />
                 </ActionIcon>
               </Group>
               {controlledFields.length > 1 && index < controlledFields.length - 1 ? (
@@ -136,7 +136,7 @@ function FilterMenu({ onClose }) {
       <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
         <Button
           variant="subtle"
-          leftIcon={<Plus />}
+          leftIcon={<IconPlus />}
           onClick={() => {
             append({ col: '', opr: '', value: '' });
           }}

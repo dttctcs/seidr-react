@@ -2,20 +2,20 @@ import React, { useState } from 'react';
 
 import { ActionIcon, Tooltip } from '@mantine/core';
 import { AddDialog } from './AddDialog';
-import { Plus } from 'tabler-icons-react';
+import { IconPlus } from '@tabler/icons-react';
 
 export function Add() {
   const [dialogOpen, setDialogOpen] = useState(false);
 
   return (
     <>
-      <Tooltip label="Add Item">
+      <Tooltip label='Add Item'>
         <ActionIcon
           onClick={() => {
             setDialogOpen(true);
           }}
         >
-          <Plus />
+          <IconPlus />
         </ActionIcon>
       </Tooltip>
 

@@ -1,34 +1,34 @@
 import React, { useState } from 'react';
 
 import { ActionIcon, Tooltip, Menu, Switch } from '@mantine/core';
-import { Settings as SettingsIcon, BorderRight, Resize, Contrast2 } from 'tabler-icons-react';
+import { IconSettings, IconBorderRight, IconResize, IconContrast2 } from '@tabler/icons-react';
 
 export function Settings({ onSettingsChange, settings }) {
   const [opened, setOpened] = useState(false);
 
   return (
     <Menu
-      position="bottom-start"
+      position='bottom-start'
       onOpen={() => setOpened(true)}
       onClose={() => setOpened(false)}
       opened={opened}
       closeOnItemClick={false}
     >
       <Menu.Target>
-        <Tooltip opened={opened ? false : undefined} label="Settings">
+        <Tooltip opened={opened ? false : undefined} label='Settings'>
           <ActionIcon>
-            <SettingsIcon />
+            <IconSettings />
           </ActionIcon>
         </Tooltip>
       </Menu.Target>
       <Menu.Dropdown>
         <Menu.Label>Theme</Menu.Label>
         <Menu.Item
-          icon={<Contrast2 size={16} />}
+          icon={<IconContrast2 size={16} />}
           rightSection={
             <Switch
               styles={{ trackLabel: { minWidth: '12px' } }}
-              size="xs"
+              size='xs'
               checked={settings.striped}
               onChange={(event) => onSettingsChange({ ...settings, striped: !settings.striped })}
             />
@@ -37,11 +37,11 @@ export function Settings({ onSettingsChange, settings }) {
           Striped
         </Menu.Item>
         <Menu.Item
-          icon={<BorderRight size={16} />}
+          icon={<IconBorderRight size={16} />}
           rightSection={
             <Switch
               styles={{ trackLabel: { minWidth: '12px' } }}
-              size="xs"
+              size='xs'
               checked={settings.rightBorder}
               onChange={(event) => onSettingsChange({ ...settings, rightBorder: !settings.rightBorder })}
             />
@@ -51,11 +51,11 @@ export function Settings({ onSettingsChange, settings }) {
         </Menu.Item>
         <Menu.Label>Layout</Menu.Label>
         <Menu.Item
-          icon={<Resize size={16} />}
+          icon={<IconResize size={16} />}
           rightSection={
             <Switch
               styles={{ trackLabel: { minWidth: '12px' } }}
-              size="xs"
+              size='xs'
               checked={settings.dense}
               onChange={(event) => onSettingsChange({ ...settings, dense: !settings.dense })}
             />
@@ -64,11 +64,11 @@ export function Settings({ onSettingsChange, settings }) {
           Dense
         </Menu.Item>
         <Menu.Item
-          icon={<BorderRight size={16} />}
+          icon={<IconBorderRight size={16} />}
           rightSection={
             <Switch
               styles={{ trackLabel: { minWidth: '12px' } }}
-              size="xs"
+              size='xs'
               checked={settings.rtl}
               onChange={(event) => onSettingsChange({ ...settings, rtl: !settings.rtl })}
             />

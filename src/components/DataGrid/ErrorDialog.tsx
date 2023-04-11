@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useApi } from '../SeidrApiProvider';
 
 import { Group, Modal, Text } from '@mantine/core';
-import { AlertCircle } from 'tabler-icons-react';
+import { IconAlertCircle } from '@tabler/icons-react';
 
 export function ErrorDialog() {
   const { error } = useApi();
@@ -22,7 +22,7 @@ export function ErrorDialog() {
       onClose={() => setDialogOpen(false)}
       title={
         <Group>
-          <AlertCircle size={16} color="red" />
+          <IconAlertCircle size={16} color='red' />
           <Text>Error</Text>
         </Group>
       }
