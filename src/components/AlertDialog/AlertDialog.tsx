@@ -14,17 +14,17 @@ export function AlertDialog({ opened, onClose, handleAccept, handleReject }: Ale
     <Modal
       opened={opened}
       onClose={onClose}
-      aria-labelledby="alert-dialog-title"
-      aria-describedby="alert-dialog-description"
-      title="Item löschen?"
+      aria-labelledby='alert-dialog-title'
+      aria-describedby='alert-dialog-description'
+      title='Item löschen?'
       centered
     >
       Sind Sie Sicher, dass Sie das Item löschen wollen?
-      <Group position="right" mt="xl">
-        <Button onClick={handleReject} variant="default">
+      <Group position='right' mt='xl'>
+        <Button onClick={handleReject} variant='default'>
           Abbrechen
         </Button>
-        <Button onClick={handleAccept} color="red">
+        <Button onClick={handleAccept} color='red'>
           Löschen
         </Button>
       </Group>

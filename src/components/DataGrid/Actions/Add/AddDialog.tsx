@@ -1,3 +1,5 @@
+import React from 'react';
+
 import { useApi } from '../../../SeidrApiProvider';
 
 import { useForm } from 'react-hook-form';
@@ -15,7 +17,7 @@ interface AddDialogProps {
 export function AddDialog({ opened, onClose }: AddDialogProps) {
   const { info, addEntry } = useApi();
 
-  const { handleSubmit, reset, formState, control } = useForm<FormValues>({
+  const { handleSubmit, reset, control } = useForm<FormValues>({
     mode: 'onChange',
     defaultValues: info.add.defaultValues,
     resolver: yupResolver(info.add.schema),
