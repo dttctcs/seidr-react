@@ -17,7 +17,6 @@ export function ErrorDialog() {
 
   return (
     <Modal
-      styles={{ root: { zIndex: 3000 } }}
       opened={dialogOpen}
       onClose={() => setDialogOpen(false)}
       title={

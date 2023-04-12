@@ -1,6 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { useApi } from '../../SeidrApiProvider';
-import { paginationHeight } from '../utils';
 
 import { TablePagination, debounce } from '@mui/material';
 import { Box, ActionIcon, Group } from '@mantine/core';
@@ -84,7 +83,7 @@ export const Pagination = React.memo(({ ...props }) => {
     <Box
       sx={(theme) => ({
         flex: '0 1 0',
-        height: paginationHeight,
+        height: 54,
         border: 'none',
         borderTopWidth: '1px',
         borderTopStyle: 'solid',

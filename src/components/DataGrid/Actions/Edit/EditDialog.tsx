@@ -50,17 +50,16 @@ export function EditDialog({ item, info, opened, onClose }: EditDialogProps) {
 
   return (
     <Modal
-      styles={{ root: { zIndex: 3000 } }}
       opened={opened}
       onClose={() => {
         onClose();
         reset();
       }}
       title={`${info.edit.title}  (#${item?.id})`}
-      size="lg"
+      size='lg'
       centered
     >
-      <Stack spacing="md">
+      <Stack spacing='md'>
         {info.edit.columns.map((item: any) => (
           <FormField
             key={item.name}
@@ -71,7 +70,7 @@ export function EditDialog({ item, info, opened, onClose }: EditDialogProps) {
             schema={item}
           />
         ))}
-        <Group position="right" mt="xl">
+        <Group position='right' mt='xl'>
           <Button onClick={handleSubmit(onSubmit)}>Save</Button>
         </Group>
       </Stack>

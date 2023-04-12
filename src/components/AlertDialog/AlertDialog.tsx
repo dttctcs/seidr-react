@@ -12,7 +12,6 @@ interface AlertDialogPorps {
 export function AlertDialog({ opened, onClose, handleAccept, handleReject }: AlertDialogPorps) {
   return (
     <Modal
-      styles={{ root: { zIndex: 3000 } }}
       opened={opened}
       onClose={onClose}
       aria-labelledby="alert-dialog-title"

@@ -15,19 +15,18 @@ interface ViewDialogProps {
 export function ViewDialog({ item, info, loading, opened, onClose }: ViewDialogProps) {
   return (
     <Modal
-      styles={{ root: { minHeight: '640px', zIndex: 3000 } }}
       opened={opened}
       onClose={onClose}
       title={`${item?.show_title} (#${item?.id})`}
-      size="lg"
+      size='lg'
       centered
     >
       <LoadingOverlay visible={loading} />
 
       {!loading && item ? (
-        <Tabs defaultValue="details">
+        <Tabs defaultValue='details'>
           <Tabs.List>
-            <Tabs.Tab value="details">Details</Tabs.Tab>
+            <Tabs.Tab value='details'>Details</Tabs.Tab>
             {info.relations.map((relation: any, index: number) => {
               return (
                 <Tabs.Tab key={index} value={relation.name}>
@@ -36,24 +35,24 @@ export function ViewDialog({ item, info, loading, opened, onClose }: ViewDialogP
               );
             })}
           </Tabs.List>
-          <Tabs.Panel pt="xs" value="details">
-            <Paper p="xs" withBorder>
-              <Stack spacing="md">
+          <Tabs.Panel pt='xs' value='details'>
+            <Paper p='xs' withBorder>
+              <Stack spacing='md'>
                 {item.show_columns.map((column: string, index: number) => {
                   return (
                     <Grid key={index}>
                       <Grid.Col span={4}>
-                        <Text size="md" sx={{}}>
+                        <Text size='md' sx={{}}>
                           {item.label_columns[column]}
                         </Text>
                       </Grid.Col>
                       <Grid.Col span={1}>
-                        <Text size="xs" color="dimmed">
+                        <Text size='xs' color='dimmed'>
                           :
                         </Text>
                       </Grid.Col>
                       <Grid.Col span={4}>
-                        <Text size="md" color="dimmed" sx={{}}>
+                        <Text size='md' color='dimmed' sx={{}}>
                           {getValue(item.result, column)}
                         </Text>
                       </Grid.Col>
@@ -65,7 +64,7 @@ export function ViewDialog({ item, info, loading, opened, onClose }: ViewDialogP
           </Tabs.Panel>
           {info.relations.map((relation: any, index: number) => {
             return (
-              <Tabs.Panel pt="xs" key={index} value={relation.name}>
+              <Tabs.Panel pt='xs' key={index} value={relation.name}>
                 <Paper withBorder>
                   <RelationPanel
                     relatedPath={relation.path}

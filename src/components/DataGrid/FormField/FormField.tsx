@@ -55,7 +55,8 @@ export function FormField({ name, control, schema, filter, ...props }: FormField
         control={control}
         name={name}
         mask='__.__.____ __:__'
-        inputFormat='dd.MM.yyyy HH:mm'
+        format='dd.MM.yyyy HH:mm'
+        schema={schema}
         PopperProps={filter && { placement: 'bottom-end' }}
         {...props}
       />
@@ -68,7 +69,8 @@ export function FormField({ name, control, schema, filter, ...props }: FormField
         control={control}
         name={name}
         mask='__.__.____'
-        inputFormat='dd.MM.yyyy'
+        format='dd.MM.yyyy'
+        schema={schema}
         PopperProps={filter && { placement: 'bottom-end' }}
         {...props}
       />
