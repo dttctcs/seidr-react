@@ -29,7 +29,7 @@ export function ErrorDialog() {
     >
       {error ? (
         <>
-          <Text>{error.message}</Text>
+          <Text>{error.message}: {error.originalError}</Text>
         </>
       ) : null}
     </Modal>
