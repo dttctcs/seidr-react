@@ -61,7 +61,7 @@ const getSeidrInfo = () => {
         'icon': 'Table',
         'level': 'security',
         'name': 'Permissionview',
-        'path': 'permissionview',
+        'path': 'permissionviews',
         'permission_name': 'PermissionViewApi',
         'type': 'table',
       },
