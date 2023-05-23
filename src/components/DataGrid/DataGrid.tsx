@@ -68,11 +68,13 @@ export const DataGrid = forwardRef<HTMLDivElement, DataGridProps>((props, ref) =
     styles,
   } = props;
 
+  const localStorageKey = `${path}-datagrid`;
+
   const { classes, cx, theme } = applyStyles();
 
   const [state, dispatch] = useReducer(reducer, {
     ...initialState,
-    settings: JSON.parse(localStorage.getItem(path + 'datagrid')) || {
+    settings: JSON.parse(localStorage.getItem(localStorageKey)) || {
       rtl: settings?.rtl ?? false,
       dense: settings?.dense ?? false,
       striped: settings?.striped ?? false,
@@ -90,7 +92,7 @@ export const DataGrid = forwardRef<HTMLDivElement, DataGridProps>((props, ref) =
 
   useEffect(() => {
     if (state.settings) {
-      localStorage.setItem(path + 'gridSettings', JSON.stringify(state.settings));
+      localStorage.setItem(localStorageKey, JSON.stringify(state.settings));
     }
   }, [state.settings]);
 
@@ -103,7 +105,7 @@ export const DataGrid = forwardRef<HTMLDivElement, DataGridProps>((props, ref) =
       <LoadingOverlay
         loaderProps={{ size: 'sm', variant: 'dots' }}
         overlayOpacity={0.1}
-        overlayColor="#c5c5c5"
+        overlayColor='#c5c5c5'
         visible={loading}
       />
       {info && data && !loading && (
