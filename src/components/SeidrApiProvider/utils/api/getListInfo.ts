@@ -10,7 +10,7 @@ export const getListInfo = async (path) => {
       return data;
     }
 
-    throw new Error('Something went wrong.');
+    throw new Error(response.statusText);
   } catch (error) {
     throw new Error(error);
   }

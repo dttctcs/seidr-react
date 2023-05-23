@@ -42,7 +42,7 @@ export function useProvideAuth(baseURL: string) {
         return user;
       }
 
-      throw new Error('Something went wrong');
+      throw new Error(response.statusText);
     } catch (error) {
       dispatch({ payload: false, type: 'setLoading' });
     }

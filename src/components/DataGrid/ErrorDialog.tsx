@@ -22,16 +22,12 @@ export function ErrorDialog() {
       title={
         <Group>
           <IconAlertCircle size={16} color='red' />
-          <Text>Error</Text>
+          <Text>{error ? error.originalError.message : 'Error'}</Text>
         </Group>
       }
       centered
     >
-      {error ? (
-        <>
-          <Text>{error.message}: {error.originalError}</Text>
-        </>
-      ) : null}
+      {error ? <Text>{error.message}</Text> : null}
     </Modal>
   );
 }
