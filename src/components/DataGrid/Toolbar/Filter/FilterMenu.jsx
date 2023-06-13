@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import {Fragment, useEffect} from 'react';
 import { useApi } from '../../../SeidrApiProvider';
 
 import * as yup from 'yup';
@@ -64,7 +64,7 @@ function FilterMenu({ onClose }) {
       {controlledFields.length ? (
         controlledFields.map((field, index) => {
           return (
-            <React.Fragment key={field.id}>
+            <Fragment key={field.id}>
               <Group mt="lg" spacing="md" noWrap>
                 <Box sx={{ width: '192px' }}>
                   <FormFilterField
@@ -122,7 +122,7 @@ function FilterMenu({ onClose }) {
                   label="AND"
                 />
               ) : null}
-            </React.Fragment>
+            </Fragment>
           );
         })
       ) : (

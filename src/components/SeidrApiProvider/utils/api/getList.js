@@ -5,6 +5,7 @@ export const getList = async (path, queryParams) => {
     const { fetchPath, options } = createFetchParams({
       path: urlJoin(path, '/'),
       method: 'GET',
+      //queryParams: { q: encodeURIComponent(JSON.stringify(queryParams)) },
       queryParams: { q: JSON.stringify(queryParams) },
     });
 

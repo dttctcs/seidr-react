@@ -1,3 +1,5 @@
+import {createSearchParams} from "react-router-dom";
+
 export function createFetchParams({
   path,
   method,
@@ -6,7 +8,7 @@ export function createFetchParams({
 }) {
   let searchParams = {};
   if (typeof queryParams === 'object') {
-    searchParams = new URLSearchParams(queryParams);
+    searchParams = new createSearchParams(queryParams);
     path = path + '?' + searchParams;
   }
 
