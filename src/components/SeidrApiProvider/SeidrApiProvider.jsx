@@ -1,4 +1,4 @@
-import React, { ReactNode, createContext, useContext } from 'react';
+import { ReactNode, createContext, useContext } from 'react';
 import { useSeidrInfo } from '../SeidrProvider';
 import { useProvideApi } from './useProvideApi';
 import { urlJoin } from '../../utils';

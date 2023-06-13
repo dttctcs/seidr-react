@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useApi } from '../../../SeidrApiProvider';
 
 import { ActionIcon, Box, CloseButton, Indicator, Popover, Tooltip } from '@mantine/core';

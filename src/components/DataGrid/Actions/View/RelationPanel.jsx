@@ -1,4 +1,4 @@
-import React from 'react';
+import { memo } from 'react';
 import { SeidrApiProvider, useApi } from '../../../SeidrApiProvider';
 
 import { DataGrid } from '../../DataGrid';
@@ -19,4 +19,4 @@ function RelationPanel({ relatedPath, ...relation }) {
   );
 }
 
-export default React.memo(RelationPanel);
+export default memo(RelationPanel);

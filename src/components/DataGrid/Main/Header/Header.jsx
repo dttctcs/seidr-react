@@ -1,9 +1,9 @@
-import React from 'react';
+import { memo } from 'react';
 import { useApi } from '../../../SeidrApiProvider';
 
 import { FieldTitle } from './FieldTitle';
 
-export const Header = React.memo(({ settings, hideActions }) => {
+export const Header = memo(({ settings, hideActions }) => {
   const { data, info } = useApi();
 
   return (

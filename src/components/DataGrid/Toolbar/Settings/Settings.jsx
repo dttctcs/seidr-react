@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 import { ActionIcon, Tooltip, Menu, Switch } from '@mantine/core';
 import { IconSettings, IconBorderRight, IconResize, IconContrast2 } from '@tabler/icons-react';

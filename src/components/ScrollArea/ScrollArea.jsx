@@ -1,6 +1,6 @@
 //import 'overlayscrollbars/styles/overlayscrollbars.css';
 
-import React, { forwardRef } from 'react';
+import { forwardRef } from 'react';
 
 import { OverlayScrollbarsComponent, OverlayScrollbarsComponentProps } from 'overlayscrollbars-react';
 

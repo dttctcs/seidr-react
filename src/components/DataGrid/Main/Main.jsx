@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import { ReactNode } from 'react';
 
 import { Table, useMantineTheme } from '@mantine/core';
 import { ScrollArea } from '../../ScrollArea';

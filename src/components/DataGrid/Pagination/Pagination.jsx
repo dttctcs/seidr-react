@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useState, memo} from 'react';
 import { useApi } from '../../SeidrApiProvider';
 
 import { TablePagination, debounce } from '@mui/material';
@@ -51,7 +51,7 @@ function DataGridPaginationActions(props) {
   );
 }
 
-export const Pagination = React.memo(({ ...props }) => {
+export const Pagination = memo(({ ...props }) => {
   const { data, queryParams, setQueryParams } = useApi();
 
   const pageSizes = [10, 25, 50];

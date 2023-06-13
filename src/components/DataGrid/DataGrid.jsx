@@ -1,5 +1,5 @@
 /* eslint-disable no-case-declarations */
-import React, { useEffect, useReducer, forwardRef } from 'react';
+import { useEffect, useReducer, forwardRef } from 'react';
 
 import { LoadingOverlay, Paper } from '@mantine/core';
 import { Toolbar } from './Toolbar';

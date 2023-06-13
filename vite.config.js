@@ -29,8 +29,8 @@ export default defineConfig((configEnv) => ({
       formats: ['es', 'umd'],
       fileName: (format) => `seidr-react.${format}.js`,
     },
-    //rollupOptions: {
-    //  external: [...Object.keys(packageJson.peerDependencies)],
-    //},
+    rollupOptions: {
+      external: [...Object.keys(packageJson.peerDependencies)],
+    },
   },
 }))

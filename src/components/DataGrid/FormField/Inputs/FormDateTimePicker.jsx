@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import { useRef } from 'react';
 import { useController } from 'react-hook-form';
 
 import { TextInput, useMantineTheme } from '@mantine/core';

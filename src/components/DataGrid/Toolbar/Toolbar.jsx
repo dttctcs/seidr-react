@@ -1,4 +1,5 @@
-import React from 'react';
+import { memo } from 'react';
+
 import applyStyles from './Toolbar.styles';
 import { useApi } from '../../SeidrApiProvider';
 
@@ -7,7 +8,7 @@ import { Settings } from './Settings';
 import { Add } from '../Actions/Add';
 import { Filter } from './Filter';
 
-export const Toolbar = React.memo(({ settings, hideFilter, hideSettings, dense, dispatch }) => {
+export const Toolbar = memo(({ settings, hideFilter, hideSettings, dense, dispatch }) => {
   const { info } = useApi();
 
   const { classes } = applyStyles({ dense }, { name: 'DataGrid' });

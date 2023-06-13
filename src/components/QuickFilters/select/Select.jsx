@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useApi } from '../../SeidrApiProvider';
 
 import { Select as MantineSelect, SelectProps as MantineSelectProps } from '@mantine/core';

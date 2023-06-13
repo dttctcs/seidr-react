@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useApi } from '../SeidrApiProvider';
 
 import { Group, Modal, Text } from '@mantine/core';
