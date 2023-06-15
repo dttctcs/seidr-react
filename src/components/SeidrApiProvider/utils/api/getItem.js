@@ -10,7 +10,7 @@ export const getItem = async (path, id) => {
       return data;
     }
 
-    throw new Error(z);
+    throw new Error(response.statusText);
   } catch (error) {
     throw new Error(error);
   }
