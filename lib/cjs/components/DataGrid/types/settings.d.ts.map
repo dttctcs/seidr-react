@@ -1,1 +1,0 @@
-{"version":3,"file":"settings.d.ts","sourceRoot":"","sources":["../../../../src/components/DataGrid/types/settings.ts"],"names":[],"mappings":"AAAA,MAAM,WAAW,QAAQ;IACvB,GAAG,CAAC,EAAE,OAAO,CAAC;IACd,KAAK,CAAC,EAAE,OAAO,CAAC;IAChB,OAAO,CAAC,EAAE,OAAO,CAAC;IAClB,WAAW,CAAC,EAAE,OAAO,CAAC;CACvB"}
