@@ -4,7 +4,7 @@ A react component library for [Seidr](https://github.com/dttctcs/seidr).
 
 ## Actions
 
-![build-and-release](https://github.com/dttctcs/seidr-react/actions/workflows/build-and-release.yml/badge.svg)
+[![Publish package on NPM](https://github.com/dttctcs/seidr-react/actions/workflows/publish_package_on_npm.yml/badge.svg)](https://github.com/dttctcs/seidr-react/actions/workflows/publish_package_on_npm.yml)
 
 ## Usage
 
