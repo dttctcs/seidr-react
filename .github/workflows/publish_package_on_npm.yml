@@ -20,6 +20,7 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'pnpm'
+      - run: pnpm install
       - run: pnpm build
       - run: pnpm publish --access=public
         env:
