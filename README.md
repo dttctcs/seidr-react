@@ -2,9 +2,8 @@
 
 A react component library for [Seidr](https://github.com/dttctcs/seidr).
 
-## Actions
-
 [![Publish package on NPM](https://github.com/dttctcs/seidr-react/actions/workflows/publish_package_on_npm.yml/badge.svg)](https://github.com/dttctcs/seidr-react/actions/workflows/publish_package_on_npm.yml)
+[![npm version](https://badge.fury.io/js/seidr-react.svg)](https://badge.fury.io/js/seidr-react)
 
 ## Usage
 
@@ -12,31 +11,18 @@ A react component library for [Seidr](https://github.com/dttctcs/seidr).
 
 ### Prerequisites
 
-You have **Seidr** running? Good. All you need is to install **Seidr React** and leverage its components.
+You have [seidr](https://github.com/dttctcs/seidr) running? Good. All you need is to install **Seidr React** and
+leverage its components. We highly recommend using [pnpm](https://pnpm.io/installation) over npm.
 
-- [Create a react project](https://create-react-app.dev/)
-- Install requirements
-    - Either run `npm install git+ssh://git@github.com:dttctcs/seidr-react.git`
-    - Or add `"seidr-react": "github:dttctcs/seidr-react"` to your `package.json` dependencies list and
-      run `npm install`
-
-## Contribution
+- [Create your app](https://vitejs.dev/guide/#scaffolding-your-first-vite-project)
+- Install requirements: `pnpm i seidr-react`
 
 ### Development
 
 - Install dependencies[^install_dependencies]:
-    - Run `npm ci`, if you want to install the current version without any changes.
-    - Run `npm i`, if you intend to update/change dependencies or the version.
-- Run: `npm run storybook`
-
-### Release
-
-The project uses [Semantic Versioning](https://semver.org/).
-
-- Create a tag: `git tag <version>`, where `<version>` is a semver version number (without the prefix `v`)
-- Push your tag: `git push --tag`
-    - This will run the GitHub workflow `build-and-release`, which builds the application and publishes it to GitHub. It
-      will also create a release on GitHub with the commit log since the last release.
+    - Run `pnpm ci`, if you want to install the current version without any changes.
+    - Run `pnpm i`, if you intend to update/change dependencies or the version.
+- Run: `pnpm run storybook`
 
 ## Configuration
 
@@ -164,8 +150,8 @@ functionality as [Flask Appbuilder's](https://flask-appbuilder.readthedocs.io/en
 
 **Seidr React** provides the same StylesAPI as on [Mantine](https://mantine.dev/theming/styles-api/).
 
-[^install_dependencies]: `npm i` will update `package-lock.json` if changes occured, while `npm ci` will wipe
-your `node_modules` folder and install dependencies only from `package-lock.json`
+[^install_dependencies]: `pnpm i` will update `package-lock.json` if changes occured, while `pnpm ci` will wipe
+your `node_modules` folder and install dependencies only from `pnpm-lock.yaml`
 [^inside_seidr_api_provider]: Can only be used inside of `SeidrApiProvider`.
 [^mantine_checkbox_group_props]: Also supports any prop
 for [Mantine's CheckBox.Group](https://mantine.dev/core/checkbox/?t=props)
