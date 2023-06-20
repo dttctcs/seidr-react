@@ -32,7 +32,7 @@ jobs:
           node-version: 18.x
 
       - name: Generate new version
-        run: npm version ${{ github.event.inputs.version }}
+        run: pnpm version ${{ github.event.inputs.version }}
 
       - name: Push new version tag to repository
         run: git push origin main --tags

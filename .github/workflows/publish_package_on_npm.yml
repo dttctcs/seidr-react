@@ -20,10 +20,13 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'pnpm'
-      - run: pnpm install
-      - run: pnpm build
+      - name: Install dependencies
+        run: pnpm install
+      - name: Build for production
+        run: pnpm build
       - name: Set publishing config
         run: pnpm config set '//registry.npmjs.org/:_authToken' "${NODE_AUTH_TOKEN}"
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
-      - run: pnpm publish --access=public --no-git-checks
+      - name: Publish
+        run: pnpm publish --access=public --no-git-checks
