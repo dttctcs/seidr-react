@@ -1,4 +1,4 @@
-import {Fragment, useEffect} from 'react';
+import { Fragment, useEffect } from 'react';
 import { useApi } from '../../../SeidrApiProvider';
 
 import * as yup from 'yup';
@@ -22,7 +22,7 @@ const schema = yup.object({
   ),
 });
 
-function FilterMenu({ onClose }) {
+export function FilterMenu({ onClose }) {
   const { info, queryParams, setQueryParams } = useApi();
 
   const { handleSubmit, control, setValue, watch } = useForm({
@@ -65,7 +65,7 @@ function FilterMenu({ onClose }) {
         controlledFields.map((field, index) => {
           return (
             <Fragment key={field.id}>
-              <Group mt="lg" spacing="md" noWrap>
+              <Group mt='lg' spacing='md' noWrap>
                 <Box sx={{ width: '192px' }}>
                   <FormFilterField
                     name={`filters.${index}.col`}
@@ -104,7 +104,7 @@ function FilterMenu({ onClose }) {
                   ) : null}
                 </Box>
                 <ActionIcon
-                  size="xs"
+                  size='xs'
                   onClick={() => {
                     remove(index);
                   }}
@@ -117,9 +117,9 @@ function FilterMenu({ onClose }) {
                   sx={(theme) => ({
                     color: `${theme.colors[theme.primaryColor][theme.fn.primaryShade()]} !important`,
                   })}
-                  my="md"
-                  labelPosition="center"
-                  label="AND"
+                  my='md'
+                  labelPosition='center'
+                  label='AND'
                 />
               ) : null}
             </Fragment>
@@ -127,15 +127,15 @@ function FilterMenu({ onClose }) {
         })
       ) : (
         <Box sx={{ width: '642px' }}>
-          <Text sx={(theme) => ({ fontStyle: 'italic', padding: '7px' })} size="sm" color="dimmed">
+          <Text sx={(theme) => ({ fontStyle: 'italic', padding: '7px' })} size='sm' color='dimmed'>
             No filters selected...
           </Text>
         </Box>
       )}
-      <Divider my="xl" />
+      <Divider my='xl' />
       <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
         <Button
-          variant="subtle"
+          variant='subtle'
           leftIcon={<IconPlus />}
           onClick={() => {
             append({ col: '', opr: '', value: '' });
@@ -143,12 +143,10 @@ function FilterMenu({ onClose }) {
         >
           Add Filter
         </Button>
-        <Group spacing="md">
+        <Group spacing='md'>
           <Button onClick={handleSubmit(onSubmit)}>Apply</Button>
         </Group>
       </Box>
     </>
   );
 }
-
-export default FilterMenu;

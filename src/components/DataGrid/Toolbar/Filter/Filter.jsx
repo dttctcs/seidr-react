@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useApi } from '../../../SeidrApiProvider';
 
 import { ActionIcon, Box, CloseButton, Indicator, Popover, Tooltip } from '@mantine/core';
-import FilterMenu from './FilterMenu';
+import { FilterMenu } from './FilterMenu';
 import { IconFilter } from '@tabler/icons-react';
 
 export function Filter() {
