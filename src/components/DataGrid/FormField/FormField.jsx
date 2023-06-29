@@ -1,7 +1,3 @@
-
-
-import { Control } from 'react-hook-form';
-
 import {
   FormDatePicker,
   FormRelatedSelect,
@@ -39,10 +35,8 @@ export function FormField({ name, control, schema, filter, ...props }) {
         <FormDateTimePicker
           control={control}
           name={name}
-          mask='__.__.____ __:__'
-          format='dd.MM.yyyy HH:mm'
+          format='DD.MM.YYYY HH:mm:ss'
           schema={schema}
-          PopperProps={filter && { placement: 'bottom-end' }}
           {...props}
         />
       );
@@ -51,10 +45,8 @@ export function FormField({ name, control, schema, filter, ...props }) {
         <FormDatePicker
           control={control}
           name={name}
-          mask='__.__.____'
-          format='dd.MM.yyyy'
+          format='DD.MM.YYYY'
           schema={schema}
-          PopperProps={filter && { placement: 'bottom-end' }}
           {...props}
         />
       );

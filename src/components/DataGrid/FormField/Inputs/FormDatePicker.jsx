@@ -1,78 +1,41 @@
-import { useRef } from 'react';
 import { useController } from 'react-hook-form';
 
-import { TextInput, useMantineTheme } from '@mantine/core';
-import { IconCalendar } from '@tabler/icons-react';
-import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 
-export function FormDatePicker({ control, name, PopperProps, ...props }) {
+import dayjs from 'dayjs';
+import utc from 'dayjs/plugin/utc';
+
+dayjs.extend(utc);
+
+export function FormDatePicker({ control, name, ...props }) {
   const {
-    field: { ref, ...inputProps },
-    fieldState: { error },
+    field,
+    fieldState,
   } = useController({
     name,
     control,
   });
 
-  const theme = useMantineTheme();
-  // const [refState, setRefState] = useState(refState);
-  const customInputRef = useRef();
-
-  // useEffect(() => {
-  //   if (customInputRef) {
-  //     setRefState(!refState);
-  //   }
-  // }, [customInputRef.current]);
-
-  const colors = theme.fn.variant({
-    variant: 'default',
-    color: theme.colors[theme.primaryColor][theme.fn.primaryShade()],
-  });
-
   return (
-    <LocalizationProvider dateAdapter={AdapterDateFns}>
+    <LocalizationProvider dateAdapter={AdapterDayjs}>
       <DatePicker
-        components={{
-          OpenPickerIcon: IconCalendar,
-        }}
-        OpenPickerButtonProps={{
-          sx: {
-            padding: 0,
-            marginLeft: '-18px',
-            color: theme.colors.gray[7],
+        description={props.description}
+        slotProps={{
+          textField: {
+            autoComplete: 'off',
+            label: props.label,
+            error: !!fieldState.error,
           },
         }}
-        PopperProps={{
-          anchorEl: customInputRef.current,
-          sx: {
-            '& .Mui-selected': {
-              backgroundColor: `${colors.background} !important`,
-              ...theme.fn.hover({
-                backgroundColor: `${colors.hover} !important`,
-              }),
-            },
-          },
-          ...PopperProps,
-        }}
-        renderInput={({ inputProps, ...other }) => {
-          return (
-            <TextInput
-              label={props.label}
-              ref={customInputRef}
-              error={!!error}
-              rightSection={other.InputProps.endAdornment}
-              {...inputProps}
-            />
-          );
-        }}
-        inputRef={ref}
-        {...inputProps}
+        inputRef={field.ref}
         onChange={(newValue) => {
-          // format the marshmallow validation will pass
-          inputProps.onChange(newValue.toISOString().split('T')[0]);
+          if (newValue instanceof dayjs && !isNaN(newValue)) {
+            return field.onChange(newValue.toISOString().substring(0, 10));
+          }
         }}
+        value={dayjs.utc(field.value)}
         {...props}
       />
     </LocalizationProvider>
