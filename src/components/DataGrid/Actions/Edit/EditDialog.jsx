@@ -8,6 +8,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { Button, Group, Modal, Stack } from '@mantine/core';
 
 import { FormField } from '../../FormField';
+
 export function EditDialog({ item, info, opened, onClose }) {
   const { updateEntry } = useApi();
 
@@ -47,21 +48,24 @@ export function EditDialog({ item, info, opened, onClose }) {
         onClose();
         reset();
       }}
-      title={`${info.edit.title}  (#${item?.id})`}
+      title={info.edit.title}
       size='lg'
       centered
     >
       <Stack spacing='md'>
-        {info.edit.columns.map((item) => (
-          <FormField
-            key={item.name}
-            name={item.name}
-            control={control}
-            label={`${item.label}${item.required ? '*' : ''}`}
-            description={item.description}
-            schema={item}
-          />
-        ))}
+        {
+          info.edit.columns.map((item, index) => (
+            <FormField
+              key={index}
+              name={item.name}
+              control={control}
+              schema={item}
+              label={item.label}
+              description={item.description}
+              required={item.required}
+            />
+          ))
+        }
         <Group position='right' mt='xl'>
           <Button onClick={handleSubmit(onSubmit)}>Save</Button>
         </Group>
