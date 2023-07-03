@@ -1,8 +1,8 @@
-//import 'overlayscrollbars/styles/overlayscrollbars.css';
+import 'overlayscrollbars/overlayscrollbars.css';
 
 import { forwardRef } from 'react';
 
-import { OverlayScrollbarsComponent, OverlayScrollbarsComponentProps } from 'overlayscrollbars-react';
+import { OverlayScrollbarsComponent } from 'overlayscrollbars-react';
 
 export const ScrollArea = forwardRef(
   ({ children, options, ...others }, ref) => (
