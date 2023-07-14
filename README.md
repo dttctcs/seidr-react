@@ -150,7 +150,7 @@ functionality as [Flask Appbuilder's](https://flask-appbuilder.readthedocs.io/en
 
 **Seidr React** provides the same StylesAPI as on [Mantine](https://mantine.dev/theming/styles-api/).
 
-[^install_dependencies]: `pnpm i` will update `package-lock.json` if changes occured, while `pnpm ci` will wipe
+[^install_dependencies]: `pnpm i` will update `pnpm-lock.yaml` if changes occured, while `pnpm ci` will wipe
 your `node_modules` folder and install dependencies only from `pnpm-lock.yaml`
 [^inside_seidr_api_provider]: Can only be used inside of `SeidrApiProvider`.
 [^mantine_checkbox_group_props]: Also supports any prop
