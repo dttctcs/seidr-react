@@ -1,14 +1,14 @@
 /* eslint-disable no-case-declarations */
-import { useEffect, useReducer, forwardRef } from 'react';
+import {useEffect, useReducer, forwardRef} from 'react';
 
-import { LoadingOverlay, Paper } from '@mantine/core';
-import { Toolbar } from './Toolbar';
-import { Main } from './Main';
-import { Pagination } from './Pagination';
-import { ErrorDialog } from './ErrorDialog';
+import {LoadingOverlay, Paper} from '@mantine/core';
+import {Toolbar} from './Toolbar';
+import {Main} from './Main';
+import {Pagination} from './Pagination';
+import {ErrorDialog} from './ErrorDialog';
 
-import { applyStyles } from './DataGrid.styles';
-import { useApi } from '../SeidrApiProvider';
+import {applyStyles} from './DataGrid.styles';
+import {useApi} from '../SeidrApiProvider';
 
 const initialState = {
   settings: {
@@ -24,15 +24,14 @@ const initialState = {
 function reducer(state, action) {
   switch (action.type) {
     case 'setSettings':
-      return { ...state, settings: action.payload };
-
+      return {...state, settings: action.payload};
     default:
       throw new Error();
   }
 }
 
 export const DataGrid = forwardRef((props, ref) => {
-  const { path, data, loading, info, setQueryParams } = useApi();
+  const {path, data, loading, info, setQueryParams} = useApi();
   const {
     hideToolbar = false,
     hideFilter = false,
@@ -45,13 +44,12 @@ export const DataGrid = forwardRef((props, ref) => {
     styles,
   } = props;
 
-  const localStorageKey = `${path}-datagrid`;
 
-  const { classes, cx, theme } = applyStyles();
-
+  const {classes, cx, theme} = applyStyles();
+  console.log(settings)
   const [state, dispatch] = useReducer(reducer, {
     ...initialState,
-    settings: JSON.parse(localStorage.getItem(localStorageKey)) || {
+    settings: {
       rtl: settings?.rtl ?? false,
       dense: settings?.dense ?? false,
       striped: settings?.striped ?? false,
@@ -67,20 +65,14 @@ export const DataGrid = forwardRef((props, ref) => {
     }
   }, [data]);
 
-  useEffect(() => {
-    if (state.settings) {
-      localStorage.setItem(localStorageKey, JSON.stringify(state.settings));
-    }
-  }, [state.settings]);
-
   return (
     <Paper
       ref={ref}
       className={classes.root}
-      sx={{ position: 'relative', height: '100%', display: 'flex', flexDirection: 'column', ...sx }}
+      sx={{position: 'relative', height: '100%', display: 'flex', flexDirection: 'column', ...sx}}
     >
       <LoadingOverlay
-        loaderProps={{ size: 'sm', variant: 'dots' }}
+        loaderProps={{size: 'sm', variant: 'dots'}}
         overlayOpacity={0.1}
         overlayColor='#c5c5c5'
         visible={loading}
@@ -96,12 +88,12 @@ export const DataGrid = forwardRef((props, ref) => {
               dense={state.settings.dense}
             />
           ) : null}
-          <Main settings={state.settings} hideActions={hideActions} loading={loading} onSelect={onSelectEntry} />
+          <Main settings={state.settings} hideActions={hideActions} loading={loading} onSelect={onSelectEntry}/>
 
-          <Pagination />
+          <Pagination/>
         </>
       )}
-      <ErrorDialog />
+      <ErrorDialog/>
     </Paper>
   );
 });
