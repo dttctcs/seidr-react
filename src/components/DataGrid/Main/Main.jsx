@@ -1,15 +1,14 @@
-import { ReactNode } from 'react';
+//import { ReactNode } from 'react';
 
 import { Table, useMantineTheme } from '@mantine/core';
 import { ScrollArea } from '../../ScrollArea';
 import { Header } from './Header';
 import { Body } from './Body';
-import { EditDialog } from '../Actions/Edit/EditDialog';
+//import { EditDialog } from '../Actions/Edit/EditDialog';
 
 
 export function Main({
   settings,
-
   hideActions,
   loading,
   onSelect,
