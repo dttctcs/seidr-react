@@ -1,6 +1,6 @@
 import { Stack } from '@mantine/core';
-import { Select } from '../../../components/QuickFilters';
-import { DataGrid } from '../../../components/DataGrid';
+import { Select } from '../index.js';
+import { DataGrid } from '../../DataGrid/index.js';
 
 const meta = {
   title: 'Components/QuickFilters/Select',

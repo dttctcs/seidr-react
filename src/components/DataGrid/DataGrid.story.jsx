@@ -1,4 +1,4 @@
-import {DataGrid} from '../../components/DataGrid';
+import {DataGrid} from './index.js';
 
 const meta = {
   title: 'components/DataGrid',

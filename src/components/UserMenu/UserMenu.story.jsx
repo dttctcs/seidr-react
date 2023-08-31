@@ -1,9 +1,9 @@
 import { MemoryRouter, Routes, Route, Outlet } from 'react-router-dom';
 import { Box, Button, Paper } from '@mantine/core';
-import { SeidrApiProvider } from '../../components/SeidrApiProvider';
-import { DataGrid } from '../../components/DataGrid';
-import { UserMenu } from '../../components/UserMenu';
-import { useSeidrAuth } from '../../components/SeidrProvider';
+import { SeidrApiProvider } from '../SeidrApiProvider/index.js';
+import { DataGrid } from '../DataGrid/index.js';
+import { UserMenu } from './index.jsx';
+import { useSeidrAuth } from '../SeidrProvider/index.js';
 
 function Permissions() {
   return (

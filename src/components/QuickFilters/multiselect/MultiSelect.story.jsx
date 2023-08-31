@@ -1,6 +1,6 @@
 import { Stack } from '@mantine/core';
-import { MultiSelect } from '../../../components/QuickFilters';
-import { DataGrid } from '../../../components/DataGrid';
+import { MultiSelect } from '../index.js';
+import { DataGrid } from '../../DataGrid/index.js';
 
 const meta = {
   title: 'Components/QuickFilters/MultiSelect',

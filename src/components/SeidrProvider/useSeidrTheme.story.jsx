@@ -1,4 +1,4 @@
-import { useSeidrTheme } from '../../components/SeidrProvider';
+import { useSeidrTheme } from './index.js';
 
 function MantineThemeWrapper() {
   const theme = useSeidrTheme();

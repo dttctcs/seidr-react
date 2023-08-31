@@ -1,6 +1,6 @@
 import { Stack } from '@mantine/core';
-import { CheckboxGroup } from '../../../components/QuickFilters';
-import { DataGrid } from '../../../components/DataGrid';
+import { CheckboxGroup } from '../index.js';
+import { DataGrid } from '../../DataGrid/index.js';
 
 const meta = {
   title: 'components/QuickFilters/CheckboxGroup',

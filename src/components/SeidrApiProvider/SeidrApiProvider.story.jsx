@@ -1,4 +1,4 @@
-import { SeidrApiProvider, useApi } from '../../components/SeidrApiProvider';
+import { SeidrApiProvider, useApi } from './index.js';
 import { Story } from '@storybook/addon-docs';
 
 const meta = {

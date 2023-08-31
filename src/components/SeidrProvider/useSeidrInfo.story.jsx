@@ -1,5 +1,5 @@
 import { Button, Stack } from '@mantine/core';
-import { useSeidrAuth, useSeidrInfo } from '../../components/SeidrProvider';
+import { useSeidrAuth, useSeidrInfo } from './index.js';
 
 function SeidrInfoWrapper() {
   const { user, signin } = useSeidrAuth();

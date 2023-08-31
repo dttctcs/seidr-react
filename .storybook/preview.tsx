@@ -1,12 +1,5 @@
-import { handlers } from '../src/mocks/handlers';
 import { SeidrProvider, SeidrApiProvider } from '../src';
 import { Preview } from '@storybook/react';
-import { setupWorker } from 'msw';
-
-if (typeof global.process === 'undefined') {
-  const worker = setupWorker(...handlers);
-  worker.start({ onUnhandledRequest: 'bypass' });
-}
 
 const preview: Preview = {
   parameters: {
