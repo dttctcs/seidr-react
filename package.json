@@ -8,7 +8,6 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "lint": "eslint src --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006 -s public"
   },
@@ -72,13 +71,6 @@
     "@storybook/react-webpack5": "^7.0.24",
     "@vitejs/plugin-react": "^4.0.1",
     "babel-loader": "^9.1.2",
-    "eslint": "^8.43.0",
-    "eslint-config-airbnb": "^19.0.4",
-    "eslint-config-prettier": "^8.8.0",
-    "eslint-plugin-react": "^7.32.2",
-    "eslint-plugin-react-hooks": "^4.6.0",
-    "eslint-plugin-react-refresh": "^0.4.1",
-    "eslint-plugin-storybook": "^0.6.12",
     "react": ">=18.2.0",
     "storybook": "^7.0.24",
     "vite": "^4.3.9",

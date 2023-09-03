@@ -46,7 +46,7 @@ export const DataGrid = forwardRef((props, ref) => {
   } = props;
 
   const { classes, cx, theme } = applyStyles();
-  console.log(settings);
+ // console.log(settings);
   const [state, dispatch] = useReducer(reducer, {
     ...initialState,
     settings: {

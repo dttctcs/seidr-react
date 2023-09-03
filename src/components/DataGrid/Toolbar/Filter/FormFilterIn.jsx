@@ -30,6 +30,7 @@ export function FormFilterIn({ control, name, ...props }) {
       placeholder="Enter items"
       searchable
       creatable
+      withinPortal
       error={error ? error.message : null}
       {...inputProps}
       value={inputProps.value}

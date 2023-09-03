@@ -17,6 +17,7 @@ function FormFilterField({ control, name, items, onChange, TextFieldProps, ...pr
       ref={ref}
       data={items}
       searchable
+      withinPortal
       // getOptionLabel={(option) => {
       //   const label = option
       //     .split('_')
