@@ -45,7 +45,7 @@ export function FormField({ name, control, schema, filter, ...props }) {
         <FormDatePicker
           control={control}
           name={name}
-          format='DD.MM.YYYY'
+          inputFormat='DD.MM.YYYY'
           schema={schema}
           {...props}
         />
