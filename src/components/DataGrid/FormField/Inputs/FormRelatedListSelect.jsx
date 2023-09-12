@@ -12,10 +12,6 @@ export function FormRelatedListSelect({ control, name, items, ...props }) {
 
   const data = items.map((item) => ({ value: item.id, label: item.value }));
 
-  const currentItems = Array.isArray(inputProps.value)
-    ? inputProps.value.map((value) => value.id)
-    : [];
-
   return (
     <MultiSelect
       ref={ref}
@@ -23,11 +19,6 @@ export function FormRelatedListSelect({ control, name, items, ...props }) {
       error={error ? error.message : null}
       searchable
       {...inputProps}
-      value={currentItems}
-      onChange={(ids) => {
-        const selectedItems = items.filter((item) => ids.includes(item.id));
-        inputProps.onChange(selectedItems);
-      }}
       {...props}
     />
   );
