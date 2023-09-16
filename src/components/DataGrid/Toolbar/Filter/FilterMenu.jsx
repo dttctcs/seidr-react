@@ -42,7 +42,7 @@ export function FilterMenu({ onClose }) {
   });
 
   useEffect(() => {
-    if (queryParams.filters.length) {
+    if (queryParams.filters && queryParams.filters.length) {
       setValue('filters', JSON.parse(JSON.stringify(queryParams.filters)));
     }
   }, [queryParams.filters, setValue]);
@@ -51,7 +51,7 @@ export function FilterMenu({ onClose }) {
     const filters = JSON.parse(JSON.stringify(data.filters));
 
     filters.forEach((filter) => {
-      if (filter.opr === 'in' && Array.isArray(filter.value)) {
+      if (filter.opr === 'in' && Array.isArray(filter.value) && filter.value.length > 0) {
         filter.value = JSON.stringify(filter.value);
       }
     });
