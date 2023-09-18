@@ -58,16 +58,9 @@ export function FilterMenu({ onClose }) {
     onClose();
   };
 
-
-  const addFilter = () => {
-    setTimeout(() => {
-      append({ col: '', opr: '', value: '' });
-    }, 300);
-  }
-
   return (
     <>
-      {controlledFields.length > 0 && Object.keys(info.filters).length > 0 ? (
+      {controlledFields.length > 0 && Object.keys(info?.filters).length > 0 ? (
         controlledFields.map((field, index) => {
           return (
             <Fragment key={field.id}>
@@ -77,7 +70,7 @@ export function FilterMenu({ onClose }) {
                   <FormFilterField
                     name={`filters.${index}.col`}
                     control={control}
-                    items={Object.keys(info.filters)}
+                    items={Object.keys(info?.filters)}
                     onChange={(newValue) => {
                       update(index, { col: newValue, value: '', opr: '' });
                     }}
@@ -144,7 +137,9 @@ export function FilterMenu({ onClose }) {
         <Button
           variant='subtle'
           leftIcon={<IconPlus />}
-          onClick={addFilter}
+          onClick={() => {
+            append({ col: '', opr: '', value: '' });
+          }}
         >
           Add Filter
         </Button>
