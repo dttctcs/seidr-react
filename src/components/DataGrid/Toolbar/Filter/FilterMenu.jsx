@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useState } from 'react';
+import { Fragment, useEffect } from 'react';
 import { useApi } from '../../../SeidrApiProvider';
 
 import * as yup from 'yup';
@@ -24,9 +24,6 @@ const schema = yup.object({
 
 export function FilterMenu({ onClose }) {
   const { info, queryParams, setQueryParams } = useApi();
-  const [isLoading, setIsLoading] = useState(true);
-  const [isDataAvailable, setIsDataAvailable] = useState(false);
-
   const { handleSubmit, control, setValue, watch } = useForm({
     mode: 'onTouched',
     defaultValues: {
@@ -61,12 +58,12 @@ export function FilterMenu({ onClose }) {
     onClose();
   };
 
-  useEffect(() => {
+
+  const addFilter = () => {
     setTimeout(() => {
-      setIsDataAvailable(true);
-      setIsLoading(false);
-    }, 1000);
-  }, []);
+      append({ col: '', opr: '', value: '' });
+    }, 300);
+  }
 
   return (
     <>
@@ -147,9 +144,7 @@ export function FilterMenu({ onClose }) {
         <Button
           variant='subtle'
           leftIcon={<IconPlus />}
-          onClick={() => {
-            append({ col: '', opr: '', value: '' });
-          }}
+          onClick={addFilter}
         >
           Add Filter
         </Button>
