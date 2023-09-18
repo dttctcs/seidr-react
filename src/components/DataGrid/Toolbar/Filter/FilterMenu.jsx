@@ -70,7 +70,7 @@ export function FilterMenu({ onClose }) {
                   <FormFilterField
                     name={`filters.${index}.col`}
                     control={control}
-                    items={Object.keys(info?.filters ? info.filters : null)}
+                    items={info && info.filters ? Object.keys(info.filters) : []}
                     onChange={(newValue) => {
                       update(index, { col: newValue, value: '', opr: '' });
                     }}
