@@ -71,6 +71,7 @@ export function FilterMenu({ onClose }) {
                     name={`filters.${index}.col`}
                     control={control}
                     items={Object.keys(info?.filters)}
+                  //  items={info?.filters ? Object.keys(info.filters) : []}
                     onChange={(newValue) => {
                       update(index, { col: newValue, value: '', opr: '' });
                     }}
