@@ -67,14 +67,24 @@ export function FilterMenu({ onClose }) {
             <Fragment key={field.id}>
               <Group mt='lg' spacing='md' noWrap>
                 <Box sx={{ width: '192px' }}>
-                  <FormFilterField
+                 {/* <FormFilterField
                     name={`filters.${index}.col`}
                     control={control}
-                    items={info && info.filters ? Object.keys(info.filters) : []}
+                    items={Object.keys(info.filters)}
                     onChange={(newValue) => {
                       update(index, { col: newValue, value: '', opr: '' });
                     }}
-                  />
+                  />*/}
+                  {info && info.filters && (
+                    <FormFilterField
+                      name={`filters.${index}.col`}
+                      control={control}
+                      items={Object.keys(info.filters)}
+                      onChange={(newValue) => {
+                        update(index, { col: newValue, value: '', opr: '' });
+                      }}
+                    />
+                  )}
                 </Box>
 
                 <Box sx={{ width: '192px' }}>
