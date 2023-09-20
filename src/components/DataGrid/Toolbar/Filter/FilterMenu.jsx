@@ -60,7 +60,7 @@ export function FilterMenu({ onClose }) {
 
   return (
     <>
-      {controlledFields.length > 0 && Object.keys(info?.filters).length > 0 ? (
+      {controlledFields.length ? (
         controlledFields.map((field, index) => {
           return (
             <Fragment key={field.id}>
