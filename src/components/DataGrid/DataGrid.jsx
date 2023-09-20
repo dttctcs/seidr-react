@@ -38,6 +38,7 @@ export const DataGrid = forwardRef((props, ref) => {
     hideSettings = false,
     hideActions = false,
     hidePagination = false,
+    hideError = false,
     settings = null,
     sx = null,
     onSelectEntry = null,
@@ -96,7 +97,10 @@ export const DataGrid = forwardRef((props, ref) => {
 
         </>
       )}
-      <ErrorDialog />
+      {!hideError ?
+        <ErrorDialog />
+        : null
+      }
     </Paper>
   );
 });
