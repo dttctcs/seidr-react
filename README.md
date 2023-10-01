@@ -109,6 +109,7 @@ table.
 | hideToolbar      | boolean                | Hide toolbar, the toolbar is the upper section containing Settings, Add and Filter                    |
 | hideFilter       | boolean                | Hide filters                                                                                          |
 | hideSettings     | boolean                | Hide settings                                                                                         |
+| hideError        | boolean                | Hide error modal when a customized error modal is necessary                                           |
 | hideActions      | boolean                | Hide Action column on every row                     >                                                 |
 | hidePagination   | boolean                | Hide Pagination                                                                                       |
 | settings         | object: Settings       | Style settings                                                                                        |
