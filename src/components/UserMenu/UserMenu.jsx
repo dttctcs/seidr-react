@@ -43,6 +43,7 @@ export function UserMenu({ basePath = '/security', Target, children }) {
       width={260}
       position='bottom-end'
       transition='pop-top-right'
+      withinPortal
       opened={opened}
       onClose={() => setOpened(false)}
       onOpen={() => setOpened(true)}

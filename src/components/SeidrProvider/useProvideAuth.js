@@ -61,6 +61,7 @@ export function useProvideAuth(baseURL) {
 
       if (response.ok) {
         const user = await response.json();
+        authenticate();
         dispatch({ payload: user, type: 'setUser' });
       } else {
         dispatch({ payload: 'Username or password wrong.', type: 'setError' });
