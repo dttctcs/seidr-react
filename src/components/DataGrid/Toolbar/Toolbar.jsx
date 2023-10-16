@@ -8,7 +8,7 @@ import { Settings } from './Settings';
 import { Add } from '../Actions/Add';
 import { Filter } from './Filter';
 
-export const Toolbar = memo(({ settings, hideFilter, hideSettings, dense, dispatch }) => {
+export const Toolbar = memo(({ settings, hideAdd, hideFilter, hideSettings, dense, dispatch }) => {
   const { info } = useApi();
 
   const { classes } = applyStyles({ dense }, { name: 'DataGrid' });
@@ -22,7 +22,7 @@ export const Toolbar = memo(({ settings, hideFilter, hideSettings, dense, dispat
         ) : null}
       </Box>
       <Box sx={{ display: 'flex' }}>
-        {canPost ? <Add /> : null}
+        {canPost && !hideAdd  ? <Add /> : null}
         {!hideFilter ? <Filter /> : null}
       </Box>
     </Box>

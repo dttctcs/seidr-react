@@ -53,7 +53,6 @@ function DataGridPaginationActions(props) {
 
 export const Pagination = memo(({ ...props }) => {
   const { data, queryParams, setQueryParams } = useApi();
-
   const pageSizes = [10, 25, 50];
   const rowsPerPage = queryParams.page_size;
   const [cachedPage, setCachedPage] = useState(queryParams.page);
@@ -69,6 +68,7 @@ export const Pagination = memo(({ ...props }) => {
   useEffect(() => {
     setCachedPage(queryParams.page);
   }, [queryParams.page]);
+
 
   const handlePageChange = (event, newPage) => {
     setCachedPage(newPage);

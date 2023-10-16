@@ -1,5 +1,5 @@
 /* eslint-disable no-case-declarations */
-import { useEffect, useReducer, forwardRef } from 'react';
+import { useEffect, useReducer, forwardRef, useState } from 'react';
 
 import { LoadingOverlay, Paper } from '@mantine/core';
 import { Toolbar } from './Toolbar';
@@ -35,6 +35,7 @@ export const DataGrid = forwardRef((props, ref) => {
   const {
     hideToolbar = false,
     hideFilter = false,
+    hideAdd = false,
     hideSettings = false,
     hideActions = false,
     hidePagination = false,
@@ -66,6 +67,8 @@ export const DataGrid = forwardRef((props, ref) => {
     }
   }, [data]);
 
+
+
   return (
     <Paper
       ref={ref}
@@ -85,8 +88,10 @@ export const DataGrid = forwardRef((props, ref) => {
               settings={state.settings}
               dispatch={dispatch}
               hideFilter={hideFilter}
+              hideAdd={hideAdd}
               hideSettings={hideSettings}
               dense={state.settings.dense}
+
             />
           ) : null}
           <Main settings={state.settings} hideActions={hideActions} loading={loading} onSelect={onSelectEntry} />

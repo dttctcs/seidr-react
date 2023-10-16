@@ -49,12 +49,13 @@ export function FilterMenu({ onClose }) {
   const onSubmit = (data) => {
     const filters = JSON.parse(JSON.stringify(data.filters));
 
+
     filters.forEach((filter) => {
       if (filter.opr === 'in' && Array.isArray(filter.value) && filter.value.length > 0) {
         filter.value = JSON.stringify(filter.value);
       }
     });
-    setQueryParams({ filters });
+    setQueryParams({ filters, page: 0 });
     onClose();
   };
 
