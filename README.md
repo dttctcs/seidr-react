@@ -112,6 +112,7 @@ table.
 | hideError        | boolean                | Hide error modal when a customized error modal is necessary                                           |
 | hideActions      | boolean                | Hide Action column on every row                     >                                                 |
 | hidePagination   | boolean                | Hide Pagination                                                                                       |
+| hideAdd          | boolean                | Hide add button from toolbar                                                                          |
 | settings         | object: Settings       | Style settings                                                                                        |
 | rowsPerPageProps | number                 | Externally control page size                                                                          |
 | fetchOnMount     | boolean                | Determines if the table should trigger a data fetch on mount, defaults to true                        |
