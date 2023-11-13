@@ -1,43 +1,26 @@
 import { useController } from 'react-hook-form';
-
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-
-import dayjs from 'dayjs';
-import utc from 'dayjs/plugin/utc';
-
-dayjs.extend(utc);
+import { DateInput } from '@mantine/dates';
 
 export function FormDatePicker({ control, name, ...props }) {
-  const {
-    field,
-    fieldState,
-  } = useController({
+  const { field } = useController({
     name,
     control,
   });
 
+
   return (
-    <LocalizationProvider dateAdapter={AdapterDayjs}>
-      <DatePicker
-        description={props.description}
-        slotProps={{
-          textField: {
-            autoComplete: 'off',
-            label: props.label,
-            error: !!fieldState.error,
-          },
-        }}
-        inputRef={field.ref}
+    <>
+      <DateInput
         onChange={(newValue) => {
-          if (newValue instanceof dayjs && !isNaN(newValue)) {
-            return field.onChange(newValue.toISOString().substring(0, 10));
+          if (newValue instanceof Date) {
+            const utcDate = new Date(newValue.getTime() - newValue.getTimezoneOffset() * 60000);
+            field.onChange(utcDate.toISOString().substring(0, 10));
           }
         }}
-        value={dayjs.utc(field.value)}
+        value={field.value ? new Date(field.value) : null}
         {...props}
       />
-    </LocalizationProvider>
+    </>
   );
 }
+

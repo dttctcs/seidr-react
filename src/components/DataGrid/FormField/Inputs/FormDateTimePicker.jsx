@@ -10,7 +10,6 @@ export function FormDateTimePicker({ control, name, ...props }) {
   return (
     <>
       <DateTimePicker
-        withinPortal
         onChange={(newValue) => {
           if (newValue instanceof Date) {
             const utcDate = new Date(newValue);
