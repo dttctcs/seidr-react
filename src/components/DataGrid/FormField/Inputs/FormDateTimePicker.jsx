@@ -1,3 +1,4 @@
+/*
 import { useController } from 'react-hook-form';
 
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
@@ -49,3 +50,33 @@ export function FormDateTimePicker({ control, name, ...props }) {
     </LocalizationProvider>
   );
 }
+*/
+
+import { useController } from 'react-hook-form';
+import { DateTimePicker } from '@mantine/dates';
+
+export function FormDateTimePicker({ control, name, ...props }) {
+  const { field } = useController({
+    name,
+    control,
+  });
+
+
+  return (
+    <>
+      <DateTimePicker
+        withinPortal
+        onChange={(newValue) => {
+          if (newValue instanceof Date) {
+            const utcDate = new Date(newValue.getTime() - newValue.getTimezoneOffset() * 60000);
+            field.onChange(utcDate.toISOString().substring(0, 10));
+          }
+        }}
+        value={field.value ? new Date(field.value) : null}
+        {...props}
+      />
+    </>
+  );
+}
+
+
