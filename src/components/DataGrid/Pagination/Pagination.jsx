@@ -1,13 +1,13 @@
-import { useEffect, useMemo, useState, memo } from 'react';
+import React, { useEffect, useMemo, useState, memo } from 'react';
 import { useApi } from '../../SeidrApiProvider';
-
-import { Box, Pagination as MantinePagination } from '@mantine/core';
+import { Box, Pagination as MantinePagination, Select, Text } from '@mantine/core';
 
 export const Pagination = memo(({ ...props }) => {
   const { data, queryParams, setQueryParams } = useApi();
+  const pageSizes = [{value:10, label: '10'}, {value:25, label: '25'}, {value: 50, label: '50'}];
   const rowsPerPage = queryParams.page_size;
   const [cachedPage, setCachedPage] = useState(queryParams.page);
-  
+
   const debounce = (func, delay) => {
     let timer;
     return (...args) => {
@@ -15,7 +15,7 @@ export const Pagination = memo(({ ...props }) => {
       timer = setTimeout(() => func.apply(this, args), delay);
     };
   };
-  
+
   const debouncedSetPage = useMemo(
     () =>
       debounce((val) => {
@@ -29,14 +29,20 @@ export const Pagination = memo(({ ...props }) => {
   }, [queryParams.page]);
 
   const handlePageChange = (newPage) => {
-    setCachedPage(newPage-1);
-    debouncedSetPage(newPage-1);
+    setCachedPage(newPage - 1);
+    debouncedSetPage(newPage - 1);
   };
+
+  const handleRowsPerPageChange = (value) => {
+    setQueryParams({ page_size: parseInt(value, 10) });
+  }
 
   return (
     <Box
       sx={(theme) => ({
-        flex: '0 1 0',
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
         height: 54,
         border: 'none',
         borderTopWidth: '1px',
@@ -45,9 +51,25 @@ export const Pagination = memo(({ ...props }) => {
         padding: theme.spacing.md,
       })}
     >
+      <Box
+        sx={(theme) => ({
+          display: 'flex',
+          alignItems: 'center',
+          gap: theme.spacing.sm
+        })}
+        >
+          <Text>Rows per page:</Text>
+          <Select
+            value={rowsPerPage}
+            defaultValue={rowsPerPage}
+            onChange={(value) => handleRowsPerPageChange(value)}
+            data={pageSizes}
+            w={80}
+          />
+      </Box>
       <MantinePagination
         position='center'
-        total={Math.ceil(data.count/rowsPerPage)}
+        total={Math.ceil(data.count / rowsPerPage)}
         value={cachedPage + 1}
         onChange={handlePageChange}
         {...props}
