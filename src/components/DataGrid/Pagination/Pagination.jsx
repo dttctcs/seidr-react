@@ -65,6 +65,24 @@ export const Pagination = memo(({ ...props }) => {
             onChange={(value) => handleRowsPerPageChange(value)}
             data={pageSizes}
             w={80}
+            styles={() => ({
+              input: {
+                fontSize: '14px',
+                fontWeight: '250',
+                lineHeight: '52px',
+                border: '1px solid #E6E8ED',
+              },
+              item: {
+                '&[data-selected]': {
+                  '&, &:hover': {
+                    backgroundColor: '#E6E8ED',
+                    color: 'black',
+                    border: '1px solid #E6E8ED',
+                    outline: 'none !important'
+                  },
+                },
+              },
+            })}
           />
       </Box>
       <MantinePagination
