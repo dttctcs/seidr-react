@@ -4,8 +4,8 @@ import { Box, Pagination as MantinePagination, Select, Text } from '@mantine/cor
 
 export const Pagination = memo(({ ...props }) => {
   const { data, queryParams, setQueryParams } = useApi();
-  const pageSizes = [{value:10, label: '10'}, {value:25, label: '25'}, {value: 50, label: '50'}];
-  const rowsPerPage = queryParams.page_size;
+  const pageSizes = [{value:'10', label: '10'}, {value:'25', label: '25'}, {value: '50', label: '50'}];
+  const rowsPerPage = String(queryParams.page_size);
   const [cachedPage, setCachedPage] = useState(queryParams.page);
 
   const debounce = (func, delay) => {
