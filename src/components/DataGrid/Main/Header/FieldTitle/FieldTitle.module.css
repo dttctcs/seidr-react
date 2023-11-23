@@ -1,0 +1,44 @@
+.fieldTitleRoot {
+  position: sticky;
+  top: 0;
+  padding: 0 !important;
+  z-index: 20;
+  @mixin light {
+    background-color: var(--mantine-color-white)
+  }
+  
+  @mixin dark {
+    background-color: var(--mantine-color-dark-7);
+  }
+}
+
+.fieldTitleWrapper {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  padding-left: var(--mantine-spacing-sm);
+  padding-right: var(--mantine-spacing-sm);
+  padding-top: var(--mantine-spacing-xs);
+  padding-bottom: var(--mantine-spacing-xs);
+  border-bottom: 2px solid var(--mantine-color-gray-4);
+  font-family: var(--mantine-font-family);
+  font-size: var(--mantine-font-sizes-sm);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  cursor: pointer;
+  color: var(--mantine-color-dark-4);
+}
+
+.fieldTitleName {
+  font-weight: 700;
+}
+
+.fieldTitleIcon {
+  display: flex;
+  align-items: center;
+  visibility: hidden;
+}
+
+.fieldTitleWrapper:hover .fieldTitleIcon {
+  visibility: visible;
+}
