@@ -14,7 +14,7 @@ export function AlertDialog({ opened, onClose, handleAccept, handleReject }) {
       centered
     >
       Sind Sie Sicher, dass Sie das Item löschen wollen?
-      <Group position='right' mt='xl'>
+      <Group align='right' mt='xl' justify='flex-end'>
         <Button onClick={handleReject} variant='default'>
           Abbrechen
         </Button>
