@@ -1,3 +1,5 @@
+import '@mantine/core/styles.css';
+import '@mantine/dates/styles.css';
 export { SeidrProvider, useSeidrAuth, useSeidrInfo, useSeidrTheme } from './components/SeidrProvider';
 export { SeidrApiProvider, useApi } from './components/SeidrApiProvider';
 export {
@@ -5,7 +7,6 @@ export {
   Add,
   AddDialog,
   DataGrid,
-  DataGridStyles,
   Delete,
   Edit,
   EditDialog,
