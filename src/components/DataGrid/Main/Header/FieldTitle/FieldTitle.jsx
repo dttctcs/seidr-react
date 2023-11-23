@@ -1,6 +1,6 @@
 import React from 'react';
 import { useApi } from '../../../../SeidrApiProvider';
-import applyStyles from './FieldTitle.styles';
+import classes from './FieldTitle.module.css';
 
 import { Box, Indicator, Tooltip } from '@mantine/core';
 import { IconChevronDown, IconChevronUp } from '@tabler/icons-react';
@@ -9,19 +9,14 @@ import { IconChevronDown, IconChevronUp } from '@tabler/icons-react';
 export function FieldTitle({
                              column,
                              label,
-
                              selecDataGrid,
                              related,
-                             rtl,
-
                              classNames,
                              styles,
                            }) {
   const { queryParams, setQueryParams } = useApi();
 
   const selectedColumn = queryParams.order_column === column;
-
-  const { classes } = applyStyles({ selectedColumn, selecDataGrid, rtl }, { classNames, styles, name: 'DataGrid' });
 
   return (
     <th
@@ -42,7 +37,7 @@ export function FieldTitle({
           <Tooltip label='Related Field'>
             <Indicator
               label='rel'
-              styles={(theme) => ({ indicator: { top: `-1px !important`, right: `-2px !important`, padding: '4px' } })}
+              style={({ indicator: { top: `-1px !important`, right: `-2px !important`, padding: '4px' } })}
             >
               <Box className={classes.fieldTitleIcon}>
                 {selectedColumn ? (

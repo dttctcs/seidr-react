@@ -7,7 +7,7 @@ import { useSeidrAuth } from '../SeidrProvider/index.js';
 
 function Permissions() {
   return (
-    <Paper sx={{ flex: 1 }}>
+    <Paper style={{ flex: 1 }}>
       <SeidrApiProvider path='permissions/'>
         <DataGrid />
       </SeidrApiProvider>
@@ -17,7 +17,7 @@ function Permissions() {
 
 function PermissionView() {
   return (
-    <Paper sx={{ flex: 1 }}>
+    <Paper style={{ flex: 1 }}>
       <SeidrApiProvider path='permissionview/'>
         <DataGrid />
       </SeidrApiProvider>
@@ -27,7 +27,7 @@ function PermissionView() {
 
 function Roles() {
   return (
-    <Paper sx={{ flex: 1 }}>
+    <Paper style={{ flex: 1 }}>
       <SeidrApiProvider path='roles/'>
         <DataGrid />
       </SeidrApiProvider>
@@ -37,7 +37,7 @@ function Roles() {
 
 function Users() {
   return (
-    <Paper sx={{ flex: 1 }}>
+    <Paper style={{ flex: 1 }}>
       <SeidrApiProvider path='users/'>
         <DataGrid />
       </SeidrApiProvider>
@@ -47,7 +47,7 @@ function Users() {
 
 function ViewsMenus() {
   return (
-    <Paper sx={{ flex: 1 }}>
+    <Paper style={{ flex: 1 }}>
       <SeidrApiProvider path='viewsmenus/'>
         <DataGrid />
       </SeidrApiProvider>
@@ -59,7 +59,7 @@ function Frame() {
   const { user, loading, signin, signout } = useSeidrAuth();
   return (
     <div>
-      <Box sx={{ display: 'flex' }}>
+      <Box style={{ display: 'flex' }}>
         <Button
           onClick={() => {
             if (user) {

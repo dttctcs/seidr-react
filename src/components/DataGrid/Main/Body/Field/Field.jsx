@@ -4,12 +4,9 @@ import parse from 'html-react-parser';
 import DOMPurify from 'dompurify';
 
 import { Skeleton } from '@mantine/core';
-import applyStyles from './Field.style';
+import classes from './Field.module.css'
 
-
-
-export const Field = React.memo(({ loading, rightBorder, rtl, children, ...props }) => {
-  const { classes, cx } = applyStyles({ rightBorder, rtl });
+export const Field = React.memo(({ loading, rightBorder, children, ...props }) => {
 
   let clean;
   if (typeof children === 'string' && isHtml(children)) {
@@ -17,8 +14,11 @@ export const Field = React.memo(({ loading, rightBorder, rtl, children, ...props
   }
 
   return (
-    <td className={cx(classes.field, rightBorder ? classes.borderRight : null)} {...props}>
-      <Skeleton visible={loading}>{clean ? clean : children}</Skeleton>
+    <td 
+      className={`${classes.field}`}
+      {...props}
+    >
+        <Skeleton visible={loading}>{clean ? clean : children}</Skeleton>
     </td>
   );
 });

@@ -4,6 +4,7 @@ import { useApi } from '../../../SeidrApiProvider';
 import { ActionIcon, Box, CloseButton, Indicator, Popover, Tooltip } from '@mantine/core';
 import { FilterMenu } from './FilterMenu';
 import { IconFilter } from '@tabler/icons-react';
+import classes from '../../DataGrid.module.css'
 
 export function Filter() {
   const { queryParams } = useApi();
@@ -20,7 +21,7 @@ export function Filter() {
     >
       <Popover.Target>
         <Tooltip opened={opened ? false : null} label='Filter'>
-          <ActionIcon onClick={() => setOpened(true)}>
+          <ActionIcon className={classes.icon} onClick={() => setOpened(true)}>
             {queryParams.filters.length ? (
               <Indicator zIndex={1} size={16} label={queryParams.filters.length}>
                 <IconFilter />
@@ -32,7 +33,7 @@ export function Filter() {
         </Tooltip>
       </Popover.Target>
       <Popover.Dropdown>
-        <Box sx={{ position: 'absolute', top: 4, right: 4 }}>
+        <Box style={{ position: 'absolute', top: 4, right: 4 }}>
           <CloseButton title='Filters' onClick={() => setOpened(false)} />
         </Box>
         <FilterMenu

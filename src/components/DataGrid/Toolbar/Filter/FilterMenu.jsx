@@ -11,6 +11,7 @@ import FormFilterField from './FormFilterField';
 import FormOperatorField from './FormOperatorField';
 import { IconPlus, IconTrash } from '@tabler/icons-react';
 import { FormFilterIn } from './FormFilterIn';
+import classes from '../../DataGrid.module.css'
 
 const schema = yup.object({
   filters: yup.array().of(
@@ -65,8 +66,8 @@ export function FilterMenu({ onClose }) {
         controlledFields.map((field, index) => {
           return (
             <Fragment key={field.id}>
-              <Group mt='lg' spacing='md' noWrap>
-                <Box sx={{ width: '192px' }}>
+              <Group mt='lg' spacing='md' śtyle={{whiteSpace: 'nowrap'}}>
+                <Box style={{ width: '192px' }}>
                   {info && info.filters && (
                     <FormFilterField
                       name={`filters.${index}.col`}
@@ -79,7 +80,7 @@ export function FilterMenu({ onClose }) {
                   )}
                 </Box>
 
-                <Box sx={{ width: '192px' }}>
+                <Box style={{ width: '192px' }}>
                   {field.col ? (
                     <FormOperatorField
                       name={`filters.${index}.opr`}
@@ -91,7 +92,7 @@ export function FilterMenu({ onClose }) {
                     />
                   ) : null}
                 </Box>
-                <Box sx={{ width: '192px' }}>
+                <Box style={{ width: '192px' }}>
                   {field.col ? (
                     field.opr === 'in' ? (
                       <FormFilterIn name={`filters.${index}.value`} control={control} />
@@ -107,6 +108,7 @@ export function FilterMenu({ onClose }) {
                 </Box>
                 <ActionIcon
                   size='xs'
+                  className={classes.icon}
                   onClick={() => {
                     remove(index);
                   }}
@@ -116,9 +118,6 @@ export function FilterMenu({ onClose }) {
               </Group>
               {controlledFields.length > 1 && index < controlledFields.length - 1 ? (
                 <Divider
-                  sx={(theme) => ({
-                    color: `${theme.colors[theme.primaryColor][theme.fn.primaryShade()]} !important`,
-                  })}
                   my='md'
                   labelPosition='center'
                   label='AND'
@@ -128,17 +127,17 @@ export function FilterMenu({ onClose }) {
           );
         })
       ) : (
-        <Box sx={{ width: '642px' }}>
-          <Text sx={(theme) => ({ fontStyle: 'italic', padding: '7px' })} size='sm' color='dimmed'>
+        <Box style={{ width: '642px' }}>
+          <Text style={({ fontStyle: 'italic', padding: '7px' })} size='sm' color='dimmed'>
             No filters selected...
           </Text>
         </Box>
       )}
       <Divider my='xl' />
-      <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+      <Box style={{ display: 'flex', justifyContent: 'space-between' }}>
         <Button
           variant='subtle'
-          leftIcon={<IconPlus />}
+          leftSection={<IconPlus />}
           onClick={() => {
             append({ col: '', opr: '', value: '' });
           }}

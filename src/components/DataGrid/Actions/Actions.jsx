@@ -7,11 +7,14 @@ import { Edit } from './Edit';
 import { Delete } from './Delete';
 
 
-export function Actions({ id, selected, rtl }) {
+export function Actions({ id, selected }) {
   const { info } = useApi();
 
   return (
-    <Group sx={{ gap: 4, justifyContent: rtl ? 'flex-end' : undefined }} spacing={0} noWrap>
+    <Group 
+      style={{ gap: 4, width: '110px', whiteSpace: 'nowrap', padding: 'var(--mantine-spacing-md)'}}
+      spacing={0}
+    >
       {info.permissions.includes('can_get') ? <View id={id} /> : null}
       {info.permissions.includes('can_put') ? <Edit id={id} /> : null}
       {info.permissions.includes('can_delete') ? <Delete id={id} /> : null}

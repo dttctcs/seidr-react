@@ -35,7 +35,7 @@ export function ViewDialog({ item, info, loading, opened, onClose }) {
                   return (
                     <Grid key={index}>
                       <Grid.Col span={4}>
-                        <Text size='md' sx={{}}>
+                        <Text size='md'>
                           {item.label_columns[column]}
                         </Text>
                       </Grid.Col>
@@ -45,7 +45,7 @@ export function ViewDialog({ item, info, loading, opened, onClose }) {
                         </Text>
                       </Grid.Col>
                       <Grid.Col span={4}>
-                        <Text size='md' color='dimmed' sx={{}}>
+                        <Text size='md' c='dimmed'>
                           {getValue(item.result, column)}
                         </Text>
                       </Grid.Col>

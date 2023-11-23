@@ -39,7 +39,7 @@ export const Pagination = memo(({ ...props }) => {
 
   return (
     <Box
-      sx={(theme) => ({
+      style={{
         display: 'flex',
         justifyContent: 'space-between',
         alignItems: 'center',
@@ -47,16 +47,16 @@ export const Pagination = memo(({ ...props }) => {
         border: 'none',
         borderTopWidth: '1px',
         borderTopStyle: 'solid',
-        borderColor: theme.colors.gray[4],
-        padding: theme.spacing.md,
-      })}
+        borderColor: 'var(--mantine-color-gray-4)',
+        padding: 'var(--mantine-spacing-md)'
+      }}
     >
       <Box
-        sx={(theme) => ({
+        style={{
           display: 'flex',
           alignItems: 'center',
-          gap: theme.spacing.sm
-        })}
+          gap: 'var(--mantine-spacing-sm)'
+        }}
         >
           <Text>Rows per page:</Text>
           <Select
@@ -86,7 +86,7 @@ export const Pagination = memo(({ ...props }) => {
           />
       </Box>
       <MantinePagination
-        color='gray'
+        color='rgba(5,22,83,1)'
         position='center'
         total={Math.ceil(data.count / rowsPerPage)}
         value={cachedPage + 1}
