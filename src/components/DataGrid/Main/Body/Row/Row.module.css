@@ -1,0 +1,8 @@
+.row:hover {
+  cursor: pointer;
+  background-color: var(--mantine-colors-background)
+}
+
+.selected {
+  background-color: var(--mantine-colors-hover) !important;
+}
