@@ -29,17 +29,16 @@ export function Body({
               key={index}
               entry={{ ...entry, id }}
               selected={selectedItem?.id === id}
-              hover={settings.hover}
               setSelectedItem={setSelectedItem}
               onSelect={onSelect}
             >
               {!hideActions ? (
-                <Field rtl={settings.rtl} rightBorder={settings.rightBorder} loading={loading}>
-                  <Actions id={data.ids[index]} selected={selectedItem?.id === id} rtl={settings.rtl} />
+                <Field loading={loading}>
+                  <Actions id={data.ids[index]} selected={selectedItem?.id === id}/>
                 </Field>
               ) : null}
               {data.list_columns.map((column, columnIndex) => (
-                <Field key={columnIndex} rtl={settings.rtl} rightBorder={settings.rightBorder} loading={loading}>
+                <Field style={{padding: 'var(--mantine-spacing-md)'}} key={columnIndex} loading={loading}>
                   {getValue(entry, column)}
                 </Field>
               ))}
@@ -52,7 +51,7 @@ export function Body({
             style={{ padding: '8px' }}
             colSpan={hideActions ? data.list_columns.length : data.list_columns.length + 1}
           >
-            <Text sx={{ fontStyle: 'italic' }} size="sm" color="dimmed">
+            <Text style={{ fontStyle: 'italic' }} size="sm" c="dimmed">
               No data available...
             </Text>
           </td>

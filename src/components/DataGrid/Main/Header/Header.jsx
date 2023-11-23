@@ -9,7 +9,7 @@ export const Header = memo(({ settings, hideActions }) => {
   return (
     <thead style={{ padding: 0 }}>
       <tr>
-        {!hideActions ? <FieldTitle column="Actions" rtl={settings.rtl} /> : null}
+        {!hideActions ? <FieldTitle column="Actions" /> : null}
         {data.list_columns.map((column, index) => (
           <FieldTitle
             key={column}
@@ -17,7 +17,6 @@ export const Header = memo(({ settings, hideActions }) => {
             label={data.label_columns[column]}
             selecDataGrid={data.order_columns.includes(column)}
             related={info.filters[column]?.schema.type === 'Nested'}
-            rtl={settings.rtl}
           />
         ))}
       </tr>

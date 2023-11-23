@@ -8,7 +8,7 @@ import { Body } from './Body';
 
 
 export function Main({
-  settings,
+  // settings,
   hideActions,
   loading,
   onSelect,
@@ -21,14 +21,20 @@ export function Main({
       style={{ flex: 1, flexDirection: 'column' }}
     >
       <Table
-        verticalSpacing={settings.dense ? 'xs' : 'md'}
-        horizontalSpacing={settings.dense ? 'xs' : 'md'}
-        fontSize={settings.dense ? 'sm' : 'md'}
-        striped={settings.striped}
+        // verticalSpacing={settings.dense ? 'xs' : 'md'}
+        // horizontalSpacing={settings.dense ? 'xs' : 'md'}
+        // fontSize={settings.dense ? 'sm' : 'md'}
+        // striped={settings.striped}
         highlightOnHover={!!onSelect}
       >
-        <Header settings={settings} hideActions={hideActions} />
-        <Body settings={settings} loading={loading} onSelect={onSelect} hideActions={hideActions} />
+        <Header 
+          // settings={settings} 
+          hideActions={hideActions} />
+        <Body 
+          // settings={settings} 
+          loading={loading} 
+          onSelect={onSelect} 
+          hideActions={hideActions} />
       </Table>
     </ScrollArea>
   );
