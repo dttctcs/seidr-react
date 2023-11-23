@@ -7,5 +7,5 @@ const meta = {
 export default meta;
 
 export const Primary = {
-  render: () => <><DataGrid settings={{rtl: false}}/></>,
+  render: () => <><DataGrid/></>,
 };
