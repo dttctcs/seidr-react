@@ -32,7 +32,7 @@ export function FormFilterIn({ control, name, ...props }) {
       creatable
       error={error ? error.message : null}
       {...inputProps}
-      value={inputProps.value}
+      value={String(inputProps.value)}
       getCreateLabel={(query) => `+ Add ${query}`}
       onCreate={(query) => {
         setData((current) => [...current, query]);
