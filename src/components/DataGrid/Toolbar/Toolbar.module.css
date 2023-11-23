@@ -1,0 +1,5 @@
+.toolbarRoot {
+  display: flex;
+  justify-content: flex-end;
+  padding: var(--mantine-spacing-md);
+}
