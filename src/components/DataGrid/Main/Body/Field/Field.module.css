@@ -1,0 +1,17 @@
+.field {
+  /* Include font styles from theme.fn.fontStyles() if needed */
+  font-size: var(--mantine-font-size-md);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  text-align: left;
+
+  border-bottom: 1px solid var(--mantine-color-gray-4);
+}
+
+.borderRight {
+  border-right: var(--mantine-border);
+}
+
+.borderRight:last-of-type {
+  border-right: none;
+}
