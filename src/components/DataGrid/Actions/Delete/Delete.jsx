@@ -4,6 +4,7 @@ import { useApi } from '../../../SeidrApiProvider';
 import { ActionIcon, Tooltip } from '@mantine/core';
 import { AlertDialog } from '../../../AlertDialog';
 import { IconTrash } from '@tabler/icons-react';
+import classes from '../../DataGrid.module.css'
 
 
 export function Delete({ id }) {
@@ -24,6 +25,7 @@ export function Delete({ id }) {
     <>
       <Tooltip label='Delete'>
         <ActionIcon
+          className={classes.icon}
           size='sm'
           onClick={() => {
             setDialogOpen(true);

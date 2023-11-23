@@ -4,6 +4,7 @@ import { useApi } from '../../../SeidrApiProvider';
 import { ActionIcon, Tooltip } from '@mantine/core';
 import { EditDialog } from './EditDialog';
 import { IconPencil } from '@tabler/icons-react';
+import classes from '../../DataGrid.module.css'
 
 
 export function Edit({ id }) {
@@ -17,6 +18,7 @@ export function Edit({ id }) {
     <>
       <Tooltip label='Edit'>
         <ActionIcon
+          className={classes.icon}
           size='sm'
           onClick={async () => {
             setLoading(true);
