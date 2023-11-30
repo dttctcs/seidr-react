@@ -48,7 +48,10 @@ export const Pagination = memo(({ ...props }) => {
         borderTopWidth: '1px',
         borderTopStyle: 'solid',
         borderColor: 'var(--mantine-color-gray-4)',
-        padding: 'var(--mantine-spacing-md)'
+        padding: 'var(--mantine-spacing-md)',
+        zIndex: 900,
+        position: 'relative',
+        bottom: 0,
       }}
     >
       <Box
