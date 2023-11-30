@@ -1,7 +1,7 @@
 /* eslint-disable no-case-declarations */
 import { useEffect, useReducer, forwardRef, useState } from 'react';
 
-import { LoadingOverlay, Paper } from '@mantine/core';
+import { LoadingOverlay, Paper, Box } from '@mantine/core';
 import { Toolbar } from './Toolbar';
 import { Main } from './Main';
 import { Pagination } from './Pagination';
@@ -73,32 +73,35 @@ export const DataGrid = forwardRef((props, ref) => {
       style={{ position: 'relative', height: '100%', display: 'flex', flexDirection: 'column' }}
     >
       <LoadingOverlay
-        loaderProps={{ size: 'sm', variant: 'dots' }}
+        loaderProps={{ size: 'sm', type: 'dots' }}
         style={{color:'#c5c5c5', opacity: 0.3}}
         visible={loading}
-      />
-      {info && data && !loading && (
+        />
+      {info && data && (
         <>
-          {!hideToolbar ? (
-            <Toolbar
-              // settings={state.settings}
-              // dispatch={dispatch}
-              hideFilter={hideFilter}
-              hideAdd={hideAdd}
-              hideSettings={hideSettings}
-              // dense={state.settings.dense}
-            />
-          ) : null}
-          <Main 
-            // settings={state.settings}
-             hideActions={hideActions} 
-             loading={loading} 
-             onSelect={onSelectEntry} />
+          {!loading && (
+            <>
+              {!hideToolbar ? (
+                <Toolbar
+                // settings={state.settings}
+                  // dispatch={dispatch}
+                  hideFilter={hideFilter}
+                  hideAdd={hideAdd}
+                  hideSettings={hideSettings}
+                  // dense={state.settings.dense}
+                  />
+                  ) : null}
+              <Main 
+                // settings={state.settings}
+                hideActions={hideActions} 
+                loading={loading} 
+                onSelect={onSelectEntry} />
+                </>
+          )}
           {!hidePagination ?
-            <Pagination />
-            : null
-          }
-
+          <Pagination />
+          : null
+        }
         </>
       )}
       {!hideError ?
