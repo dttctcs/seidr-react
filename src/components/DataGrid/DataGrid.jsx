@@ -64,7 +64,9 @@ export const DataGrid = forwardRef((props, ref) => {
     }
   }, [data]);
 
-
+  if(!info || !data) {
+    return
+  }
 
   return (
     <Paper
