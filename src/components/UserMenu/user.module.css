@@ -1,0 +1,15 @@
+.iconSmall {
+    width: 14px;
+    height: 14px;
+}
+
+.iconLarge {
+    width: 34px;
+    height: 34px;
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+.iconLarge:hover {
+    cursor: pointer;
+}

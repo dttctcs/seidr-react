@@ -1,7 +1,7 @@
 import React, { ReactNode, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSeidrAuth } from '../SeidrProvider';
-
+import classes from './user.module.css';
 import { Group, Menu, Text, UnstyledButton } from '@mantine/core';
 import { IconAppWindow, IconIdBadge2, IconLock, IconLogout, IconUsers, IconChevronDown } from '@tabler/icons-react';
 
@@ -67,7 +67,7 @@ export function UserMenu({ basePath = '/security', Target, children }) {
             <Menu.Label>Security</Menu.Label>
             {availableRoutes.map((route, index) => {
               return (
-                <Menu.Item key={index} icon={<route.Icon size={16} />} onClick={() => navigate(route.path)}>
+                <Menu.Item p={12} key={index} leftSection={<route.Icon className={classes.iconSmall} />} onClick={() => navigate(route.path)}>
                   {route.label}
                 </Menu.Item>
               );
@@ -77,7 +77,7 @@ export function UserMenu({ basePath = '/security', Target, children }) {
           </>
         ) : null}
         {children}
-        <Menu.Item icon={<IconLogout size={14} />} onClick={signout}>
+        <Menu.Item leftSection={<IconLogout p={12} className={classes.iconSmall}  />} onClick={signout}>
           Logout
         </Menu.Item>
       </Menu.Dropdown>
