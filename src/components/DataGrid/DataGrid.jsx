@@ -73,14 +73,12 @@ export const DataGrid = forwardRef((props, ref) => {
       style={{ position: 'relative', height: '100%', display: 'flex', flexDirection: 'column' }}
     >
         <LoadingOverlay
-          pb={54}
-          loaderProps={{ size: 'sm', type: 'dots' }}
+          overlayProps={{ radius: "sm", blur: 2 }}
           style={{color:'#c5c5c5', opacity: 0.3}}
           visible={loading}
         />
-      {info && data && (
+
         <>
-          {!loading && (
             <Box pb={54}>
               {!hideToolbar ? (
                 <Toolbar
@@ -98,13 +96,13 @@ export const DataGrid = forwardRef((props, ref) => {
                 loading={loading} 
                 onSelect={onSelectEntry} />
             </Box>
-          )}
+
           {!hidePagination ?
           <Pagination />
           : null
         }
         </>
-      )}
+
       {!hideError ?
         <ErrorDialog />
         : null
