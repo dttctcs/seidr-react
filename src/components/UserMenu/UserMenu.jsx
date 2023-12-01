@@ -24,7 +24,6 @@ export function UserMenu({ basePath = '/security', Target, children }) {
   return (
     <Menu
       width={260}
-      zIndex={1000}
       position='bottom-end'
       transition='pop-top-right'
       withinPortal

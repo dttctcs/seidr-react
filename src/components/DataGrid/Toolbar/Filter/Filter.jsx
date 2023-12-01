@@ -5,7 +5,7 @@ import { ActionIcon, Box, CloseButton, Indicator, Popover, Tooltip } from '@mant
 import { FilterMenu } from './FilterMenu';
 import { IconFilter } from '@tabler/icons-react';
 import classes from '../../DataGrid.module.css'
-import zIndex from '@mui/material/styles/zIndex.js';
+
 
 export function Filter() {
   const { queryParams } = useApi();
@@ -33,7 +33,7 @@ export function Filter() {
           </ActionIcon>
         </Tooltip>
       </Popover.Target>
-      <Popover.Dropdown style={{zIndex: 100}}>
+      <Popover.Dropdown>
         <Box style={{ position: 'absolute', top: 4, right: 4 }}>
           <CloseButton title='Filters' onClick={() => setOpened(false)} />
         </Box>
