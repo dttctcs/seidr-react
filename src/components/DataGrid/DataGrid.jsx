@@ -81,7 +81,7 @@ export const DataGrid = forwardRef((props, ref) => {
         />
 
         <>
-            <Box pb={54}>
+            <Box>
               {!hideToolbar ? (
                 <Toolbar
                 // settings={state.settings}
