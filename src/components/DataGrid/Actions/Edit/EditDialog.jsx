@@ -30,8 +30,8 @@ export function EditDialog({ item, info, opened, onClose }) {
   // since it is a proxy object //see https://github.com/react-hook-form/react-hook-form/issues/3402
   const { dirty } = formState.dirtyFields;
   const onSubmit = async (data) => {
+    data.active = data.active === 'true';
     data = dirtyValues(formState.dirtyFields, data);
-
     await updateEntry(item.id, data);
     reset();
     onClose();
