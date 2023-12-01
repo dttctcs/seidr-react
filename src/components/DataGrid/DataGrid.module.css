@@ -2,6 +2,6 @@
 }
 
 .icon{
-  color: gray;
-  background-color: transparent;
+  color: gray !important;
+  background-color: transparent !important;
 }
