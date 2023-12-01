@@ -72,31 +72,32 @@ export const DataGrid = forwardRef((props, ref) => {
       className={classes.root}
       style={{ position: 'relative', height: '100%', display: 'flex', flexDirection: 'column' }}
     >
-      <LoadingOverlay
-        loaderProps={{ size: 'sm', type: 'dots' }}
-        style={{color:'#c5c5c5', opacity: 0.3}}
-        visible={loading}
+        <LoadingOverlay
+          pb={54}
+          loaderProps={{ size: 'sm', type: 'dots' }}
+          style={{color:'#c5c5c5', opacity: 0.3}}
+          visible={loading}
         />
       {info && data && (
         <>
           {!loading && (
-            <>
+            <Box pb={54}>
               {!hideToolbar ? (
                 <Toolbar
                 // settings={state.settings}
-                  // dispatch={dispatch}
-                  hideFilter={hideFilter}
-                  hideAdd={hideAdd}
-                  hideSettings={hideSettings}
-                  // dense={state.settings.dense}
-                  />
-                  ) : null}
+                // dispatch={dispatch}
+                hideFilter={hideFilter}
+                hideAdd={hideAdd}
+                hideSettings={hideSettings}
+                // dense={state.settings.dense}
+                />
+                ) : null}
               <Main 
                 // settings={state.settings}
                 hideActions={hideActions} 
                 loading={loading} 
                 onSelect={onSelectEntry} />
-                </>
+            </Box>
           )}
           {!hidePagination ?
           <Pagination />

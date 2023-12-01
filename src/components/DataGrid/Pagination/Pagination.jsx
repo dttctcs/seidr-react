@@ -36,7 +36,7 @@ export const Pagination = memo(({ ...props }) => {
   const handleRowsPerPageChange = (value) => {
     setQueryParams({ page_size: parseInt(value, 10) });
   }
-
+  
   return (
     <Box
       style={{
@@ -49,9 +49,9 @@ export const Pagination = memo(({ ...props }) => {
         borderTopStyle: 'solid',
         borderColor: 'var(--mantine-color-gray-4)',
         padding: 'var(--mantine-spacing-md)',
-        zIndex: 900,
-        position: 'relative',
+        position: 'absolute',
         bottom: 0,
+        width: '100%'
       }}
     >
       <Box
