@@ -1,6 +1,6 @@
 {
   "name": "seidr-react",
-  "version": "0.15.17",
+  "version": "1.0.0",
   "private": false,
   "description": "A react component library for Seidr",
   "license": "MIT",
