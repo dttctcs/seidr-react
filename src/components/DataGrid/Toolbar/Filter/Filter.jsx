@@ -33,7 +33,7 @@ export function Filter() {
           </ActionIcon>
         </Tooltip>
       </Popover.Target>
-      <Popover.Dropdown style={{zIndex: 1000}}>
+      <Popover.Dropdown style={{zIndex: 100}}>
         <Box style={{ position: 'absolute', top: 4, right: 4 }}>
           <CloseButton title='Filters' onClick={() => setOpened(false)} />
         </Box>

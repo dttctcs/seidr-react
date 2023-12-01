@@ -89,7 +89,7 @@ export const Pagination = memo(({ ...props }) => {
           />
       </Box>
       <MantinePagination
-        color='rgba(5,22,83,1)'
+        color='rgb(143,143,143)'
         position='center'
         total={Math.ceil(data.count / rowsPerPage)}
         value={cachedPage + 1}
