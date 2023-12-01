@@ -12,6 +12,7 @@ export function AlertDialog({ opened, onClose, handleAccept, handleReject }) {
       aria-describedby='alert-dialog-description'
       title='Item löschen?'
       centered
+      zIndex={1000}
     >
       Sind Sie Sicher, dass Sie das Item löschen wollen?
       <Group align='right' mt='xl' justify='flex-end'>

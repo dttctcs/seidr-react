@@ -51,6 +51,7 @@ export function EditDialog({ item, info, opened, onClose }) {
       title={info.edit.title}
       size='lg'
       centered
+      zIndex={1000}
     >
       <Stack spacing='md'>
         {

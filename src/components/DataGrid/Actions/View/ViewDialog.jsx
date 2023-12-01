@@ -13,6 +13,7 @@ export function ViewDialog({ item, info, loading, opened, onClose }) {
       title={`${item?.show_title} (#${item?.id})`}
       size='lg'
       centered
+      zIndex={1000}
     >
       <LoadingOverlay visible={loading} />
 

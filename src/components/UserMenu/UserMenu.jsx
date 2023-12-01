@@ -1,26 +1,10 @@
-import React, { ReactNode, useState } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSeidrAuth } from '../SeidrProvider';
 import classes from './user.module.css';
 import { Group, Menu, Text, UnstyledButton } from '@mantine/core';
 import { IconAppWindow, IconIdBadge2, IconLock, IconLogout, IconUsers, IconChevronDown } from '@tabler/icons-react';
 
-// const useStyles = createStyles((theme) => ({
-//   user: {
-//     color: theme.colorScheme === 'dark' ? theme.colors.dark[0] : theme.black,
-//     padding: `${theme.spacing.xs}px ${theme.spacing.sm}px`,
-//     borderRadius: theme.radius.sm,
-//     transition: 'background-color 100ms ease',
-
-//     '&:hover': {
-//       backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[8] : theme.colors.gray[1],
-//     },
-//   },
-
-//   userActive: {
-//     backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[8] : theme.colors.gray[1],
-//   },
-// }));
 
 export function UserMenu({ basePath = '/security', Target, children }) {
   const navigate = useNavigate();
