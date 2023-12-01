@@ -51,8 +51,8 @@ dependencies:
     specifier: ^2.2.0
     version: 2.2.0
   overlayscrollbars-react:
-    specifier: ^0.5.0
-    version: 0.5.0(overlayscrollbars@2.2.0)(react@18.2.0)
+    specifier: ^0.5.3
+    version: 0.5.3(overlayscrollbars@2.2.0)(react@18.2.0)
   react-dom:
     specifier: '>=18.2.0'
     version: 18.2.0(react@18.2.0)
@@ -8689,8 +8689,8 @@ packages:
       wcwidth: 1.0.1
     dev: true
 
-  /overlayscrollbars-react@0.5.0(overlayscrollbars@2.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-uCNTnkfWW74veoiEv3kSwoLelKt4e8gTNv65D771X3il0x5g5Yo0fUbro7SpQzR9yNgi23cvB2mQHTTdQH96pA==}
+  /overlayscrollbars-react@0.5.3(overlayscrollbars@2.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-mq9D9tbfSeq0cti1kKMf3B3AzsEGwHcRIDX/K49CvYkHz/tKeU38GiahDkIPKTMEAp6lzKCo4x1eJZA6ZFYOxQ==}
     peerDependencies:
       overlayscrollbars: ^2.0.0
       react: '>=16.8.0'
