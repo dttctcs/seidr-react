@@ -3,13 +3,14 @@
   top: 0;
   padding: 0 !important;
   z-index: 20;
-  @mixin light {
+  background-color: white !important;
+ /* @mixin light {
     background-color: var(--mantine-color-white)
   }
   
   @mixin dark {
     background-color: var(--mantine-color-dark-7);
-  }
+  }*/
 }
 
 .fieldTitleWrapper {

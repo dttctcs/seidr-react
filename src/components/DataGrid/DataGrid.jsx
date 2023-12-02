@@ -1,7 +1,7 @@
 /* eslint-disable no-case-declarations */
 import { useEffect, useReducer, forwardRef, useState } from 'react';
 
-import { LoadingOverlay, Paper, Box } from '@mantine/core';
+import { LoadingOverlay, Paper } from '@mantine/core';
 import { Toolbar } from './Toolbar';
 import { Main } from './Main';
 import { Pagination } from './Pagination';
@@ -43,6 +43,7 @@ export const DataGrid = forwardRef((props, ref) => {
     settings = null,
     onSelectEntry = null,
     fetchOnMount = true,
+    styles
   } = props;
 
   // console.log(settings);
@@ -69,11 +70,12 @@ export const DataGrid = forwardRef((props, ref) => {
   }
 
   return (
-    <Paper
-      ref={ref}
-      className={classes.root}
-      style={{ position: 'relative', height: '100%', display: 'flex', flexDirection: 'column' }}
-    >
+
+      <Paper
+        ref={ref}
+        className={classes.root}
+        style={{ position: 'relative', height: '100%', display: 'flex', flexDirection: 'column', ...styles }}
+      >
         <LoadingOverlay
           overlayProps={{ radius: "sm", blur: 2 }}
           style={{color:'#c5c5c5', opacity: 0.3}}
@@ -81,35 +83,36 @@ export const DataGrid = forwardRef((props, ref) => {
         />
 
         <>
-            <Box>
-              {!hideToolbar ? (
-                <Toolbar
+          <>
+            {!hideToolbar ? (
+              <Toolbar
                 // settings={state.settings}
                 // dispatch={dispatch}
                 hideFilter={hideFilter}
                 hideAdd={hideAdd}
                 hideSettings={hideSettings}
                 // dense={state.settings.dense}
-                />
-                ) : null}
-              <Main 
-                // settings={state.settings}
-                hideActions={hideActions} 
-                loading={loading} 
-                onSelect={onSelectEntry} />
-            </Box>
+              />
+            ) : null}
+            <Main
+              // settings={state.settings}
+              hideActions={hideActions}
+              loading={loading}
+              onSelect={onSelectEntry} />
+          </>
 
           {!hidePagination ?
-          <Pagination />
-          : null
-        }
+            <Pagination />
+            : null
+          }
         </>
 
-      {!hideError ?
-        <ErrorDialog />
-        : null
-      }
-    </Paper>
+        {!hideError ?
+          <ErrorDialog />
+          : null
+        }
+      </Paper>
+
   );
 });
 

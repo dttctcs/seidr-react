@@ -34,7 +34,6 @@ export function AddDialog({ opened, onClose }) {
       title={info.add.title}
       size='lg'
       centered
-      zIndex={1000}
     >
       <Stack spacing='md'>
         {info.add.columns.map((item) => (

@@ -1,7 +1,7 @@
 //import { ReactNode } from 'react';
 
-import { Table, useMantineTheme, ScrollArea } from '@mantine/core';
-//import { ScrollArea } from '../../ScrollArea';
+import { Table, useMantineTheme } from '@mantine/core';
+import { ScrollArea } from '../../ScrollArea';
 import { Header } from './Header';
 import { Body } from './Body';
 //import { EditDialog } from '../Actions/Edit/EditDialog';
@@ -17,8 +17,8 @@ export function Main({
 
   return (
     <ScrollArea
-      /*options={{ className: theme.colorScheme === 'dark' ? 'os-theme-light' : undefined }}
-      style={{ flex: 1, flexDirection: 'column' }}*/
+      options={{ className: theme.colorScheme === 'dark' ? 'os-theme-light' : undefined }}
+      style={{ flex: 1, flexDirection: 'column' }}
     >
       <Table
         // verticalSpacing={settings.dense ? 'xs' : 'md'}

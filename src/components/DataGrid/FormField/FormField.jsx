@@ -19,9 +19,9 @@ export function FormField({ name, control, schema, filter, ...props }) {
         <FormSelect
           name={name}
           control={control}
-          data={[
-            { label: 'True', value: String(true) },
-            { label: 'False', value: String(false) },
+          items={[
+            { label: 'true', value: 'true' },
+            { label: 'false', value: 'false' },
           ]}
           {...props}
         />

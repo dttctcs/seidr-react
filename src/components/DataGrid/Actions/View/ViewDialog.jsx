@@ -1,7 +1,7 @@
 import React from 'react';
 import { getValue } from '../../utils';
 
-import { Grid, LoadingOverlay, Modal, Paper, Stack, Tabs, Text } from '@mantine/core';
+import { Grid, LoadingOverlay, Modal, Paper, ScrollArea, Stack, Tabs, Text } from '@mantine/core';
 import RelationPanel from './RelationPanel';
 
 
@@ -32,6 +32,7 @@ export function ViewDialog({ item, info, loading, opened, onClose }) {
           <Tabs.Panel pt='xs' value='details'>
             <Paper p='xs' withBorder>
               <Stack spacing='md'>
+                <ScrollArea h={450}  type="auto" >
                 {item.show_columns.map((column, index) => {
                   return (
                     <Grid key={index}>
@@ -53,6 +54,7 @@ export function ViewDialog({ item, info, loading, opened, onClose }) {
                     </Grid>
                   );
                 })}
+                </ScrollArea>
               </Stack>
             </Paper>
           </Tabs.Panel>

@@ -5,7 +5,7 @@ import { dirtyValues } from '../../utils';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 
-import { Button, Group, Modal, Stack } from '@mantine/core';
+import { Button, Group, Modal, ScrollArea, Stack } from '@mantine/core';
 
 import { FormField } from '../../FormField';
 
@@ -51,9 +51,9 @@ export function EditDialog({ item, info, opened, onClose }) {
       title={info.edit.title}
       size='lg'
       centered
-      zIndex={1000}
     >
       <Stack spacing='md'>
+        <ScrollArea h={450}  type="auto" >
         {
           info.edit.columns.map((item, index) => (
             <FormField
@@ -70,6 +70,7 @@ export function EditDialog({ item, info, opened, onClose }) {
         <Group position='right' mt='xl'>
           <Button onClick={handleSubmit(onSubmit)}>Save</Button>
         </Group>
+        </ScrollArea>
       </Stack>
     </Modal>
   );
