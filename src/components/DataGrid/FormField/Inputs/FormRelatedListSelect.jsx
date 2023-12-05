@@ -11,17 +11,19 @@ export function FormRelatedListSelect({ control, name, items, ...props }) {
   });
 
   const data = items.map((item) => ({ value: String(item.id), label: item.value }));
-  const currentItems = Array.isArray(inputProps.value) ? inputProps.value.map((value) => String(value.id)) : [];
+  const currentItems = Array.isArray(inputProps.value)
+    ? inputProps.value.map((value) => (typeof value === 'object' ? String(value.id) : String(value)))
+    : [];
 
   return (
     <MultiSelect
-      ref={ref}
-      data={data}
-      error={error ? error.message : null}
-      searchable
-      {...inputProps}
-      value={currentItems.value}
-      {...props}
+    ref={ref}
+    data={data}
+    error={error ? error.message : null}
+    searchable
+    {...inputProps}
+    value={currentItems}
+    {...props}
     />
   );
 }
