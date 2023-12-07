@@ -13,3 +13,7 @@
 .iconLarge:hover {
     cursor: pointer;
 }
+
+.btn:hover {
+    background-color: var(--mantine-color-gray-1);;
+}

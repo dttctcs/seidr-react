@@ -34,7 +34,7 @@ export function UserMenu({ basePath = '/security', Target, children }) {
       <Menu.Target>
         {/* Fix me, I only work with forwardRefs */}
         {Target || (
-          <UnstyledButton>
+          <UnstyledButton className={classes.btn} style={{borderRadius: 4}} p={'xs'}>
             <Group style={{ flexWrap: 'nowrap' }} spacing={7}>
               <Text weight={500} size='sm' style={{ lineHeight: 1, whiteSpace: 'nowrap' }} mr={3}>
                 {`${user.first_name} ${user.last_name}`}
