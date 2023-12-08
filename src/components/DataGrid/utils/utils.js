@@ -1,9 +1,9 @@
 export const getValue = (entry, column) => {
   const value = column.split('.').reduce((previous, current) => previous[current], entry);
-  if (!value) {
+  if (!value && typeof value !== 'boolean') {
     return null;
   }
-
+  
   if (typeof value === 'boolean') {
     return value.toString();
   }
