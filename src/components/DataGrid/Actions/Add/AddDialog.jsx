@@ -19,7 +19,7 @@ export function AddDialog({ opened, onClose }) {
   });
 
   const onSubmit = async (data) => {
-    data.active = data.active === "true" ? 1 : 0;
+    data.active = data.active === "true" ? 1 : data.active === "false" ? 0 : null;
     await addEntry(data);
     reset();
     onClose();

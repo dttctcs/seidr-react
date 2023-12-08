@@ -33,7 +33,7 @@ export function EditDialog({ item, info, opened, onClose }) {
   const { dirty } = formState.dirtyFields;
   const onSubmit = async (data) => {
     data = dirtyValues(formState.dirtyFields, data);
-    data.active = data.active === "true" ? 1 : 0;
+    data.active = data.active === "true" ? 1 : data.active === "false" ? 0 : null;
     await updateEntry(item.id, data);
     reset();
     onClose();
