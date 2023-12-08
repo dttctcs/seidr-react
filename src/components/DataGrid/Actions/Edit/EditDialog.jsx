@@ -11,7 +11,7 @@ import { FormField } from '../../FormField';
 
 export function EditDialog({ item, info, opened, onClose }) {
   const { updateEntry } = useApi();
-
+  
   const { handleSubmit, reset, setValue, formState, control } = useForm({
     mode: 'onTouched',
     defaultValues: info.edit.defaultValues,
@@ -21,7 +21,9 @@ export function EditDialog({ item, info, opened, onClose }) {
   useEffect(() => {
     if (item) {
       for (const column of info.edit.columns) {
-        setValue(column.name, item.result[column.name]);
+        setValue(column.name, 
+          typeof item.result[column.name] === 'boolean' ?
+          String(item.result[column.name]) : item.result[column.name]);
       }
     }
   }, [item, info.edit.columns, setValue]);
