@@ -11,7 +11,7 @@ import { FormField } from '../../FormField';
 
 export function AddDialog({ opened, onClose }) {
   const { info, addEntry } = useApi();
-
+  
   const { handleSubmit, reset, control } = useForm({
     mode: 'onChange',
     defaultValues: info.add.defaultValues,
@@ -42,13 +42,14 @@ export function AddDialog({ opened, onClose }) {
             key={item.name}
             name={item.name}
             control={control}
-            label={`${item.name}${item.required ? '*' : ''}`}
+            label={item.name}
             description={item.description}
             schema={item}
+            required={item.required}
           />
         ))}
         <Group position='right' mt='xl'>
-          <Button onClick={handleSubmit(onSubmit)}>Add</Button>
+          <Button onClick={handleSubmit(onSubmit)} >Add</Button>
         </Group>
       </Stack>
     </Modal>
