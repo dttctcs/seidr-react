@@ -1,7 +1,7 @@
 
 import { useController } from 'react-hook-form';
 
-import { TextInput } from '@mantine/core';
+import { TextInput, PasswordInput } from '@mantine/core';
 
 export function FormTextField({ control, name, ...props }) {
   const {
@@ -13,5 +13,6 @@ export function FormTextField({ control, name, ...props }) {
   });
 
   const currentItem = inputProps.value || '';
-  return <TextInput ref={ref} {...inputProps} error={error ? error.message : null} value={currentItem} {...props} />;
+  return name === "password" ? <PasswordInput ref={ref} {...inputProps} error={error ? error.message : null} value={String(currentItem)} {...props} />:
+  <TextInput ref={ref} {...inputProps} error={error ? error.message : null} value={currentItem} {...props} />;
 }
