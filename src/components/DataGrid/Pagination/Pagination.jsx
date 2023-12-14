@@ -8,29 +8,13 @@ export const Pagination = memo(({ ...props }) => {
   const rowsPerPage = String(queryParams.page_size);
   const [cachedPage, setCachedPage] = useState(queryParams.page);
 
-  const debounce = (func, delay) => {
-    let timer;
-    return (...args) => {
-      clearTimeout(timer);
-      timer = setTimeout(() => func.apply(this, args), delay);
-    };
-  };
-
-  const debouncedSetPage = useMemo(
-    () =>
-      debounce((val) => {
-        setQueryParams({ page: val });
-      }, 550),
-    [setQueryParams],
-  );
-
   useEffect(() => {
     setCachedPage(queryParams.page);
   }, [queryParams.page]);
 
   const handlePageChange = (newPage) => {
     setCachedPage(newPage - 1);
-    debouncedSetPage(newPage - 1);
+    setQueryParams(newPage - 1);
   };
 
   const handleRowsPerPageChange = (value) => {
