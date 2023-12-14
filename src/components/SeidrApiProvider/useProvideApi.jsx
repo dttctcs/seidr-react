@@ -78,7 +78,7 @@ export function useProvideApi(props) {
         : state.queryParams;
 
       const data = await getList(props.path, relatedQueryParams);
-      dispatch({ type: 'setData', payload: data });
+      if(data) dispatch({ type: 'setData', payload: data });
       return data;
     } catch (error) {
       dispatch({ type: 'setError', payload: { message: `Couldn't fetch list`, originalError: error } });
