@@ -1,10 +1,33 @@
 import { useEffect, useState } from 'react';
 import { useController } from 'react-hook-form';
 
-import { MultiSelect } from '@mantine/core';
+import { Combobox, useCombobox, PillsInput, Pill } from '@mantine/core';
 
 export function FormFilterIn({ control, name, ...props }) {
-  const [data, setData] = useState([]);
+  const combobox = useCombobox({
+    onDropdownClose: () => combobox.resetSelectedOption(),
+    onDropdownOpen: () => combobox.updateSelectedOptionIndex('active'),
+  });
+  
+  const [value, setValue] = useState([]);
+  const [search, setSearch] = useState('');
+
+  const handleValueSelect = (val) =>{
+    if(search!==''){
+      if (!value.includes(search)) setValue((current) => [...current, search]);
+      setSearch('')
+    }
+  }
+  
+  const handleValueRemove = (val) =>
+    setValue((current) => current.filter((v) => v !== val));
+    
+    const values = value.map((item) => (
+      <Pill key={item} withRemoveButton onRemove={() => handleValueRemove(item)}>
+        {item}
+      </Pill>
+  ));
+
   const {
     field: { ref, ...inputProps },
     fieldState: { error },
@@ -12,35 +35,63 @@ export function FormFilterIn({ control, name, ...props }) {
     name,
     control,
   });
-
+  
   useEffect(() => {
     if (inputProps.value) {
-      const currentItems = JSON.parse(inputProps.value);
-      setData([...currentItems]);
-      inputProps.onChange(currentItems);
+      console.log(inputProps)
+      try {
+        const currentItems = JSON.parse(String(inputProps.value));
+        setValue([...currentItems]);
+      } catch (error) {
+        console.error('Error parsing JSON:', error);
+      }
     } else {
       inputProps.onChange([]);
     }
   }, []);
 
+  useEffect(() => {
+    console.log("'" + JSON.stringify(value) + "'");
+    inputProps.onChange(JSON.stringify(value));
+  }, [value]);
+  
   return (
-    <MultiSelect
-      ref={ref}
-      data={data}
-      placeholder="Enter items"
-      searchable
-      creatable
-      error={error ? error.message : null}
-      {...inputProps}
-      value={String(inputProps.value)}
-      getCreateLabel={(query) => `+ Add ${query}`}
-      onCreate={(query) => {
-        setData((current) => [...current, query]);
-        return query;
-      }}
-      onChange={(values) => {
-        inputProps.onChange(values);
-      }}
-    />
+    <Combobox 
+      store={combobox} 
+      onOptionSubmit={handleValueSelect}
+      >
+      <Combobox.DropdownTarget>
+        <PillsInput onClick={() => combobox.openDropdown()}>
+          <Pill.Group>
+            {values}
+
+            <Combobox.EventsTarget>
+              <PillsInput.Field
+                onFocus={() => combobox.openDropdown()}
+                onBlur={() => combobox.closeDropdown()}
+                value={search}
+                placeholder="Search values"
+                onChange={(event) => {
+                  combobox.updateSelectedOptionIndex();
+                  setSearch(event.currentTarget.value);
+                }}
+                onKeyDown={(event) => {
+                  if (event.key === 'Backspace' && search.length === 0) {
+                    event.preventDefault();
+                    handleValueRemove(value[value.length - 1]);
+                  }
+                }}
+              />
+            </Combobox.EventsTarget>
+          </Pill.Group>
+        </PillsInput>
+      </Combobox.DropdownTarget>
+
+      <Combobox.Dropdown>
+        <Combobox.Options>
+          <Combobox.Option value="$create">+ Create {search}</Combobox.Option>
+        </Combobox.Options>
+      </Combobox.Dropdown>
+    </Combobox>
   );
 }
