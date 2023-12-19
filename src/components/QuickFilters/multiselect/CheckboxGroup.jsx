@@ -37,6 +37,7 @@ export function CheckboxGroup({name, ...props}) {
                 setQueryParams({
                     ...queryParams,
                     filters: [...newFilters, {col: quickFilter.column, opr: 'in', value: JSON.stringify(values)}],
+                    page: 0
                 });
             }}
             {...props}

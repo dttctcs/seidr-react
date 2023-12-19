@@ -18,7 +18,7 @@ export const Pagination = memo(({ ...props }) => {
   };
 
   const handleRowsPerPageChange = (value) => {
-    setQueryParams({ page_size: parseInt(value, 10) });
+    setQueryParams({ page_size: parseInt(value, 10), page: 0 });
   }
   
   return (
