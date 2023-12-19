@@ -14,7 +14,7 @@ export const Pagination = memo(({ ...props }) => {
 
   const handlePageChange = (newPage) => {
     setCachedPage(newPage - 1);
-    setQueryParams(newPage - 1);
+    setQueryParams({ page: newPage - 1 });
   };
 
   const handleRowsPerPageChange = (value) => {
