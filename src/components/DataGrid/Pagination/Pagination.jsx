@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useState, memo } from 'react';
 import { useApi } from '../../SeidrApiProvider';
 import { Box, Pagination as MantinePagination, Select, Text } from '@mantine/core';
+import { controller } from '../../SeidrApiProvider/utils/api/getList';
 
 export const Pagination = memo(({ ...props }) => {
   const { data, queryParams, setQueryParams } = useApi();
@@ -13,11 +14,13 @@ export const Pagination = memo(({ ...props }) => {
   }, [queryParams.page]);
 
   const handlePageChange = (newPage) => {
+    if(controller) controller.abort();    
     setCachedPage(newPage - 1);
     setQueryParams({ page: newPage - 1 });
   };
 
   const handleRowsPerPageChange = (value) => {
+    if(controller) controller.abort();
     setQueryParams({ page_size: parseInt(value, 10), page: 0 });
   }
   

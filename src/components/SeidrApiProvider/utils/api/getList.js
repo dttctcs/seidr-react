@@ -3,9 +3,9 @@ import { createFetchParams, urlJoin } from '../../../../utils';
 export let controller = null;
 
 export const getList = async (path, queryParams) => {
-  if (controller) {
-    controller.abort();
-  }
+  // if (controller) {
+  //   controller.abort();
+  // }
   controller = new AbortController();
   const signal = controller.signal;
   
