@@ -2,26 +2,24 @@ import React from 'react';
 
 import { useApi } from '../../../SeidrApiProvider';
 
-import { useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
+import { useForm } from '@mantine/form';
+import { yupResolver } from 'mantine-form-yup-resolver';
 
-import { Button, Modal, Group, Stack } from '@mantine/core';
+import { Button, Modal, Group, Stack, Box } from '@mantine/core';
 import { FormField } from '../../FormField';
-
 
 export function AddDialog({ opened, onClose }) {
   const { info, addEntry } = useApi();
   
-  const { handleSubmit, reset, control } = useForm({
-    mode: 'onChange',
-    defaultValues: info.add.defaultValues,
-    resolver: yupResolver(info.add.schema),
-  });
+  const form = useForm({
+    initialValues: info.add.defaultValues,
+    validate: yupResolver(info.add.schema),
+  })
 
-  const onSubmit = async (data) => {
+  const handleSubmit = async (data) => {
     data.active = data.active === "true" ? 1 : data.active === "false" ? 0 : null;
     await addEntry(data);
-    reset();
+    form.reset();
     onClose();
   };
 
@@ -29,29 +27,31 @@ export function AddDialog({ opened, onClose }) {
     <Modal
       opened={opened}
       onClose={() => {
-        reset();
+        form.reset();
         onClose();
       }}
       title={info.add.title}
       size='lg'
       centered
     >
-      <Stack spacing='md'>
-        {info.add.columns.map((item) => (
-          <FormField
-            key={item.name}
-            name={item.name}
-            control={control}
-            label={item.name}
-            description={item.description}
-            schema={item}
-            required={item.required}
-          />
-        ))}
-        <Group position='right' mt='xl'>
-          <Button onClick={handleSubmit(onSubmit)} >Add</Button>
-        </Group>
-      </Stack>
+      <Box component='form' onSubmit={form.onSubmit(handleSubmit)}>
+        <Stack spacing='md'>
+          {info.add.columns.map((item) => (
+            <FormField
+              form={form}
+              key={item.name}
+              name={item.name}
+              label={item.name}
+              description={item.description}
+              schema={item}
+              withAsterisk={item.required}
+            />
+          ))}
+          <Group position='right' mt='xl'>
+            <Button type='submit' >Add</Button>
+          </Group>
+        </Stack>
+      </Box>
     </Modal>
   );
 }
