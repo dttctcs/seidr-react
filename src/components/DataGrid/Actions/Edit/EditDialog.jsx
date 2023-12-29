@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useApi } from '../../../SeidrApiProvider';
-import { dirtyValues } from '../../utils';
+import { dirtyValues, getJsonValue } from '../../utils';
 
 import { useForm } from '@mantine/form';
 import { yupResolver } from 'mantine-form-yup-resolver';
@@ -9,6 +9,11 @@ import { Button, Group, Modal, ScrollArea, Stack, Box } from '@mantine/core';
 
 import { FormField } from '../../FormField';
 
+function loadInitialValues(item, info){
+  return new Promise((resolve) => {
+    resolve(getJsonValue(item, info.edit.columns))
+  })
+}
 export function EditDialog({ item, info, opened, onClose }) {
   const { updateEntry } = useApi();
   
@@ -16,43 +21,44 @@ export function EditDialog({ item, info, opened, onClose }) {
     initialValues: info.edit.defaultValues,
     validate: yupResolver(info.edit.schema),
   })
-
-  const getJsonValue = (item, columns) => {
-    const JsonValue ={}
-    columns.forEach((column) => {
-      JsonValue[column.name] = 
-        typeof item.result[column.name] == 'boolean' ? 
-        String(item.result[column.name]) : item.result[column.name]
-    })
-    return JsonValue;
-  }
-
+  
+  const getDirtyFields = () => {
+    const dirtyFields = {};
+    Object.keys(form.values).forEach((fieldName) => {
+      console.log(fieldName, form.isDirty(fieldName))
+      if (form.isDirty(fieldName)) {
+        console.log(fieldName)
+        dirtyFields[fieldName] = true;
+      }
+    });
+    return dirtyFields;
+  };
+  
   useEffect(() => {
-    if(item) form.setValues(getJsonValue(item, info.edit.columns));
+    if(item){
+      loadInitialValues(item, info).then((values) => {
+        form.setValues(values);
+        form.resetDirty(values);
+      });
+    }
   }, [item, info.edit.columns]);
 
-  // This has to bere here. dirtyFields won't include the changes if not,
-  // since it is a proxy object //see https://github.com/react-hook-form/react-hook-form/issues/3402
-  // const { dirty } = formState.dirtyFields;
   const handleSubmit = async (data) => {
-    // data = dirtyValues(formState.dirtyFields, data);
-    data.active = data.active === "true" ? 1 : data.active === "false" ? 0 : null;
+    data = dirtyValues(getDirtyFields(), data);
     console.log(data)
     await updateEntry(item.id, data);
-    form.reset();
     onClose();
   };
-
+  
   if (!item) {
     return null;
   }
-
+  
   return (
     <Modal
       opened={opened}
       onClose={() => {
         onClose();
-        form.reset();
       }}
       title={info.edit.title}
       size='lg'
