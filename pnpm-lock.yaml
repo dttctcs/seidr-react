@@ -20,6 +20,9 @@ dependencies:
   '@mantine/dates':
     specifier: ^7.2.2
     version: 7.2.2(@mantine/core@7.2.2)(@mantine/hooks@7.2.2)(dayjs@1.11.8)(react-dom@18.2.0)(react@18.2.0)
+  '@mantine/form':
+    specifier: ^7.3.2
+    version: 7.3.2(react@18.2.0)
   '@mantine/hooks':
     specifier: ^7.2.2
     version: 7.2.2(react@18.2.0)
@@ -41,6 +44,9 @@ dependencies:
   is-html:
     specifier: ^3.0.0
     version: 3.0.0
+  mantine-form-yup-resolver:
+    specifier: ^2.0.0
+    version: 2.0.0(@mantine/form@7.3.2)(yup@1.2.0)
   overlayscrollbars:
     specifier: ^2.2.0
     version: 2.2.0
@@ -3169,6 +3175,16 @@ packages:
       dayjs: 1.11.8
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
+    dev: false
+
+  /@mantine/form@7.3.2(react@18.2.0):
+    resolution: {integrity: sha512-/qa1KQKVC46XWgIU190r3XM3Xld8Lsvz4L/an//TO67RnAGEdC5OCvr2JCb+fprZZi3YdxaKOkVNvP20W23qkg==}
+    peerDependencies:
+      react: ^18.2.0
+    dependencies:
+      fast-deep-equal: 3.1.3
+      klona: 2.0.6
+      react: 18.2.0
     dev: false
 
   /@mantine/hooks@7.2.2(react@18.2.0):
@@ -7886,6 +7902,11 @@ packages:
     engines: {node: '>=6'}
     dev: true
 
+  /klona@2.0.6:
+    resolution: {integrity: sha512-dhG34DXATL5hSxJbIexCft8FChFXtmskoZYnoPWjXQuebWYCNkVeV3KkGegCK9CP1oswI/vQibS2GY7Em/sJJA==}
+    engines: {node: '>= 8'}
+    dev: false
+
   /language-subtag-registry@0.3.22:
     resolution: {integrity: sha512-tN0MCzyWnoz/4nHS6uxdlFWoUZT7ABptwKPQ52Ea7URk6vll88bWBVhodtnlfEuCcKWNGoc+uGbw1cwa9IKh/w==}
     dev: true
@@ -8034,6 +8055,17 @@ packages:
     dependencies:
       tmpl: 1.0.5
     dev: true
+
+  /mantine-form-yup-resolver@2.0.0(@mantine/form@7.3.2)(yup@1.2.0):
+    resolution: {integrity: sha512-nmmUvhBMDCi/aYUMusWJSV+m/UGu/0rQ1qAhh1B7TRk4cZ3ZUTgoewSvb5+BRldz+zZX62jLpzQX8hJsV8dsWA==}
+    engines: {node: '>=16.6.0'}
+    peerDependencies:
+      '@mantine/form': '>=7.0.0'
+      yup: '>=1.0.0'
+    dependencies:
+      '@mantine/form': 7.3.2(react@18.2.0)
+      yup: 1.2.0
+    dev: false
 
   /map-or-similar@1.5.0:
     resolution: {integrity: sha512-0aF7ZmVon1igznGI4VS30yugpduQW3y3GkcgGJOp7d8x8QrizhigUxjI/m2UojsXXto+jLAH3KSz+xOJTiORjg==}
