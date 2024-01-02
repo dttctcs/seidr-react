@@ -1,6 +1,3 @@
-
-import { useController } from 'react-hook-form';
-
 import { Select } from '@mantine/core';
 
 export function FormRelatedSelect({ form, name, items, filter, ...props }) {
