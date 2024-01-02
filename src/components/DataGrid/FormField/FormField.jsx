@@ -8,7 +8,7 @@ import {
 } from './Inputs';
 
 
-export function FormField({ form, name, control, schema, filter, ...props }) {
+export function FormField({ form, name, schema, filter, ...props }) {
   if (!schema.type) {
     return null;
   }
