@@ -17,7 +17,6 @@ export function AddDialog({ opened, onClose }) {
   })
 
   const handleSubmit = async (data) => {
-    data.active = data.active === "true" ? 1 : data.active === "false" ? 0 : null;
     await addEntry(data);
     form.reset();
     onClose();
