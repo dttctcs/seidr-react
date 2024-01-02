@@ -8,7 +8,7 @@ import {
 } from './Inputs';
 
 
-export function FormField({ name, control, schema, filter, ...props }) {
+export function FormField({ form, name, schema, filter, ...props }) {
   if (!schema.type) {
     return null;
   }
@@ -17,8 +17,8 @@ export function FormField({ name, control, schema, filter, ...props }) {
     case 'Boolean':
       return (
         <FormSelect
+          form={form}
           name={name}
-          control={control}
           items={[
             { label: 'true', value: 'true' },
             { label: 'false', value: 'false' },
@@ -27,13 +27,13 @@ export function FormField({ name, control, schema, filter, ...props }) {
         />
       );
     case 'RelatedList':
-      return <FormRelatedListSelect name={name} control={control} items={schema.values} {...props} />;
+      return <FormRelatedListSelect form={form} name={name} items={schema.values} {...props} />;
     case 'Related':
-      return <FormRelatedSelect name={name} control={control} items={schema.values} filter={filter} {...props} />;
+      return <FormRelatedSelect form={form} name={name} items={schema.values} filter={filter} {...props} />;
     case 'DateTime':
       return (
         <FormDateTimePicker
-          control={control}
+          form={form}
           name={name}
           format='DD.MM.YYYY HH:mm:ss'
           schema={schema}
@@ -43,7 +43,7 @@ export function FormField({ name, control, schema, filter, ...props }) {
     case 'Date':
       return (
         <FormDatePicker
-          control={control}
+          form={form}
           name={name}
           format='DD.MM.YYYY'
           schema={schema}
@@ -52,8 +52,8 @@ export function FormField({ name, control, schema, filter, ...props }) {
       );
     case 'Integer':
     case 'Float':
-      return <FormTextField name={name} control={control} {...props} />;
+      return <FormTextField form={form} name={name} {...props} />;
     default:
-      return <FormTextField name={name} control={control} {...props} />;
+      return <FormTextField form={form} name={name} {...props} />;
   }
 }

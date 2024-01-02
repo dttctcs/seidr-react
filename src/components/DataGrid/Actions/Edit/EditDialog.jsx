@@ -1,79 +1,88 @@
 import React, { useEffect } from 'react';
 import { useApi } from '../../../SeidrApiProvider';
-import { dirtyValues } from '../../utils';
+import { dirtyValues, getJsonValue } from '../../utils';
 
-import { useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
+import { useForm } from '@mantine/form';
+import { yupResolver } from 'mantine-form-yup-resolver';
 
-import { Button, Group, Modal, ScrollArea, Stack } from '@mantine/core';
+import { Button, Group, Modal, ScrollArea, Stack, Box } from '@mantine/core';
 
 import { FormField } from '../../FormField';
 
+function loadInitialValues(item, info){
+  return new Promise((resolve) => {
+    resolve(getJsonValue(item, info.edit.columns))
+  })
+}
 export function EditDialog({ item, info, opened, onClose }) {
   const { updateEntry } = useApi();
   
-  const { handleSubmit, reset, setValue, formState, control } = useForm({
-    mode: 'onTouched',
-    defaultValues: info.edit.defaultValues,
-    resolver: yupResolver(info.edit.schema),
-  });
-
-  useEffect(() => {
-    if (item) {
-      for (const column of info.edit.columns) {
-        setValue(column.name, 
-          typeof item.result[column.name] === 'boolean' ?
-          String(item.result[column.name]) : item.result[column.name]);
+  const form = useForm({
+    initialValues: info.edit.defaultValues,
+    validate: yupResolver(info.edit.schema),
+  })
+  
+  const getDirtyFields = () => {
+    const dirtyFields = {};
+    Object.keys(form.values).forEach((fieldName) => {
+      if (form.isDirty(fieldName)) {
+        dirtyFields[fieldName] = true;
       }
+    });
+    return dirtyFields;
+  };
+  
+  useEffect(() => {
+    if(item){
+      loadInitialValues(item, info).then((values) => {
+        form.setValues(values);
+        form.resetDirty(values);
+      });
     }
-  }, [item, info.edit.columns, setValue]);
+  }, [item, info.edit.columns]);
 
-  // This has to bere here. dirtyFields won't include the changes if not,
-  // since it is a proxy object //see https://github.com/react-hook-form/react-hook-form/issues/3402
-  const { dirty } = formState.dirtyFields;
-  const onSubmit = async (data) => {
-    data = dirtyValues(formState.dirtyFields, data);
-    data.active = data.active === "true" ? 1 : data.active === "false" ? 0 : null;
+  const handleSubmit = async (data) => {
+    data = dirtyValues(getDirtyFields(), data);
     await updateEntry(item.id, data);
-    reset();
     onClose();
   };
-
+  
   if (!item) {
     return null;
   }
-
+  
   return (
     <Modal
       opened={opened}
       onClose={() => {
         onClose();
-        reset();
       }}
       title={info.edit.title}
       size='lg'
       centered
     >
-      <Stack spacing='md'>
-        <ScrollArea h={450}  type="auto" >
-        {
-          info.edit.columns.map((item, index) => (
-            <FormField
-              key={index}
-              name={item.name}
-              control={control}
-              schema={item}
-              label={item.label}
-              description={item.description}
-              required={item.required}
-            />
-          ))
-        }
-        <Group position='right' mt='xl'>
-          <Button onClick={handleSubmit(onSubmit)}>Save</Button>
-        </Group>
-        </ScrollArea>
-      </Stack>
+      <Box component='form' onSubmit={form.onSubmit(handleSubmit)}>
+        <Stack spacing='md'>
+          <ScrollArea h={450}  type="auto" >
+          {
+            info.edit.columns.map((item, index) => (
+              <FormField
+                form={form}
+                key={index}
+                name={item.name}
+                label={item.label}
+                description={item.description}
+                schema={item}
+                withAsterisk={item.required}
+                />
+                ))
+              }
+          <Group position='right' mt='xl'>
+            <Button type='submit'>Save</Button>
+          </Group>
+          </ScrollArea>
+        </Stack>
+      </Box>
     </Modal>
   );
 }

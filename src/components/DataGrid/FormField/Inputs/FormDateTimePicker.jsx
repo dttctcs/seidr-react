@@ -1,26 +1,20 @@
-import { useController } from 'react-hook-form';
 import { DateTimePicker } from '@mantine/dates';
 
-export function FormDateTimePicker({ control, name, ...props }) {
-  const { field } = useController({
-    name,
-    control,
-  });
+export function FormDateTimePicker({ form, name, ...props }) {
 
   return (
     <>
       <DateTimePicker
+        {...form.getInputProps(name)}
         onChange={(newValue) => {
           if (newValue instanceof Date) {
             const utcDate = new Date(newValue);
-            field.onChange(utcDate.toISOString());
+            form.setFieldValue(name, utcDate.toISOString());
           }
         }}
-        value={field.value ? new Date(field.value) : null}
+        value={form.getInputProps(name).value ? new Date(form.getInputProps(name).value) : null}
         {...props}
       />
     </>
   );
 }
-
-

@@ -1,9 +1,8 @@
 import { useEffect, useState } from 'react';
-import { useController } from 'react-hook-form';
 
 import { Combobox, useCombobox, PillsInput, Pill } from '@mantine/core';
 
-export function FormFilterIn({ control, name, ...props }) {
+export function FormFilterIn({ form, name, ...props }) {
   const combobox = useCombobox({
     onDropdownClose: () => combobox.resetSelectedOption(),
     onDropdownOpen: () => combobox.updateSelectedOptionIndex('active'),
@@ -27,32 +26,22 @@ export function FormFilterIn({ control, name, ...props }) {
         {item}
       </Pill>
   ));
-
-  const {
-    field: { ref, ...inputProps },
-    fieldState: { error },
-  } = useController({
-    name,
-    control,
-  });
   
   useEffect(() => {
-    if (inputProps.value) {
-      console.log(inputProps)
+    if (form.getInputProps(name).value) {
       try {
-        const currentItems = JSON.parse(String(inputProps.value));
+        const currentItems = JSON.parse(String(form.getInputProps(name).value));
         setValue([...currentItems]);
       } catch (error) {
         console.error('Error parsing JSON:', error);
       }
     } else {
-      inputProps.onChange([]);
+      form.getInputProps(name).onChange([]);
     }
   }, []);
 
   useEffect(() => {
-    console.log("'" + JSON.stringify(value) + "'");
-    inputProps.onChange(JSON.stringify(value));
+    form.getInputProps(name).onChange(JSON.stringify(value));
   }, [value]);
   
   return (

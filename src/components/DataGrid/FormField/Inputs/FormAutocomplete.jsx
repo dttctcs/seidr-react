@@ -1,16 +1,8 @@
 import React from 'react';
-import { useController } from 'react-hook-form';
 
 import { Autocomplete } from '@mantine/core';
 
-export function FormAutocomplete({ control, name, items, onChange, TextFieldProps, ...props }) {
-  const {
-    field: { ref, ...inputProps },
-    fieldState: { error },
-  } = useController({
-    name,
-    control,
-  });
+export function FormAutocomplete({ form, name, items, ...props }) {
 
-  return <Autocomplete ref={ref} error={error ? error.message : null} data={items} {...inputProps} {...props} />;
+  return <Autocomplete data={items} {...form.getInputProps(name)} {...props} />;
 }
