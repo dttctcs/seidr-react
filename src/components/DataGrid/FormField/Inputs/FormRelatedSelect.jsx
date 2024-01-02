@@ -8,14 +8,15 @@ export function FormRelatedSelect({ form, name, items, filter, ...props }) {
       data={data}
       searchable
       {...form.getInputProps(name)}
-      // onChange={(value) => {
-      //   if (filter) {
-      //     inputProps.onChange(value);
-      //     return;
-      //   }
-      //   const newItem = items.find((item) => item.id.toString() === value);
-      //   inputProps.onChange(newItem);
-      // }}
+      onChange={(value) => {
+        if (filter) {
+          form.setFieldValue(name, value);
+          return;
+        }
+        const newItem = items.find((item) => item.id.toString() === value);
+        form.setFieldValue(name, newItem);
+      }}
+      value={form.getInputProps(name).value.id}
       {...props}
     />
   );
