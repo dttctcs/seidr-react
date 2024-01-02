@@ -67,7 +67,10 @@ export function FilterMenu({ onClose }) {
             <FormFilterField
               form={form}
               name={`filters.${index}.col`}
-              items={Object.keys(info.filters)}
+              items={Object.entries(info.filters).map(([property, value]) => ({
+                label: value.label,
+                value: String(property),
+              }))}
               onChange={(newValue) => {
                 form.setFieldValue(`filters.${index}`, { col: newValue, opr: '', value: '', key: randomId() });
               }}
