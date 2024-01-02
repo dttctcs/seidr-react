@@ -16,7 +16,7 @@ export function FormRelatedSelect({ form, name, items, filter, ...props }) {
         const newItem = items.find((item) => item.id.toString() === value);
         form.setFieldValue(name, newItem);
       }}
-      value={String(form.getInputProps(name).value.id)}
+      value={filter ? form.getInputProps(name).value : String(form.getInputProps(name).value.id)}
       {...props}
     />
   );
