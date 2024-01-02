@@ -25,9 +25,7 @@ export function EditDialog({ item, info, opened, onClose }) {
   const getDirtyFields = () => {
     const dirtyFields = {};
     Object.keys(form.values).forEach((fieldName) => {
-      console.log(fieldName, form.isDirty(fieldName))
       if (form.isDirty(fieldName)) {
-        console.log(fieldName)
         dirtyFields[fieldName] = true;
       }
     });
@@ -45,7 +43,6 @@ export function EditDialog({ item, info, opened, onClose }) {
 
   const handleSubmit = async (data) => {
     data = dirtyValues(getDirtyFields(), data);
-    console.log(data)
     await updateEntry(item.id, data);
     onClose();
   };

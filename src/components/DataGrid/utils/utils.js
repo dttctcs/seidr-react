@@ -23,7 +23,6 @@ export function dirtyValues(dirtyFields, allValues) {
   // If *any* item in an array was modified, the entire array must be submitted, because there's no way to indicate
   // "placeholders" for unchanged elements. `dirtyFields` is `true` for leaves.
   if (dirtyFields === true || Array.isArray(dirtyFields)) {
-    console.log(allValues)
     return allValues
   };
   // Here, we have an object
