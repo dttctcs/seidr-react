@@ -35,12 +35,12 @@ export function AddDialog({ opened, onClose }) {
     >
       <Box component='form' onSubmit={form.onSubmit(handleSubmit)}>
         <Stack spacing='md'>
-          {info.add.columns.map((item) => (
+          {info.add.columns.map((item, index) => (
             <FormField
               form={form}
-              key={item.name}
+              key={index}
               name={item.name}
-              label={item.name}
+              label={item.label}
               description={item.description}
               schema={item}
               withAsterisk={item.required}
