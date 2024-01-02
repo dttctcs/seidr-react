@@ -19,6 +19,7 @@ export function Filter() {
       position='bottom-end'
       onClose={() => setOpened(false)}
       closeOnClickOutside={false}
+      zIndex={1}
     >
       <Popover.Target>
         <Tooltip opened={opened ? false : null} label='Filter'>
